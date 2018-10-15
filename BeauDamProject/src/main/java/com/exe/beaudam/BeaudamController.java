@@ -151,6 +151,9 @@ public class BeaudamController {
 
 	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_user() {
+		
+		
+		
 
 		// 회원관리 페이지 이동
 		return "adminUser";

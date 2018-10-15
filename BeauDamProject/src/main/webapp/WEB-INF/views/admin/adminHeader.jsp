@@ -22,7 +22,7 @@
 				<a href="">상품</a>
 			</td>			
 			<td>
-				<a href="#">회원</a>
+				<a href="adminUser.action">회원</a>
 			</td>
 			<td>
 				<a href="adminOrder.action">주문</a>				
