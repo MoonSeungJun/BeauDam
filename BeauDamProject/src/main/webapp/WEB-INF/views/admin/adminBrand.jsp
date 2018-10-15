@@ -29,7 +29,7 @@
 			etude
 		</td>
 		<td>
-			<a href="#">삭제</a>
+			<a href="#" style="text-decoration: none;">삭제</a>
 		</td>
 	</tr>	
 	<tr>
@@ -37,7 +37,7 @@
 			innisfree
 		</td>
 		<td>
-			<a href="#">삭제</a>
+			<a href="#" style="text-decoration: none;">삭제</a>
 		</td>
 	</tr>	
 	<tr>
@@ -45,7 +45,7 @@
 			holika
 		</td>
 		<td>
-			<a href="#">삭제</a>
+			<a href="#" style="text-decoration: none;">삭제</a>
 		</td>
 	</tr>	
 </table>
@@ -67,7 +67,7 @@
 			eye
 		</td>
 		<td>
-			<a href="#">삭제</a>
+			<a href="#" style="text-decoration: none;">삭제</a>
 		</td>
 	</tr>	
 	<tr>
@@ -75,7 +75,7 @@
 			skin
 		</td>
 		<td>
-			<a href="#">삭제</a>
+			<a href="#" style="text-decoration: none;">삭제</a>
 		</td>
 	</tr>	
 	<tr>
@@ -83,7 +83,7 @@
 			lip
 		</td>
 		<td>
-			<a href="#">삭제</a>
+			<a href="#" style="text-decoration: none;">삭제</a>
 		</td>
 	</tr>	
 </table>
@@ -106,7 +106,7 @@
 			BB
 		</td>
 		<td>
-			<a href="#">삭제</a>
+			<a href="#" style="text-decoration: none;">삭제</a>
 		</td>
 	</tr>	
 	<tr>
@@ -114,7 +114,7 @@
 			liner
 		</td>
 		<td>
-			<a href="#">삭제</a>
+			<a href="#" style="text-decoration: none;">삭제</a>
 		</td>
 	</tr>	
 	<tr>
@@ -122,7 +122,7 @@
 			man
 		</td>
 		<td>
-			<a href="#">삭제</a>
+			<a href="#" style="text-decoration: none;">삭제</a>
 		</td>
 	</tr>		
 

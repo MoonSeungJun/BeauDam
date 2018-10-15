@@ -149,6 +149,7 @@ public class BeaudamController {
 	
 	// ********************** Admin Page **********************
 
+	//syj
 	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_user() {
 		
@@ -156,28 +157,31 @@ public class BeaudamController {
 		
 
 		// 회원관리 페이지 이동
-		return "adminUser";
+		return "admin/adminUser";
 	}
-
+	
+	//syj
 	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProduct() {
 
 		// 상품조회 페이지 이동
-		return "adminProduct";
+		return "admin/adminProduct";
 	}
 
+	//syj
 	@RequestMapping(value = "/adminProduct_update.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProduct_update() {
 
 		// 상품수정 페이지 이동
-		return "adminProduct_update";
+		return "admin/adminProduct_update";
 	}
 
+	//syj
 	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_new_product() {
 
 		// 상품등록 페이지 이동
-		return "adminProduct_new";
+		return "admin/adminProduct_new";
 	}
 	
 	

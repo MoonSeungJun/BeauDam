@@ -122,7 +122,10 @@
 			</td>
 			<td>
 				상태
-			</td>			
+			</td>		
+			<td>
+				비고
+			</td>		
 		</tr>
 		
 		<tr>
@@ -159,8 +162,17 @@
 			<td>
 				2018-10-05 10:47:55
 			</td>
+			
 			<td>
-				상품 준비중
+				<select>
+					<option value="ready">상품 준비중</option>
+					<option value="ing">배송중</option>
+					<option value="complete">배송완료</option>
+					
+				</select>
+			</td>
+			<td>
+				<a href="#" style="text-decoration: none;">수정</a>
 			</td>			
 		</tr>
 	

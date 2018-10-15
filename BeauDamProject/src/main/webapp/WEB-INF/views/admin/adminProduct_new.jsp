@@ -25,15 +25,15 @@
 	
 	
 	
-<form name="adminProduct_new" method="post" action="" enctype="multipart/form-data">
-	<table align="center" style="width: 60%; height: auto;" border="1">
-		<tr style="height: 45px;" align="center">
+<form name="adminProduct_new" method="post" enctype="multipart/form-data">
+	<table border="1">
+		<tr>
 			<td>
 				브랜드
 			</td>
 			
 			<td>
-				<select style="width: 90%; height: 40px;">
+				<select>
 					<option>에뛰드</option>
 					<option>홀리카홀리카</option>
 					<option>이니스프리</option>					
@@ -45,13 +45,13 @@
 			</td>
 			
 			<td>
-				<select style="width: 45%; height: 40px;">
+				<select>
 					<option>Lib</option>
 					<option>Eye</option>
 					<option>Face</option>					
 				</select>
 				
-				<select style="width: 45%; height: 40px;">
+				<select>
 					<option>Balm</option>
 					<option>Gluds</option>
 					<option>Tint</option>					
@@ -62,28 +62,28 @@
 				재고
 			</td>
 			
-			<td style="width: 45px;">
-				<input type="text" style="width: 90%; height: 40px;"> 
+			<td>
+				<input type="text"> 
 			</td>
 			
 			<td>
-				&nbsp;&nbsp;&nbsp;&nbsp;코드&nbsp;&nbsp;&nbsp;&nbsp;
+				코드
 			</td>
 			
 			<td>
-				<input type="text" style="width: 90%; height: 40px;">
+				<input type="text">
 			</td>
 			
 			
 		</tr>	
 		
-		<tr  style="height: 45px;" align="center">
+		<tr>
 			<td>
 				상품명
 			</td>
 			
 			<td>
-				<input type="text" style="width: 90%; height: 40px;">
+				<input type="text">
 			</td>
 			
 			
@@ -92,22 +92,22 @@
 			</td>
 			
 			<td>
-				<input type="text" style="width: 80%; height: 40px;">원
+				<input type="text">원
 			</td>
 			
 						
 			<td rowspan="2" colspan="4">
-				<input type="button" value="등록하기" style="height: 70px; width: 90%;">
+				<input type="button" value="등록하기">
 			</td>
 		</tr>	
 		
-		<tr  style="height: 45px;" align="center">
+		<tr>
 			<td>
 				썸네일이미지
 			</td>
 			
 			<td>
-				<input type="file" style="width: 90%; height: 30px;">
+				<input type="file">
 			</td>
 			
 			<td>
@@ -115,14 +115,14 @@
 			</td>
 			
 			<td>
-				<input type="file" style="width: 90%; height: 30px;">
+				<input type="file">
 			</td>
 		</tr>
 		
 	</table>
 	<br><br>
-	<table align="center" style="width: 60%; height: auto;" border="1">
-		<tr align="center">
+	<table border="1">
+		<tr >
 			<td>
 				코드
 			</td>
@@ -150,13 +150,10 @@
 			<td>
 				재고
 			</td>
-			
-			<td>
-				관리
-			</td>
+
 		</tr>
 		
-		<tr align="center">
+		<tr>
 			<td>
 				2012012
 			</td>
@@ -184,10 +181,7 @@
 			<td>
 				<input type="text" value="232">
 			</td>
-			
-			<td>
-				수정/삭제
-			</td>
+
 		</tr>
 		
 	</table>

@@ -12,27 +12,27 @@
 
 <h1>상품조회</h1>
 	<br><br>
-	<table align="center" style="width: 50%; height: auto;" border="1">
+	<table border="1">
 		
 		<tr>
 			<td>
-				&nbsp;&nbsp;&nbsp;&nbsp;코드&nbsp;&nbsp;&nbsp;&nbsp;
+				코드
 			</td>
 			
 			<td colspan="3">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width: 16%; height: 30px;">
+				<input type="text" name="code">
 			</td>
 		</tr>
 		
 		
 		
-		<tr style="height: 45px;" align="center">
+		<tr>
 			<td>
 				브랜드
 			</td>
 			
 			<td>
-				<select style="width: 90%; height: 40px;">
+				<select>
 					<option>에뛰드</option>
 					<option>홀리카홀리카</option>
 					<option>이니스프리</option>					
@@ -44,13 +44,13 @@
 			</td>
 			
 			<td>
-				<select style="width: 45%; height: 40px;">
+				<select>
 					<option>Lib</option>
 					<option>Eye</option>
 					<option>Face</option>					
 				</select>
 				
-				<select style="width: 45%; height: 40px;">
+				<select>
 					<option>Balm</option>
 					<option>Gluds</option>
 					<option>Tint</option>					
@@ -61,19 +61,19 @@
 			
 		</tr>	
 		
-		<tr  style="height: 35px;" align="center">
+		<tr>
 			<td>
 				상품명
 			</td>
 			
 			<td>
-				<input type="text" style="width: 90%; height: 30px;">
+				<input type="text">
 			</td>
 			
 				
 						
 			<td rowspan="2" colspan="4">
-				<input type="button" value="검색" style="height: 30px; width: 90%;">
+				<input type="button" value="검색">
 			</td>
 		</tr>	
 		
@@ -81,8 +81,8 @@
 		
 	</table>
 	<br><br>
-	<table align="center" style="width: 60%; height: auto;" border="1">
-		<tr align="center">
+	<table border="1">
+		<tr>
 			<td>
 				코드
 			</td>
@@ -146,7 +146,7 @@
 			</td>
 			
 			<td>
-				<a href="">수정</a>/<a href="">삭제</a>
+				<a href="" style="text-decoration: none;">수정</a>/<a href="" style="text-decoration: none;">삭제</a>
 			</td>
 		</tr>
 		

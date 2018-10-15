@@ -12,26 +12,31 @@
 <body>
 
 	<table border="1">
-		<tr>
+		<tr>		
 			<td>
-				<a href="">
+				<a href="" style="text-decoration: none;">
 					<img src="<%=cp %>/resources/image/adminHeader/adminHeaderLogo.png" height="150" width="150">
 				</a>
 			</td>
 			<td>
-				<a href="">상품</a>
+				<details>
+					<summary>상품</summary>
+					<p><a href="adminProduct.action">관리</a></p>
+					<p><a href="adminProduct_new.action">등록</a></p>
+				</details>
+				
 			</td>			
 			<td>
-				<a href="adminUser.action">회원</a>
+				<a href="adminUser.action" style="text-decoration: none;">회원</a>
 			</td>
 			<td>
-				<a href="adminOrder.action">주문</a>				
+				<a href="adminOrder.action" style="text-decoration: none;">주문</a>				
 			</td>
 			<td>
-				<a href="adminBrand.action">브랜드/카테고리</a>				
+				<a href="adminBrand.action" style="text-decoration: none;">브랜드/카테고리</a>				
 			</td>
 			<td>
-				<a href="adminSales.action">매출</a>				
+				<a href="adminSales.action" style="text-decoration: none;">매출</a>				
 			</td>			
 		</tr>	
 	</table>
