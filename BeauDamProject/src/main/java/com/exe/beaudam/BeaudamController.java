@@ -29,6 +29,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BeaudamController {
 
+	
+	
+	
+	
+	
+	
 	// ********************** Beaudam Page **********************
 	
 	@RequestMapping(value = "/login.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -172,27 +178,28 @@ public class BeaudamController {
 	}
 	
 	
+	//esteban
 	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminBrand() {
 		
 		// 브랜드 관리 페이지 이동
-		return "adminBrand";
+		return "admin/adminBrand";
 	}
 	
-	
+	//esteban	
 	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminOrder() {
 		
 		// 주문내역 관리 페이지 이동
-		return "adminOrder";
+		return "admin/adminOrder";
 	}
 	
-	
+	//esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminSales() {
 		
 		// 매출 페이지 이동
-		return "adminSales";
+		return "admin/adminSales";
 	}
 	
 	
