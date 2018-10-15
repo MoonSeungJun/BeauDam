@@ -121,8 +121,12 @@
 				주문일자
 			</td>
 			<td>
-				상태
-			</td>		
+				결제상태
+			</td>	
+			<td>
+				배송상태
+			</td>
+					
 			<td>
 				비고
 			</td>		
@@ -165,10 +169,19 @@
 			
 			<td>
 				<select>
+					<option value="ready">입금대기</option>
+					<option value="complete">입금완료</option>
+					<option value="change">교환</option>
+					<option value="returns">반품</option>
+					<option value="cancel">취소</option>									
+				</select>
+			</td>
+			
+			<td>
+				<select>
 					<option value="ready">상품 준비중</option>
 					<option value="ing">배송중</option>
-					<option value="complete">배송완료</option>
-					
+					<option value="complete">배송완료</option>				
 				</select>
 			</td>
 			<td>
