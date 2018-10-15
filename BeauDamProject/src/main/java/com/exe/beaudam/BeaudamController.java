@@ -20,10 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *   
  *  4. 각자 맡은 페이지에 자신의 이름 주석 달아놓기
  *  
- *  5. image파일은 resources의 image폴더에 맡은 페이지 폴더 생성하여 그 폴더에 넣을 것
- *   -> resources/image/폴더(페이지명)/~.jpg
+ *  5. image파일은 resources의 image의 해당하는 폴더에 맡은 페이지 폴더 생성하여 그 폴더에 넣을 것
+ *   -> resources/image/해당 폴더(*표시)/폴더(페이지명)/~.jpg
  *   -> 폴더명은 3번과 같이 자신의 페이지명과 똑같이 할 것
  *   -> 이미지명은 어떤 용도의 이미지인지 알 수 있도록 지을 것
+ *   
+ *  6. css파일은 resources의 css의 해당하는 폴더에 맡은 페이지 폴더 생성하여 그 폴더에 넣을 것
+ *   -> resources/css/해당 폴더(*표시)/폴더(페이지명)/~.css
+ *   -> 폴더명은 3번과 같이 자신의 페이지명과 똑같이 할 것
+ *   -> css명은 어떤 용도의 이미지인지 알 수 있도록 지을 것
  */
 
 @Controller
