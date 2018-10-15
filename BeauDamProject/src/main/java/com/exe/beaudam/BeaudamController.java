@@ -39,39 +39,39 @@ public class BeaudamController {
 
 		// 로그인 정보 체크
 		if (id != null) {
-			return "main";
+			return "beaudam/main";
 		}
 
 		// 로그인 페이지 이동
-		return "login";
+		return "beaudam/login";
 	}
 
 	@RequestMapping(value = "/newUser.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String newUser() {
 
 		// 회원가입 페이지 이동
-		return "newUser";
+		return "beaudam/newUser";
 	}
 
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String main() {
 
 		// 메인 페이지 이동
-		return "main";
+		return "beaudam/main";
 	}
 
 	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String productList() {
 
 		// 상품리스트 페이지 이동
-		return "productList";
+		return "beaudam/productList";
 	}
 
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String productDetail() {
 
 		// 상품상세 페이지 이동
-		return "productDetail";
+		return "beaudam/productDetail";
 	}
 	
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -83,11 +83,11 @@ public class BeaudamController {
 		if(pay != null) {
 			
 			// 결제완료 페이지 이동
-			return "payOk";
+			return "beaudam/payOk";
 		}
 		
 		// 결제 페이지 이동
-		return "pay";
+		return "beaudam/pay";
 	}
 	
 	
@@ -99,42 +99,42 @@ public class BeaudamController {
 	public String myPage() {
 
 		// 마이페이지 이동
-		return "myPage";
+		return "myPage/myPage";
 	}	
 	
 	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myBasket() {
 
 		// 장바구니(마이페이지) 페이지 이동
-		return "myBasket";
+		return "myPage/myBasket";
 	}
 
 	@RequestMapping(value = "/myInfo.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myInfo() {
 
 		// 회원정보 수정(마이페이지) 페이지 이동
-		return "myInfo";
+		return "myPage/myInfo";
 	}
 
 	@RequestMapping(value = "/myCoupon.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myCoupon() {
 
 		// 보유쿠폰(마이페이지) 페이지 이동
-		return "myCoupon";
+		return "myPage/myCoupon";
 	}
 
 	@RequestMapping(value = "/myOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myOrder() {
 
 		// 보유쿠폰(마이페이지) 페이지 이동
-		return "myOrder";
+		return "myPage/myOrder";
 	}
 
 	@RequestMapping(value = "/myLeave.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myLeave() {
 
 		// 보유쿠폰(마이페이지) 페이지 이동
-		return "myLeave";
+		return "myPage/myLeave";
 	}
 
 	
@@ -147,28 +147,28 @@ public class BeaudamController {
 	public String admin_user() {
 
 		// 회원관리 페이지 이동
-		return "adminUser";
+		return "admin/adminUser";
 	}
 
 	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProduct() {
 
 		// 상품조회 페이지 이동
-		return "adminProduct";
+		return "admin/adminProduct";
 	}
 
 	@RequestMapping(value = "/adminProduct_update.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProduct_update() {
 
 		// 상품수정 페이지 이동
-		return "adminProduct_update";
+		return "admin/adminProduct_update";
 	}
 
 	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_new_product() {
 
 		// 상품등록 페이지 이동
-		return "adminProduct_new";
+		return "admin/adminProduct_new";
 	}
 	
 	
@@ -176,7 +176,7 @@ public class BeaudamController {
 	public String adminBrand() {
 		
 		// 브랜드 관리 페이지 이동
-		return "adminBrand";
+		return "admin/adminBrand";
 	}
 	
 	
@@ -184,7 +184,7 @@ public class BeaudamController {
 	public String adminOrder() {
 		
 		// 주문내역 관리 페이지 이동
-		return "adminOrder";
+		return "admin/adminOrder";
 	}
 	
 	
@@ -192,7 +192,7 @@ public class BeaudamController {
 	public String adminSales() {
 		
 		// 매출 페이지 이동
-		return "adminSales";
+		return "admin/adminSales";
 	}
 	
 	
