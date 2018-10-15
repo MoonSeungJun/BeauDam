@@ -95,7 +95,13 @@ public class BeaudamController {
 
 	// ********************** My Page **********************
 
-	// 마이페이지 default 페이지
+	@RequestMapping(value = "/myPage.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String myPage() {
+
+		// 마이페이지 이동
+		return "myPage";
+	}	
+	
 	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myBasket() {
 
@@ -164,6 +170,32 @@ public class BeaudamController {
 		// 상품등록 페이지 이동
 		return "adminProduct_new";
 	}
+	
+	
+	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String adminBrand() {
+		
+		// 브랜드 관리 페이지 이동
+		return "adminBrand";
+	}
+	
+	
+	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String adminOrder() {
+		
+		// 주문내역 관리 페이지 이동
+		return "adminOrder";
+	}
+	
+	
+	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String adminSales() {
+		
+		// 매출 페이지 이동
+		return "adminSales";
+	}
+	
+	
 
 	
 	
