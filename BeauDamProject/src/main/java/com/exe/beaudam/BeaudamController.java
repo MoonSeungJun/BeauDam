@@ -20,10 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *   
  *  4. 각자 맡은 페이지에 자신의 이름 주석 달아놓기
  *  
- *  5. image파일은 resources의 image폴더에 맡은 페이지 폴더 생성하여 그 폴더에 넣을 것
- *   -> resources/image/폴더(페이지명)/~.jpg
+ *  5. image파일은 resources의 image의 해당하는 폴더에 맡은 페이지 폴더 생성하여 그 폴더에 넣을 것
+ *   -> resources/image/해당 폴더(*표시)/폴더(페이지명)/~.jpg
  *   -> 폴더명은 3번과 같이 자신의 페이지명과 똑같이 할 것
  *   -> 이미지명은 어떤 용도의 이미지인지 알 수 있도록 지을 것
+ *   
+ *  6. css파일은 resources의 css의 해당하는 폴더에 맡은 페이지 폴더 생성하여 그 폴더에 넣을 것
+ *   -> resources/css/해당 폴더(*표시)/폴더(페이지명)/~.css
+ *   -> 폴더명은 3번과 같이 자신의 페이지명과 똑같이 할 것
+ *   -> css명은 어떤 용도의 이미지인지 알 수 있도록 지을 것
  */
 
 @Controller
@@ -45,55 +50,54 @@ public class BeaudamController {
 
 		// 로그인 정보 체크
 		if (id != null) {
-			return "main";
+			return "beaudam/main";
 		}
 
 		// 로그인 페이지 이동
-		return "login";
+		return "beaudam/login";
 	}
 
 	@RequestMapping(value = "/newUser.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String newUser() {
 
 		// 회원가입 페이지 이동
-		return "newUser";
+		return "beaudam/newUser";
 	}
 
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String main() {
 
 		// 메인 페이지 이동
-		return "main";
+		return "beaudam/main";
 	}
 
 	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String productList() {
 
 		// 상품리스트 페이지 이동
-		return "productList";
+		return "beaudam/productList";
 	}
 
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String productDetail() {
 
 		// 상품상세 페이지 이동
-		return "productDetail";
+		return "beaudam/productDetail";
 	}
 	
+	// msj
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String pay(HttpServletRequest request) {
-		
-		// -----문승준-----
 		
 		String pay = request.getParameter("pay");
 		if(pay != null) {
 			
 			// 결제완료 페이지 이동
-			return "payOk";
+			return "beaudam/payOk";
 		}
 		
 		// 결제 페이지 이동
-		return "pay";
+		return "beaudam/pay";
 	}
 	
 	
@@ -105,42 +109,45 @@ public class BeaudamController {
 	public String myPage() {
 
 		// 마이페이지 이동
-		return "myPage";
+		return "myPage/myPage";
 	}	
 	
 	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myBasket() {
 
-		// 장바구니(마이페이지) 페이지 이동
-		return "myBasket";
+		// 장바구니 (마이페이지) 페이지 이동
+		return "myPage/myBasket";
 	}
 
 	@RequestMapping(value = "/myInfo.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myInfo() {
 
-		// 회원정보 수정(마이페이지) 페이지 이동
-		return "myInfo";
+		// 회원정보 수정 (마이페이지) 페이지 이동
+		return "myPage/myInfo";
 	}
 
+	// msj
 	@RequestMapping(value = "/myCoupon.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myCoupon() {
 
-		// 보유쿠폰(마이페이지) 페이지 이동
-		return "myCoupon";
+		// 보유쿠폰 (마이페이지) 페이지 이동
+		return "myPage/myCoupon";
 	}
 
+	// msj
 	@RequestMapping(value = "/myOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myOrder() {
 
-		// 보유쿠폰(마이페이지) 페이지 이동
-		return "myOrder";
+		// 주문정보 (마이페이지) 페이지 이동
+		return "myPage/myOrder";
 	}
 
+	// msj
 	@RequestMapping(value = "/myLeave.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myLeave() {
 
-		// 보유쿠폰(마이페이지) 페이지 이동
-		return "myLeave";
+		// 회원탈퇴 (마이페이지) 페이지 이동
+		return "myPage/myLeave";
 	}
 
 	
@@ -222,21 +229,21 @@ public class BeaudamController {
 	public String faq() {
 
 		// FAQ 페이지 이동
-		return "faq";
+		return "customerCenter/faq";
 	}
 
 	@RequestMapping(value = "/inquire.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String inquire() {
 
-		// 1:1 문의 페이지 이동
-		return "inquire";
+		// 1:1문의 페이지 이동
+		return "customerCenter/inquire";
 	}
 
 	@RequestMapping(value = "/notification.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String notification() {
 
 		// 공지사항 페이지 이동
-		return "notification";
+		return "customerCenter/notification";
 	}
 
 }
