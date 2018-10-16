@@ -34,6 +34,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BeaudamController {
 
+	
+	
+	
+	
+	
+	
 	// ********************** Beaudam Page **********************
 	
 	@RequestMapping(value = "/login.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -79,10 +85,9 @@ public class BeaudamController {
 		return "beaudam/productDetail";
 	}
 	
+	// msj
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String pay(HttpServletRequest request) {
-		
-		// -----문승준-----
 		
 		String pay = request.getParameter("pay");
 		if(pay != null) {
@@ -121,6 +126,7 @@ public class BeaudamController {
 		return "myPage/myInfo";
 	}
 
+	// msj
 	@RequestMapping(value = "/myCoupon.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myCoupon() {
 
@@ -128,13 +134,15 @@ public class BeaudamController {
 		return "myPage/myCoupon";
 	}
 
+	// msj
 	@RequestMapping(value = "/myOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myOrder() {
 
-		// 보유쿠폰 (마이페이지) 페이지 이동
+		// 주문정보 (마이페이지) 페이지 이동
 		return "myPage/myOrder";
 	}
 
+	// msj
 	@RequestMapping(value = "/myLeave.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myLeave() {
 
@@ -148,13 +156,18 @@ public class BeaudamController {
 	
 	// ********************** Admin Page **********************
 
+	//syj
 	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_user() {
+		
+		
+		
 
 		// 회원관리 페이지 이동
 		return "admin/adminUser";
 	}
-
+	
+	//syj
 	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProduct() {
 
@@ -162,6 +175,7 @@ public class BeaudamController {
 		return "admin/adminProduct";
 	}
 
+	//syj
 	@RequestMapping(value = "/adminProduct_update.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProduct_update() {
 
@@ -169,6 +183,7 @@ public class BeaudamController {
 		return "admin/adminProduct_update";
 	}
 
+	//syj
 	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_new_product() {
 
@@ -177,6 +192,7 @@ public class BeaudamController {
 	}
 	
 	
+	//esteban
 	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminBrand() {
 		
@@ -184,7 +200,7 @@ public class BeaudamController {
 		return "admin/adminBrand";
 	}
 	
-	
+	//esteban	
 	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminOrder() {
 		
@@ -192,7 +208,7 @@ public class BeaudamController {
 		return "admin/adminOrder";
 	}
 	
-	
+	//esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminSales() {
 		
