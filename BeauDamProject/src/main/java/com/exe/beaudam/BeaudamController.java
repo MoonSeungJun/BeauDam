@@ -138,7 +138,7 @@ public class BeaudamController {
 	@RequestMapping(value = "/myLeave.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myLeave() {
 
-		// 보유쿠폰(마이페이지) 페이지 이동
+		// 회원탈퇴(마이페이지) 페이지 이동
 		return "myPage/myLeave";
 	}
 
