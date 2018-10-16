@@ -219,7 +219,7 @@ public class BeaudamController {
 	@RequestMapping(value = "/inquire.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String inquire() {
 
-		// 1:1 문의 페이지 이동
+		// 1:1문의 페이지 이동
 		return "customerCenter/inquire";
 	}
 
