@@ -15,7 +15,7 @@
 		<tr>		
 			<td>
 				<a href="" style="text-decoration: none;">
-					<img src="<%=cp %>/resources/image/adminHeader/adminHeaderLogo.png" height="150" width="150">
+					<img src="<%=cp %>/resources/image/admin/adminHeaderLogo.png" height="150" width="150">
 				</a>
 			</td>
 			<td>
