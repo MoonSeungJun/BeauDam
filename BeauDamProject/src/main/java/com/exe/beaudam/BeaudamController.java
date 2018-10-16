@@ -213,21 +213,21 @@ public class BeaudamController {
 	public String faq() {
 
 		// FAQ 페이지 이동
-		return "faq";
+		return "customerCenter/faq";
 	}
 
 	@RequestMapping(value = "/inquire.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String inquire() {
 
 		// 1:1 문의 페이지 이동
-		return "inquire";
+		return "customerCenter/inquire";
 	}
 
 	@RequestMapping(value = "/notification.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String notification() {
 
 		// 공지사항 페이지 이동
-		return "notification";
+		return "customerCenter/notification";
 	}
 
 }
