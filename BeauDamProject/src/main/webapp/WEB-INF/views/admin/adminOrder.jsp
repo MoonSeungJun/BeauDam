@@ -169,8 +169,6 @@
 			
 			<td>
 				<select>
-					<option value="ready">입금대기</option>
-					<option value="complete">입금완료</option>
 					<option value="change">교환</option>
 					<option value="returns">반품</option>
 					<option value="cancel">취소</option>									
