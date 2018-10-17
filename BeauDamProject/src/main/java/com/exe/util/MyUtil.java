@@ -1,5 +1,7 @@
 ﻿package com.exe.util;
 
+import org.springframework.stereotype.*;
+
 public class MyUtil {
 	
 	//전체 페이지수 구하기

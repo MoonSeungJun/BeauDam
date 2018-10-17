@@ -1,10 +1,17 @@
 package com.exe.beaudam;
 
-import javax.servlet.http.HttpServletRequest;
+import java.net.*;
+import java.util.*;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import javax.servlet.http.*;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
+
+import com.exe.util.*;
+import com.table.productDTO.*;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -30,7 +37,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *   -> 폴더명은 3번과 같이 자신의 페이지명과 똑같이 할 것
  *   -> css명은 어떤 용도의 이미지인지 알 수 있도록 지을 것
  */
-
 
 /*
  * 	쿼리 insert, delete 테이블 순서
@@ -68,15 +74,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class BeaudamController {
-
-	
-	
-	
-	
-	
 	
 	// ********************** Beaudam Page **********************
-	
+
 	@RequestMapping(value = "/login.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request) {
 
@@ -119,24 +119,21 @@ public class BeaudamController {
 		// 상품상세 페이지 이동
 		return "beaudam/productDetail";
 	}
-	
+
 	// msj
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String pay(HttpServletRequest request) {
-		
+
 		String pay = request.getParameter("pay");
-		if(pay != null) {
-			
+		if (pay != null) {
+
 			// 결제완료 페이지 이동
 			return "beaudam/payOk";
 		}
-		
+
 		// 결제 페이지 이동
 		return "beaudam/pay";
 	}
-	
-	
-	
 
 	// ********************** My Page **********************
 
@@ -145,8 +142,8 @@ public class BeaudamController {
 
 		// 마이페이지 이동
 		return "myPage/myPage";
-	}	
-	
+	}
+
 	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myBasket() {
 
@@ -185,24 +182,17 @@ public class BeaudamController {
 		return "myPage/myLeave";
 	}
 
-	
-	
-	
-	
 	// ********************** Admin Page **********************
 
-	//syj
+	// syj
 	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_user() {
-		
-		
-		
 
 		// 회원관리 페이지 이동
 		return "admin/adminUser";
 	}
-	
-	//syj
+
+	// syj
 	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProduct() {
 
@@ -210,7 +200,7 @@ public class BeaudamController {
 		return "admin/adminProduct";
 	}
 
-	//syj
+	// syj
 	@RequestMapping(value = "/adminProduct_update.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProduct_update() {
 
@@ -218,45 +208,38 @@ public class BeaudamController {
 		return "admin/adminProduct_update";
 	}
 
-	//syj
+	// syj
 	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_new_product() {
 
 		// 상품등록 페이지 이동
 		return "admin/adminProduct_new";
 	}
-	
-	
-	//esteban
+
+	// esteban
 	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminBrand() {
-		
+
 		// 브랜드 관리 페이지 이동
 		return "admin/adminBrand";
 	}
-	
-	//esteban	
+
+	// esteban
 	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminOrder() {
-		
+
 		// 주문내역 관리 페이지 이동
 		return "admin/adminOrder";
 	}
-	
-	//esteban
+
+	// esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminSales() {
-		
+
 		// 매출 페이지 이동
 		return "admin/adminSales";
 	}
-	
-	
 
-	
-	
-	
-	
 	// ********************** Customer Center Page **********************
 
 	// 고객센터 default 페이지
@@ -280,5 +263,99 @@ public class BeaudamController {
 		// 공지사항 페이지 이동
 		return "customerCenter/notification";
 	}
+
+/*	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView adminProduct(HttpServletRequest request, HttpServletResponse response) {
+
+		String pageNum = request.getParameter("pageNum");
+		String searchKey = request.getParameter("searchKey");
+		String searchValue = request.getParameter("searchValue");
+		String searchDefaultKey = "PRODUCT_NAME";
+
+		HashMap<String, Object> reqValue = new HashMap<String, Object>();
+
+		reqValue.put("pageNum", pageNum);
+		reqValue.put("searchKey", searchKey);
+		reqValue.put("searchValue", searchValue);
+		reqValue.put("searchDefaultKey", searchDefaultKey);
+
+		HashMap<String, Object> returnVal = pagingMethod(reqValue, request);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/adminProduct");
+
+		mav.addObject("returnVal", returnVal);
+
+		// 상품조회 페이지 이동
+		return mav;
+	}
+
+	//	페이징 메소드
+	public HashMap<String, Object> pagingMethod(HashMap<String, Object> reqValue, HttpServletRequest request) {
+
+		String cp = request.getContentType();
+
+		String pageNum = (String) reqValue.get("pageNum");
+		int currentPage = 1;
+
+		if (pageNum != null)
+			currentPage = Integer.parseInt(pageNum);
+
+		String searchKey = (String) reqValue.get("searchKey");
+		String searchValue = (String) reqValue.get("searchValue");
+		String searchDefault = (String) reqValue.get("searchDefaultKey");
+
+		if (searchValue == null) {
+			searchKey = searchDefault;
+			searchValue = "";
+		} else {
+
+			if (request.getMethod().equalsIgnoreCase("GET"))
+				searchValue = URLDecoder.decode(searchValue, "UTF-8");
+
+		}
+
+		// 전체 데이터 갯수
+
+		int dataCount = dao.getDataCount(searchKey, searchValue);
+
+		// 전체 페이지수
+
+		int numPerPage = 10;
+		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+
+		if (currentPage > totalPage)
+			currentPage = totalPage;
+
+		int start = (currentPage - 1) * numPerPage + 1;
+		int end = currentPage * numPerPage;
+
+		List<ProductDTO> lists = dao.getList(start, end, searchKey, searchValue);
+	
+		// 페이징처리
+
+		String param = "";
+		if (!searchValue.equals("")) {
+			param = "searchKey=" + searchKey;
+			param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+
+		}
+
+		String listUrl = cp + "/list.action";
+		if (!param.equals("")) {
+			listUrl = listUrl + "?" + param;
+		}
+
+		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+
+		HashMap<String, Object> returnValue = new HashMap<String, Object>();
+
+		returnValue.put("lists", lists);
+		returnValue.put("pageIndexList", pageIndexList);
+		returnValue.put("dataCount", dataCount);
+
+		return returnValue;
+
+	}*/
 
 }
