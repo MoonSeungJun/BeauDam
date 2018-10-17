@@ -194,10 +194,29 @@ public class BeaudamController {
 
 	// syj
 	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminProduct() {
+	public ModelAndView adminProduct(HttpServletRequest request, HttpServletResponse response) {
+
+		String pageNum = request.getParameter("pageNum");
+		String searchKey = request.getParameter("searchKey");
+		String searchValue = request.getParameter("searchValue");
+		String searchDefaultKey = "PRODUCT_NAME";
+
+		HashMap<String, Object> reqValue = new HashMap<String, Object>();
+
+		reqValue.put("pageNum", pageNum);
+		reqValue.put("searchKey", searchKey);
+		reqValue.put("searchValue", searchValue);
+		reqValue.put("searchDefaultKey", searchDefaultKey);
+
+//		HashMap<String, Object> returnVal = pagingMethod(reqValue, request);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/adminProduct");
+
+//		mav.addObject("returnVal", returnVal);
 
 		// 상품조회 페이지 이동
-		return "admin/adminProduct";
+		return mav;
 	}
 
 	// syj
@@ -264,32 +283,7 @@ public class BeaudamController {
 		return "customerCenter/notification";
 	}
 
-/*	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView adminProduct(HttpServletRequest request, HttpServletResponse response) {
-
-		String pageNum = request.getParameter("pageNum");
-		String searchKey = request.getParameter("searchKey");
-		String searchValue = request.getParameter("searchValue");
-		String searchDefaultKey = "PRODUCT_NAME";
-
-		HashMap<String, Object> reqValue = new HashMap<String, Object>();
-
-		reqValue.put("pageNum", pageNum);
-		reqValue.put("searchKey", searchKey);
-		reqValue.put("searchValue", searchValue);
-		reqValue.put("searchDefaultKey", searchDefaultKey);
-
-		HashMap<String, Object> returnVal = pagingMethod(reqValue, request);
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/adminProduct");
-
-		mav.addObject("returnVal", returnVal);
-
-		// 상품조회 페이지 이동
-		return mav;
-	}
-
+	/*
 	//	페이징 메소드
 	public HashMap<String, Object> pagingMethod(HashMap<String, Object> reqValue, HttpServletRequest request) {
 
