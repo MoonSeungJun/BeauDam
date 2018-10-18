@@ -56,7 +56,21 @@ public class ViewDAO {
 		
 	}
 	
+	public List<SaleView> getAllSaleView(HashMap<String, Object> saleSearchPack){
+		
+		List<SaleView> lists = sessionTemplate.selectList("beaudam.getAllSaleView", saleSearchPack);
+		
+		return lists;
+		
+	}
 	
+	public SaleView getOneSaleView(String sale_Code) {
+		
+		SaleView dto =  sessionTemplate.selectOne("beaudam.getOneSaleView",sale_Code);
+		
+		return dto;
+		
+	}
 	
 	
 	

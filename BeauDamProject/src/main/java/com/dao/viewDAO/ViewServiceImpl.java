@@ -51,6 +51,12 @@ public class ViewServiceImpl implements ViewService {
 		return null;
 	}
 
+	@Override
+	public SaleView getOneSaleView(String sale_Code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 		
 	
 	

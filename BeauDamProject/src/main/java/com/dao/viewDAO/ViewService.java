@@ -13,6 +13,6 @@ public interface ViewService {
 	List<ProductView> getAllProductData(HashMap<String, Object> searchPack);
 	ProductView getOneProductData(String code);
 	List<SaleView> getAllSaleData(HashMap<String, Object> saleSearchPack);
-	
+	SaleView getOneSaleView(String sale_Code);
 		
 }
