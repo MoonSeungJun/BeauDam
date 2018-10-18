@@ -19,6 +19,7 @@
 				insert into member_Grade (id) values (#{id})
 			</insert>
 			
+		<!-- Coupon -->
 			<insert id="insertCoupon" parameterType="com.table.memberDTO.CouponDTO">
 				insert into coupon (id, coupon) values (#{id},#{coupon1})
 			</insert>	
@@ -211,7 +212,7 @@
 		</delete>
 		
 		<!-- Notification -->
-		<delete id="deleteNotification" parameterType="com.table.otherDTO.NotificationDTO">
+		<delete id="deleteNotification" parameterType="int">
 			delete notification where num = #{num}			
 		</delete>
 	
@@ -225,7 +226,7 @@
 			zip,city,street,gender,pay,grade,point,to_char(created,'yyyy-mm-dd') created, isLeave from memberView
 		</select>
 		
-		<select id="getOneMemberData" resultType="com.view.view.MemberView" parameterType="com.table.memberDTO.MemberDTO">
+		<select id="getOneMemberData" resultType="com.view.view.MemberView" parameterType="String">
 			select id,pwd,name,nickName,cellPhone,tel,to_char(birth,'yyyy-mm-dd') birth,email,
 			zip,city,street,gender,pay,grade,point,to_char(created,'yyyy-mm-dd') created, isLeave from memberView
 			where id = #{id}
