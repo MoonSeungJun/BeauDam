@@ -88,4 +88,10 @@ public class OtherServiceImpl implements OtherService {
 		return null;
 	}
 
+	@Override
+	public ReviewDTO reviewData(String sale_Code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

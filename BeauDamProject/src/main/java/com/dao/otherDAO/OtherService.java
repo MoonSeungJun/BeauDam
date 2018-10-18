@@ -25,5 +25,5 @@ public interface OtherService {
 	CouponDTO getCouponData(String id);
 	int getWeekCouponCount(String id);
 	CouponDTO getWeekCouponData(String id);
-	
+	ReviewDTO reviewData(String sale_Code);
 }
