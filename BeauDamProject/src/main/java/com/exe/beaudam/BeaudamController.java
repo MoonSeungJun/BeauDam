@@ -150,22 +150,32 @@ public class BeaudamController {
 	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myBasket() {
 
-		// 장바구니 (마이페이지) 페이지 이동
+		// 장바구니(마이페이지) 페이지 이동
+
 		return "myPage/myBasket";
 	}
 
-	@RequestMapping(value = "/myInfo.action", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/myInfo.action", method = RequestMethod.GET)
 	public String myInfo() {
 
-		// 회원정보 수정 (마이페이지) 페이지 이동
+		// 마이페이지 비밀번호확인 페이지 이동
 		return "myPage/myInfo";
+	}
+	
+	@RequestMapping(value = "/myEdit.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String myEdit() {
+
+		// 회원정보 수정2(마이페이지) 페이지 이동
+		return "myPage/myEdit";
+
 	}
 
 	// msj
 	@RequestMapping(value = "/myCoupon.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myCoupon() {
 
-		// 보유쿠폰 (마이페이지) 페이지 이동
+		// 보유쿠폰(마이페이지) 페이지 이동
+
 		return "myPage/myCoupon";
 	}
 
@@ -174,6 +184,7 @@ public class BeaudamController {
 	public String myOrder() {
 
 		// 주문정보 (마이페이지) 페이지 이동
+		
 		return "myPage/myOrder";
 	}
 
@@ -182,12 +193,10 @@ public class BeaudamController {
 	public String myLeave() {
 
 		// 회원탈퇴 (마이페이지) 페이지 이동
+
 		return "myPage/myLeave";
 	}
 
-	
-	
-	
 	
 	// ********************** Admin Page **********************
 
