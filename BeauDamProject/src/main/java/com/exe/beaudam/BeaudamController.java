@@ -1,10 +1,13 @@
 package com.exe.beaudam;
 
+import javax.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.dao.adminDAO.*;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -69,7 +72,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BeaudamController {
 
-	
+	@Resource(name="adminService")
+	private AdminServiceImpl adminService;
 	
 	
 	
@@ -253,8 +257,13 @@ public class BeaudamController {
 	//esteban
 	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminBrand() {
-		
+				
 		// 브랜드 관리 페이지 이동
+		
+		
+		
+		
+		
 		return "admin/adminBrand";
 	}
 	
