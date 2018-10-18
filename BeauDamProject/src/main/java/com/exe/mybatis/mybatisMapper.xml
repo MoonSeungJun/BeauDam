@@ -2,7 +2,291 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="beaudam">
+	
+	<!-- Insert -->	
+	
+		<!-- Member -->
+			<insert id="insertMember" parameterType="com.table.memberDTO.MemberDTO">
+				insert into member (id,pwd,nickName) values (#{id},#{pwd},#{nickName})	
+			</insert>
+			
+			<insert id="insertMemberInfo" parameterType="com.table.memberDTO.Member_InfoDTO">
+				insert into member_Info (id,name,birth,tel,cellphone,zip,city,street,email,gender) 
+				values (#{id},#{name},#{birth},#{tel},#{cellphone},#{zip},#{city},#{street},#{email},#{gender})
+			</insert>
+			
+			<insert id="insertMemberGrade" parameterType="com.table.memberDTO.Member_GradeDTO">
+				insert into member_Grade (id) values (#{id})
+			</insert>
+			
+			<insert id="insertCoupon" parameterType="com.table.memberDTO.CouponDTO">
+				insert into coupon (id, coupon) values (#{id},#{coupon1})
+			</insert>	
+		
+		
+		<!-- Product -->
+			<insert id="insertProduct" parameterType="com.table.productDTO.ProductDTO">
+				insert into product (code,product_Name,product_Price) values (#{code},#{product_Name},#{product_Price})
+			</insert>
+			
+			<insert id="insertBrand" parameterType="com.table.productDTO.BrandDTO">
+				insert into brand (code,brand,type,category) values (#{code},#{brand},#{type},#{category})
+			</insert>
+			
+			<insert id="insertImg" parameterMap="com.table.productDTO.ImgDTO">
+				insert into img (code, thumb_Img, detail_Img) values (#{code}, #{thumb_Img}, #{detail_Img})
+			</insert>
+			<insert id="insertColor" parameterType="com.table.productDTO.ColorDTO">
+				insert into color (color_Code, code, color_Name, qty) values (#{color_Code}, #{code}, #{color_Name}, #{qty})
+			</insert>	
+		
+		
+		<!-- Sale -->
+			<insert id="insertSaleDate" parameterType="com.table.saleDTO.Sale_DateDTO">
+				insert into sale_date 
+				(sale_code,payment_method,use_coupon,use_point,total_price)
+				values
+				(#{sale_code},#{payment_method},#{use_coupon},#{use_point},#{total_price})
+			</insert>
+			
+			<insert id="insertSaleProduct" parameterType="com.table.saleDTO.Sale_ProductDTO">
+				insert into sale_product (sale_code,code,brand,product_name,product_price,color_code,qty) values
+				(#{sale_code},#{code},#{brand},#{product_name},#{product_price},#{color_code},#{qty})
+			</insert>
+						
+			<insert id="insertSaleClient" parameterType="com.table.saleDTO.Sale_ClientDTO">
+				insert into sale_client (sale_code,id,name,tel,cellphone,addr,message) values
+				(#{sale_code},#{id},#{name},#{tel},#{cellphone},#{addr},#{message})
+			</insert>	
+		
+			
+		<!-- Notification -->
+			<insert id="insertNotification" parameterType="com.table.otherDTO.NotificationDTO">
+				insert into notification (subject,content) values (#{subject},#{content})
+			</insert>
+		
+		
+		<!-- Review -->
+			<insert id="insertReview" parameterType="com.table.otherDTO.ReviewDTO">
+				insert into review (sale_code, score, review) values (#{sale_code}, #{score}, #{review})
+			</insert>
+			
+			
+		<!-- Basket -->
+			<insert id="insertBasket" parameterType="com.table.otherDTO.BasketDTO">
+				insert into basket (basket_num,id,code,color_code,product_name,product_price,qty) values
+				(#{basket_num},#{id},#{code},#{color_code},#{product_name},#{product_price},#{qty})
+			</insert>
+		
+		
+		<!-- Admin -->
+			<insert id="insertAdminBrand" parameterType="com.table.adminDTO.Admin_BrandDTO">
+				insert into admin_brand values (#{brand})
+			</insert>			
+			<insert id="insertAdminCategory" parameterType="com.table.adminDTO.Admin_CategoryDTO">
+				insert into admin_category values (#{category})
+			</insert>		
+			<insert id="insertAdminType" parameterType="com.table.adminDTO.Admin_TypeDTO">
+				insert into admin_type values (#{type})
+			</insert>		
+		
+		
+		
+		
+		
+	
+	<!-- Update -->
+	
+	
+		<!-- Member -->
+			<!-- 회원정보 수정 -->
+			<update id="updateMember" parameterType="com.table.memberDTO.MemberDTO">
+				update member set nickName = #{nickName}, pwd = #{pwd} where id = #{id}
+			</update>
+			
+			<update id="updateMemberInfo" parameterType="com.table.memberDTO.Member_InfoDTO">
+				update member_Info set birth = #{birth}, zip = #{zip}, city = #{city}, street = #{street},
+				tel = #{tel}, cellPhone = #{cellPhone}, email = #{email}, gender = #{gender} where id = #{id}
+			</update>
+			
+			<!-- 탈퇴처리 -->			
+			<update id="updateIsLeave" parameterType="String">
+				update member set isLeave = 1 where id = #{id}
+			</update>
+			
+			<update id="updateMemberGrade" parameterType="com.table.memberDTO.Member_GradeDTO">
+				update member_grade set pay = #{pay}, grade = #{grade}, point = #{point} where id = #{id}
+			</update>
+			
+			
+			
+		<!-- Product -->
+			<!-- 상품수정 -->
+			<update id="updateProduct" parameterType="com.table.productDTO.ProductDTO">
+				update product set product_name = #{product_name}, product_price = #{product_price} where code = #{code}
+			</update>
+			
+			<update id="updateBrand" parameterType="com.table.productDTO.BrandDTO">
+				update product set brand=#{brand},category=#{category},type=#{type} where code=#{code}
+			</update>
+			<update id="updateImg" parameterType="com.table.productDTO.ImgDTO">
+				update img set thumb_img=#{thumb_img},detail_img=#{detail_img} where code = #{code}
+			</update>
+			<update id="updateColor" parameterType="com.table.productDTO.ColorDTO">
+				update color set color_code=#{color_code},color_name=#{color_name},qty=#{qty} where code = #{code}
+			</update>
+			
+			
+		<!-- Admin -->
+			
+			
+		<!-- Sale -->
+			
+			<!-- 결제상태, 배송상태 수정 -->			
+			<update id="updateSaleDate" parameterType="com.table.saleDTO.Sale_DateDTO">
+				update sale_date set pay_status=#{pay_status},delivery_status=#{delivery_status} where sale_code = #{sale_code}
+			</update>					
+			
+		<!-- Coupon -->
+			<update id="updateCoupon" parameterType="map">
+				update coupon set usedate = #{usedate} where id = #{id}
+			</update>
+			
+		<!-- Notification -->
+			<update id="updateHitCount" parameterType="int">
+				update notification set hitCount = hitCount + 1 where num = #{num}
+			</update>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	<!-- Delete -->
 
-
+		<!-- Product -->
+		<delete id="deleteProduct" parameterType="String">
+			delete product where code = #{code}
+		</delete>
+		
+		<delete id="deleteBrand" parameterType="String">
+			delete brand where code = #{code}
+		</delete>
+		<delete id="deleteColor" parameterType="String">
+			delete color where code = #{code}
+		</delete>
+		<delete id="deleteImg" parameterType="String">
+			delete img where code = #{code}
+		</delete>
+		
+		<!-- Admin -->
+		<delete id="deleteAdminBrand" parameterType="String">
+			delete admin_brand where brand = #{brand}
+		</delete>
+		<delete id="deleteAdminCategory" parameterType="String">
+			delete admin_category where category = #{category}
+		</delete>
+		<delete id="deleteAdminType" parameterType="String">
+			delete admin_type where type = #{type}
+		</delete>
+		
+		
+		
+		<!-- Basket -->
+		<delete id="deleteBasket" parameterType="map">
+			delete basket where basket_num = #{basket_num} and id = #{id}
+		</delete>
+			
+			
+			
+		<!-- Review -->		
+		<delete id="deleteReview" parameterType="int">
+			delete review where num = #{num}
+		</delete>
+		
+		<!-- Notification -->
+		<delete id="deleteNotification" parameterType="com.table.otherDTO.NotificationDTO">
+			delete notification where num = #{num}			
+		</delete>
+	
+		
+		
+	<!-- Select -->
+	
+		<!-- Member -->		
+		<select id="getAllMemberData" resultType="com.view.view.MemberView">
+			select id,pwd,name,nickName,cellPhone,tel,to_char(birth,'yyyy-mm-dd') birth,email,
+			zip,city,street,gender,pay,grade,point,to_char(created,'yyyy-mm-dd') created, isLeave from memberView
+		</select>
+		
+		<select id="getOneMemberData" resultType="com.view.view.MemberView" parameterType="com.table.memberDTO.MemberDTO">
+			select id,pwd,name,nickName,cellPhone,tel,to_char(birth,'yyyy-mm-dd') birth,email,
+			zip,city,street,gender,pay,grade,point,to_char(created,'yyyy-mm-dd') created, isLeave from memberView
+			where id = #{id}
+		</select>
+		
+		<select id="getLeaveMemberData" resultType="com.view.view.MemberView">
+			select id,pwd,name,nickName,cellPhone,tel,to_char(birth,'yyyy-mm-dd') birth,email,
+			zip,city,street,gender,pay,grade,point,to_char(created,'yyyy-mm-dd') created, isLeave from memberView
+			where isLeave = 1
+		</select>
+		
+		<!-- Product -->
+		
+		<!-- Admin -->
+		
+		
+		<!-- Basket -->
+		<select id="getBasketData" resultType="com.table.otherDTO.BasketDTO" parameterType="String">
+			select basket_num, id, code, color_code, product_name, product_price, qty from
+			basket where id = #{id}
+		</select>
+		
+		
+		
+		
+		<!-- Notification -->
+		<select id="getNotificationData" resultType="com.table.otherDTO.NotificationDTO">
+			select num, id, subject, content, hitCount,to_char(created, 'yyyy-mm-dd') created
+			from notification
+		</select>
+		
+		
+		<!-- Coupon -->
+		<select id="getCouponCount" resultType="int" parameterType="String">
+			select count(*) from coupon where id = #{id} and period > sysdate
+		</select>
+		<select id="getCouponData" resultType="com.table.memberDTO.CouponDTO" parameterType="String">
+			select num,id,coupon,to_char(period, 'yyyy-mm-dd') period, usedate from coupon
+			where id = #{id} and period > sysdate
+		</select>		
+		
+		<select id="getWeekCouponCount" parameterType="String" resultType="int">
+		<![CDATA[
+			select count(*) from coupon
+			where id = #{id} and trunc(period-sysdate) <= 7
+		]]>
+		</select>
+		
+		<select id="getWeekCouponData" parameterType="String" resultType="com.table.otherDTO.CouponDTO">
+		<![CDATA[
+			select id,coupon,period,usedate from coupon
+			where id = #{id} and trunc(period-sysdate) <= 7	
+		]]>
+		</select>		
+		
+		
+		<!-- Review -->
+		<!-- Sale -->
+		<select id=""></select>
+		<select id=""></select>
+		<select id=""></select>
+		<select id=""></select>
 
 </mapper>
