@@ -4,7 +4,6 @@ import java.util.*;
 
 import org.mybatis.spring.*;
 import org.springframework.stereotype.*;
-
 import com.view.view.*;
 
 @Repository("viewDAO")
@@ -40,5 +39,24 @@ public class ViewDAO {
 		return dto;
 		
 	}
+	
+	public List<ProductView> getAllproductData(HashMap<String, Object> searchPack) {
+		
+		List<ProductView> lists = sessionTemplate.selectList("beaudam.getAllProductData", searchPack);		
+		
+		return lists;
+	}
+	
+	public ProductView getOneProductData(String code) {
+		
+		ProductView dto = sessionTemplate.selectOne("beaudam.getOneProductData", code);
+		
+		return dto;
+		
+	}
+	
+	
+	
+	
 	
 }
