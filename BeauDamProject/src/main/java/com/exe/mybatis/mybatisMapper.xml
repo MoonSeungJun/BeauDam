@@ -39,7 +39,7 @@
 			<insert id="insertColor" parameterType="com.table.productDTO.ColorDTO">
 				insert into color (color_Code, code, color_Name, qty) values (#{color_Code}, #{code}, #{color_Name}, #{qty})
 			</insert>	
-		
+			
 		
 		<!-- Sale -->
 			<insert id="insertSaleDate" parameterType="com.table.saleDTO.Sale_DateDTO">
