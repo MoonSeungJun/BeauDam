@@ -33,7 +33,7 @@ public class ViewServiceImpl implements ViewService {
 	}
 
 	@Override
-	public List<ProductView> getllAllProductData(HashMap<String, Object> searchPack) {
+	public List<ProductView> getAllProductData(HashMap<String, Object> searchPack) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -44,13 +44,6 @@ public class ViewServiceImpl implements ViewService {
 		return null;
 	}
 
-	
-
-	@Override
-	public SaleView getOneSaleCode(String sale_Code) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<SaleView> getAllSaleData(HashMap<String, Object> saleSearchPack) {
