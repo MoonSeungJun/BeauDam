@@ -101,7 +101,7 @@ pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
-pom.properties
+./m2e-wtp/web-resources/META-INF/maven/com.exe/beaudam/pom.properties
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
