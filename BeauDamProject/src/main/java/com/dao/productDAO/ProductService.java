@@ -9,7 +9,7 @@ public interface ProductService {
 	void insertProduct(ProductDTO dto);
 	void insertBrand(BrandDTO dto);
 	void inserImg(ImgDTO dto);
-	void insertColoe(ColorDTO dto);
+	void insertColor(ColorDTO dto);
 //	update
 	void updateProduct(ProductDTO dto);
 	void updateBrand(BrandDTO dto);

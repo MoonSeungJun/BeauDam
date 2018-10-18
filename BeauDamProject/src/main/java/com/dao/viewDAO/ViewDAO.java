@@ -1,53 +1,43 @@
 package com.dao.viewDAO;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.*;
+import org.springframework.stereotype.*;
 
-import com.view.view.ProductView;
-import com.view.view.SaleView;
+import com.view.view.*;
 
-
-
-
-
-
+@Repository("viewDAO")
 public class ViewDAO {
 
-	SqlSessionTemplate sessiontemplate;
 	
-
-	public List<ProductView> getllAllProductData(HashMap<String, Object>searchPack){
-						
-		List<ProductView> lists = sessiontemplate.selectList("beaudam.getAllProduct",searchPack);
-				
+	private SqlSessionTemplate sessionTemplate;
+	
+	
+	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) throws Exception {
+		this.sessionTemplate = sessionTemplate;		
+	}
+	
+	
+	public List<MemberView> getAllMemberData() {
+		
+		List<MemberView> lists = sessionTemplate.selectList("beaudam.getAllMemberData");
+		
+		return lists;		
+		
+	}
+	
+	public List<MemberView> getLeaveMemberData() {
+		
+		List<MemberView> lists = sessionTemplate.selectList("beaudam.getLeaveMemberData");
 		return lists;
+		
 	}
 	
-	public ProductView getOneProductData(String code) {
+	public MemberView getOneMemberData(String id) {
 		
-		ProductView dto = sessiontemplate.selectOne("beaudam.getOneProductData",code);
-		
+		MemberView dto = sessionTemplate.selectOne("beaudam.getOneMemberData");
 		return dto;
-		
-	}
-	
-	public List<SaleView> getAllSaleData(HashMap<String, Object> saleSearchPack){
-	
-		List<SaleView> lists = sessiontemplate.selectList("beaudam.getAllSaleView",saleSearchPack);
-	
-		return lists;
-	
-	}
-	
-	public SaleView getOneSaleCode(String sale_Code) {
-		
-			
-		SaleView dto = sessiontemplate.selectOne("beaudam.getOneSaleView", sale_Code);
-		
-		return dto;
-		
 		
 	}
 	

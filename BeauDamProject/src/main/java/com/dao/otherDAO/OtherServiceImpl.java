@@ -2,6 +2,8 @@ package com.dao.otherDAO;
 
 import java.util.*;
 
+import javax.annotation.*;
+
 import org.springframework.stereotype.*;
 
 import com.table.memberDTO.*;
@@ -10,88 +12,86 @@ import com.table.otherDTO.*;
 @Service("otherService")
 public class OtherServiceImpl implements OtherService {
 
+	@Resource(name="otherDAO")
+	private OtherDAO dao;
+	
 	@Override
 	public void insertCoupon(CouponDTO dto) {
-		// TODO Auto-generated method stub
+		dao.insertCoupon(dto);
 		
 	}
 
 	@Override
 	public void insertNotification(NotificationDTO dto) {
-		// TODO Auto-generated method stub
+		dao.insertNotification(dto);
 		
 	}
 
 	@Override
 	public void insertReview(ReviewDTO dto) {
-		// TODO Auto-generated method stub
+		dao.insertReview(dto);
 		
 	}
 
 	@Override
 	public void insertBasket(BasketDTO dto) {
-		// TODO Auto-generated method stub
+		dao.insertBasket(dto);
 		
 	}
 
 	@Override
 	public void updateCoupon(HashMap<String, Object> map) {
-		// TODO Auto-generated method stub
+		dao.updateCoupon(map);
 		
 	}
 
 	@Override
 	public void updateHitCount(int num) {
-		// TODO Auto-generated method stub
+		dao.updateHitCount(num);
 		
 	}
 
 	@Override
 	public void deleteBasket(HashMap<String, Object> map) {
-		// TODO Auto-generated method stub
+		dao.deleteBasket(map);
 		
 	}
 
 	@Override
 	public void deleteReview(int num) {
-		// TODO Auto-generated method stub
+		dao.deleteReview(num);
 		
 	}
 
 	@Override
 	public void deleteNotification(int num) {
-		// TODO Auto-generated method stub
+		dao.deleteNotification(num);
 		
 	}
 
 	@Override
 	public int getCouponCount(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = dao.getCouponCount(id);
+		return count;
 	}
 
 	@Override
-	public CouponDTO getCouponData(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CouponDTO> getCouponData(String id) {
+		List<CouponDTO> lists = dao.getCouponData(id);
+		return lists;
 	}
 
 	@Override
 	public int getWeekCouponCount(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = dao.getWeekCouponCount(id);
+		return count;
 	}
 
 	@Override
-	public CouponDTO getWeekCouponData(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CouponDTO> getWeekCouponData(String id) {
+		List<CouponDTO> lists = dao.getWeekCouponData(id);
+		return lists;
 	}
 
-	@Override
-	public ReviewDTO reviewData(String sale_Code) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
