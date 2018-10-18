@@ -1,0 +1,406 @@
+@charset "UTF-8";
+@font-face { font-family: 'designhouseOTFLight00'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'WONBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONBatang.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+
+html, body, ul, li, h2, h3 {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    width: 100%;
+    background-color: rgba( 255, 255, 255, 0.5 );
+ /*   position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 99999;*/
+}
+
+.top {
+    padding: 5px;
+    text-align: center;
+    background-color: beige;
+    font-family: 'WONBatang';
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/*.top a {
+    color: black;
+    text-decoration: none;
+    text-align: right;
+    font-size: 13px;
+}*/
+
+.top a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.header .login {
+    margin-right: 30px;
+    font-family: 'WONBatang';
+    /*background-color: aquamarine;*/
+}
+
+.header .login ul {
+    overflow: hidden;
+    margin: 0;
+}
+
+.header .login li {
+    float: right;
+    margin: 10px;
+}
+
+.login a {
+    color: black;
+    text-decoration: none;
+}
+
+.login a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.header_wrapper {
+    /*border: 1px solid red;*/
+    overflow: hidden;
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    /*position: relative;*/
+    /*background-color: antiquewhite;*/ 
+}
+
+.header_container {
+    width: 1200px;
+    margin: 0 auto;
+    /*background-color: fuchsia;*/
+}
+
+.header_grid {
+    float: left;
+    height: 150px;
+    /*background-color: aqua;*/
+}
+
+.header_event {
+    /*border: 3px solid red;*/
+    display: inline-block;
+    /*position: absolute;
+    left: 350px;
+    top: 130px;*/
+    /*background-color: aqua;*/
+    width: 400px;
+    /*height: 200px;*/
+    /*position: absolute;*/
+    /*margin-top: -100px;*/
+    /*position: relative;
+    left: auto;*/
+}
+
+.header_event p {
+    font-weight: bold;
+    font-size: 20px;
+    font-family: sans-serif;  
+    text-align: center;
+    width: 230px;
+    /*background-color: fuchsia;*/
+    
+}
+
+.header_event ul {
+    overflow: hidden;
+}
+
+.header_event li {
+    float: left;
+    margin: 5px;
+    /*text-align: center;*/
+}
+
+.header_event .list_logo {
+    width: 50px;
+}
+
+.header_logo {
+    /*background-color: darkturquoise;*/
+    display: inline-block;
+    width: 400px;
+}
+
+.header_logo img {
+    width: 150px;
+   /* height: 150px;*/
+    margin-bottom: 50px;
+}
+
+.header_search {
+    /*background-color: dodgerblue;*/
+    display: inline-block;  
+    /*text-align: right;*/
+   /* overflow: hidden;*/
+    width: 380px;
+    /*float: right;*/
+  /*  position: relative;
+    top: 35px;
+    right: -350px;*/
+}
+
+.header_search .input {
+    /*width: 200px;*/
+   /* margin-right: 0;*/
+}
+
+.search_icon {
+    overflow: hidden;
+}
+
+.search_icon li {
+    float: right;
+}
+
+.container {
+     margin-top: -23px;
+}
+
+.navbar-container {
+    width: 100%;
+/*    background-color: rgba( 255, 255, 255, 0.5 );
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 99999;*/
+}
+
+.navbar {
+    overflow: visible;
+    font-family: 'WONBatang';
+    font-weight: bold;
+    width: 960px;
+    margin: 0 auto;
+    font-size: 15px;
+    z-index: 999999;
+    
+    /*background-color: forestgreen;*/
+   
+}
+
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    width: 135px;
+    
+}
+
+.dropdown {
+    float: left;
+    overflow: visible;
+    margin: 0 auto;
+    z-index: 999999;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: inherit;
+    font: inherit;
+    margin: 0;
+    width: 135px;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: bisque;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    /*background-color: rgba( 255, 255, 255, 0.5 );*/
+    /*left: 0;*/
+    /*border: 1px solid gray;*/
+    z-index: 1;
+    z-index: 999999;
+    border: none;
+}
+
+.dropdown-content .header {
+  /*  background: red;*/
+    padding: 16px;
+    color: white;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    /*width: 33.33%;*/
+    /* padding: 8px; */
+    /*background-color: #ccc;*/
+    /*height: 250px;*/
+    text-align: center;
+}
+
+.column h3 {
+    color: coral;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.column a {
+    float: none; 
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    font-weight: normal;
+    font-family: '맑은고딕';
+    
+}
+
+.column a:hover {
+    color: dimgrey;
+    background-color: white;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.content_layout {
+    margin-top: 50px;
+    background-color: #F9F9F9;
+}
+
+.content_box {
+   /* width: 960px;*/
+    overflow: hidden;  
+    position: relative;
+    left: 400px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.content_grid {
+    float: left;
+}
+
+.content_left {
+    display: inline-block;
+    text-align: right;
+}
+
+.content_right {
+    display: inline-block;
+    text-align: left;
+}
+
+.layout_img img {
+    padding: 10px;
+    background-color: white;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.layout_img:hover {
+    opacity: 0.4;
+}
+
+.best_wrapper {
+    padding-bottom: 50px;
+    
+}
+
+.best_wrapper h3 {
+    font-family: 'WONBatang';
+    letter-spacing: 0.4em;
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+    padding: 20px;
+    
+}
+
+.best_wrapper ul {
+    text-align: center;
+    overflow: hidden;
+    width: 960px;
+    margin: 0 auto;
+}
+
+.best_wrapper li {
+    float: left;
+    text-align: center;
+}
+
+.best_wrapper img {
+    width: 220px;
+    margin: 10px;
+    border-radius: 30px;
+}
+
+/*.center img {
+    margin: 30px auto;
+    width: 100%;
+    opacity: 0.8;
+}*/
+
+.footer {
+    background-color: #F9F9F9;
+    height: 300px;
+    margin-top: 80px;
+    padding: 20px;
+    background-image: url(./resources/css/image/logo.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 150px;
+}
+   
+.side img {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.sticky{
+    position: sticky;
+    top: 0px;
+    z-index: 999;
+    background-color: gray;
+    /* background-color: rgba( 255, 255, 255, 0.5 ); */
+}
+
