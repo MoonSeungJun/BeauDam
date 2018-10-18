@@ -1,0 +1,116 @@
+@charset "UTF-8";
+@font-face { font-family: 'designhouseOTFLight00'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'WONBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONBatang.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'Binggrae-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae-Bold.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+html, body, ul, li, h1, h2 {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;   
+}
+
+.head {
+    /*background-color: aliceblue;*/
+    height: 360px;
+    margin-top: -30px;
+    width: 100%;
+    overflow: auto;
+}
+
+.head p {
+    margin: 0 auto;
+   	/* background-color: aqua; */
+    text-align: center;
+    line-height: 360px;
+    font-family: 'WONBatang';  
+    font-size: 30px;	  
+}
+
+.brand {
+    border-right: 2px solid gray;
+    border-left: 2px solid gray;
+    width: 600px;
+    margin: 30px auto;
+    padding-bottom: 20px;   
+}
+
+.brandname {
+    margin: 0 auto;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.brandname td {
+    /*margin-right: 10px;*/
+    text-align: left;
+    width: 180px;
+    height: 30px;
+}
+
+.bestlist {
+	/* background-color:aqua; */
+	margin: 0 auto;
+	margin-bottom: 50px;
+	width: 960px;
+	padding-top: 10px;
+	border-bottom: 2px solid gray;
+}
+
+.bestlist ul {
+	overflow: hidden;
+}
+
+.bestlist li {
+	float: left;
+	margin: 10px;
+	text-align: center;
+	width: 300px;
+}
+
+.bestlist img {
+	width: 300px;
+	margin-bottom: 20px;
+}
+
+.bestname li {
+	font-size: 20px;
+}
+
+.bestlist img:hover {
+	webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+.list {
+	width: 960px;
+	margin: 0 auto;
+}
+
+.list ul{
+	overflow: hidden;
+}
+
+.list li{
+	float: left;
+	margin: 10px;
+}
+
+.listitem img {
+	width: 220px;
+	margin-bottom: 13px;
+	border-radius: 30px;
+}
+
+.listitem img:hover {
+	webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+
+.listitem p {
+	text-align: center;
+}
+
+
+
+
