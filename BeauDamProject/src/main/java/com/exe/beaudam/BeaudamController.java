@@ -109,11 +109,18 @@ public class BeaudamController {
 		return "myPage/myBasket";
 	}
 
-	@RequestMapping(value = "/myInfo.action", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/myInfo.action", method = RequestMethod.GET)
 	public String myInfo() {
 
 		// 회원정보 수정(마이페이지) 페이지 이동
 		return "myPage/myInfo";
+	}
+	
+	@RequestMapping(value = "/myEdit.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String myEdit() {
+
+		// 회원정보 수정(마이페이지) 페이지 이동
+		return "myPage/myEdit";
 	}
 
 	@RequestMapping(value = "/myCoupon.action", method = { RequestMethod.GET, RequestMethod.POST })
