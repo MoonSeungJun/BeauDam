@@ -300,7 +300,7 @@
 		
 		
 		<!-- Review -->
-		<select id="reviewData" parameterType="String" resultType="com.table.otherDTO.ReviewDTO">
+		<select id="getReviewData" parameterType="String" resultType="com.table.otherDTO.ReviewDTO">
 			select sale_Code,score,review,created from review
 			where sale_Code = #{sale_Code}
 		</select>

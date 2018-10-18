@@ -34,27 +34,32 @@ public class ViewServiceImpl implements ViewService {
 
 	@Override
 	public List<ProductView> getAllProductData(HashMap<String, Object> searchPack) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ProductView> lists = dao.getAllproductData(searchPack);
+		
+		return lists;
 	}
 
 	@Override
 	public ProductView getOneProductData(String code) {
-		// TODO Auto-generated method stub
-		return null;
+		ProductView dto = dao.getOneProductData(code);
+		return dto;
 	}
 
 
 	@Override
-	public List<SaleView> getAllSaleData(HashMap<String, Object> saleSearchPack) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SaleView> getAllSaleView(HashMap<String, Object> saleSearchPack) {
+		
+		List<SaleView> lists = dao.getAllSaleView(saleSearchPack);
+		
+		return lists;
 	}
 
 	@Override
 	public SaleView getOneSaleView(String sale_Code) {
-		// TODO Auto-generated method stub
-		return null;
+		SaleView dto = dao.getOneSaleView(sale_Code);
+		
+		return dto;
+		
 	}
 
 		
