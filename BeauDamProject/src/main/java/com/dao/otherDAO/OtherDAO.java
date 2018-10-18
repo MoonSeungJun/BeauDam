@@ -96,5 +96,12 @@ public class OtherDAO {
 		return lists;
 	}
 	
+	public ReviewDTO reviewData(String sale_Code) {
+		
+		ReviewDTO dto = sessionTemplate.selectOne("beaudam.reviewData", sale_Code);
+		
+		return dto;
+	}
+	
 	
 }

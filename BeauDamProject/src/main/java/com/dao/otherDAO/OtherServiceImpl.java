@@ -93,5 +93,11 @@ public class OtherServiceImpl implements OtherService {
 		return lists;
 	}
 
+	@Override
+	public ReviewDTO reviewData(String sale_Code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
