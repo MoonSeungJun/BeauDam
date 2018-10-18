@@ -38,8 +38,7 @@
 			<td>
 				<a href="#" style="text-decoration: none;">삭제</a>
 			</td>
-		</tr>	
-	
+		</tr>		
 	</c:forEach>
 
 </table>
@@ -56,30 +55,16 @@
 			<input type="button" value="추 가" onclick="">
 		</td>
 	</tr>
+		<c:forEach var="dto" items="${category }">
 		<tr>
-		<td colspan="2">
-			eye
-		</td>
-		<td>
-			<a href="#" style="text-decoration: none;">삭제</a>
-		</td>
-	</tr>	
-	<tr>
-		<td colspan="2">
-			skin
-		</td>
-		<td>
-			<a href="#" style="text-decoration: none;">삭제</a>
-		</td>
-	</tr>	
-	<tr>
-		<td colspan="2">
-			lip
-		</td>
-		<td>
-			<a href="#" style="text-decoration: none;">삭제</a>
-		</td>
-	</tr>	
+			<td colspan="2">
+				${dto.category }
+			</td>
+			<td>
+				<a href="#" style="text-decoration: none;">삭제</a>
+			</td>
+		</tr>		
+	</c:forEach>
 </table>
 
 <table border="1">
@@ -95,30 +80,16 @@
 		</td>		
 	
 	</tr>
-	<tr>
-		<td colspan="2">
-			BB
-		</td>
-		<td>
-			<a href="#" style="text-decoration: none;">삭제</a>
-		</td>
-	</tr>	
-	<tr>
-		<td colspan="2">
-			liner
-		</td>
-		<td>
-			<a href="#" style="text-decoration: none;">삭제</a>
-		</td>
-	</tr>	
-	<tr>
-		<td colspan="2">
-			man
-		</td>
-		<td>
-			<a href="#" style="text-decoration: none;">삭제</a>
-		</td>
-	</tr>		
+		<c:forEach var="dto" items="${type }">
+		<tr>
+			<td colspan="2">
+				${dto.type }
+			</td>
+			<td>
+				<a href="#" style="text-decoration: none;">삭제</a>
+			</td>
+		</tr>		
+	</c:forEach>
 
 </table>
 

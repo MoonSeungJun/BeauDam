@@ -34,7 +34,7 @@
 				insert into brand (code,brand,type,category) values (#{code},#{brand},#{type},#{category})
 			</insert>
 			
-			<insert id="insertImg" parameterMap="com.table.productDTO.ImgDTO">
+			<insert id="insertImg" parameterType="com.table.productDTO.ImgDTO">
 				insert into img (code, thumb_Img, detail_Img) values (#{code}, #{thumb_Img}, #{detail_Img})
 			</insert>
 			<insert id="insertColor" parameterType="com.table.productDTO.ColorDTO">
@@ -248,13 +248,13 @@
 		
 		
 		<!-- Admin -->
-		<select id="getAdminBrand">
+		<select id="getAdminBrand" resultType="com.table.adminDTO.Admin_BrandDTO">
 			select brand from admin_brand
 		</select>
-		<select id="getAdminCatogory">
+		<select id="getAdminCategory" resultType="com.table.adminDTO.Admin_CategoryDTO">
 			select category from admin_category
 		</select>
-		<select id="getAdminType">
+		<select id="getAdminType" resultType="com.table.adminDTO.Admin_TypeDTO">
 			select type from admin_type
 		</select>
 		

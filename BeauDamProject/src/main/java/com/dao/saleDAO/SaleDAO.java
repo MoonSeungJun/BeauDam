@@ -1,13 +1,15 @@
 package com.dao.saleDAO;
 
 import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.saleDTO.*;
 
 @Repository("saleDAO")
 public class SaleDAO {
-
+	
+	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {

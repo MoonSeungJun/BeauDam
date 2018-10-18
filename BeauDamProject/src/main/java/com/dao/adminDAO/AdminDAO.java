@@ -3,6 +3,7 @@ package com.dao.adminDAO;
 import java.util.*;
 
 import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.adminDTO.*;
@@ -11,6 +12,7 @@ import com.view.view.*;
 @Repository("adminDAO")
 public class AdminDAO {
 	
+	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
 	

@@ -1,6 +1,7 @@
 package com.dao.memberDAO;
 
 import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.memberDTO.*;
@@ -10,6 +11,7 @@ import com.table.memberDTO.*;
 @Repository("memberDAO")
 public class MemberDAO {
 
+	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {

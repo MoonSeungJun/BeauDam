@@ -263,8 +263,9 @@ public class BeaudamController {
 	public String adminBrand(HttpServletRequest req) {
 				
 		// 브랜드 관리 페이지 이동
-		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
 		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
+		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
+		
 		List<Admin_TypeDTO> type = adminService.getAdminType();
 		
 		req.setAttribute("brand", brand);

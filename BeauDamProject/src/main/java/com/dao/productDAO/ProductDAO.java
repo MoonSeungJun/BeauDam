@@ -1,6 +1,7 @@
 package com.dao.productDAO;
 
 import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.productDTO.*;
@@ -8,6 +9,7 @@ import com.table.productDTO.*;
 @Repository("productDAO")
 public class ProductDAO {
 
+	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {

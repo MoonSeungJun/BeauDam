@@ -3,6 +3,7 @@ package com.dao.viewDAO;
 import java.util.*;
 
 import org.mybatis.spring.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.view.view.*;
@@ -10,7 +11,7 @@ import com.view.view.*;
 @Repository("viewDAO")
 public class ViewDAO {
 
-	
+	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
 	
