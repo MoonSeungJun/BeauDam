@@ -70,20 +70,6 @@ public class BeaudamController {
 		// 메인 페이지 이동
 		return "beaudam/main";
 	}
-	
-	@RequestMapping(value = "/mainTop.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainTop() {
-
-		// 메인 페이지 이동
-		return "beaudam/mainTop";
-	}
-	
-	@RequestMapping(value = "/mainBottom.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainBottom() {
-
-		// 메인 페이지 이동
-		return "beaudam/mainBottom";
-	}
 
 	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String productList() {
