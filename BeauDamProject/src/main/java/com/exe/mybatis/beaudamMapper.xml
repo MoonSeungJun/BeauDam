@@ -158,15 +158,7 @@
 				update notification set hitCount = hitCount + 1 where num = #{num}
 			</update>
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+				
 		
 	
 	<!-- Delete -->
@@ -239,6 +231,21 @@
 		</select>
 		
 		<!-- Product -->
+		<select id="getAllProductData" resultType="com.view.view.ProductView" parameterType="map">
+			select code,brand,category,type,product_Name,color_Code,color_Name,product_Price,thumb_Img,detail_Img,qty from productView
+			where ${searchKey1} like '%' || #{searchValue1} || '%' and
+				  ${searchKey2} like '%' || #{searchValue2} || '%' and
+				  ${searchKey3} like '%' || #{searchValue3} || '%' and
+				  ${searchKey4} like '%' || #{searchValue4} || '%' and
+				  ${searchKey5} like '%' || #{searchValue5} || '%'	
+			
+		</select>	
+		
+		<select id="getOneProductData" resultType="com.view.view.ProductView" parameterType="String">
+			select code,brand,category,type,product_Name,color_Code,color_Name,product_Price,humb_Img,detail_Img,qty from productView
+			where code=#{code}
+		</select>
+		
 		
 		<!-- Admin -->
 		
@@ -284,10 +291,24 @@
 		
 		
 		<!-- Review -->
+		<select id="reviewData" parameterType="String" resultType="com.table.otherDTO.ReviewDTO">
+			select sale_Code,score,review,created from review
+			where sale_Code = #{sale_Code}
+		</select>
+		
 		<!-- Sale -->
-		<select id=""></select>
-		<select id=""></select>
-		<select id=""></select>
-		<select id=""></select>
-
+		<select id="getAllSaleView" resultType="com.view.view.SaleView" parameterType="map">
+			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code, use_Coupon, payment_Method, addr, message, pay_Status, delivery_Status,
+			 product_Price, qty, use_Point, total_Price from saleView			
+			 where ${searchKey1} like '%' || #{searchValue1} || '%' and
+				   ${searchKey2} like '%' || #{searchValue2} || '%' and
+				   ${searchKey3} like '%' || #{searchValue3} || '%'
+		</select>
+		
+		<select id="getOneSaleView" resultType="com.view.view.SaleView" parameterType="String">
+			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code, use_Coupon, payment_Method, addr, message, pay_Status, delivery_Status,
+			 product_Price, qty, use_Point, total_Price from saleView
+			 where sale_Code=#{sale_Code}
+		</select>
+					
 </mapper>
