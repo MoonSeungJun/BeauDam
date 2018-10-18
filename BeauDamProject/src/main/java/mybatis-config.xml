@@ -16,7 +16,7 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource="com/beaudam/mybatis/mybatisMapper.xml"/>
+		<mapper resource="com/beaudam/mybatis/beaudamMapper.xml"/>
 	</mappers>
 
 </configuration>
