@@ -21,9 +21,11 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.exe.beaudam" />
+	<context:component-scan base-package="com.exe.beaudam"/>
 	<context:component-scan base-package="com.exe.email"/>
-	
+	<context:component-scan base-package="com.dao.*"/>
+	<context:component-scan base-package="com.table.*"/>
+			
 	<beans:bean id="myUtil" class="com.exe.util.MyUtil"/>
 	
 	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

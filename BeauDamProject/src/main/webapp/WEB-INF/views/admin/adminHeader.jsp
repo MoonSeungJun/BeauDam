@@ -14,7 +14,7 @@
 	<table border="1">
 		<tr>		
 			<td>
-				<a href="" style="text-decoration: none;">
+				<a href="main.action" style="text-decoration: none;">
 					<img src="<%=cp %>/resources/image/admin/adminHeaderLogo.png" height="150" width="150">
 				</a>
 			</td>

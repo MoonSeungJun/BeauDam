@@ -20,7 +20,7 @@
 			</insert>
 			
 		<!-- Coupon -->
-			<insert id="insertCoupon" parameterType="com.table.memberDTO.CouponDTO">
+			<insert id="insertCoupon" parameterType="com.table.otherDTO.CouponDTO">
 				insert into coupon (id, coupon) values (#{id},#{coupon1})
 			</insert>	
 		
@@ -34,7 +34,7 @@
 				insert into brand (code,brand,type,category) values (#{code},#{brand},#{type},#{category})
 			</insert>
 			
-			<insert id="insertImg" parameterMap="com.table.productDTO.ImgDTO">
+			<insert id="insertImg" parameterType="com.table.productDTO.ImgDTO">
 				insert into img (code, thumb_Img, detail_Img) values (#{code}, #{thumb_Img}, #{detail_Img})
 			</insert>
 			<insert id="insertColor" parameterType="com.table.productDTO.ColorDTO">
@@ -248,6 +248,15 @@
 		
 		
 		<!-- Admin -->
+		<select id="getAdminBrand" resultType="com.table.adminDTO.Admin_BrandDTO">
+			select brand from admin_brand
+		</select>
+		<select id="getAdminCategory" resultType="com.table.adminDTO.Admin_CategoryDTO">
+			select category from admin_category
+		</select>
+		<select id="getAdminType" resultType="com.table.adminDTO.Admin_TypeDTO">
+			select type from admin_type
+		</select>
 		
 		
 		<!-- Basket -->
@@ -270,7 +279,7 @@
 		<select id="getCouponCount" resultType="int" parameterType="String">
 			select count(*) from coupon where id = #{id} and period > sysdate
 		</select>
-		<select id="getCouponData" resultType="com.table.memberDTO.CouponDTO" parameterType="String">
+		<select id="getCouponData" resultType="com.table.otherDTO.CouponDTO" parameterType="String">
 			select num,id,coupon,to_char(period, 'yyyy-mm-dd') period, usedate from coupon
 			where id = #{id} and period > sysdate
 		</select>		
