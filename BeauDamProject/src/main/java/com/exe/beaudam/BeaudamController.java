@@ -1,5 +1,7 @@
 package com.exe.beaudam;
 
+import java.util.*;
+
 import javax.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dao.adminDAO.*;
+import com.table.adminDTO.*;
+import com.view.view.*;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -256,13 +260,16 @@ public class BeaudamController {
 	
 	//esteban
 	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminBrand() {
+	public String adminBrand(HttpServletRequest req) {
 				
 		// 브랜드 관리 페이지 이동
+		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
+		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
+		List<Admin_TypeDTO> type = adminService.getAdminType();
 		
-		
-		
-		
+		req.setAttribute("brand", brand);
+		req.setAttribute("category", category);
+		req.setAttribute("type", type);
 		
 		return "admin/adminBrand";
 	}

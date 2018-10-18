@@ -1,10 +1,13 @@
 package com.dao.adminDAO;
 
+import java.util.*;
+
 import javax.annotation.*;
 
 import org.springframework.stereotype.*;
 
 import com.table.adminDTO.*;
+import com.view.view.*;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService{
@@ -40,7 +43,26 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void deleteType(String type) {
 		dao.deleteAdminType(type);		
+	}
+
+	@Override
+	public List<Admin_BrandDTO> getAdminBrand() {
+		List<Admin_BrandDTO> lists = dao.getAdminBrand();
+		return lists;
+	}
+
+	@Override
+	public List<Admin_CategoryDTO> getAdminCatogory() {
+		List<Admin_CategoryDTO> lists = dao.getAdminCatogory();
+		return lists;
+	}
+
+	@Override
+	public List<Admin_TypeDTO> getAdminType() {
+		List<Admin_TypeDTO> lists = dao.getAdminType();
+		return lists;
 	}	
+
 	
 	
 	

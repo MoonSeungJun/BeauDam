@@ -20,7 +20,7 @@
 			</insert>
 			
 		<!-- Coupon -->
-			<insert id="insertCoupon" parameterType="com.table.memberDTO.CouponDTO">
+			<insert id="insertCoupon" parameterType="com.table.otherDTO.CouponDTO">
 				insert into coupon (id, coupon) values (#{id},#{coupon1})
 			</insert>	
 		
@@ -248,6 +248,15 @@
 		
 		
 		<!-- Admin -->
+		<select id="getAdminBrand">
+			select brand from admin_brand
+		</select>
+		<select id="getAdminCatogory">
+			select category from admin_category
+		</select>
+		<select id="getAdminType">
+			select type from admin_type
+		</select>
 		
 		
 		<!-- Basket -->
@@ -270,7 +279,7 @@
 		<select id="getCouponCount" resultType="int" parameterType="String">
 			select count(*) from coupon where id = #{id} and period > sysdate
 		</select>
-		<select id="getCouponData" resultType="com.table.memberDTO.CouponDTO" parameterType="String">
+		<select id="getCouponData" resultType="com.table.otherDTO.CouponDTO" parameterType="String">
 			select num,id,coupon,to_char(period, 'yyyy-mm-dd') period, usedate from coupon
 			where id = #{id} and period > sysdate
 		</select>		

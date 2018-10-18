@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>    	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%
+	String cp = request.getContextPath();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,30 +30,18 @@
 			<input type="button" value="추 가" onclick="">
 		</td>		
 	</tr>
-	<tr>
-		<td colspan="2">
-			etude
-		</td>
-		<td>
-			<a href="#" style="text-decoration: none;">삭제</a>
-		</td>
-	</tr>	
-	<tr>
-		<td colspan="2">
-			innisfree
-		</td>
-		<td>
-			<a href="#" style="text-decoration: none;">삭제</a>
-		</td>
-	</tr>	
-	<tr>
-		<td colspan="2">
-			holika
-		</td>
-		<td>
-			<a href="#" style="text-decoration: none;">삭제</a>
-		</td>
-	</tr>	
+	<c:forEach var="dto" items="${brand }">
+		<tr>
+			<td colspan="2">
+				${dto.brand }
+			</td>
+			<td>
+				<a href="#" style="text-decoration: none;">삭제</a>
+			</td>
+		</tr>	
+	
+	</c:forEach>
+
 </table>
 
 <table border="1">

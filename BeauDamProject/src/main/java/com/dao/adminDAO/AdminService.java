@@ -1,6 +1,9 @@
 package com.dao.adminDAO;
 
+import java.util.*;
+
 import com.table.adminDTO.*;
+
 
 public interface AdminService {
 
@@ -11,8 +14,9 @@ public interface AdminService {
 
 	
 //	select
-	
-	
+	List<Admin_BrandDTO> getAdminBrand();
+	List<Admin_CategoryDTO> getAdminCatogory();
+	List<Admin_TypeDTO> getAdminType();
 //	update
 //	delete
 	void deleteBrand(String brand);
