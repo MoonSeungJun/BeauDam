@@ -1,5 +1,7 @@
 package com.dao.adminDAO;
 
+import javax.annotation.*;
+
 import org.springframework.stereotype.*;
 
 import com.table.adminDTO.*;
@@ -7,40 +9,37 @@ import com.table.adminDTO.*;
 @Service("adminService")
 public class AdminServiceImpl implements AdminService{
 
+	@Resource(name="adminDAO")
+	private AdminDAO dao;
+	
 	@Override
-	public void insertBrand(Admin_BrandDTO dto) {
-		// TODO Auto-generated method stub
-		
+	public void insertBrand(Admin_BrandDTO dto) {		
+		dao.insertAdminBrand(dto);		
 	}
 
 	@Override
 	public void insertCategory(Admin_CategoryDTO dto) {
-		// TODO Auto-generated method stub
-		
+		dao.insertAdminCategory(dto);		
 	}
 
 	@Override
 	public void insertType(Admin_TypeDTO dto) {
-		// TODO Auto-generated method stub
-		
+		dao.insertAdminType(dto);		
 	}
 
 	@Override
 	public void deleteBrand(String brand) {
-		// TODO Auto-generated method stub
-		
+		dao.deleteAdminBrand(brand);
 	}
 
 	@Override
 	public void deleteCategory(String category) {
-		// TODO Auto-generated method stub
-		
+		dao.deleteAdminCategory(category);		
 	}
 
 	@Override
 	public void deleteType(String type) {
-		// TODO Auto-generated method stub
-		
+		dao.deleteAdminType(type);		
 	}	
 	
 	

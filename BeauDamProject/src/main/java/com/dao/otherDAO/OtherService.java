@@ -22,8 +22,8 @@ public interface OtherService {
 	void deleteNotification(int num);
 //	select
 	int getCouponCount(String id);
-	CouponDTO getCouponData(String id);
+	List<CouponDTO> getCouponData(String id);
 	int getWeekCouponCount(String id);
-	CouponDTO getWeekCouponData(String id);
+	List<CouponDTO> getWeekCouponData(String id);
 	
 }

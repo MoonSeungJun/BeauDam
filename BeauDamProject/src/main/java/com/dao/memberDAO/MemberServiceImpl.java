@@ -1,54 +1,58 @@
 package com.dao.memberDAO;
 
-import java.util.*;
+
+import javax.annotation.*;
 
 import org.springframework.stereotype.*;
 
 import com.table.memberDTO.*;
-import com.view.view.*;
+
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
 
+	@Resource(name="memberDAO")
+	private MemberDAO dao;
+	
 	@Override
 	public void insertMember(MemberDTO dto) {
-		// TODO Auto-generated method stub
+		dao.insertMember(dto);
 		
 	}
 
 	@Override
 	public void insertMemberInfo(Member_InfoDTO dto) {
-		// TODO Auto-generated method stub
+		dao.insertMemberInfo(dto);
 		
 	}
 
 	@Override
 	public void insertMemberGrade(Member_GradeDTO dto) {
-		// TODO Auto-generated method stub
+		dao.insertMemberGrade(dto);
 		
 	}
 
 	@Override
 	public void updateMember(MemberDTO dto) {
-		// TODO Auto-generated method stub
+		dao.updateMember(dto);
 		
 	}
 
 	@Override
 	public void updateMemberInfo(Member_InfoDTO dto) {
-		// TODO Auto-generated method stub
+		dao.updateMemberInfo(dto);
 		
 	}
 
 	@Override
 	public void updateMemberGrade(Member_GradeDTO dto) {
-		// TODO Auto-generated method stub
+		dao.updateMemberGrade(dto);
 		
 	}
 
 	@Override
 	public void updateIsLeave(String id) {
-		// TODO Auto-generated method stub
+		dao.updateIsLeave(id);
 		
 	}
 

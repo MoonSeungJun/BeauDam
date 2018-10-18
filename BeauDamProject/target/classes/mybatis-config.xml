@@ -8,7 +8,7 @@
 			<transactionManager type="JDBC"/>
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-				<property name="url" value="jdbc:oracle:thin:@192.168.16.11:1521:TestDB"/>
+				<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:TestDB"/>
 				<property name="username" value="beaudam"/>
 				<property name="password" value="a123"/>
 			</dataSource>

@@ -1,5 +1,7 @@
 package com.dao.productDAO;
 
+import javax.annotation.*;
+
 import org.springframework.stereotype.*;
 
 import com.table.productDTO.*;
@@ -7,75 +9,78 @@ import com.table.productDTO.*;
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
 
+	@Resource(name="productDAO")
+	private ProductDAO dao;
+	
 	@Override
 	public void insertProduct(ProductDTO dto) {
-		// TODO Auto-generated method stub
+		dao.insertProduct(dto);
 		
 	}
 
 	@Override
 	public void insertBrand(BrandDTO dto) {
-		// TODO Auto-generated method stub
+		dao.insertBrand(dto);
 		
 	}
 
 	@Override
 	public void inserImg(ImgDTO dto) {
-		// TODO Auto-generated method stub
+		dao.inserImg(dto);
 		
 	}
 
 	@Override
-	public void insertColoe(ColorDTO dto) {
-		// TODO Auto-generated method stub
+	public void insertColor(ColorDTO dto) {
+		dao.insertColor(dto);
 		
 	}
 
 	@Override
 	public void updateProduct(ProductDTO dto) {
-		// TODO Auto-generated method stub
+		dao.updateProduct(dto);
 		
 	}
 
 	@Override
 	public void updateBrand(BrandDTO dto) {
-		// TODO Auto-generated method stub
+		dao.updateBrand(dto);
 		
 	}
 
 	@Override
 	public void updateImg(ImgDTO dto) {
-		// TODO Auto-generated method stub
+		dao.updateImg(dto);
 		
 	}
 
 	@Override
 	public void updateColor(ColorDTO dto) {
-		// TODO Auto-generated method stub
+		dao.updateColor(dto);
 		
 	}
 
 	@Override
 	public void deleteProduct(String code) {
-		// TODO Auto-generated method stub
+		dao.deleteProduct(code);
 		
 	}
 
 	@Override
 	public void deleteBrand(String code) {
-		// TODO Auto-generated method stub
+		dao.deleteBrand(code);
 		
 	}
 
 	@Override
 	public void deleteColor(String code) {
-		// TODO Auto-generated method stub
+		dao.deleteColor(code);
 		
 	}
 
 	@Override
 	public void deleteImg(String code) {
-		// TODO Auto-generated method stub
+		dao.deleteImg(code);
 		
 	}
 
