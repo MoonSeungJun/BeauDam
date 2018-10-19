@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 session="false" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 	String cp = request.getContextPath();
 %>
@@ -34,8 +36,8 @@ session="false" pageEncoding="UTF-8"%>
                 <div class="login">
                     <ul>
                         <li><a href="">고객센터</a></li>
-                        <li><a href="">회원가입</a></li>
-                        <li><a href="">LOGIN</a></li>
+                        <li><a href="<%=cp%>/newTerm.action">회원가입</a></li>
+                        <li><a href="<%=cp%>/login.action">LOGIN</a></li>
                     </ul>
                 </div>
                 <div class="header_container">

@@ -2,7 +2,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<%
+	String cp = request.getContextPath();
+%>
     
 <!DOCTYPE html>
 <html>
@@ -352,7 +355,6 @@ dl {
 </style>
 </head>
 <body>
-
 	<div style="padding-bottom: 80px;">
 		<div class="title_style">
 			<div class="title_area">
@@ -371,7 +373,7 @@ dl {
 						</i>
 						<span style="font-size: 18px;">dohwi9406</span>
 					</div>
-					<a href="/"  class="setting_btn">
+					<a href="<%=cp %>/myInfo.action"  class="setting_btn">
 						<img src="/beaudam/resources/image/myPage/setting.jpg" height="30px" align="bottom">
 					</a>
 				</div>

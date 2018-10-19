@@ -36,7 +36,7 @@ session="false" pageEncoding="UTF-8"%>
                     <ul>
                         <li><a href="">고객센터</a></li>
                         <li><a href="">회원가입</a></li>
-                        <li><a href="">LOGIN</a></li>
+                        <li><a href="<%=cp%>/login.action">LOGIN</a></li>
                     </ul>
                 </div>
                 <div class="header_container">
