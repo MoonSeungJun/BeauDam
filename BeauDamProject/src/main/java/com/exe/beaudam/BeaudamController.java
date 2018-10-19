@@ -4,13 +4,17 @@ import java.util.*;
 
 import javax.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dao.adminDAO.*;
+import com.dao.saleDAO.SaleServiceImpl;
+import com.dao.viewDAO.ViewServiceImpl;
 import com.table.adminDTO.*;
+import com.table.saleDTO.Sale_DateDTO;
 import com.view.view.*;
 
 /*
@@ -79,7 +83,11 @@ public class BeaudamController {
 	@Resource(name="adminService")
 	private AdminServiceImpl adminService;
 	
+	@Resource(name="viewService")
+	private ViewServiceImpl viewService;
 	
+	@Resource(name="saleService")
+	private SaleServiceImpl saleService;
 	
 	
 	
@@ -277,11 +285,52 @@ public class BeaudamController {
 	
 	//esteban	
 	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminOrder() {
+	public String adminOrder(HttpServletRequest request) {
 		
+		HashMap<String, Object> saleSearchPack = new HashMap<String, Object>();
+		
+			String searchValue1 = request.getParameter("searchValue1");
+			String searchValue2 = request.getParameter("searchValue1");
+			String searchValue3 = request.getParameter("searchValue1");
+		
+		
+		if(searchValue1==null||searchValue1.equals("")) {
+			searchValue1 = "";
+		}
+		if(searchValue2==null||searchValue2.equals("")) {
+			searchValue2 = "";
+		}
+		if(searchValue3==null||searchValue3.equals("")) {
+			searchValue3 = "";
+		}
+		
+		saleSearchPack.put("searchValue1", searchValue1);
+		saleSearchPack.put("searchValue2", searchValue2);
+		saleSearchPack.put("searchValue3", searchValue3);
+				
+			
+		List<SaleView> saleView = viewService.getAllSaleView(saleSearchPack);
+			
+		//페이징 처리 추가		
+		
+	
+		request.setAttribute("lists", saleView);	
+				
 		// 주문내역 관리 페이지 이동
 		return "admin/adminOrder";
 	}
+	
+	@RequestMapping(value = "/adminOrderUpdate", method = { RequestMethod.GET, RequestMethod.POST })
+	public String adminOrderUpdate(Sale_DateDTO dto, HttpServletRequest request) {
+		
+		saleService.updateSaleDate(dto);
+		
+		
+		return "admin/adminOrder";
+	}
+	
+	
+	
 	
 	//esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })

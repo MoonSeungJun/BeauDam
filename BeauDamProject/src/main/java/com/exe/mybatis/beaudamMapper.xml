@@ -309,9 +309,9 @@
 		<select id="getAllSaleView" resultType="com.view.view.SaleView" parameterType="map">
 			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code, use_Coupon, payment_Method, addr, message, pay_Status, delivery_Status,
 			 product_Price, qty, use_Point, total_Price from saleView			
-			 where ${searchKey1} like '%' || #{searchValue1} || '%' and
-				   ${searchKey2} like '%' || #{searchValue2} || '%' and
-				   ${searchKey3} like '%' || #{searchValue3} || '%'
+			 where  name like '%' || #{searchValue1} || '%' and
+				    id like '%' || #{searchValue2} || '%' and
+				    cellPhone like '%' || #{searchValue3} || '%'
 		</select>
 		
 		<select id="getOneSaleView" resultType="com.view.view.SaleView" parameterType="String">
