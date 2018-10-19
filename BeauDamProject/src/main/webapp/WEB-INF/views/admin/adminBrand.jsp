@@ -12,6 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 		
@@ -117,6 +118,9 @@
 	}
 
 </script>
+=======
+<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
+>>>>>>> haena_branch
 </head>
 <body>
 
