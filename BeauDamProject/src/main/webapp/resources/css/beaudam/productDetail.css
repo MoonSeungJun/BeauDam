@@ -1,0 +1,214 @@
+@charset "UTF-8";
+@font-face { font-family: 'YiSunShinDotumM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+@font-face { font-family: 'KHNPHD'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+h2, dl {
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+	width: 1200px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.container {
+	width: 100%;
+}
+
+.wrapper {
+    overflow: hidden;
+    /* background-color: blue; */
+    margin: 0 auto;
+    width: 960px;
+    margin-top: 130px;
+}
+
+.left {
+    float: left;
+    display: inline-block;
+    /* margin-bottom: 10px; */
+}
+
+.right {
+    float: left;
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.right_header {
+    font-family: 'KHNPHD';
+}
+
+.right p {
+    margin-bottom: 15px;
+    color: dimgrey;
+    font-weight: 700;
+}
+
+.right_content {
+	padding:10px;
+    border-top: 2px solid black;
+    border-bottom: 1px solid gray;
+    /*overflow: hidden;*/
+    
+}
+
+.right_content img {
+	width: 25px;
+	cursor: pointer;
+}
+
+dl {
+	overflow: hidden;
+}
+
+dt {
+    width: 150px;
+    font-weight: bold;
+    background-color: floralwhite;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 5px;
+    float: left;
+}
+
+dd {
+	float: left;	
+}
+
+.right_content dd {
+	width: 150px;
+	text-align: center;
+}
+
+.result {
+	padding: 10px;
+}
+.result dd {
+    color: orangered;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.result .gray a {
+    color: dimgrey;
+    font-size: 15px;
+}
+
+.result {
+    border-bottom: 2px solid black; 
+}
+
+.buy {
+    margin: 20px;
+    text-align: center;
+}
+
+.buy .wish_button {
+    margin: 0 10px;
+    width: 50px;
+}
+
+.buy .wish_button:hover {
+    content: url(/beaudam/resources/image/beaudam/productDetail/wish_1.png);
+}
+
+.buy .cart_button:hover {
+    content: url(/beaudam/resources/image/beaudam/productDetail/cart_1.png);
+}
+
+.buy .cart_button {
+    margin: 0 10px;
+    width: 50px;
+}
+
+.buy .buy_button {
+    width: 200px;
+    margin-left: 50px;
+}
+
+.detail {
+	text-align: center;
+}
+
+.review {
+	width: 100%;
+}
+
+.review_container {
+	/* background-color: yellow; */
+	margin: 0 auto;	
+	overflow: hidden;
+	width: 1200px;
+}
+
+.review_button {
+	overflow: hidden;
+}
+
+.review_button p {
+	float: left;
+	font-size: 20px; 
+	display: inline;
+	font-family: 'YiSunShinDotumM';
+	
+	
+}
+
+.container aa {
+	float: right;
+	background-color: #f0ad4e;
+	padding: 10px; 
+	color: white; 
+	width: 80px;
+	
+}
+
+.review_wrapper {
+	overflow: hidden;
+}
+
+.review_info {
+	float: left;
+	width: 10%;
+	margin: 10px;
+	padding: 10px;
+	position: relative;
+	display: inline-block;
+	/* background-color: aqua; */
+	border-right: 1px solid gray;
+}
+
+.review_info span {
+	display: block;
+	text-decoration: none;
+}
+
+.review_data {
+	float: right;
+	width: 86%;
+	margin: 10px;
+	padding: 20px;
+	position: relative;
+	display: inline-block;
+	height: 70px;
+}
+
+textarea {
+	resize: none;
+	padding: 10px 15px;
+}
+
+
+
+
+
+
+
+
+

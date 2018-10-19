@@ -10,7 +10,7 @@ session="false" pageEncoding="UTF-8"%>
     <head>
         <title>list</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="<%=cp%>/resources/css/beaudam/list.css">
+        <link rel="stylesheet" href="./resources/css/beaudam/list.css">
         <link rel="stylesheet" href="./resources/css/beaudam/main.css">
     </head>
     <body>
@@ -41,7 +41,7 @@ session="false" pageEncoding="UTF-8"%>
         	<ul>
         		<li>
         			<div>
-        				<img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg">
+        				<a href="<%=cp %>/productDetail.action"><img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a>
         				<p style="font-size: 20px; color: #ff4d4d">BEST 01</p>
         				솔솔 말린 솔방울
         				<p>5,000원</p>
@@ -49,7 +49,7 @@ session="false" pageEncoding="UTF-8"%>
         		</li>
         		<li>
         			<div>
-        				<img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg">
+        				<a href="<%=cp %>/productDetail.action"><img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a>
         				<p style="font-size: 20px; color: #ff4d4d">BEST 02</p>
         				솔솔 말린 솔방울
         				<p>5,000원</p>
@@ -57,7 +57,7 @@ session="false" pageEncoding="UTF-8"%>
         		</li>
         		<li>
         			<div>
-        				<img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg">
+        				<a href="<%=cp %>/productDetail.action"><img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a>
         				<p style="font-size: 20px; color: #ff4d4d">BEST 03</p>
         				솔솔 말린 솔방울
         				<p>5,000원</p>
