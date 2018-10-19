@@ -247,11 +247,89 @@ public class BeaudamController {
 	//esteban
 	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminBrand(HttpServletRequest req) {
-				
-		// 브랜드 관리 페이지 이동
-		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
-		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
 		
+		//브랜드 추가
+		String addBrand = req.getParameter("addbrand");
+		
+		if(addBrand != null && !addBrand.equals("")) {				
+			Admin_BrandDTO dto = new Admin_BrandDTO();			
+			dto.setBrand(addBrand);	
+			req.removeAttribute("addbrand");			
+			List<Admin_BrandDTO> lists = adminService.getAdminBrand();			
+			Iterator<Admin_BrandDTO> it = lists.iterator();			
+			while(it.hasNext()) {				
+				Admin_BrandDTO vo = it.next(); 				
+				if(vo.getBrand().equals(addBrand)) {
+					req.setAttribute("data", "오류");
+					return "redirect:/adminBrand.action";
+				}				
+			}			
+			adminService.insertBrand(dto);			
+			return "redirect:/adminBrand.action";
+		}
+		
+		//브랜드 삭제
+		String delBrand = req.getParameter("delbrand");				
+		if(delBrand != null && !delBrand.equals("")) {				
+			req.removeAttribute("delBrand");			
+			adminService.deleteBrand(delBrand);			
+			return "redirect:/adminBrand.action";
+		}
+		
+		//카테고리 추가
+		String addCate = req.getParameter("addCate");
+		if(addCate != null && !addCate.equals("")) {				
+			Admin_CategoryDTO dto = new Admin_CategoryDTO();			
+			dto.setCategory(addCate);
+			req.removeAttribute("addCate");			
+			List<Admin_CategoryDTO> lists = adminService.getAdminCatogory();			
+			Iterator<Admin_CategoryDTO> it = lists.iterator();			
+			while(it.hasNext()) {				
+				Admin_CategoryDTO vo = it.next(); 				
+				if(vo.getCategory().equals(addCate)) {
+					req.setAttribute("data", "오류");
+					return "redirect:/adminBrand.action";
+				}				
+			}			
+			adminService.insertCategory(dto);			
+			return "redirect:/adminBrand.action";
+		}
+		//카테고리 삭제
+		String delCate = req.getParameter("delCate");						
+		if(delCate != null && !delCate.equals("")) {				
+			req.removeAttribute("delCate");			
+			adminService.deleteCategory(delCate);			
+			return "redirect:/adminBrand.action";
+		}
+		
+		//타입 추가
+		String addType = req.getParameter("addType");
+		if(addType != null && !addType.equals("")) {				
+			Admin_TypeDTO dto = new Admin_TypeDTO();			
+			dto.setType(addType);
+			req.removeAttribute("addType");			
+			List<Admin_TypeDTO> lists = adminService.getAdminType();			
+			Iterator<Admin_TypeDTO> it = lists.iterator();			
+			while(it.hasNext()) {				
+				Admin_TypeDTO vo = it.next(); 				
+				if(vo.getType().equals(addCate)) {
+					req.setAttribute("data", "오류");
+					return "redirect:/adminBrand.action";
+				}				
+			}			
+			adminService.insertType(dto);			
+			return "redirect:/adminBrand.action";
+		}
+		//타입 삭제
+		String delType = req.getParameter("delType");
+		if(delType != null && !delType.equals("")) {				
+			req.removeAttribute("delType");			
+			adminService.deleteType(delType);			
+			return "redirect:/adminBrand.action";
+		}
+		//관리 페이지 이동
+		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
+		List<Admin_BrandDTO> brand = adminService.getAdminBrand();		
 		List<Admin_TypeDTO> type = adminService.getAdminType();
 		
 		req.setAttribute("brand", brand);
