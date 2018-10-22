@@ -13,7 +13,9 @@ public interface ViewService {
 	List<MemberView> getLeaveMemberData();
 	List<ProductView> getAllProductData(HashMap<String, Object> searchPack);
 	ProductView getOneProductData(String code);
-	List<SaleView> getAllSaleData(HashMap<String, Object> saleSearchPack);
+	List<SaleView> getAllSaleView(HashMap<String, Object> saleSearchPack);
+	SaleView getOneSaleView(String sale_Code);
 	List<MemberView> getSearchMemberData(Member_InfoDTO dto);
+
 		
 }

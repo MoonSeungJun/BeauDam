@@ -5,8 +5,8 @@ import java.util.*;
 import org.mybatis.spring.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
-
 import com.table.memberDTO.*;
+
 import com.view.view.*;
 
 @Repository("viewDAO")
@@ -42,30 +42,42 @@ public class ViewDAO {
 		return dto;
 		
 	}
+
+	public List<ProductView> getAllproductData(HashMap<String, Object> searchPack) {
+		
+		List<ProductView> lists = sessionTemplate.selectList("beaudam.getAllProductData", searchPack);		
+		
+		return lists;
+	}
 	
-	 
-	public List<ProductView> getAllProductData(HashMap<String, Object> searchPack) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	 
 	public ProductView getOneProductData(String code) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ProductView dto = sessionTemplate.selectOne("beaudam.getOneProductData", code);
+		
+		return dto;
+		
+	}
+	
+	public List<SaleView> getAllSaleView(HashMap<String, Object> saleSearchPack){
+		
+		List<SaleView> lists = sessionTemplate.selectList("beaudam.getAllSaleView", saleSearchPack);
+		
+		return lists;
+		
+	}
+	
+	public SaleView getOneSaleView(String sale_Code) {
+		
+		SaleView dto =  sessionTemplate.selectOne("beaudam.getOneSaleView",sale_Code);
+		
+		return dto;
+
 	}
 
-
-	 
-	public List<SaleView> getAllSaleData(HashMap<String, Object> saleSearchPack) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	 
 	public List<MemberView> getSearchMemberData(Member_InfoDTO dto) {
 		List<MemberView> searchMemberList = sessionTemplate.selectList("beaudam.getSearchMemberData",dto);
 		return searchMemberList;
+
 	}
 	
 	

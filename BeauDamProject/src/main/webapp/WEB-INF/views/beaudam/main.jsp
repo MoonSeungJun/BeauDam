@@ -36,8 +36,15 @@ session="false" pageEncoding="UTF-8"%>
                 <div class="login">
                     <ul>
                         <li><a href="">고객센터</a></li>
+               			<c:if test="${!empty id}">
+               			<li><a href="<%=cp%>/myPage.action">MY PAGE</a></li>
+                        <li><a href="<%=cp%>/logout.action">LOGOUT</a></li>
+                        <li><p>${id }님 환영합니다♥</p></li>
+               			</c:if>         
+               			<c:if test="${empty id }">
                         <li><a href="<%=cp%>/newTerm.action">회원가입</a></li>
                         <li><a href="<%=cp%>/login.action">LOGIN</a></li>
+                        </c:if>
                     </ul>
                 </div>
                 <div class="header_container">

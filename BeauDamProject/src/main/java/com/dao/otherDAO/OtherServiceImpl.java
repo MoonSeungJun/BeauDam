@@ -93,5 +93,11 @@ public class OtherServiceImpl implements OtherService {
 		return lists;
 	}
 
+	@Override
+	public List<ReviewDTO> getReviewData(String sale_Code) {
+		List<ReviewDTO> lists = dao.getReviewData(sale_Code);		
+		return lists;
+	}
+
 
 }

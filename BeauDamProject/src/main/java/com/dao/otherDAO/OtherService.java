@@ -25,5 +25,5 @@ public interface OtherService {
 	List<CouponDTO> getCouponData(String id);
 	int getWeekCouponCount(String id);
 	List<CouponDTO> getWeekCouponData(String id);
-	
+	List<ReviewDTO> getReviewData (String sale_Code);
 }
