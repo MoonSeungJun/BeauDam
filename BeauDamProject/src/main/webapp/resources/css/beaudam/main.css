@@ -238,7 +238,6 @@ a {
     /*background-color: rgba( 255, 255, 255, 0.5 );*/
     /*left: 0;*/
     /*border: 1px solid gray;*/
-    z-index: 1;
     z-index: 999999;
     border: none;
 }
@@ -278,6 +277,7 @@ a {
     text-align: center;
     font-weight: normal;
     font-family: '맑은고딕';
+    font-size: 13px;
     
 }
 

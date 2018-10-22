@@ -19,7 +19,6 @@ public interface MemberService {
 	void updateIsLeave(String id);
 	
 //	delete
-	
 
 	
 }

@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String cp = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
 </head>
 <body>
 
 <jsp:include page="adminHeader.jsp"/>
-
-<h1>상품조회</h1>
-	<br><br>
+<div>
+	<h2>상품조회</h2>
 	<table border="1">
 		
 		<tr>
@@ -151,6 +154,6 @@
 		</tr>
 		
 	</table>
-
+	</div>
 </body>
 </html>

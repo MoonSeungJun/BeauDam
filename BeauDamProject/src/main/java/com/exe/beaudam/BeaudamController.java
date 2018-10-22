@@ -1,16 +1,26 @@
 package com.exe.beaudam;
 
+import java.io.*;
 import java.util.*;
 
 import javax.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.dao.adminDAO.*;
+import com.dao.viewDAO.*;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.naver.naverlogin.*;
 import com.table.adminDTO.*;
+import com.table.memberDTO.*;
 import com.view.view.*;
 
 /*
@@ -79,28 +89,75 @@ public class BeaudamController {
 	@Resource(name="adminService")
 	private AdminServiceImpl adminService;
 	
+
+	@Resource(name="viewService")
+	private ViewServiceImpl viewService;
+
+	/* NaverLoginBO */
+	private NaverLoginBO naverLoginBO;
+
 	
-	
-	
+	/* NaverLoginBO */
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		
+		this.naverLoginBO = naverLoginBO;
+		
+	}
 	
 	// ********************** Beaudam Page **********************
 	
-	@RequestMapping(value = "/login.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(HttpServletRequest request) {
+	@RequestMapping(value = "/login.action", method = RequestMethod.GET)
+	public ModelAndView login(HttpServletRequest request, HttpSession session) {
+		
+		/* 네아로 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
+        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+        
+        /* 생성한 인증 URL을 View로 전달 */
+        return new ModelAndView("beaudam/login", "url", naverAuthUrl);
 
+	}
+	
+	@RequestMapping(value="/login_ok.action", method = {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView doLogin(HttpServletRequest request, HttpSession session) {
+		
 		// 로그인 정보 받아오기
 		String id = request.getParameter("id");
+		String pwd = request.getParameter("password");
+		
+		// 입력한 id 조회
 
-		// 로그인 정보 체크
-		if (id != null) {
-			return "beaudam/main";
+		if(id.equals("beaudam") && pwd.equals("a123")) {
+			
+			session.setAttribute("id", id);
+
+			return new ModelAndView("redirect:/main.action");
+			
+		}else {
+		
+			String errormessage = "아이디 또는 비밀번호가 잘못되었습니다.";
+
+			return new ModelAndView("beaudam/login", "message", errormessage);
+		
 		}
+	}
+	
+	@RequestMapping(value = "/callback.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
+		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
+		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		String apiResult = naverLoginBO.getUserProfile(oauthToken);
+		return new ModelAndView("beaudam/callback", "result", apiResult);
+	}
+	
+	@RequestMapping(value = "/newTerm.action", method = RequestMethod.GET)
+	public String newTerm() {
 
-		// 로그인 페이지 이동
-		return "beaudam/login";
+		// 약관 페이지 이동
+		return "beaudam/newTerm";
 	}
 
-	@RequestMapping(value = "/newUser.action", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/newUser.action", method = RequestMethod.GET)
 	public String newUser() {
 
 		// 회원가입 페이지 이동
@@ -108,10 +165,12 @@ public class BeaudamController {
 	}
 
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String main() {
+	public ModelAndView main(HttpSession session) {
+		
+		String id = (String) session.getAttribute("id");
 
 		// 메인 페이지 이동
-		return "beaudam/main";
+		return new ModelAndView("beaudam/main","id",id);
 	}
 
 	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -209,15 +268,70 @@ public class BeaudamController {
 	// ********************** Admin Page **********************
 
 	//syj
-	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String admin_user() {
-		
-		
-		
+	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST})	
+	public String admin_user(HttpServletRequest req) {
+		// 회원관리 페이지 이동			
 
-		// 회원관리 페이지 이동
-		return "admin/adminUser";
+		if(req.getMethod().equalsIgnoreCase("POST")) {
+			Member_InfoDTO mv = new Member_InfoDTO();		
+			
+			String id = req.getParameter("id");
+			String name = req.getParameter("name");
+			String tel = req.getParameter("tel");
+			String cellphone = req.getParameter("cellphone");
+			String birth = req.getParameter("birth");
+			
+			System.out.println(id+name+tel+cellphone+birth);
+			
+			if(id != null && !id.equals("")) {
+				mv.setId(id);
+			}else {
+				id = "";
+				mv.setId(id);
+			}
+			if(name != null && !name.equals("")) {
+				mv.setName(name);
+			}else {
+				name = "";
+				mv.setName(name);
+			}
+			if(tel != null && !tel.equals("")) {
+				mv.setTel(tel);
+			}else {
+				tel = "";
+				mv.setTel(tel);
+			}
+			if(cellphone != null && !cellphone.equals("")) {
+				mv.setCellphone(cellphone);
+			}else {
+				cellphone = "";
+				mv.setCellphone(cellphone);
+			}
+			if(birth != null && !birth.equals("")) {
+				mv.setBirth(birth);
+			}else {
+				birth = "";
+				mv.setBirth(birth);
+			}
+			
+			List<MemberView> lists = viewService.getSearchMemberData(mv);
+			
+			req.setAttribute("searchList", lists);
+
+			return "admin/adminUser"; 
+			
+		}
+		
+		List<MemberView> memberList = viewService.getAllMemberData();		
+		req.setAttribute("memberList", memberList);
+
+		return "admin/adminUser";		
+		
 	}
+	
+	
+	
+	
 	
 	//syj
 	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -254,16 +368,7 @@ public class BeaudamController {
 		if(addBrand != null && !addBrand.equals("")) {				
 			Admin_BrandDTO dto = new Admin_BrandDTO();			
 			dto.setBrand(addBrand);	
-			req.removeAttribute("addbrand");			
-			List<Admin_BrandDTO> lists = adminService.getAdminBrand();			
-			Iterator<Admin_BrandDTO> it = lists.iterator();			
-			while(it.hasNext()) {				
-				Admin_BrandDTO vo = it.next(); 				
-				if(vo.getBrand().equals(addBrand)) {
-					req.setAttribute("data", "오류");
-					return "redirect:/adminBrand.action";
-				}				
-			}			
+			req.removeAttribute("addbrand");				
 			adminService.insertBrand(dto);			
 			return "redirect:/adminBrand.action";
 		}
@@ -281,16 +386,7 @@ public class BeaudamController {
 		if(addCate != null && !addCate.equals("")) {				
 			Admin_CategoryDTO dto = new Admin_CategoryDTO();			
 			dto.setCategory(addCate);
-			req.removeAttribute("addCate");			
-			List<Admin_CategoryDTO> lists = adminService.getAdminCatogory();			
-			Iterator<Admin_CategoryDTO> it = lists.iterator();			
-			while(it.hasNext()) {				
-				Admin_CategoryDTO vo = it.next(); 				
-				if(vo.getCategory().equals(addCate)) {
-					req.setAttribute("data", "오류");
-					return "redirect:/adminBrand.action";
-				}				
-			}			
+			req.removeAttribute("addCate");		
 			adminService.insertCategory(dto);			
 			return "redirect:/adminBrand.action";
 		}
@@ -308,15 +404,6 @@ public class BeaudamController {
 			Admin_TypeDTO dto = new Admin_TypeDTO();			
 			dto.setType(addType);
 			req.removeAttribute("addType");			
-			List<Admin_TypeDTO> lists = adminService.getAdminType();			
-			Iterator<Admin_TypeDTO> it = lists.iterator();			
-			while(it.hasNext()) {				
-				Admin_TypeDTO vo = it.next(); 				
-				if(vo.getType().equals(addCate)) {
-					req.setAttribute("data", "오류");
-					return "redirect:/adminBrand.action";
-				}				
-			}			
 			adminService.insertType(dto);			
 			return "redirect:/adminBrand.action";
 		}

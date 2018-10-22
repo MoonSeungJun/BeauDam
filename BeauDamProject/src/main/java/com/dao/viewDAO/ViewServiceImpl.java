@@ -6,6 +6,7 @@ import javax.annotation.*;
 
 import org.springframework.stereotype.*;
 
+import com.table.memberDTO.*;
 import com.view.view.*;
 
 @Service("viewService")
@@ -52,12 +53,19 @@ public class ViewServiceImpl implements ViewService {
 	}
 
 	@Override
+
 	public SaleView getOneSaleView(String sale_Code) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 		
+
+	public List<MemberView> getSearchMemberData(Member_InfoDTO dto) {
+		List<MemberView> searchMemberList = dao.getSearchMemberData(dto);
+		return searchMemberList;
+	}
+
 	
 	
 }
