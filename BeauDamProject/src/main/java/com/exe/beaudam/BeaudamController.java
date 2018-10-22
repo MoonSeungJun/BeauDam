@@ -7,6 +7,9 @@ import javax.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +22,6 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.naver.naverlogin.NaverLoginBO;
 import com.table.adminDTO.*;
 import com.view.view.*;
-
-import ch.qos.logback.classic.sift.MDCBasedDiscriminator;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -124,6 +125,7 @@ public class BeaudamController {
 		if(id.equals("beaudam") && pwd.equals("a123")) {
 			
 			session.setAttribute("id", id);
+			//DB에서 가져올 때부터는 닉네임으로 올리기
 
 			return new ModelAndView("redirect:/main.action");
 			
@@ -136,12 +138,42 @@ public class BeaudamController {
 		}
 	}
 	
+	@RequestMapping(value = "/logout.action", method = RequestMethod.GET)
+	public ModelAndView logout(HttpServletRequest request, HttpSession session) {
+		
+		session.removeAttribute("id");
+        
+        /* 생성한 인증 URL을 View로 전달 */
+        return new ModelAndView("redirect:/main.action");
+
+	}
+	
 	@RequestMapping(value = "/callback.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
+	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
-		return new ModelAndView("beaudam/callback", "result", apiResult);
+		
+		JSONParser parser = new JSONParser();
+		
+		JSONObject obj1 = (JSONObject) parser.parse(apiResult);
+			
+		JSONObject obj2 =  (JSONObject) obj1.get("response");
+		
+		String id = (String) obj2.get("id");
+		String nickname = (String) obj2.get("nickname");
+		String gender = (String) obj2.get("gender");
+		String email = (String) obj2.get("email");
+		String name = (String) obj2.get("name");
+		String birth = (String) obj2.get("birthday");
+		
+		String result = "id는 " + id + ", nickname은 " + nickname + ", gender는 " +gender+
+				", email은 " + email + ", 이름은 " +name + ", 생일은 " + birth;
+		
+		session.setAttribute("id", id);
+		session.setAttribute("nickname", nickname);
+		
+		return new ModelAndView("redirect:/main.action");
 	}
 	
 	@RequestMapping(value = "/newTerm.action", method = RequestMethod.GET)

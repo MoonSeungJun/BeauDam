@@ -108,13 +108,22 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
 		<!-- NaverLoginAPI / Scribe -->
 		<dependency>
 		 	<groupId>com.github.scribejava</groupId>
 		 	<artifactId>scribejava-core</artifactId>
 		 	<version>2.8.1</version>
 		 </dependency>
-	
+		 
+		<!-- JSON Library  -->
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
