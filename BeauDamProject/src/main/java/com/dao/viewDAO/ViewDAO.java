@@ -42,7 +42,6 @@ public class ViewDAO {
 		return dto;
 		
 	}
-	
 
 	public List<ProductView> getAllproductData(HashMap<String, Object> searchPack) {
 		
@@ -74,18 +73,7 @@ public class ViewDAO {
 		return dto;
 		
 	}
-	 
-	public List<ProductView> getAllProductData(HashMap<String, Object> searchPack) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	 
-	public List<SaleView> getAllSaleData(HashMap<String, Object> saleSearchPack) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	 
+			 
 	public List<MemberView> getSearchMemberData(Member_InfoDTO dto) {
 		List<MemberView> searchMemberList = sessionTemplate.selectList("beaudam.getSearchMemberData",dto);
 		return searchMemberList;
