@@ -6,11 +6,12 @@ import javax.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.dao.adminDAO.*;
+import com.dao.viewDAO.*;
 import com.table.adminDTO.*;
+import com.table.memberDTO.*;
 import com.view.view.*;
 
 /*
@@ -79,6 +80,8 @@ public class BeaudamController {
 	@Resource(name="adminService")
 	private AdminServiceImpl adminService;
 	
+	@Resource(name="viewService")
+	private ViewServiceImpl viewService;
 	
 	
 	
@@ -209,15 +212,139 @@ public class BeaudamController {
 	// ********************** Admin Page **********************
 
 	//syj
-	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String admin_user() {
+	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET })	
+	public String admin_user(HttpServletRequest req) {
+		// 회원관리 페이지 이동		
+		
+		if(req.getMethod().equalsIgnoreCase("POST")) {
+			req.removeAttribute("memberList");			
+			String id = req.getParameter("id");
+			String name = req.getParameter("name");
+			String tel = req.getParameter("tel");
+			String cellphone = req.getParameter("cellphone");
+			String birth = req.getParameter("birth");		
+			
+			Member_InfoDTO dto = new Member_InfoDTO();
+			
+			if(id != null && !id.equals("")) {
+				dto.setId(id);				
+			}else {
+				id = "";
+				dto.setId(id);
+			}
+			
+			if(name != null && !name.equals("")) {
+				dto.setName(name);
+			}else {
+				name = "";
+				dto.setName("");
+			}
+			if(tel != null && !tel.equals("")) {
+				dto.setTel(tel);
+			}else {
+				tel = "";
+				dto.setTel(tel);
+			}
+			if(cellphone != null && !cellphone.equals("")) {
+				dto.setCellphone(cellphone);
+			}else {
+				cellphone = "";
+				dto.setCellphone(cellphone);
+			}
+			if(birth != null && !birth.equals("")) {
+				dto.setBirth(birth);
+			}else {
+				birth = "";
+				dto.setBirth(birth);
+			}
+			
+			System.out.println(dto.getId() + dto.getName() + dto.getTel()+dto.getCellphone()+dto.getBirth());
+			
+			List<MemberView> searchMemberList = viewService.getSearchMemberData(dto);	
+			
+			return "admin/adminUser";
+			
+		} else {
+			List<MemberView> memberList = viewService.getAllMemberData();		
+			req.setAttribute("memberList", memberList);
+			
+			return "admin/adminUser";
+		}
 		
 		
-		
-
-		// 회원관리 페이지 이동
-		return "admin/adminUser";
 	}
+	
+	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.POST })
+	
+	//public List<MemberView> admin_users(@RequestBody Map<String, Object> map) {
+	public String admin_users(@RequestBody Map<String, Object> map) {
+		// 회원관리 페이지 이동		
+	
+		/*String id = req.getParameter("id");
+		String name = req.getParameter("name");
+		String tel = req.getParameter("tel");
+		String cellphone = req.getParameter("cellphone");
+		String birth = req.getParameter("birth");*/		
+		
+		//System.out.println(map.get("id") + "aaaaaaaaaaaaaaaaaa");
+		System.out.println(map.toString());
+		
+		//Member_InfoDTO dto = new Member_InfoDTO();
+		MemberView dto = new MemberView();
+		
+		List<MemberView> lists = new ArrayList<MemberView>();
+		
+		lists.add(dto);
+		
+		return "admin/adminUser";
+		//return lists;
+		
+		
+		
+		/*if(id != null && !id.equals("")) {
+			dto.setId(id);				
+		}else {
+			id = "";
+			dto.setId(id);
+		}
+		
+		if(name != null && !name.equals("")) {
+			dto.setName(name);
+		}else {
+			name = "";
+			dto.setName("");
+		}
+		if(tel != null && !tel.equals("")) {
+			dto.setTel(tel);
+		}else {
+			tel = "";
+			dto.setTel(tel);
+		}
+		if(cellphone != null && !cellphone.equals("")) {
+			dto.setCellphone(cellphone);
+		}else {
+			cellphone = "";
+			dto.setCellphone(cellphone);
+		}
+		if(birth != null && !birth.equals("")) {
+			dto.setBirth(birth);
+		}else {
+			birth = "";
+			dto.setBirth(birth);
+		}
+		
+		System.out.println(dto.getId() + dto.getName() + dto.getTel()+dto.getCellphone()+dto.getBirth());
+		
+		List<MemberView> searchMemberList = viewService.getSearchMemberData(dto);	
+		
+		return "admin/adminUser";*/
+
+	}
+	
+	
+	
+	
+	
 	
 	//syj
 	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })

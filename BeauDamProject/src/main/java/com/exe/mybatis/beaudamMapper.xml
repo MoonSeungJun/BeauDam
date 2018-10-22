@@ -230,6 +230,11 @@
 			where isLeave = 1
 		</select>
 		
+		<select id="getSearchMemberData" resultType="com.view.view.MemberView" parameterType="com.table.memberDTO.Member_InfoDTO">
+			select ID,PWD,NAME,NICKNAME,CELLPHONE,TEL,BIRTH,EMAIL,ZIP,CITY,STREET,GENDER,PAY,GRADE,POINT,CREATED,ISLEAVE from
+			memberView where id = #{id} or name = #{name} or tel = #{tel} or cellphone = #{cellphone} or birth = #{birth} 
+		</select>
+		
 		<!-- Product -->
 		<select id="getAllProductData" resultType="com.view.view.ProductView" parameterType="map">
 			select code,brand,category,type,product_Name,color_Code,color_Name,product_Price,thumb_Img,detail_Img,qty from productView

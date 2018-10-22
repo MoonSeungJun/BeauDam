@@ -2,6 +2,7 @@ package com.dao.viewDAO;
 
 import java.util.*;
 
+import com.table.memberDTO.*;
 import com.view.view.*;
 
 public interface ViewService {
@@ -13,6 +14,6 @@ public interface ViewService {
 	List<ProductView> getAllProductData(HashMap<String, Object> searchPack);
 	ProductView getOneProductData(String code);
 	List<SaleView> getAllSaleData(HashMap<String, Object> saleSearchPack);
-	
+	List<MemberView> getSearchMemberData(Member_InfoDTO dto);
 		
 }

@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
@@ -55,6 +56,11 @@
 		<beans:property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:TestDB"/>
 		<beans:property name="username" value="beaudam"/>
 		<beans:property name="password" value="a123"/>
+	</beans:bean>
+	
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" id="viewResolver" p:order="0"/>
+	<beans:bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" id="jsonView">
+	    <beans:property name="contentType" value="application/json;charset=UTF-8"/>
 	</beans:bean>
 	
 </beans:beans>

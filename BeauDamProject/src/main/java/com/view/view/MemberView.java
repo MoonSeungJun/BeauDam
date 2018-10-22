@@ -3,7 +3,7 @@ package com.view.view;
 public class MemberView {
 
 	private int pay, point, isLeave;
-	private String id, pwd, name, nickName, cellPhone, tel;
+	private String id, pwd, name, nickName, cellphone, tel;
 	private String birth, email, zip, city, street, gender, grade, created;
 
 	public int getPay() {
@@ -62,12 +62,13 @@ public class MemberView {
 		this.nickName = nickName;
 	}
 
-	public String getCellPhone() {
-		return cellPhone;
+
+	public String getCellphone() {
+		return cellphone;
 	}
 
-	public void setCellPhone(String cellPhone) {
-		this.cellPhone = cellPhone;
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
 	}
 
 	public String getTel() {
