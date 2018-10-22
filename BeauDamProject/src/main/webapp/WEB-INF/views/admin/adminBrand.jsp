@@ -13,6 +13,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
 <script type="text/javascript">
 		
 	function addBrand() {
@@ -22,17 +23,7 @@
 			url: "adminBrand.action",
 			data: {"addbrand":$('#brandInput').val()},
 			async:false,
-			dataType: "text",
-			success: function(data) {
-				if(data == null){
-					alert("추가되었습니다.");
-					window.location.href = "/beaudam/adminBrand.action";	
-				} else {
-					alert("이미 추가된 브랜드 입니다.");
-					window.location.href = "/beaudam/adminBrand.action";
-				}
-				
-			}
+			dataType: "text"
 		});		
 	}
 	
@@ -56,17 +47,7 @@
 			url: "adminBrand.action",
 			data: {"addCate":$('#cateInput').val()},
 			async:false,
-			dataType: "text",
-			success: function(data) {
-				if(data == null){
-					alert("추가되었습니다.");
-					window.location.href = "/beaudam/adminBrand.action";	
-				} else {
-					alert("이미 추가된 카테고리 입니다.");
-					window.location.href = "/beaudam/adminBrand.action";
-				}
-				
-			}
+			dataType: "text"
 		});		
 	}
 	
@@ -90,17 +71,7 @@
 			url: "adminBrand.action",
 			data: {"addType":$('#typeInput').val()},
 			async:false,
-			dataType: "text",
-			success: function(data) {
-				if(data == null){
-					alert("추가되었습니다.");
-					window.location.href = "/beaudam/adminBrand.action";	
-				} else {
-					alert("이미 추가된 타입 입니다.");
-					window.location.href = "/beaudam/adminBrand.action";
-				}
-				
-			}
+			dataType: "text"
 		});		
 	}
 	
@@ -117,6 +88,8 @@
 	}
 
 </script>
+
+
 </head>
 <body>
 

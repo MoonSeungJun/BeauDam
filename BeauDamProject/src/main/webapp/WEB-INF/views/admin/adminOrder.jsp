@@ -1,17 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>BeauDam Admin</title>
+<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
 <script type="text/javascript">
 
 	function orderSearch() {
 		
-		var f = document.adminOrderForm;		
+		f = document.adminOrderForm;
+		
+		searchValue1 = f.id.value;
+		searchValue1 = searchValue1.trim();
+		
+		searchValue2 = f.name.value;
+		searchValue2 = searchValue2.trim();
+		
+		searchValue3 = f.cellphone.value;
+		searchValue3 = searchValue3.trim();
+		
+		if(!searchValue1&&!searchValue2&&!searchValue3){
+			alert("\검색어를 입력하세요.");
+			f.id.focus();
+			return;
+		}
+		
+		f.action = "<%=cp%>/adminOrder.action";
+		f.submit();
 		
 	}
+	
+	function adminOrderUpdate() {
+		
+		
+		f.action = "<%=cp%>/adminOrderUpdate.action";
+		f.submit();
+		
+		
+	}
+	
+	
+	
+	
+	
 </script>
 </head>
 <body>
@@ -85,6 +125,7 @@
 	</table>
 </form>
 
+<form action="" name="adminOrderEditForm" method="post">
 	<table border="1">
 		<tr>
 			<td>
@@ -131,44 +172,45 @@
 				비고
 			</td>		
 		</tr>
-		
+
+	<c:forEach var = "dto" items="${lists }"> 
 		<tr>
 			<td>
-				1000102
+				${dto.sale_Code }
 			</td>
 			<td>
-				admin
+				${dto.id }
 			</td>				
 			<td>
-				관리자
+				${dto.name }
 			</td>
 			<td>
-				010-1234-1234
+				${dto.cellphone }
 			</td>				
 			<td>
-				서울시 강남구 테헤란로
+				${dto.addr }
 			</td>			
 			<td>
-				나는 화장품이 필요없다
+				${dto.product_Name }
 			</td>			
 			<td>
-				시꺼먼색
+				${dto.color_Code }
 			</td>						
 			<td>
-				15000
+				${dto.product_Price }
 			</td>
 			<td>
-				10
+				${dto.qty }
 			</td>
 			<td>
-				150000	
+				${dto.totalPrice }
 			</td>
 			<td>
-				2018-10-05 10:47:55
+				${dto.saleDate }
 			</td>
 			
 			<td>
-				<select>
+				<select id="pay_Status">
 					<option value="change">교환</option>
 					<option value="returns">반품</option>
 					<option value="cancel">취소</option>									
@@ -176,23 +218,20 @@
 			</td>
 			
 			<td>
-				<select>
+				<select id="delivery_Status">
 					<option value="ready">상품 준비중</option>
 					<option value="ing">배송중</option>
 					<option value="complete">배송완료</option>				
 				</select>
 			</td>
 			<td>
-				<a href="#" style="text-decoration: none;">수정</a>
+				<input type="hidden" name="sale_Code" value="${dto.sale_Code }">
+				<input type="hidden" name="pageNum" value="${pageNum }">
+				<a onclick="adminOrderUpdate();" style="text-decoration: none;">수정</a>
 			</td>			
 		</tr>
-	
+	</c:forEach>
 	</table>
-
-
-
-
-
-
+</form>
 </body>
 </html>

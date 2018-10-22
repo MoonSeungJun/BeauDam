@@ -98,5 +98,12 @@ public class OtherDAO {
 		return lists;
 	}
 	
+	public List<ReviewDTO> getReviewData (String sale_Code) {
+		
+		List<ReviewDTO> lists = sessionTemplate.selectList("beaudam.getReviewData", sale_Code);
+		
+		return lists;
+	}
+	
 	
 }

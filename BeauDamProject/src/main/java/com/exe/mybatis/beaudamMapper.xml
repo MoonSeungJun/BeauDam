@@ -230,14 +230,19 @@
 			where isLeave = 1
 		</select>
 		
+		<select id="getSearchMemberData" resultType="com.view.view.MemberView" parameterType="com.table.memberDTO.Member_InfoDTO">
+			select ID,PWD,NAME,NICKNAME,CELLPHONE,TEL,to_char(birth,'yyyy-mm-dd') BIRTH,EMAIL,ZIP,CITY,STREET,GENDER,PAY,GRADE,POINT, to_char(created,'yyyy-mm-dd') CREATED,ISLEAVE from
+			memberView where id = #{id} or name = #{name} or tel = #{tel} or cellphone = #{cellphone} or birth = #{birth} 
+		</select>
+		
 		<!-- Product -->
 		<select id="getAllProductData" resultType="com.view.view.ProductView" parameterType="map">
 			select code,brand,category,type,product_Name,color_Code,color_Name,product_Price,thumb_Img,detail_Img,qty from productView
-			where ${searchKey1} like '%' || #{searchValue1} || '%' and
-				  ${searchKey2} like '%' || #{searchValue2} || '%' and
-				  ${searchKey3} like '%' || #{searchValue3} || '%' and
-				  ${searchKey4} like '%' || #{searchValue4} || '%' and
-				  ${searchKey5} like '%' || #{searchValue5} || '%'	
+			where code like '%' || #{searchValue1} || '%' and
+				  brand like '%' || #{searchValue2} || '%' and
+				  category like '%' || #{searchValue3} || '%' and
+				  type like '%' || #{searchValue4} || '%' and
+				  product_Name like '%' || #{searchValue5} || '%'	
 			
 		</select>	
 		
@@ -300,7 +305,7 @@
 		
 		
 		<!-- Review -->
-		<select id="reviewData" parameterType="String" resultType="com.table.otherDTO.ReviewDTO">
+		<select id="getReviewData" parameterType="String" resultType="com.table.otherDTO.ReviewDTO">
 			select sale_Code,score,review,created from review
 			where sale_Code = #{sale_Code}
 		</select>
@@ -309,9 +314,9 @@
 		<select id="getAllSaleView" resultType="com.view.view.SaleView" parameterType="map">
 			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code, use_Coupon, payment_Method, addr, message, pay_Status, delivery_Status,
 			 product_Price, qty, use_Point, total_Price from saleView			
-			 where ${searchKey1} like '%' || #{searchValue1} || '%' and
-				   ${searchKey2} like '%' || #{searchValue2} || '%' and
-				   ${searchKey3} like '%' || #{searchValue3} || '%'
+			 where  name like '%' || #{searchValue1} || '%' and
+				    id like '%' || #{searchValue2} || '%' and
+				    cellPhone like '%' || #{searchValue3} || '%'
 		</select>
 		
 		<select id="getOneSaleView" resultType="com.view.view.SaleView" parameterType="String">
