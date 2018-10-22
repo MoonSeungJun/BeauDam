@@ -24,6 +24,7 @@
 	
 	<context:component-scan base-package="com.exe.beaudam"/>
 	<context:component-scan base-package="com.exe.email"/>
+	<context:component-scan base-package="com.naver.naverlogin" />
 	<context:component-scan base-package="com.dao.*"/>
 	<context:component-scan base-package="com.table.*"/>
 			
@@ -49,9 +50,10 @@
 	   <beans:property name="dataSource" ref="dataSource"/>
 	   <beans:property name="configLocation" value="classpath:/mybatis-config.xml"/>
 	</beans:bean>
+	
+	<beans:bean id="naverLoginBO" class="com.naver.naverlogin.NaverLoginBO" />
 
-	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
-	destroy-method="close">
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"	destroy-method="close">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<beans:property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:TestDB"/>
 		<beans:property name="username" value="beaudam"/>

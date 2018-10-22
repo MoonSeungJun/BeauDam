@@ -1,0 +1,90 @@
+@charset "UTF-8";
+@font-face { font-family: 'YiSunShinDotumM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'designhouseOTFLight00'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+body, html, ul, li, div, button, h2, h3, p {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*a {
+ 	color: white; 
+ 	text-decoration: none; 
+ 	outline: none
+}
+
+a:hover, a:active {
+	text-decoration: none; 
+	color: gainsboro; 
+}*/
+.logo {
+    /*float: right;*/
+    font-family: 'designhouseOTFLight00';
+    font-size: 30px;
+    text-decoration: none;
+    color: black;
+    margin-left: 30px;
+    font-weight: bold;
+}
+
+.logo:hover {
+    color: black;
+}
+
+.top ul {
+    overflow: hidden;
+}
+
+.top li {
+    float: right;
+    margin-right: 30px;
+    font-size: 15px;
+    font-family: sans-serif;
+}
+
+.header {
+    line-height: 50px;
+    background-color: gainsboro;
+    width: 100%;
+    height: 50px;
+}
+
+.dropdown {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.dropdown-menu li {
+    font-size: 18px;
+    padding: 5px;
+}
+
+.header .category {
+    margin-right: 20px;
+    color: black;
+    cursor: pointer;
+}
+
+.category:hover {
+    color: gray;
+}
+
+.wrapper {
+    width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    
+}
+
+.product {
+    width: 600px;
+}
+
+.title {
+    width: 100px;
+    height: 45px;
+    text-align: center;
+    background-color: gainsboro; 
+}

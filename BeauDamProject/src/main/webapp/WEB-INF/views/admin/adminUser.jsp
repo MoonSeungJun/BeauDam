@@ -1,12 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% %>
+=======
+    pageEncoding="UTF-8"%>
+<%
+	String cp = request.getContextPath();
+%>
+>>>>>>> bb4ac565b18eb8f8da799ee307be6ab8ab409128
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
 <script type="text/javascript">
@@ -50,6 +58,16 @@
 	<br/>
 	<br/>
 
+=======
+<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
+</head>
+<body>
+
+<jsp:include page="adminHeader.jsp"/>
+<div class="wrapper">
+<h1>회원조회</h1>
+	<br><br>
+>>>>>>> bb4ac565b18eb8f8da799ee307be6ab8ab409128
 	<table border="1">
 		<tr align="center">
 			<td>아이디</td>
@@ -92,6 +110,7 @@
 
 		<c:if test="${!empty memberList }">
 		
+<<<<<<< HEAD
 			<c:forEach var="dto" items="${memberList }">
 				<tr>
 					<td>${dto.id }</td>
@@ -121,6 +140,10 @@
 
 
 
+=======
+	</table>
+	</div>
+>>>>>>> bb4ac565b18eb8f8da799ee307be6ab8ab409128
 
 <%-- 			<c:if test="${!empty memberList }"> --%>
 <%-- 				<c:forEach var="dto" items="${memberList }"> --%>

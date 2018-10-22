@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원정보 수정</title>
+<title>회원가입｜뷰담</title>
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -136,36 +136,33 @@ button:hover {
 	<div id="container">
 			<div class="title_style">
 				<div>
-					<h2 style="font-family: designhouseOTFLight00">회원정보수정</h2>
-					<p style="font-family: Black Han Sans">Edit Information</p>
+					<h2 style="font-family: designhouseOTFLight00">회원정보입력</h2>
+					<p style="font-family: Black Han Sans">Enter Information</p>
 				</div>
 			</div>
 			
 			<div style="width: 800px; margin: 0 auto">				
-				<div style="box-sizing: border-box; padding: 23px 30px 25px 28px; background-color: #f4f7f8; border: 1px solid #e4eaed">
-					<p>· 개명을 하신 회원님은 <b>고객센터</b>를 통해서 문의해주시기 바랍니다.</p>
-				</div>
-				<h3 style="float: left">정보수정</h3>
+				<h3 style="float: left">가입정보</h3>
 				<p style="color: red; float: right;"> * 필수입력사항</p>
 				<hr style="width: 800px">
 				<table style="width: 650px">
 					<tr>
 						<td width="150px" style="padding-left: 20px"><b>아이디</b></td>
-						<td>dohwi9406</td>
+						<td><input type="text" name="id"/></td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>이름</b></td>
-						<td><input type="text" value="허도휘" disabled="disabled"/></td>
+						<td><input type="text" name="name"/></td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>닉네임</b></td>
-						<td><input type="text" value="도비"/></td>
+						<td><input type="text" name="nickname"/></td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>성별</b></td>
 						<td>
 							<input type="radio">남
-							<input type="radio" checked="checked">여
+							<input type="radio">여
 						</td>
 					</tr>
 					<tr>
@@ -180,36 +177,40 @@ button:hover {
 							<select>
 								<option>11일</option>								
 							</select>
-							<input type="radio" checked="checked">양력
+							<input type="radio">양력
 							<input type="radio">음력
 						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>비밀번호</b></td>
 						<td>
-							<button type="button">비밀번호 변경</button>
-							<!-- 비밀번호 변경 버튼을 누르면 모달로 현재 비밀번호,
-							새 비밀번호, 새 비밀번호 입력을 받을꺼에욤!!! -->
+							<input type="text" name="pwd"/>
+						</td>
+					</tr>
+					<tr>
+						<td style="padding-left: 20px"><b>비밀번호확인</b></td>
+						<td>
+							<input type="text" name="pwd1"/>
 						</td>
 					</tr>
 					<tr>
 						<td rowspan="2" style="padding-left: 20px"><b>주소</b></td>
 						<td>
-							<input type="text" readonly="readonly" id="sample4_postcode" placeholder="우편번호" value="02259"/>
+							<input type="text" readonly="readonly" id="sample4_postcode" placeholder="우편번호">
 							<button type="button" onclick="sample4_execDaumPostcode()">우편번호 찾기</button><br/>
 							<span id="guide" style="color:#999"></span>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="text" readonly="readonly" id="sample4_roadAddress" placeholder="도로명주소" value="서울시 용마산로 60가길 11"/>
-							<input type="text" placeholder="상세주소" value="A동 401호"/>
+							<input type="text" readonly="readonly" id="sample4_roadAddress" placeholder="도로명주소">
+							<input type="text" placeholder="상세주소">
 						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>휴대폰번호</b></td>
 						<td>
-							<select>
+							<select name="hp1">
 								<option value="010">010</option>
 								<option value="016">016</option>
 								<option value="017">017</option>
@@ -217,8 +218,8 @@ button:hover {
 								<option value="019">019</option>
 								<option value="011">011</option>
 							</select>
-							<input type="text" value="6720"/>
-							<input type="text" value="3060"/>
+							<input type="text" name="hp2"/>
+							<input type="text" name="hp3"/>
 						</td>
 					</tr>
 					<tr>
@@ -246,16 +247,16 @@ button:hover {
 	                            <option value="064">064</option>
 	                            <option value="070">070</option>
                             </select>
-							<input type="text">
-							<input type="text">
+							<input type="text" name="phone2"/>
+							<input type="text" name="phone3"/>
 						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>이메일주소</b></td>
 						<td>
-							<input type="text" value="dohwi9406"/>
+							<input type="text" name="email1"/>
 							@
-							<input type="text" value="naver.com">
+							<input type="text" name="email2">
 							<select style="width:120px;">
                               <option value="">직접입력</option>
                               <option value="dreamwiz.com">dreamwiz.com</option>
@@ -281,7 +282,7 @@ button:hover {
 					</tr>
 					<tr>
 						<td>
-							<input type="radio" checked="checked" >동의
+							<input type="radio" >동의
 							<input type="radio">동의하지 않음
 						</td>
 					</tr>
@@ -291,7 +292,7 @@ button:hover {
 					</tr>
 					<tr>
 						<td>
-							<input type="radio" checked="checked" >동의
+							<input type="radio">동의
 							<input type="radio">동의하지 않음
 						</td>
 					</tr>
@@ -301,8 +302,8 @@ button:hover {
 			<br/>
 			<div align="center" style="margin: 0 auto">
 				<button type="button" onclick=
-				"javascript:location.href='<%=cp %>/myPage.action'" style="width: 60px">취소</button>
-				<button type="button" style="width: 60px">수정</button>
+				"javascript:location.href='<%=cp %>/main.action'" style="width: 60px">취소</button>
+				<button type="button" style="width: 60px">가입</button>
 			</div>
 	</div>
 </body>

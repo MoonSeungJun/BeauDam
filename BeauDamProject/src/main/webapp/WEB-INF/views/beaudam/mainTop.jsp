@@ -36,7 +36,7 @@ session="false" pageEncoding="UTF-8"%>
                     <ul>
                         <li><a href="">고객센터</a></li>
                         <li><a href="">회원가입</a></li>
-                        <li><a href="">LOGIN</a></li>
+                        <li><a href="<%=cp%>/login.action">LOGIN</a></li>
                     </ul>
                 </div>
                 <div class="header_container">
@@ -85,8 +85,7 @@ session="false" pageEncoding="UTF-8"%>
                         <a href="#">쿠션</a>
                         <a href="#">파우더/팩트</a>
                         <a href="#">프라이머</a>
-                        <a href="#">하이라이터</a>
-                        <a href="#">쉐딩</a>
+                        <a href="#">컨투어링/하이라이터</a>
                         <a href="#">블러셔</a>
                     </div>
                     <div class="column">
@@ -114,8 +113,7 @@ session="false" pageEncoding="UTF-8"%>
                     </div>
                     <div class="column">
                     <h3>PERFUME</h3>
-                        <a href="#">남성용</a>
-                        <a href="#">여성용</a>
+                        <a href="#">향수</a>
                     </div>
                     <div class="column">
                     <h3>ACC</h3>
