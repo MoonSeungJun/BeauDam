@@ -13,14 +13,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dao.adminDAO.*;
+import com.dao.productDAO.*;
 import com.dao.viewDAO.*;
+import com.file.upload.*;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.naver.naverlogin.*;
 import com.table.adminDTO.*;
 import com.table.memberDTO.*;
+import com.table.productDTO.*;
 import com.view.view.*;
 
 /*
@@ -93,6 +97,9 @@ public class BeaudamController {
 	@Resource(name="viewService")
 	private ViewServiceImpl viewService;
 
+	@Resource(name="productService")
+	private ProductServiceImpl productService;
+	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 
@@ -350,11 +357,103 @@ public class BeaudamController {
 	}
 
 	//syj
-	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String admin_new_product() {
+	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET})
+	public String admin_new_product(HttpServletRequest req) {
+		
+		// 상품등록 페이지 이동				
+		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
+		List<Admin_CategoryDTO> cate = adminService.getAdminCategory();
+		List<Admin_TypeDTO> type = adminService.getAdminType();
+					
+		req.setAttribute("brand", brand);
+		req.setAttribute("cate", cate);
+		req.setAttribute("type", type);
+		
+		return "admin/adminProduct_new";	
+		
+	}
+	
+	@RequestMapping(value="/adminProduct_new.action",method=RequestMethod.POST)
+	public ModelAndView admin_add_product( @RequestParam("thumbImg")MultipartFile f1, @RequestParam("detailImg")MultipartFile f2, ProductUpload command, HttpServletRequest req) throws Exception {
+	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/adminProduct_new.action");
+		
+		
+		String originalFN1 = new String(f1.getOriginalFilename().getBytes("8859_1"),"UTF-8");
+		String originalFN2 = new String(f2.getOriginalFilename().getBytes("8859_1"),"UTF-8");
 
-		// 상품등록 페이지 이동
-		return "admin/adminProduct_new";
+
+
+		String ext1 = originalFN1.substring(originalFN1.lastIndexOf('.'));
+		String ext2 = originalFN2.substring(originalFN2.lastIndexOf('.'));	
+		
+		String saveFileName1 = UUID.randomUUID().toString().replaceAll("-", "") + ext1;
+		String saveFileName2 = UUID.randomUUID().toString().replaceAll("-", "") + ext2;	
+		
+		String thumbPath = "C:\\beudamImage/thumbImg";
+		String detailPath = "C:\\beudamImage/detailImg";
+		File tp = new File(thumbPath);
+		File dp = new File(detailPath);
+
+		try {
+
+			if(!tp.exists()) {
+				tp.mkdirs();
+			}
+			if(!dp.exists()) {
+				dp.mkdirs();
+			}		
+			
+			File serverFile;
+			
+			serverFile = new File(thumbPath + File.separator + saveFileName1);		
+			f1.transferTo(serverFile);
+			
+			
+			
+			serverFile = new File(detailPath + File.separator + saveFileName2);	
+			f2.transferTo(serverFile);			
+			
+            ProductDTO product = new ProductDTO();
+            BrandDTO brand = new BrandDTO();
+            ColorDTO color = new ColorDTO();
+            ImgDTO img = new ImgDTO();
+            
+            System.out.println(command.getCount());
+            System.out.println(command.getPrice());
+            
+            
+            
+            product.setCode(command.getCode());
+            product.setProductName(command.getProductName());
+            product.setProductPrice(Integer.parseInt(command.getPrice()));
+            
+            brand.setBrand(command.getBrand());
+            brand.setCategory(command.getCategory());
+            brand.setCode(command.getCode());
+            brand.setType(command.getType());
+            
+            color.setCode(command.getCode());
+            color.setColorCode(command.getColorCode());
+            color.setColorName(command.getColor());
+            color.setQty(Integer.parseInt(command.getCount()));
+            
+            img.setCode(command.getCode());
+            img.setDetail_Img(saveFileName2);
+            img.setThumb_Img(saveFileName1);
+            
+            productService.insertProduct(product);
+            productService.insertBrand(brand);
+            productService.insertColor(color);
+            productService.insertImg(img);          
+			
+		} catch (FileNotFoundException e) {			
+			e.printStackTrace();
+		}
+
+		return mav;
+					
 	}
 	
 	
@@ -415,7 +514,7 @@ public class BeaudamController {
 			return "redirect:/adminBrand.action";
 		}
 		//관리 페이지 이동
-		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
+		List<Admin_CategoryDTO> category = adminService.getAdminCategory();
 		List<Admin_BrandDTO> brand = adminService.getAdminBrand();		
 		List<Admin_TypeDTO> type = adminService.getAdminType();
 		

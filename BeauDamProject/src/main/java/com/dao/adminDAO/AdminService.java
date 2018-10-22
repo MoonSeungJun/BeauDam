@@ -15,7 +15,7 @@ public interface AdminService {
 	
 //	select
 	List<Admin_BrandDTO> getAdminBrand();
-	List<Admin_CategoryDTO> getAdminCatogory();
+	List<Admin_CategoryDTO> getAdminCategory();
 	List<Admin_TypeDTO> getAdminType();
 //	update
 //	delete

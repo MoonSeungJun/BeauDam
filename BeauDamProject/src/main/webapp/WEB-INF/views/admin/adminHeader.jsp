@@ -21,7 +21,7 @@
                     <li><input type="button" value="로그아웃" style="text-align: right;"></li>
                     <li>admin님이 로그인중입니다.</li>
                 </ul>
-                <a style="text-decoration: none; color: black;" href="" >뷰티를 담다 뷰ː담</a>
+                <a style="text-decoration: none; color: black;" href="main.action" >뷰티를 담다 뷰ː담</a>
             </div>
             
         <div class="header">

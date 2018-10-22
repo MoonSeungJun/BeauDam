@@ -25,8 +25,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void inserImg(ImgDTO dto) {
-		dao.inserImg(dto);
+	public void insertImg(ImgDTO dto) {
+		dao.insertImg(dto);
 		
 	}
 

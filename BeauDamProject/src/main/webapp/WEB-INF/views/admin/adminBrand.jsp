@@ -23,7 +23,10 @@
 			url: "adminBrand.action",
 			data: {"addbrand":$('#brandInput').val()},
 			async:false,
-			dataType: "text"
+			dataType: "text",
+			success: function() {				
+				window.location.href = "/beaudam/adminBrand.action";
+			}	
 		});		
 	}
 	

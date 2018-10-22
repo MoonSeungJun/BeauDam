@@ -52,8 +52,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<Admin_CategoryDTO> getAdminCatogory() {
-		List<Admin_CategoryDTO> lists = dao.getAdminCatogory();
+	public List<Admin_CategoryDTO> getAdminCategory() {
+		List<Admin_CategoryDTO> lists = dao.getAdminCategory();
 		return lists;
 	}
 

@@ -29,7 +29,7 @@ public class ProductDAO {
 	}
 
 	 
-	public void inserImg(ImgDTO dto) {
+	public void insertImg(ImgDTO dto) {
 		sessionTemplate.insert("beaudam.insertImg",dto);
 		
 	}

@@ -51,7 +51,7 @@ public class AdminDAO {
 	}
 
 	
-	public List<Admin_CategoryDTO> getAdminCatogory() {
+	public List<Admin_CategoryDTO> getAdminCategory() {
 		List<Admin_CategoryDTO> lists = sessionTemplate.selectList("beaudam.getAdminCategory");
 		return lists;
 	}
