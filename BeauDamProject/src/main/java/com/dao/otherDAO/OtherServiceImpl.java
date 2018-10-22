@@ -94,9 +94,9 @@ public class OtherServiceImpl implements OtherService {
 	}
 
 	@Override
-	public ReviewDTO reviewData(String sale_Code) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ReviewDTO> getReviewData(String sale_Code) {
+		List<ReviewDTO> lists = dao.getReviewData(sale_Code);		
+		return lists;
 	}
 
 
