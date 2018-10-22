@@ -48,14 +48,6 @@ public class ViewServiceImpl implements ViewService {
 
 
 	@Override
-	public List<SaleView> getAllSaleView(HashMap<String, Object> saleSearchPack) {
-		
-		List<SaleView> lists = dao.getAllSaleView(saleSearchPack);
-		
-		return lists;
-	}
-
-	@Override
 	public SaleView getOneSaleView(String sale_Code) {
 		SaleView dto = dao.getOneSaleView(sale_Code);
 		
@@ -68,6 +60,19 @@ public class ViewServiceImpl implements ViewService {
 		List<MemberView> searchMemberList = dao.getSearchMemberData(dto);
 		return searchMemberList;
 	}
+
+	@Override
+	public List<SaleView> getAllSaleView(HashMap<String, Object> saleSearchPack) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SaleView> getAllSaleData(HashMap<String, Object> saleSearchPack) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 }

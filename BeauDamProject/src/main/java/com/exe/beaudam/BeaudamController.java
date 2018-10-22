@@ -1,42 +1,36 @@
 package com.exe.beaudam;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
-import javax.annotation.*;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
-import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.http.HttpSession;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dao.adminDAO.*;
-
+import com.dao.adminDAO.AdminServiceImpl;
 import com.dao.productDAO.ProductServiceImpl;
 import com.dao.saleDAO.SaleServiceImpl;
 import com.dao.viewDAO.ViewServiceImpl;
-import com.table.adminDTO.*;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.naver.naverlogin.NaverLoginBO;
+import com.table.adminDTO.Admin_BrandDTO;
+import com.table.adminDTO.Admin_CategoryDTO;
+import com.table.adminDTO.Admin_TypeDTO;
+import com.table.memberDTO.Member_InfoDTO;
 import com.table.productDTO.BrandDTO;
 import com.table.productDTO.ColorDTO;
 import com.table.productDTO.ProductDTO;
 import com.table.saleDTO.Sale_DateDTO;
-
-import com.dao.viewDAO.*;
-import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.naver.naverlogin.*;
-import com.table.adminDTO.*;
-import com.table.memberDTO.*;
-
-import com.view.view.*;
+import com.view.view.MemberView;
+import com.view.view.ProductView;
+import com.view.view.SaleView;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -114,6 +108,8 @@ public class BeaudamController {
 	private ProductServiceImpl productServiece;
 
 	
+	private NaverLoginBO naverLoginBO;
+	
 	// ********************** Beaudam Page **********************
 	
 	@RequestMapping(value = "/login.action", method = RequestMethod.GET)
@@ -187,11 +183,6 @@ public class BeaudamController {
 
 		// 메인 페이지 이동
 		return "beaudam/mainTop";
-	}
-
-	@RequestMapping(value = "/mainBottom.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainBottom() {
-		
 	}
 
 	public ModelAndView main(HttpSession session) {
