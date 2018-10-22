@@ -11,20 +11,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
+
 
 <script type="text/javascript">
 
 	function searchSend() {
-
-<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
-</head>
-<body>
-
-<jsp:include page="adminHeader.jsp"/>
-<div>
-	<h2>상품조회</h2>
-	<table border="1">
-
 		
 		f = document.adminProductForm;
 		
@@ -73,10 +65,6 @@ function adminProductUpdate() {
 	
 	
 });
-	
-	
-	
-	
 	
 </script>
 

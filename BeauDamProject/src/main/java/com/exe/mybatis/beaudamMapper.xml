@@ -144,7 +144,7 @@
 		<!-- Sale -->
 			
 			<!-- 결제상태, 배송상태 수정 -->			
-			<update id="updateSaleDate" parameterType="com.table.saleDTO.Sale_DateDTO">
+			<update id="updateSaleDate" parameterType="com.view.view.SaleView">
 				update sale_date set pay_status=#{pay_status},delivery_status=#{delivery_status} where sale_code = #{sale_code}
 			</update>					
 			
@@ -262,6 +262,27 @@
 		<select id="getAdminType" resultType="com.table.adminDTO.Admin_TypeDTO">
 			select type from admin_type
 		</select>
+		<select id="getAdminDaySales" >
+			select to_char(saledate,'day') , sum(total_price) totalPrice
+			from sale_date 
+			where to_char(saledate,'ww')=to_char(sysdate,'ww')
+			group by to_char(saledate,'day')
+			order by to_char(saledate,'day');			
+		</select>
+		<select id="getAdminMonthSales">
+			select to_char(saledate,'mm') month,sun(total_price) totalPrice from sale_date
+			where to_char(saledate,'yyyy-mm')
+			between '2018-01' and '2018-12'
+			group by to_char(saledate,'mm')
+			order by to_char(saledate,'mm') asc;
+		</select>
+		<select id="getAdminYearSales">
+			select to_char(saledate,'yyyy') year, sum(total_price) totalPrice from sale_date
+			where to_char(saledate,'yyyy')
+			group by to_char(saledate,'yyyy')
+			order by to_char(saledate,'yyyy'); 
+		</select>
+		
 		
 		
 		<!-- Basket -->

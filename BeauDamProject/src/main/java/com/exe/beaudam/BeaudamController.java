@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ import com.dao.adminDAO.AdminServiceImpl;
 import com.dao.productDAO.ProductServiceImpl;
 import com.dao.saleDAO.SaleServiceImpl;
 import com.dao.viewDAO.ViewServiceImpl;
+import com.exe.util.MyUtil;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.naver.naverlogin.NaverLoginBO;
 import com.table.adminDTO.Admin_BrandDTO;
@@ -99,14 +101,16 @@ public class BeaudamController {
 	private AdminServiceImpl adminService;
 
 	@Resource(name="viewService")
-	private ViewServiceImpl viewService1;
+	private ViewServiceImpl viewService;
 
 	@Resource(name="saleService")
 	private SaleServiceImpl saleService;
 
 	@Resource(name="productService")
 	private ProductServiceImpl productServiece;
-
+	
+	@Autowired
+	MyUtil myUtil;
 	
 	private NaverLoginBO naverLoginBO;
 	
@@ -335,7 +339,7 @@ public class BeaudamController {
 				mv.setBirth(birth);
 			}
 			
-			List<MemberView> lists = viewService1.getSearchMemberData(mv);
+			List<MemberView> lists = viewService.getSearchMemberData(mv);
 			
 			req.setAttribute("searchList", lists);
 
@@ -343,7 +347,7 @@ public class BeaudamController {
 			
 		}
 		
-		List<MemberView> memberList = viewService1.getAllMemberData();		
+		List<MemberView> memberList = viewService.getAllMemberData();		
 		req.setAttribute("memberList", memberList);
 
 
@@ -388,7 +392,7 @@ public class BeaudamController {
 		searchPack.put("searchValue5", searchValue3);
 
 
-		List<ProductView> productView = viewService1.getAllProductData(searchPack);
+		List<ProductView> productView = viewService.getAllProductData(searchPack);
 
 		List<Admin_BrandDTO> brandLists = adminService.getAdminBrand();
 		List<Admin_CategoryDTO> categoryLists = adminService.getAdminCatogory();
@@ -553,7 +557,7 @@ public class BeaudamController {
 		saleSearchPack.put("searchValue3", searchValue3);
 
 
-		List<SaleView> saleView = viewService1.getAllSaleView(saleSearchPack);
+		List<SaleView> saleView = viewService.getAllSaleView(saleSearchPack);
 
 		//페이징 처리 추가	
 		
@@ -565,8 +569,12 @@ public class BeaudamController {
 	}
 
 	@RequestMapping(value = "/adminOrderUpdate", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminOrderUpdate(Sale_DateDTO dto, HttpServletRequest request) {
+	public String adminOrderUpdate(SaleView dto, HttpServletRequest request) {
 
+		String sale_Code = request.getParameter("sale_Code");
+		
+		dto = viewService.getOneSaleView(sale_Code);
+		
 		saleService.updateSaleDate(dto);
 
 
@@ -577,6 +585,17 @@ public class BeaudamController {
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminSales() {
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		// 매출 페이지 이동
 		return "admin/adminSales";
 	}

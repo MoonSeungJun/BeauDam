@@ -17,15 +17,15 @@
 
 	function orderSearch() {
 		
-		f = document.adminOrderForm;
+		var f = document.adminOrderForm;
 		
-		searchValue1 = f.id.value;
+		var searchValue1 = f.id.value;
 		searchValue1 = searchValue1.trim();
 		
-		searchValue2 = f.name.value;
+		var searchValue2 = f.name.value;
 		searchValue2 = searchValue2.trim();
 		
-		searchValue3 = f.cellphone.value;
+		var searchValue3 = f.cellphone.value;
 		searchValue3 = searchValue3.trim();
 		
 		if(!searchValue1&&!searchValue2&&!searchValue3){
@@ -40,6 +40,25 @@
 	}
 	
 	function adminOrderUpdate() {
+		
+		
+		$(function(){
+			$("#pay_Status").change(function(){
+				
+				var pay_Status = $("#pay_Status option:selected").val();
+				
+				
+			});	
+		});
+		
+		$(function(){
+			$("#delivery_Status").change(function(){
+				
+				var delivery_Status = $("#delivery_Status option:selected").val();
+				
+				
+			});	
+		});
 		
 		
 		f.action = "<%=cp%>/adminOrderUpdate.action";
@@ -227,6 +246,9 @@
 			<td>
 				<input type="hidden" name="sale_Code" value="${dto.sale_Code }">
 				<input type="hidden" name="pageNum" value="${pageNum }">
+				<input type="hidden" name="pay_Status" value="${dto.pay_Status }">
+				<input type="hidden" name="delivery_Status" value="${dto.delivery_Status }">
+				
 				<a onclick="adminOrderUpdate();" style="text-decoration: none;">수정</a>
 			</td>			
 		</tr>

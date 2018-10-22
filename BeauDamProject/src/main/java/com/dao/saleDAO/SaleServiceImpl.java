@@ -5,6 +5,7 @@ import javax.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.saleDTO.*;
+import com.view.view.SaleView;
 
 @Service("saleService")
 public class SaleServiceImpl implements SaleService {
@@ -31,7 +32,7 @@ public class SaleServiceImpl implements SaleService {
 	}
 
 	@Override
-	public void updateSaleDate(Sale_DateDTO dto) {
+	public void updateSaleDate(SaleView dto) {
 		dao.updateSaleDate(dto);
 		
 	}

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.saleDTO.*;
+import com.view.view.SaleView;
 
 @Repository("saleDAO")
 public class SaleDAO {
@@ -30,9 +31,12 @@ public class SaleDAO {
 
 	}
 
-	public void updateSaleDate(Sale_DateDTO dto) {
+	public void updateSaleDate(SaleView dto) {
 		sessionTemplate.update("beaudam.updateSaleDate", dto);
 
 	}
 
+
+	
+	
 }

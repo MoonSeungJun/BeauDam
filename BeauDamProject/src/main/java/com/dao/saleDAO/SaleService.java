@@ -1,6 +1,7 @@
 package com.dao.saleDAO;
 
 import com.table.saleDTO.*;
+import com.view.view.SaleView;
 
 public interface SaleService {
 
@@ -9,9 +10,10 @@ public interface SaleService {
 	void insertSaleProduct(Sale_ProductDTO dto);
 	void insertSaleClient(Sale_ClientDTO dto);
 //	update
-	void updateSaleDate(Sale_DateDTO dto);
+	void updateSaleDate(SaleView dto);
 //	delete
 //	select
+	
 	
 	
 }
