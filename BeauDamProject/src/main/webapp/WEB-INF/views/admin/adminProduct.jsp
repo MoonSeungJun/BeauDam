@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
-	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
@@ -10,9 +11,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script type="text/javascript">
 
 	function searchSend() {
+
+<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
+</head>
+<body>
+
+<jsp:include page="adminHeader.jsp"/>
+<div>
+	<h2>상품조회</h2>
+	<table border="1">
+
 		
 		f = document.adminProductForm;
 		
@@ -180,6 +192,6 @@ function adminProductUpdate() {
 			</tr>
 		</c:forEach>
 	</table>
-
+	</div>
 </body>
 </html>

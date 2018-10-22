@@ -238,7 +238,6 @@ a {
     /*background-color: rgba( 255, 255, 255, 0.5 );*/
     /*left: 0;*/
     /*border: 1px solid gray;*/
-    z-index: 1;
     z-index: 999999;
     border: none;
 }
@@ -278,6 +277,7 @@ a {
     text-align: center;
     font-weight: normal;
     font-family: '맑은고딕';
+    font-size: 13px;
     
 }
 
@@ -383,10 +383,10 @@ a {
     background-color: #F9F9F9;
     height: 300px;
     margin-top: 80px;
-    padding: 20px;
-    background-image: url(./resources/css/image/logo.png);
+    padding: 20px; 
+    background-image: url(/beaudam/resources/image/beaudam/main/logo.png);
     background-repeat: no-repeat;
-    background-position: bottom right;
+    background-position: center bottom;
     background-size: 150px;
 }
    
@@ -400,7 +400,7 @@ a {
     position: sticky;
     top: 0px;
     z-index: 999;
-    background-color: gray;
-    /* background-color: rgba( 255, 255, 255, 0.5 ); */
+    background-color: white;
+    
 }
 

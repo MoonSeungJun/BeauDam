@@ -9,7 +9,7 @@ session="false" pageEncoding="UTF-8"%>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>BeauDam</title>
-        <link rel="stylesheet" href="./resources/css/beaudam/main.css">
+        <link rel="stylesheet" href="<%=cp%>/resources/css/beaudam/main.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -21,7 +21,7 @@ session="false" pageEncoding="UTF-8"%>
         <div class="header">
             <div class="top">
                 GRAND OPEN! 신규 회원 20% 즉시 할인 쿠폰 증정!
-                <img src="./resources/image/beaudam/main/top.png" onclick="$('.top').slideUp(400);" style="cursor:pointer">
+                <img src="<%=cp%>/resources/image/beaudam/main/top.png" onclick="$('.top').slideUp(400);" style="cursor:pointer">
             </div>
            <!-- <div class="login">
                 <ul>
@@ -36,7 +36,7 @@ session="false" pageEncoding="UTF-8"%>
                     <ul>
                         <li><a href="">고객센터</a></li>
                         <li><a href="">회원가입</a></li>
-                        <li><a href="">LOGIN</a></li>
+                        <li><a href="<%=cp%>/login.action">LOGIN</a></li>
                     </ul>
                 </div>
                 <div class="header_container">
@@ -44,14 +44,14 @@ session="false" pageEncoding="UTF-8"%>
                         <div class="header_event">
                             <p>GET IT!</p>
                             <ul>
-                                <li><img src="./resources/image/beaudam/main/header_event_l.png"></li>
-                                <li><img class="list_logo" src="./resources/image/beaudam/main/etude.png"></li>
+                                <li><img src="<%=cp%>/resources/image/beaudam/main/header_event_l.png"></li>
+                                <li><img class="list_logo" src="<%=cp%>/resources/image/beaudam/main/etude.png"></li>
                                 <li>에뛰드하우스 틴트<br/>5,000원</li>
-                                <li><img src="./resources/image/beaudam/main/header_event_r.png"></li>
+                                <li><img src="<%=cp%>/resources/image/beaudam/main/header_event_r.png"></li>
                             </ul>
                         </div>
                         <div class="header_logo">
-                            <a href=""><img src="./resources/image/beaudam/main/logo.png"></a>
+                            <a href="<%=cp %>/main.action"><img alt="" src="<%=cp%>/resources/image/beaudam/main/logo.png"></a>
                         </div>
                         <div class="header_search"> 
                             <!-- 수정부분 -->
@@ -60,9 +60,9 @@ session="false" pageEncoding="UTF-8"%>
                                 <li><input type="text" class="form-control" id="usr" placeholder="에뛰드 틴트" ></li>
                             </ul>
                             <ul class="search_icon">
-                                <li><img src="./resources/image/beaudam/main/icon_blog1.gif"></li>
-                                <li><img src="./resources/image/beaudam/main/icon_blog2.gif"></li>
-                                <li><img src="./resources/image/beaudam/main/icon_blog3.gif"></li>
+                                <li><img src="<%=cp%>/resources/image/beaudam/main/icon_blog1.gif"></li>
+                                <li><img src="<%=cp%>/resources/image/beaudam/main/icon_blog2.gif"></li>
+                                <li><img src="<%=cp%>/resources/image/beaudam/main/icon_blog3.gif"></li>
                             </ul>
                         </div>
                     </div>
@@ -80,13 +80,12 @@ session="false" pageEncoding="UTF-8"%>
                 <div class="dropdown-content" style="width: 950px;">  
                     <div class="column">
                     <h3>SKIN</h3>
-                        <a href="#">파운데이션</a>
-                        <a href="#">베이스</a>
+                        <a href="<%=cp %>/productList.action">파운데이션</a>
+                        <a href="<%=cp %>/productList.action">베이스</a>
                         <a href="#">쿠션</a>
                         <a href="#">파우더/팩트</a>
                         <a href="#">프라이머</a>
-                        <a href="#">하이라이터</a>
-                        <a href="#">쉐딩</a>
+                        <a href="#">컨투어링/하이라이터</a>
                         <a href="#">블러셔</a>
                     </div>
                     <div class="column">
@@ -114,8 +113,7 @@ session="false" pageEncoding="UTF-8"%>
                     </div>
                     <div class="column">
                     <h3>PERFUME</h3>
-                        <a href="#">남성용</a>
-                        <a href="#">여성용</a>
+                        <a href="#">향수</a>
                     </div>
                     <div class="column">
                     <h3>ACC</h3>
