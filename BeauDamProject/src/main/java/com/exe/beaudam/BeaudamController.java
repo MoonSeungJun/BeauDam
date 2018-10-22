@@ -1,6 +1,6 @@
 package com.exe.beaudam;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 import javax.annotation.*;
@@ -9,26 +9,19 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
-
-import com.dao.adminDAO.*;
-import com.dao.viewDAO.*;
-=======
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dao.adminDAO.*;
+import com.dao.viewDAO.*;
 import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.naver.naverlogin.NaverLoginBO;
->>>>>>> bb4ac565b18eb8f8da799ee307be6ab8ab409128
+import com.naver.naverlogin.*;
 import com.table.adminDTO.*;
 import com.table.memberDTO.*;
 import com.view.view.*;
-
-import ch.qos.logback.classic.sift.MDCBasedDiscriminator;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -96,13 +89,13 @@ public class BeaudamController {
 	@Resource(name="adminService")
 	private AdminServiceImpl adminService;
 	
-<<<<<<< HEAD
+
 	@Resource(name="viewService")
 	private ViewServiceImpl viewService;
-=======
+
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
->>>>>>> bb4ac565b18eb8f8da799ee307be6ab8ab409128
+
 	
 	/* NaverLoginBO */
 	@Autowired
@@ -275,135 +268,66 @@ public class BeaudamController {
 	// ********************** Admin Page **********************
 
 	//syj
-	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET })	
+	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST})	
 	public String admin_user(HttpServletRequest req) {
-		// 회원관리 페이지 이동		
-		
+		// 회원관리 페이지 이동			
+
 		if(req.getMethod().equalsIgnoreCase("POST")) {
-			req.removeAttribute("memberList");			
+			Member_InfoDTO mv = new Member_InfoDTO();		
+			
 			String id = req.getParameter("id");
 			String name = req.getParameter("name");
 			String tel = req.getParameter("tel");
 			String cellphone = req.getParameter("cellphone");
-			String birth = req.getParameter("birth");		
+			String birth = req.getParameter("birth");
 			
-			Member_InfoDTO dto = new Member_InfoDTO();
+			System.out.println(id+name+tel+cellphone+birth);
 			
 			if(id != null && !id.equals("")) {
-				dto.setId(id);				
+				mv.setId(id);
 			}else {
 				id = "";
-				dto.setId(id);
+				mv.setId(id);
 			}
-			
 			if(name != null && !name.equals("")) {
-				dto.setName(name);
+				mv.setName(name);
 			}else {
 				name = "";
-				dto.setName("");
+				mv.setName(name);
 			}
 			if(tel != null && !tel.equals("")) {
-				dto.setTel(tel);
+				mv.setTel(tel);
 			}else {
 				tel = "";
-				dto.setTel(tel);
+				mv.setTel(tel);
 			}
 			if(cellphone != null && !cellphone.equals("")) {
-				dto.setCellphone(cellphone);
+				mv.setCellphone(cellphone);
 			}else {
 				cellphone = "";
-				dto.setCellphone(cellphone);
+				mv.setCellphone(cellphone);
 			}
 			if(birth != null && !birth.equals("")) {
-				dto.setBirth(birth);
+				mv.setBirth(birth);
 			}else {
 				birth = "";
-				dto.setBirth(birth);
+				mv.setBirth(birth);
 			}
 			
-			System.out.println(dto.getId() + dto.getName() + dto.getTel()+dto.getCellphone()+dto.getBirth());
+			List<MemberView> lists = viewService.getSearchMemberData(mv);
 			
-			List<MemberView> searchMemberList = viewService.getSearchMemberData(dto);	
-			
-			return "admin/adminUser";
-			
-		} else {
-			List<MemberView> memberList = viewService.getAllMemberData();		
-			req.setAttribute("memberList", memberList);
-			
-			return "admin/adminUser";
-		}
-		
-		
-	}
-	
-	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.POST })
-	
-	//public List<MemberView> admin_users(@RequestBody Map<String, Object> map) {
-	public String admin_users(@RequestBody Map<String, Object> map) {
-		// 회원관리 페이지 이동		
-	
-		/*String id = req.getParameter("id");
-		String name = req.getParameter("name");
-		String tel = req.getParameter("tel");
-		String cellphone = req.getParameter("cellphone");
-		String birth = req.getParameter("birth");*/		
-		
-		//System.out.println(map.get("id") + "aaaaaaaaaaaaaaaaaa");
-		System.out.println(map.toString());
-		
-		//Member_InfoDTO dto = new Member_InfoDTO();
-		MemberView dto = new MemberView();
-		
-		List<MemberView> lists = new ArrayList<MemberView>();
-		
-		lists.add(dto);
-		
-		return "admin/adminUser";
-		//return lists;
-		
-		
-		
-		/*if(id != null && !id.equals("")) {
-			dto.setId(id);				
-		}else {
-			id = "";
-			dto.setId(id);
-		}
-		
-		if(name != null && !name.equals("")) {
-			dto.setName(name);
-		}else {
-			name = "";
-			dto.setName("");
-		}
-		if(tel != null && !tel.equals("")) {
-			dto.setTel(tel);
-		}else {
-			tel = "";
-			dto.setTel(tel);
-		}
-		if(cellphone != null && !cellphone.equals("")) {
-			dto.setCellphone(cellphone);
-		}else {
-			cellphone = "";
-			dto.setCellphone(cellphone);
-		}
-		if(birth != null && !birth.equals("")) {
-			dto.setBirth(birth);
-		}else {
-			birth = "";
-			dto.setBirth(birth);
-		}
-		
-		System.out.println(dto.getId() + dto.getName() + dto.getTel()+dto.getCellphone()+dto.getBirth());
-		
-		List<MemberView> searchMemberList = viewService.getSearchMemberData(dto);	
-		
-		return "admin/adminUser";*/
+			req.setAttribute("searchList", lists);
 
+			return "admin/adminUser"; 
+			
+		}
+		
+		List<MemberView> memberList = viewService.getAllMemberData();		
+		req.setAttribute("memberList", memberList);
+
+		return "admin/adminUser";		
+		
 	}
-	
 	
 	
 	
@@ -444,16 +368,7 @@ public class BeaudamController {
 		if(addBrand != null && !addBrand.equals("")) {				
 			Admin_BrandDTO dto = new Admin_BrandDTO();			
 			dto.setBrand(addBrand);	
-			req.removeAttribute("addbrand");			
-			List<Admin_BrandDTO> lists = adminService.getAdminBrand();			
-			Iterator<Admin_BrandDTO> it = lists.iterator();			
-			while(it.hasNext()) {				
-				Admin_BrandDTO vo = it.next(); 				
-				if(vo.getBrand().equals(addBrand)) {
-					req.setAttribute("data", "오류");
-					return "redirect:/adminBrand.action";
-				}				
-			}			
+			req.removeAttribute("addbrand");				
 			adminService.insertBrand(dto);			
 			return "redirect:/adminBrand.action";
 		}
@@ -471,16 +386,7 @@ public class BeaudamController {
 		if(addCate != null && !addCate.equals("")) {				
 			Admin_CategoryDTO dto = new Admin_CategoryDTO();			
 			dto.setCategory(addCate);
-			req.removeAttribute("addCate");			
-			List<Admin_CategoryDTO> lists = adminService.getAdminCatogory();			
-			Iterator<Admin_CategoryDTO> it = lists.iterator();			
-			while(it.hasNext()) {				
-				Admin_CategoryDTO vo = it.next(); 				
-				if(vo.getCategory().equals(addCate)) {
-					req.setAttribute("data", "오류");
-					return "redirect:/adminBrand.action";
-				}				
-			}			
+			req.removeAttribute("addCate");		
 			adminService.insertCategory(dto);			
 			return "redirect:/adminBrand.action";
 		}
@@ -498,15 +404,6 @@ public class BeaudamController {
 			Admin_TypeDTO dto = new Admin_TypeDTO();			
 			dto.setType(addType);
 			req.removeAttribute("addType");			
-			List<Admin_TypeDTO> lists = adminService.getAdminType();			
-			Iterator<Admin_TypeDTO> it = lists.iterator();			
-			while(it.hasNext()) {				
-				Admin_TypeDTO vo = it.next(); 				
-				if(vo.getType().equals(addCate)) {
-					req.setAttribute("data", "오류");
-					return "redirect:/adminBrand.action";
-				}				
-			}			
 			adminService.insertType(dto);			
 			return "redirect:/adminBrand.action";
 		}

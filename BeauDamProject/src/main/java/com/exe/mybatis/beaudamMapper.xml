@@ -231,7 +231,7 @@
 		</select>
 		
 		<select id="getSearchMemberData" resultType="com.view.view.MemberView" parameterType="com.table.memberDTO.Member_InfoDTO">
-			select ID,PWD,NAME,NICKNAME,CELLPHONE,TEL,BIRTH,EMAIL,ZIP,CITY,STREET,GENDER,PAY,GRADE,POINT,CREATED,ISLEAVE from
+			select ID,PWD,NAME,NICKNAME,CELLPHONE,TEL,to_char(birth,'yyyy-mm-dd') BIRTH,EMAIL,ZIP,CITY,STREET,GENDER,PAY,GRADE,POINT, to_char(created,'yyyy-mm-dd') CREATED,ISLEAVE from
 			memberView where id = #{id} or name = #{name} or tel = #{tel} or cellphone = #{cellphone} or birth = #{birth} 
 		</select>
 		

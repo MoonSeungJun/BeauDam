@@ -13,7 +13,7 @@
 <body>
 
 <jsp:include page="adminHeader.jsp"/>
-<!-- <div>
+<div>
 	<h2>상품조회</h2>
 	<table border="1">
 		
@@ -154,6 +154,6 @@
 		</tr>
 		
 	</table>
-	</div> -->
+	</div>
 </body>
 </html>
