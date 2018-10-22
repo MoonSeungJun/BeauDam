@@ -1,5 +1,7 @@
 package com.dao.saleDAO;
 
+import java.util.List;
+
 import javax.annotation.*;
 
 import org.springframework.stereotype.*;
@@ -35,6 +37,24 @@ public class SaleServiceImpl implements SaleService {
 	public void updateSaleDate(SaleView dto) {
 		dao.updateSaleDate(dto);
 		
+	}
+
+	@Override
+	public List<Sale_DateDTO> getAdminDaySales() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sale_DateDTO> getAdminMonthSales() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sale_DateDTO> getAdminYearSales() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

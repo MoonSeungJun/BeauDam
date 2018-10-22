@@ -1,5 +1,7 @@
 package com.dao.saleDAO;
 
+import java.util.List;
+
 import org.mybatis.spring.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -35,8 +37,20 @@ public class SaleDAO {
 		sessionTemplate.update("beaudam.updateSaleDate", dto);
 
 	}
-
-
 	
+	public List<Sale_DateDTO> getAdminDaySales(){
+		List<Sale_DateDTO> lists = sessionTemplate.selectList("beaudam.getAdminDaySales");
+		return lists;
+	}
 	
+	public List<Sale_DateDTO> getAdminMonthSales(){
+		List<Sale_DateDTO> lists = sessionTemplate.selectList("beaudam.getAdminMonthSales");
+		return lists;
+	}
+
+	public List<Sale_DateDTO> getAdminYearSales(){
+		List<Sale_DateDTO> lists = sessionTemplate.selectList("beaudam.getAdminYearSales");
+		return lists;
+	}
+
 }

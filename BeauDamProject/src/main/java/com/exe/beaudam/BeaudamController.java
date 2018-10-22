@@ -583,14 +583,23 @@ public class BeaudamController {
 
 	//esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminSales() {
+	public String adminSales(HttpServletRequest request) {
 
 		
 		
+
+		List<Sale_DateDTO> dayDto = saleService.getAdminDaySales();
+		List<Sale_DateDTO> monthDto = saleService.getAdminMonthSales();
+		List<Sale_DateDTO> yearDto = saleService.getAdminYearSales();
+			
 		
+		//페이징 처리 추가		
+
+		//송출 데이터
 		
-		
-		
+		request.setAttribute("dayDto", dayDto);
+		request.setAttribute("monthDto", monthDto);
+		request.setAttribute("yearDto", yearDto);
 		
 		
 		

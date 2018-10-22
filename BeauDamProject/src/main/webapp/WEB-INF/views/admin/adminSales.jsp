@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <%
 	String cp = request.getContextPath();
 %>
@@ -20,62 +23,24 @@
 <h3>주간</h3>
 
 	<table border="1">
-		<tr>		
+		<tr>
 			<td>
-				일				
+				요일
+			</td>	
+			<td>
+				매출액
+			</td>
+		</tr>		
+		<c:forEach var="dayDto" items="${dayDto }">
+		<tr>				
+			<td>
+				${dayDto.saleDate }				
 			</td>
 			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				월				
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				화	
-			</td>
-			<td>
-				15000
+				${dayDto.total_Price }
 			</td>
 		</tr>
-		<tr>		
-			<td>
-				수				
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				목
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				금	
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				토
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
+		</c:forEach>
 			
 	</table>
 
@@ -84,102 +49,24 @@
 <h3>월간</h3>
 
 		<table border="1">
-		<tr>		
+		<tr>	
 			<td>
-				JAN				
+				월
 			</td>
 			<td>
-				15000
+				매출액
 			</td>
-		</tr>
-		<tr>		
+		</tr>	
+		<c:forEach var="monthDto" items="${monthDto }">
+		<tr>
 			<td>
-				FEB			
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				MAR	
+				${monthDto.saleDate }			
 			</td>
 			<td>
-				15000
+				${monthDto.total_Price }
 			</td>
 		</tr>
-		<tr>		
-			<td>
-				APR				
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				MAY
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				JUN	
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				JUL
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				AUG
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				SEP
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				OCT
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				NOV
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
-		<tr>		
-			<td>
-				DEC
-			</td>
-			<td>
-				15000
-			</td>
-		</tr>
+		</c:forEach>
 			
 	</table>
 
@@ -187,22 +74,24 @@
 <h3>연간</h3>
 
 	<table border="1">
-		<tr>
+	<tr>
 			<td>
-				2017
+				연도
 			</td>
 			<td>
-				15000			
-			</td>
-		</tr>
-		<tr>
-			<td>
-				2018
-			</td>
-			<td>
-				15000
+				매출액
 			</td>
 		</tr>
+		<c:forEach var="yearDto" items="${yearDto }">
+		<tr>
+			<td>
+				${yearDto.saleDate }
+			</td>
+			<td>
+				${yearDto.total_Price }			
+			</td>
+		</tr>
+		</c:forEach>
 	</table>
 </div>
 
