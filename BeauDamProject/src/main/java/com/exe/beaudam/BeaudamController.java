@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dao.adminDAO.*;
+import com.dao.productDAO.ProductServiceImpl;
 import com.dao.saleDAO.SaleServiceImpl;
 import com.dao.viewDAO.ViewServiceImpl;
 import com.table.adminDTO.*;
+import com.table.productDTO.BrandDTO;
+import com.table.productDTO.ColorDTO;
+import com.table.productDTO.ProductDTO;
 import com.table.saleDTO.Sale_DateDTO;
 import com.view.view.*;
 
@@ -82,17 +86,23 @@ public class BeaudamController {
 
 	@Resource(name="adminService")
 	private AdminServiceImpl adminService;
-	
+
 	@Resource(name="viewService")
 	private ViewServiceImpl viewService;
-	
+
 	@Resource(name="saleService")
 	private SaleServiceImpl saleService;
+
+	@Resource(name="adminService")
+	private AdminServiceImpl adminView;
 	
-	
-	
+	@Resource(name="productService")
+	private ProductServiceImpl productServiece;
+
+
+
 	// ********************** Beaudam Page **********************
-	
+
 	@RequestMapping(value = "/login.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request) {
 
@@ -121,14 +131,14 @@ public class BeaudamController {
 		// 메인 페이지 이동
 		return "beaudam/main";
 	}
-	
+
 	@RequestMapping(value = "/mainTop.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String mainTop() {
 
 		// 메인 페이지 이동
 		return "beaudam/mainTop";
 	}
-	
+
 	@RequestMapping(value = "/mainBottom.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String mainBottom() {
 
@@ -149,24 +159,24 @@ public class BeaudamController {
 		// 상품상세 페이지 이동
 		return "beaudam/productDetail";
 	}
-	
+
 	// msj
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String pay(HttpServletRequest request) {
-		
+
 		String pay = request.getParameter("pay");
 		if(pay != null) {
-			
+
 			// 결제완료 페이지 이동
 			return "beaudam/payOk";
 		}
-		
+
 		// 결제 페이지 이동
 		return "beaudam/pay";
 	}
-	
-	
-	
+
+
+
 
 	// ********************** My Page **********************
 
@@ -176,7 +186,7 @@ public class BeaudamController {
 		// 마이페이지 이동
 		return "myPage/myPage";
 	}	
-	
+
 	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myBasket() {
 
@@ -191,7 +201,7 @@ public class BeaudamController {
 		// 마이페이지 비밀번호확인 페이지 이동
 		return "myPage/myInfo";
 	}
-	
+
 	@RequestMapping(value = "/myEdit.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myEdit() {
 
@@ -214,7 +224,7 @@ public class BeaudamController {
 	public String myOrder() {
 
 		// 주문정보 (마이페이지) 페이지 이동
-		
+
 		return "myPage/myOrder";
 	}
 
@@ -227,73 +237,31 @@ public class BeaudamController {
 		return "myPage/myLeave";
 	}
 
-	
+
 	// ********************** Admin Page **********************
 
 	//syj
 	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_user() {
-		
-		
-		
 
 		// 회원관리 페이지 이동
 		return "admin/adminUser";
 	}
-	
+
 	//syj
 	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminProduct() {
+	public String adminProduct(HttpServletRequest request) {
 
-		// 상품조회 페이지 이동
-		return "admin/adminProduct";
-	}
 
-	//syj
-	@RequestMapping(value = "/adminProduct_update.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminProduct_update() {
+		HashMap<String, Object> searchPack = new HashMap<String, Object>();
 
-		// 상품수정 페이지 이동
-		return "admin/adminProduct_update";
-	}
+		String searchValue1 = request.getParameter("searchValue1");
+		String searchValue2 = request.getParameter("searchValue2");
+		String searchValue3 = request.getParameter("searchValue3");
+		String searchValue4 = request.getParameter("searchValue4");
+		String searchValue5 = request.getParameter("searchValue5");
 
-	//syj
-	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String admin_new_product() {
 
-		// 상품등록 페이지 이동
-		return "admin/adminProduct_new";
-	}
-	
-	
-	//esteban
-	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminBrand(HttpServletRequest req) {
-				
-		// 브랜드 관리 페이지 이동
-		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
-		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
-		
-		List<Admin_TypeDTO> type = adminService.getAdminType();
-		
-		req.setAttribute("brand", brand);
-		req.setAttribute("category", category);
-		req.setAttribute("type", type);
-		
-		return "admin/adminBrand";
-	}
-	
-	//esteban	
-	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminOrder(HttpServletRequest request) {
-		
-		HashMap<String, Object> saleSearchPack = new HashMap<String, Object>();
-		
-			String searchValue1 = request.getParameter("searchValue1");
-			String searchValue2 = request.getParameter("searchValue1");
-			String searchValue3 = request.getParameter("searchValue1");
-		
-		
 		if(searchValue1==null||searchValue1.equals("")) {
 			searchValue1 = "";
 		}
@@ -303,49 +271,154 @@ public class BeaudamController {
 		if(searchValue3==null||searchValue3.equals("")) {
 			searchValue3 = "";
 		}
+		if(searchValue4==null||searchValue4.equals("")) {
+			searchValue4 = "";
+		}
+		if(searchValue5==null||searchValue5.equals("")) {
+			searchValue5 = "";
+		}	
+
+		searchPack.put("searchValue1", searchValue1);
+		searchPack.put("searchValue2", searchValue2);
+		searchPack.put("searchValue3", searchValue3);
+		searchPack.put("searchValue4", searchValue3);
+		searchPack.put("searchValue5", searchValue3);
+
+
+		List<ProductView> productView = viewService.getAllProductData(searchPack);
+
+		List<Admin_BrandDTO> brandLists = adminView.getAdminBrand();
+		List<Admin_CategoryDTO> categoryLists = adminView.getAdminCatogory();
+		List<Admin_TypeDTO> typeLists = adminView.getAdminType();
+			
 		
+		//페이징 처리 추가		
+
+		//송출 데이터
+		request.setAttribute("lists", productView);
+		request.setAttribute("brandLists", brandLists);
+		request.setAttribute("categoryLists", categoryLists);
+		request.setAttribute("typeLists", typeLists);
+		
+		
+
+		// 상품조회 페이지 이동
+		return "admin/adminProduct";
+	}
+
+	//syj
+	@RequestMapping(value = "/adminProduct_update.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String adminProduct_update(
+			BrandDTO bdto,
+			ColorDTO cdto,
+			ProductDTO pdto,
+			HttpServletRequest request) {
+
+		String pageNum = request.getParameter("pageNum");
+		
+		productServiece.updateBrand(bdto);
+		productServiece.updateColor(cdto);
+		productServiece.updateProduct(pdto);						
+			
+		// 상품수정완료 페이지 이동
+		return "admin/adminProduct";
+	}
+	
+	@RequestMapping(value = "/adminProductDelete.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String adminProductdelete(HttpServletRequest request) {
+		
+		String pageNum = request.getParameter("pageNum");
+		String code = request.getParameter("code");	
+		
+		productServiece.deleteBrand(code);
+		productServiece.deleteColor(code);
+		productServiece.deleteImg(code);
+		productServiece.deleteProduct(code);
+		
+		return "redirect:/adminProduct.action?pageNum="+pageNum;
+		
+	}
+
+	//syj
+	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String admin_new_product() {
+
+		// 상품등록 페이지 이동
+		return "admin/adminProduct_new";
+	}
+
+
+	//esteban
+	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String adminBrand(HttpServletRequest req) {
+
+		// 브랜드 관리 페이지 이동
+		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
+		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
+
+		List<Admin_TypeDTO> type = adminService.getAdminType();
+
+		req.setAttribute("brand", brand);
+		req.setAttribute("category", category);
+		req.setAttribute("type", type);
+
+		return "admin/adminBrand";
+	}
+
+	//esteban	
+	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String adminOrder(HttpServletRequest request) {
+
+		HashMap<String, Object> saleSearchPack = new HashMap<String, Object>();
+
+		String searchValue1 = request.getParameter("searchValue1");
+		String searchValue2 = request.getParameter("searchValue2");
+		String searchValue3 = request.getParameter("searchValue3");
+
+
+		if(searchValue1==null||searchValue1.equals("")) {
+			searchValue1 = "";
+		}
+		if(searchValue2==null||searchValue2.equals("")) {
+			searchValue2 = "";
+		}
+		if(searchValue3==null||searchValue3.equals("")) {
+			searchValue3 = "";
+		}
+
 		saleSearchPack.put("searchValue1", searchValue1);
 		saleSearchPack.put("searchValue2", searchValue2);
 		saleSearchPack.put("searchValue3", searchValue3);
-				
-			
+
+
 		List<SaleView> saleView = viewService.getAllSaleView(saleSearchPack);
-			
-		//페이징 처리 추가		
+
+		//페이징 처리 추가	
 		
-	
+		//리스트값 전송
 		request.setAttribute("lists", saleView);	
-				
+
 		// 주문내역 관리 페이지 이동
 		return "admin/adminOrder";
 	}
-	
+
 	@RequestMapping(value = "/adminOrderUpdate", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminOrderUpdate(Sale_DateDTO dto, HttpServletRequest request) {
-		
+
 		saleService.updateSaleDate(dto);
-		
-		
+
+
 		return "admin/adminOrder";
 	}
-	
-	
-	
-	
+
 	//esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminSales() {
-		
+
 		// 매출 페이지 이동
 		return "admin/adminSales";
 	}
-	
-	
 
-	
-	
-	
-	
 	// ********************** Customer Center Page **********************
 
 	// 고객센터 default 페이지

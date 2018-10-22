@@ -39,10 +39,6 @@
 	function adminOrderUpdate() {
 		
 		
-		
-		
-		
-		
 		f.action = "<%=cp%>/adminOrderUpdate.action";
 		f.submit();
 		
@@ -125,6 +121,7 @@
 		</tr>
 	</table>
 </form>
+
 <form action="" name="adminOrderEditForm" method="post">
 	<table border="1">
 		<tr>

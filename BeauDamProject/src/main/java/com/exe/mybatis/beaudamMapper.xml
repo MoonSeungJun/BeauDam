@@ -233,11 +233,11 @@
 		<!-- Product -->
 		<select id="getAllProductData" resultType="com.view.view.ProductView" parameterType="map">
 			select code,brand,category,type,product_Name,color_Code,color_Name,product_Price,thumb_Img,detail_Img,qty from productView
-			where ${searchKey1} like '%' || #{searchValue1} || '%' and
-				  ${searchKey2} like '%' || #{searchValue2} || '%' and
-				  ${searchKey3} like '%' || #{searchValue3} || '%' and
-				  ${searchKey4} like '%' || #{searchValue4} || '%' and
-				  ${searchKey5} like '%' || #{searchValue5} || '%'	
+			where code like '%' || #{searchValue1} || '%' and
+				  brand like '%' || #{searchValue2} || '%' and
+				  category like '%' || #{searchValue3} || '%' and
+				  type like '%' || #{searchValue4} || '%' and
+				  product_Name like '%' || #{searchValue5} || '%'	
 			
 		</select>	
 		
