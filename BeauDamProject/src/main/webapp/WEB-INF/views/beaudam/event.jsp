@@ -13,9 +13,8 @@ session="false" pageEncoding="UTF-8"%>
             </head>
         <body>
             <div class="event_title">
-                <h2 style="text-align: center; font-weight: normal;">뷰담 EVENT</h2>
+                <h2 style="text-align: center; font-weight: normal;">EVENT</h2>
                 <hr style=" border: 0; height: 2px; background-color: gray;">
-                <span>진행중인 이벤트</span>
             </div>
             <div class="event_content">
                 <div class="event_grid">

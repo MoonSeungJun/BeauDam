@@ -13,8 +13,8 @@ session="false" pageEncoding="UTF-8"%>
     <boby>
     	<jsp:include page="./mainTop.jsp"/>
         <div class="container_title">
-            <span style="text-indent: 2em; font-weight: bold;">신규 회원을 위한 뷰담의 통큰 이벤트</span>
-            <span style="color: gray; text-indent: 2.3em;">기간 2019. 11. 19 ~</span>
+            <span style="font-weight: bold; font-size: 15px;">뷰담 인스타그램 오픈!</span>
+            <span style="color: gray;">기간 2019. 11. 19 ~</span>
         </div>
         <div class="container_content">
             <img src="<%=cp %>/resources/image/beaudam/event/event2.jpg">

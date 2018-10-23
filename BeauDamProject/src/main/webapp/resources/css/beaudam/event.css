@@ -1,8 +1,22 @@
 @charset "UTF-8";
+@font-face { font-family: 'designhouseOTFLight00'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'WONBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONBatang.woff') format('woff'); font-weight: normal; font-style: normal; }
 
 .event_title {
     width: 960px;
     margin: 50px auto 0 auto;
+    
+}
+
+.event_title h2 {
+	font-size: 40px;
+    font-weight: 100;
+    letter-spacing: -3px;
+    line-height: 60px;
+    margin-top: 26px;
+    margin-bottom: 16px;
+    height: 60px;
+    font-family: 'designhouseOTFLight00';
 }
 
 .event_title span {
@@ -22,18 +36,19 @@
 .event_grid {
     margin: 0 auto 30px auto;
     border: 1px solid white;
-    width: 800px;
+    width: 960px;
 }
 
 .event_grid span {
     display: block;
     margin-bottom: 5px;
     text-align: left;
+    
 }
 
 .event_grid img {
     margin: 0 auto 20px auto;
-    width: 798px;
+    width: 958px;
 }
 
 .event_grid:hover {
@@ -44,7 +59,7 @@
     border-bottom: 1px solid darksalmon;
     border-top: 1px solid darksalmon;
     width: 900px;
-    margin: 30px auto;
+    margin: 100px auto 30px auto;
 }
 
 .container_title span {
@@ -53,7 +68,6 @@
 }
 
 .container_content {
-    padding: 50px;
     border-bottom: 1px solid gray;
     width: 900px;
     margin: 0 auto;
