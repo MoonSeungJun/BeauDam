@@ -11,75 +11,39 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-</head>
-
 <script type="text/javascript">
 
-// 	function addProduct() {
+	function showSubSelect(category) {
 		
-// 		var f = document.adminProduct_new;
+		$.ajax({
 		
-// 		var brand = $('#brandSelect option:selected').val();
-// 		var category = $('#cateSelect option:selected').val();
-// 		var type = $('#typeSelect option:selected').val();
-// 		var count = $('#count').val();
-// 		var code = $('#code').val();
-// 		var productName = $('#productName').val();
-// 		var price = $('#price').val();
-// 		var thumbImg = $('#thumbImg').val();
-// 		var detailImg = $('#detailImg').val();
-// 		var color = $('#color').val();
-// 		var colorCode = $('#colorCode').val();
-			
-// 		alert(brand + category + type + count + code + productName);
-// 		alert(price + thumbImg + detailImg + color + colorCode);
+			type:'post',
+			url: "/beaudam/adminProduct_newAjax.action",
+			dataType: "json",
+			data:{'params':category,'brand':$('#brand option:selected').val()},
+			success: function (result) {
 				
-// 		f.action = "/beaudam/adminProduct_new.action";
-// 		f.submit();	
+				$('#type').find('option').remove().end().append("<option value=''>전체</option>");
+				
+				$.each(result, function(i) {
+					$('#type').append("<option value='"+result[i]+"'>"+result[i]+"</option>")
+				});	
 		
-// 	}
-	
-	
-// 	$(function() {
-// 		$('#addProduct').click(function() {
-// 			var formData = new FormData();
-// 			formData.append("brand",$('#brandSelect option:selected').val());
-// 			formData.append('category',$('#cateSelect option:selected').val());
-// 			formData.append('type',$('#typeSelect option:selected').val());
-// 			formData.append('count', $('#count').val());
-// 			formData.append('code',$('#code').val());
-// 			formData.append('productName',$('#productName').val());
-// 			formData.append('price', $('#price').val());
-// 			formData.append('thumbImg', $('#thumbImg').val());
-// 			formData.append('detailImg', $('#detailImg').val());
-// 			formData.append('color',$('#color').val());
-// 			formData.append('colorCode', $('#colorCode').val());				
-			
-// 	 		$.ajax({			
-// 	 			type:'POST',
-// 	 			url: '/adminProduct_new.action',
-// 	 			data: formData,
-// 	 			processData: false,
-// 	 			contentType: false,	 			
-// 	 			success: function(data) {				
-// 	 				alert('성공');
-// 	 			}			 		
-//  			});			
-// 		});			
-// 	});
-
-
+			},
+			error: function(jqXHR, textStatus,errorThrown) {
+				alert(errorThrown);				
+				alert(textStatus);				
+			}					
+		});		
+	}
 </script>
-
-
-
+</head>
 <body>
-
 <jsp:include page="adminHeader.jsp"/>
 <div class="wrapper">
 <h2>상품등록</h2>
 	<br><br>	
-<form method="post" enctype="multipart/form-data" action="adminProduct_new.action">
+<form method="post" enctype="multipart/form-data" action="adminProduct_new.action" name="adminProductForm">
 	<table border="1">
 		<tr>
 			<td>
@@ -88,7 +52,8 @@
 			
 			<td>
 			
-				<select name="brand">
+				<select name="brand" id="brand">
+					
 					<c:forEach var="brand" items="${brand }">
 						<option value="${brand.brand }">${brand.brand }</option>	
 					</c:forEach>								
@@ -101,16 +66,15 @@
 			</td>
 			
 			<td>
-				<select name="category">
+				<select id="category" name="category" onchange="showSubSelect(this.value);">
+					<option value="">선택</option>	
 					<c:forEach var="dto" items="${cate }">
 						<option value="${dto.category }">${dto.category }</option>					
 					</c:forEach>					
 				</select>
 				
-				<select name="type">
-					<c:forEach var="type" items="${type }">
-						<option value="${type.type }">${type.type }</option>
-					</c:forEach>
+				<select name="type" id="type">
+					<option value=""></option>					
 				</select>
 			</td>
 			
@@ -220,42 +184,55 @@
 			</td>
 			
 			<td>
+				색상코드
+			</td>
+			<td>
+				색상
+			</td>
+			<td>
 				재고
 			</td>
 
 		</tr>
-		
+	<c:forEach var="dto" items="${productList }">
 		<tr>
 			<td>
-				2012012
+				${dto.code }
 			</td>
 			
 			<td>
-				<input type="text" value="에뛰드">
+				${dto.brand }
 			</td>
 			
 			<td>
-				<input type="text" value="Lib">
+				${dto.category }
 			</td>
 			
 			<td>
-				<input type="text" value="Balm">
+				${dto.type }
 			</td>
 			
 			<td>
-				<input type="text" value="산호초 발색 레드립밤">
+				${dto.product_Name }
 			</td>
 			
 			<td>
-			 	<input type="text" value="3500">
+			 	${dto.product_Price }
 			</td>
 			
 			<td>
-				<input type="text" value="232">
+				${dto.color_Code }
 			</td>
+			<td>
+				${dto.color_Name }
+			</td>
+				
+			<td>
+				${dto.qty }
+			</td>	
 
 		</tr>
-		
+	</c:forEach>
 	</table>
 
 </div>

@@ -1,6 +1,9 @@
 package com.dao.productDAO;
 
+import java.util.*;
+
 import com.table.productDTO.*;
+import com.view.view.*;
 
 public interface ProductService {
 
@@ -21,4 +24,6 @@ public interface ProductService {
 	void deleteColor(String code);
 	void deleteImg(String code);
 //	select
+	List<ProductView> getProductList();
+	ProductView getOneProductData(String code);
 }

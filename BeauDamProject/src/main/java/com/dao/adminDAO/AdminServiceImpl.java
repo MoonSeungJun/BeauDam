@@ -7,27 +7,27 @@ import javax.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.adminDTO.*;
-
+import com.view.view.*;
 
 @Service("adminService")
-public class AdminServiceImpl implements AdminService{
+public class AdminServiceImpl implements AdminService {
 
-	@Resource(name="adminDAO")
+	@Resource(name = "adminDAO")
 	private AdminDAO dao;
-	
+
 	@Override
-	public void insertBrand(Admin_BrandDTO dto) {		
-		dao.insertAdminBrand(dto);		
+	public void insertBrand(Admin_BrandDTO dto) {
+		dao.insertAdminBrand(dto);
 	}
 
 	@Override
 	public void insertCategory(Admin_CategoryDTO dto) {
-		dao.insertAdminCategory(dto);		
+		dao.insertAdminCategory(dto);
 	}
 
 	@Override
 	public void insertType(Admin_TypeDTO dto) {
-		dao.insertAdminType(dto);		
+		dao.insertAdminType(dto);
 	}
 
 	@Override
@@ -37,12 +37,12 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public void deleteCategory(String category) {
-		dao.deleteAdminCategory(category);		
+		dao.deleteAdminCategory(category);
 	}
 
 	@Override
 	public void deleteType(String type) {
-		dao.deleteAdminType(type);		
+		dao.deleteAdminType(type);
 	}
 
 	@Override
@@ -61,9 +61,12 @@ public class AdminServiceImpl implements AdminService{
 	public List<Admin_TypeDTO> getAdminType() {
 		List<Admin_TypeDTO> lists = dao.getAdminType();
 		return lists;
-	}	
+	}
 
-	
-	
-	
+	@Override
+	public List<AdminView> getAdminTypeData(Map<String, Object> map) {
+		List<AdminView> lists = dao.getAdminTypeData(map);
+		return lists;
+	}
+
 }

@@ -83,6 +83,7 @@
 			<td>생일</td>
 			<td>성별</td>
 			<td>가입일</td>
+			<td>탈퇴여부</td>
 			<td>관리</td>
 		</tr>
 
@@ -96,8 +97,14 @@
 					<td>${dto.cellphone }</td>
 					<td>${dto.zip } ${dto.city } ${dto.street }</td>
 					<td>${dto.birth }</td>
-					<td>${dto.gender }</td>
+					<td>${dto.gender }</td>					
 					<td>${dto.created }</td>
+					<c:if test="${dto.isLeave eq 1 }">
+						<td>탈퇴</td>	
+					</c:if>
+					<c:if test="${dto.isLeave ne 1 }">
+						<td>-</td>	
+					</c:if>
 					<td><a href="#" style="text-decoration: none;">수정</a>/<a
 						href="#" style="text-decoration: none;">삭제</a></td>
 				</tr>
@@ -113,8 +120,14 @@
 					<td>${dto.cellphone }</td>
 					<td>${dto.zip } ${dto.city } ${dto.street }</td>
 					<td>${dto.birth }</td>
-					<td>${dto.gender }</td>
+					<td>${dto.gender }</td>				
 					<td>${dto.created }</td>
+					<c:if test="${dto.isLeave eq 1 }">
+						<td>탈퇴</td>	
+					</c:if>
+					<c:if test="${dto.isLeave ne 1 }">
+						<td>-</td>	
+					</c:if>
 					<td><a href="#" style="text-decoration: none;">수정</a>/
 					<a href="#" style="text-decoration: none;">삭제</a></td>
 				</tr>

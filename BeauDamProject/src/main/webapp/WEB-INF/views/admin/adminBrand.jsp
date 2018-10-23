@@ -50,7 +50,10 @@
 			url: "adminBrand.action",
 			data: {"addCate":$('#cateInput').val()},
 			async:false,
-			dataType: "text"
+			dataType: "text",
+			success: function() {				
+				window.location.href = "/beaudam/adminBrand.action";
+			}	
 		});		
 	}
 	
@@ -74,7 +77,10 @@
 			url: "adminBrand.action",
 			data: {"addType":$('#typeInput').val()},
 			async:false,
-			dataType: "text"
+			dataType: "text",
+			success: function() {				
+				window.location.href = "/beaudam/adminBrand.action";
+			}	
 		});		
 	}
 	

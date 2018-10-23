@@ -27,8 +27,8 @@
 	<context:component-scan base-package="com.naver.naverlogin" />
 	<context:component-scan base-package="com.dao.*"/>
 	<context:component-scan base-package="com.table.*"/>
-	
-	
+	<context:component-scan base-package="com.view.*"/>
+	<context:component-scan base-package="com.file.*"/>
 			
 	<beans:bean id="myUtil" class="com.exe.util.MyUtil"/>
 	

@@ -245,9 +245,12 @@
 				  product_Name like '%' || #{searchValue5} || '%'	
 			
 		</select>	
+		<select id="getProductList" resultType="com.view.view.ProductView">
+			select code,brand,category,type,product_name,product_price,color_code,color_name,qty from productView
+		</select>
 		
 		<select id="getOneProductData" resultType="com.view.view.ProductView" parameterType="String">
-			select code,brand,category,type,product_Name,color_Code,color_Name,product_Price,humb_Img,detail_Img,qty from productView
+			select code,brand,category,type,product_Name,color_Code,color_Name,product_Price,thumb_Img,detail_Img,qty from productView
 			where code=#{code}
 		</select>
 		
@@ -261,6 +264,9 @@
 		</select>
 		<select id="getAdminType" resultType="com.table.adminDTO.Admin_TypeDTO">
 			select type from admin_type
+		</select>
+		<select id="getAdminTypeData" resultType="com.view.view.AdminView" parameterType="map">
+			select type from adminView where category = #{category} and brand = #{brand}
 		</select>
 		
 		

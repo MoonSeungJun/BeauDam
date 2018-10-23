@@ -14,46 +14,36 @@
 
 <script type="text/javascript">
 
-	function searchSend() {
-
-<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
-</head>
-<body>
-
-<jsp:include page="adminHeader.jsp"/>
-<div>
-	<h2>상품조회</h2>
-	<table border="1">
-
-		
-		f = document.adminProductForm;
-		
-		searchValue1 = f.code.value;
-		searchValue1 =searchValue1.trim();
-		
-		searchValue2 = f.brand.value;
-		searchValue2 =searchValue2.trim();
-		
-		searchValue3 = f.category.value;
-		searchValue3 =searchValue3.trim();
-		
-		searchValue4 = f.type.value;
-		searchValue4 =searchValue4.trim();
-		
-		searchValue5 = f.product_Name.value;
-		searchValue5 =searchValue5.trim();
-		
-		if(!searchValue1&&!searchValue5){		
-			alert("\검색어를 입력하세요.");
-			f.code.focus();
-			return;
-		}
-		
-		f.action = "<%=cp%>/adminProduct.action";
-		f.submit();
-		
-			
+function searchSend() {
+	
+	var f = document.adminProductForm;
+	
+	searchValue1 = f.code.value;
+	searchValue1 =searchValue1.trim();
+	
+	searchValue2 = f.brand.value;
+	searchValue2 =searchValue2.trim();
+	
+	searchValue3 = f.category.value;
+	searchValue3 =searchValue3.trim();
+	
+	searchValue4 = f.type.value;
+	searchValue4 =searchValue4.trim();
+	
+	searchValue5 = f.product_Name.value;
+	searchValue5 =searchValue5.trim();
+	
+	if(!searchValue1&&!searchValue5){		
+		alert("\검색어를 입력하세요.");
+		f.code.focus();
+		return;
 	}
+	
+	f.action = "<%=cp%>/adminProduct.action";
+	f.submit();
+	
+		
+}
 	
 function adminProductUpdate() {
 		
@@ -74,7 +64,29 @@ function adminProductUpdate() {
 	
 });
 	
-	
+function showSubSelect(category) {
+		
+		$.ajax({
+		
+			type:'post',
+			url: "/beaudam/adminProductAjax.action",
+			dataType: "json",
+			data:{'params':category,'brand':$('#brand option:selected').val()},
+			success: function (result) {
+				
+				$('#type').find('option').remove().end().append("<option value=''>전체</option>");
+				
+				$.each(result, function(i) {
+					$('#type').append("<option value='"+result[i]+"'>"+result[i]+"</option>")
+				});	
+		
+			},
+			error: function(jqXHR, textStatus,errorThrown) {
+				alert(errorThrown);				
+				alert(textStatus);				
+			}					
+		});		
+	}
 	
 	
 	
@@ -94,38 +106,35 @@ function adminProductUpdate() {
 			<tr>
 				<td>코드</td>
 
-				<td colspan="3"><input type="text" name="code"></td>
+				<td><input type="text" name="code"></td>
+				<td>브랜드</td>
+
+				<td><select name="brand" id="brand">						
+						<c:forEach var="dto" items="${brandLists }">
+							<option value="${dto.brand }">${dto.brand }</option>
+						</c:forEach>
+				</select></td>
 			</tr>
 
 
 
 			<tr>
-				<td>브랜드</td>
-
-				<td><select name="brand">
-						<option>선택하세요</option>
-						<c:forEach var="dto" items="${brandLists }">
-							<option value="${dto.brand }">${dto.brand }</option>
-						</c:forEach>
-				</select></td>
+				
 
 				<td>분류</td>
 
 				<td>
-					<select name="category">
+					<select name="category" id="category" onchange="showSubSelect(this.value);">
 						<option>선택하세요</option>
 						<c:forEach var="dto" items="${categoryLists }">
 							<option value="${dto.category }">${dto.category }</option>
 						</c:forEach>
-					</select> 
-				
-					<select name="type">
-						<option>선택하세요</option>
-						<c:forEach var="dto" items="${typeLists }">
-							<option value="${dto.type }">${dto.type }</option>
-						</c:forEach>
+					</select> 				
+				</td>
+				<td>
+					<select name="type" id="type">
+						<option value=""></option>					
 					</select>
-				
 				</td>
 
 
@@ -166,32 +175,24 @@ function adminProductUpdate() {
 			<tr align="center">
 				<td>${dto.code }</td>
 
-				<td><input type="text" id="brand" value="${dto.brand }">
-				</td>
+				<td>${dto.brand }</td>
 
-				<td><input type="text" id="category" value="${dto.category }">
-				</td>
+				<td>${dto.category }</td>
 
-				<td><input type="text" id="type" value="${dto.type }">
-				</td>
+				<td>${dto.type }</td>
 
-				<td><input type="text" id="product_Name"
-					value="${dto.product_Name }"></td>
+				<td>${dto.product_Name }</td>
 
-				<td><input type="text" id="product_Price"
-					value="${dto.product_Price }"></td>
+				<td>${dto.product_Price }</td>
 
-				<td><input type="text" id="qty" value="${dto.qty }"></td>
-
-
-
-				<td><input type="hidden" name="code" value="${dto.code}">
-					<input type="hidden" name="pageNum" value="${pageNum }"> <a
-					onclick="">수정</a>/<a href="" style="text-decoration: none;">삭제</a>
+				<td>${dto.qty }</td>
+				<td>
+					<a>수정</a>/
+					<a href="adminProductDelete.action?code=${dto.code }" style="text-decoration: none;">삭제</a>
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
-	</div>
+	
 </body>
 </html>

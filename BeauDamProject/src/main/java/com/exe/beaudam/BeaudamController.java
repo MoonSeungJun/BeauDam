@@ -1,53 +1,31 @@
 package com.exe.beaudam;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.annotation.*;
+import javax.servlet.http.*;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.json.simple.*;
+import org.json.simple.parser.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.*;
 
-<<<<<<< HEAD
 import com.dao.adminDAO.*;
 import com.dao.productDAO.*;
+import com.dao.saleDAO.*;
 import com.dao.viewDAO.*;
 import com.file.upload.*;
-import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.github.scribejava.core.model.*;
 import com.naver.naverlogin.*;
 import com.table.adminDTO.*;
 import com.table.memberDTO.*;
 import com.table.productDTO.*;
+import com.table.saleDTO.*;
 import com.view.view.*;
-=======
-import com.dao.adminDAO.AdminServiceImpl;
-import com.dao.productDAO.ProductServiceImpl;
-import com.dao.saleDAO.SaleServiceImpl;
-import com.dao.viewDAO.ViewServiceImpl;
-import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.naver.naverlogin.NaverLoginBO;
-import com.table.adminDTO.Admin_BrandDTO;
-import com.table.adminDTO.Admin_CategoryDTO;
-import com.table.adminDTO.Admin_TypeDTO;
-import com.table.memberDTO.Member_InfoDTO;
-import com.table.productDTO.BrandDTO;
-import com.table.productDTO.ColorDTO;
-import com.table.productDTO.ProductDTO;
-import com.table.saleDTO.Sale_DateDTO;
-import com.view.view.MemberView;
-import com.view.view.ProductView;
-import com.view.view.SaleView;
->>>>>>> 395eb32b4c61ec369b79a2e38f9ef20446a035a3
+
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -118,22 +96,17 @@ public class BeaudamController {
 	@Resource(name="viewService")
 	private ViewServiceImpl viewService1;
 
-<<<<<<< HEAD
+
 	@Resource(name="productService")
 	private ProductServiceImpl productService;
 	
 	/* NaverLoginBO */
-	private NaverLoginBO naverLoginBO;
-=======
-	@Resource(name="saleService")
-	private SaleServiceImpl saleService;
->>>>>>> 395eb32b4c61ec369b79a2e38f9ef20446a035a3
-
-	@Resource(name="productService")
-	private ProductServiceImpl productServiece;
-
 	@Resource(name="naverLoginBO")
 	private NaverLoginBO naverLoginBO;
+
+	@Resource(name="saleService")
+	private SaleServiceImpl saleService;
+	
 	
 	// ********************** Beaudam Page **********************
 	
@@ -436,7 +409,7 @@ public class BeaudamController {
 		List<ProductView> productView = viewService1.getAllProductData(searchPack);
 
 		List<Admin_BrandDTO> brandLists = adminService.getAdminBrand();
-		List<Admin_CategoryDTO> categoryLists = adminService.getAdminCatogory();
+		List<Admin_CategoryDTO> categoryLists = adminService.getAdminCategory();
 		List<Admin_TypeDTO> typeLists = adminService.getAdminType();
 			
 		
@@ -457,16 +430,13 @@ public class BeaudamController {
 	//syj
 	@RequestMapping(value = "/adminProduct_update.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProduct_update(
-			BrandDTO bdto,
-			ColorDTO cdto,
-			ProductDTO pdto,
-			HttpServletRequest request) {
+			BrandDTO bdto,ColorDTO cdto,ProductDTO pdto,HttpServletRequest request) {
 
 		String pageNum = request.getParameter("pageNum");
 		
-		productServiece.updateBrand(bdto);
-		productServiece.updateColor(cdto);
-		productServiece.updateProduct(pdto);						
+		productService.updateBrand(bdto);
+		productService.updateColor(cdto);
+		productService.updateProduct(pdto);						
 			
 		// 상품수정완료 페이지 이동
 		return "admin/adminProduct";
@@ -478,10 +448,24 @@ public class BeaudamController {
 		String pageNum = request.getParameter("pageNum");
 		String code = request.getParameter("code");	
 		
-		productServiece.deleteBrand(code);
-		productServiece.deleteColor(code);
-		productServiece.deleteImg(code);
-		productServiece.deleteProduct(code);
+		ProductView view = productService.getOneProductData(code);
+		
+		productService.deleteBrand(code);
+		productService.deleteColor(code);
+		productService.deleteImg(code);
+		productService.deleteProduct(code);
+		
+		String thumbPath = request.getSession().getServletContext().getRealPath("/thumbImg");
+		String detailPath = request.getSession().getServletContext().getRealPath("/detailImg");
+		
+		
+		File serverFile;
+		
+		serverFile = new File(thumbPath + File.separator + view.getThumb_Img());	
+		
+		serverFile.delete();
+		serverFile = new File(detailPath + File.separator + view.getDetail_Img());
+		serverFile.delete();
 		
 		return "redirect:/adminProduct.action?pageNum="+pageNum;
 		
@@ -491,16 +475,81 @@ public class BeaudamController {
 	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET})
 	public String admin_new_product(HttpServletRequest req) {
 		
-		// 상품등록 페이지 이동				
+		// 상품등록 페이지 이동 시 셀렉트박스 출력				
 		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
 		List<Admin_CategoryDTO> cate = adminService.getAdminCategory();
 		List<Admin_TypeDTO> type = adminService.getAdminType();
-					
+		
+		//상품 등록 페이지 이동 시 상품 리스트 출력
+		List<ProductView> lists = productService.getProductList();
+
+		req.setAttribute("productList", lists);					
 		req.setAttribute("brand", brand);
 		req.setAttribute("cate", cate);
 		req.setAttribute("type", type);
 		
 		return "admin/adminProduct_new";	
+		
+	}
+	
+	
+	@RequestMapping(value="/adminProduct_newAjax.action", method=RequestMethod.POST)
+	public void selectBoxAjax(HttpServletRequest req, HttpServletResponse resp, String params, String brand) {
+		
+		try {
+			
+			String category = params;
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("brand", brand);
+			map.put("category", category);
+			
+			List<AdminView> typeList = adminService.getAdminTypeData(map);			
+			JSONArray jArray = new JSONArray();			
+			
+			for(int i=0;i<typeList.size();i++) {
+				Object str = typeList.get(i).getType();
+				
+				jArray.add(str);				
+			}			
+			
+			PrintWriter pw = resp.getWriter();
+			pw.print(jArray.toString());
+			pw.flush();
+			pw.close();		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	@RequestMapping(value="/adminProductAjax.action", method=RequestMethod.POST)
+	public void productAjax(HttpServletRequest req, HttpServletResponse resp, String params, String brand) {
+		
+		try {
+			
+			String category = params;
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("brand", brand);
+			map.put("category", category);
+			
+			List<AdminView> typeList = adminService.getAdminTypeData(map);			
+			JSONArray jArray = new JSONArray();			
+			
+			for(int i=0;i<typeList.size();i++) {
+				Object str = typeList.get(i).getType();				
+				jArray.add(str);				
+			}			
+			
+			PrintWriter pw = resp.getWriter();
+			pw.print(jArray.toString());
+			pw.flush();
+			pw.close();		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -522,8 +571,9 @@ public class BeaudamController {
 		String saveFileName1 = UUID.randomUUID().toString().replaceAll("-", "") + ext1;
 		String saveFileName2 = UUID.randomUUID().toString().replaceAll("-", "") + ext2;	
 		
-		String thumbPath = "C:\\beudamImage/thumbImg";
-		String detailPath = "C:\\beudamImage/detailImg";
+		String thumbPath = req.getSession().getServletContext().getRealPath("/thumbImg");
+		String detailPath = req.getSession().getServletContext().getRealPath("/detailImg");
+		System.out.println(thumbPath);
 		File tp = new File(thumbPath);
 		File dp = new File(detailPath);
 
@@ -549,12 +599,7 @@ public class BeaudamController {
             ProductDTO product = new ProductDTO();
             BrandDTO brand = new BrandDTO();
             ColorDTO color = new ColorDTO();
-            ImgDTO img = new ImgDTO();
-            
-            System.out.println(command.getCount());
-            System.out.println(command.getPrice());
-            
-            
+            ImgDTO img = new ImgDTO();          
             
             product.setCode(command.getCode());
             product.setProductName(command.getProductName());
@@ -593,12 +638,7 @@ public class BeaudamController {
 	public String adminBrand(HttpServletRequest req) {
 
 
-		// 브랜드 관리 페이지 이동
-		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
-		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
-
-
-		
+		// 브랜드 관리 페이지 이동		
 		//브랜드 추가
 		String addBrand = req.getParameter("addbrand");
 		
@@ -652,18 +692,13 @@ public class BeaudamController {
 			return "redirect:/adminBrand.action";
 		}
 		//관리 페이지 이동
-<<<<<<< HEAD
-		List<Admin_CategoryDTO> category = adminService.getAdminCategory();
-		List<Admin_BrandDTO> brand = adminService.getAdminBrand();		
-=======
-		List<Admin_CategoryDTO> category1 = adminService.getAdminCatogory();
-		List<Admin_BrandDTO> brand1 = adminService.getAdminBrand();		
 
->>>>>>> 395eb32b4c61ec369b79a2e38f9ef20446a035a3
+		List<Admin_CategoryDTO> category = adminService.getAdminCategory();
+		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
 		List<Admin_TypeDTO> type = adminService.getAdminType();
 
-		req.setAttribute("brand", brand1);
-		req.setAttribute("category", category1);
+		req.setAttribute("brand", brand);
+		req.setAttribute("category", category);
 		req.setAttribute("type", type);
 
 		return "admin/adminBrand";
