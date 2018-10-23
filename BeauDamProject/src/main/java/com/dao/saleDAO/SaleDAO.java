@@ -43,7 +43,7 @@ public class SaleDAO {
 		return lists;
 	}
 	
-	public List<Sale_DateDTO> getAdminMonthSales(){
+	public List<Sale_DateDTO> getAdminMonthSales(String yearSearchValue){
 		List<Sale_DateDTO> lists = sessionTemplate.selectList("beaudam.getAdminMonthSales");
 		return lists;
 	}

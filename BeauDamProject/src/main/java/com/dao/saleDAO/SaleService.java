@@ -16,6 +16,6 @@ public interface SaleService {
 //	delete
 //	select
 	List<Sale_DateDTO> getAdminDaySales();
-	List<Sale_DateDTO> getAdminMonthSales();
+	List<Sale_DateDTO> getAdminMonthSales(String yearSearchValue);
 	List<Sale_DateDTO> getAdminYearSales();
 }

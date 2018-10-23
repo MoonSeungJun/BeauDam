@@ -41,20 +41,24 @@ public class SaleServiceImpl implements SaleService {
 
 	@Override
 	public List<Sale_DateDTO> getAdminDaySales() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Sale_DateDTO> lists = dao.getAdminDaySales();
+		
+		return lists;
 	}
 
 	@Override
-	public List<Sale_DateDTO> getAdminMonthSales() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Sale_DateDTO> getAdminMonthSales(String yearSearchValue) {
+		List<Sale_DateDTO> lists = dao.getAdminMonthSales(yearSearchValue);
+		
+		return lists;
 	}
 
 	@Override
 	public List<Sale_DateDTO> getAdminYearSales() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Sale_DateDTO> lists = dao.getAdminYearSales();
+		
+		return lists;
 	}
 
 }

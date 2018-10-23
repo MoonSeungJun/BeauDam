@@ -585,11 +585,14 @@ public class BeaudamController {
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminSales(HttpServletRequest request) {
 
+		//y
+		
+		String yearSearchValue = request.getParameter("yearSearchValue");
 		
 		
 
 		List<Sale_DateDTO> dayDto = saleService.getAdminDaySales();
-		List<Sale_DateDTO> monthDto = saleService.getAdminMonthSales();
+		List<Sale_DateDTO> monthDto = saleService.getAdminMonthSales(yearSearchValue);
 		List<Sale_DateDTO> yearDto = saleService.getAdminYearSales();
 			
 		

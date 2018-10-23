@@ -268,19 +268,19 @@
 			from sale_date 
 			where to_char(saledate,'ww')=to_char(sysdate,'ww')
 			group by to_char(saledate,'day')
-			order by to_char(saledate,'day');			
+			order by to_char(saledate,'day')			
 		</select>
-		<select id="getAdminMonthSales" resultType="com.table.saleDTO.Sale_DateDTO">
+		<select id="getAdminMonthSales" resultType="com.table.saleDTO.Sale_DateDTO" parameterType="String">
 			select to_char(saledate,'mm') saleDate,sum(total_price) total_Price from sale_date
 			where to_char(saledate,'yyyy-mm')
-			between '2018-01' and '2018-12'
+			between '${yearSearchValue}-01' and '${yearSearchValue}-12'
 			group by to_char(saledate,'mm')
-			order by to_char(saledate,'mm') asc;
+			order by to_char(saledate,'mm') asc
 		</select>
 		<select id="getAdminYearSales" resultType="com.table.saleDTO.Sale_DateDTO">
 			select to_char(saledate,'yyyy') saleDate, sum(total_price) total_Price from sale_date
 			group by to_char(saledate,'yyyy')
-			order by to_char(saledate,'yyyy'); 
+			order by to_char(saledate,'yyyy')
 		</select>
 		
 		
