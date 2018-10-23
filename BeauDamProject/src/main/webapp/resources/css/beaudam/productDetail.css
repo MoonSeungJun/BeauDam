@@ -44,11 +44,10 @@ a {
     font-family: 'KHNPHD';
 }
 
-.right p {
-    margin-bottom: 15px;
-    color: dimgrey;
-    font-weight: 700;
+.right_header h2 {
+	margin-bottom: 30px;
 }
+
 
 .right_content {
 	padding:10px;

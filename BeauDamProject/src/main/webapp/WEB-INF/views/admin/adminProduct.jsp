@@ -16,16 +16,6 @@
 
 	function searchSend() {
 
-<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
-</head>
-<body>
-
-<jsp:include page="adminHeader.jsp"/>
-<div>
-	<h2>상품조회</h2>
-	<table border="1">
-
-		
 		f = document.adminProductForm;
 		
 		searchValue1 = f.code.value;
@@ -74,124 +64,120 @@ function adminProductUpdate() {
 	
 });
 	
-	
-	
-	
-	
 </script>
 
 </head>
 <body>
-
 	<jsp:include page="adminHeader.jsp" />
-
-	<h1>상품조회</h1>
-	<br>
-	<br>
+	<div class="wrapper">
 	<form action="" name="adminProductForm" method="post">
-		<table border="1">
-
+		<h2 class="text-center">상품조회</h2>
+		<hr>
+		<table border="1" style="text-align: center; margin: 0 auto;"> 
 			<tr>
-				<td>코드</td>
-
-				<td colspan="3"><input type="text" name="code"></td>
+				<td class="title">코드</td>
+				<td colspan="3"><input type="text" name="code" style="width: 100%; border: none; text-indent: 1em;"></td>
 			</tr>
-
-
-
 			<tr>
-				<td>브랜드</td>
-
-				<td><select name="brand">
-						<option>선택하세요</option>
+				<td class="title">브랜드</td>
+				<td style="width: 150px;">
+					<select name="brand" style="width: 100%;  text-indent: 1em">
+							<option>선택하세요</option>
 						<c:forEach var="dto" items="${brandLists }">
 							<option value="${dto.brand }">${dto.brand }</option>
 						</c:forEach>
-				</select></td>
-
-				<td>분류</td>
-
-				<td>
-					<select name="category">
-						<option>선택하세요</option>
+					</select>
+				</td>
+				<td class="title">분류</td>
+				<td style="text-align: center;">
+					<select name="category" style="width: 100px;">
+							<option>선택하세요</option>
 						<c:forEach var="dto" items="${categoryLists }">
 							<option value="${dto.category }">${dto.category }</option>
 						</c:forEach>
 					</select> 
-				
-					<select name="type">
-						<option>선택하세요</option>
+					<select name="type" style="width: 100px;">
+							<option>선택하세요</option>
 						<c:forEach var="dto" items="${typeLists }">
 							<option value="${dto.type }">${dto.type }</option>
 						</c:forEach>
 					</select>
-				
 				</td>
-
-
 			</tr>
-
 			<tr>
-				<td>상품명</td>
-
-				<td><input type="text" name="product_Name"></td>
-
-				<td rowspan="2" colspan="4"><input type="button" value="검색"
-					onclick="searchSend();"></td>
+				<td class="title">상품명</td>
+				<td colspan="3">
+					<input type="text" name="product_Name" style="border: none; width: 80%;">
+					<input type="button" value="검색" onclick="searchSend();">
+				</td>
 			</tr>
-
 		</table>
 	</form>
-	<br>
-	<br>
-	<table border="1">
-		<tr>
-			<td>코드</td>
 
-			<td>브랜드</td>
-
-			<td>카테코리</td>
-
-			<td>타입</td>
-
-			<td>상품명</td>
-
-			<td>가격</td>
-
-			<td>재고</td>
-
-			<td>관리</td>
+	<br><br>
+	
+	<table border="1" style="width: 100%;">
+				<tr>
+			<td class="title">
+				코드
+			</td>
+			
+			<td class="title">
+				브랜드
+			</td>
+			
+			<td class="title">
+				카테코리
+			</td>
+			
+			<td class="title" style="width: 110px;">
+				타입
+			</td>
+			
+			<td class="title" style="width: 200px;">
+				상품명
+			</td>
+			
+			<td class="title" style=" width: 100px;">
+				가격
+			</td>
+			
+			<td class="title" style="width: 100px;">
+				재고
+			</td>
+			
+			<td class="title">
+				관리
+			</td>
 		</tr>
-		<c:forEach var="dto" items="${lists }">
-			<tr align="center">
-				<td>${dto.code }</td>
-
-				<td><input type="text" id="brand" value="${dto.brand }">
-				</td>
-
-				<td><input type="text" id="category" value="${dto.category }">
-				</td>
-
-				<td><input type="text" id="type" value="${dto.type }">
-				</td>
-
-				<td><input type="text" id="product_Name"
-					value="${dto.product_Name }"></td>
-
-				<td><input type="text" id="product_Price"
-					value="${dto.product_Price }"></td>
-
-				<td><input type="text" id="qty" value="${dto.qty }"></td>
-
-
-
-				<td><input type="hidden" name="code" value="${dto.code}">
-					<input type="hidden" name="pageNum" value="${pageNum }"> <a
-					onclick="">수정</a>/<a href="" style="text-decoration: none;">삭제</a>
-				</td>
-			</tr>
-		</c:forEach>
+			<c:forEach var="dto" items="${lists }">
+		<tr align="center">
+			<td>${dto.code }</td>
+			<td>
+				<input type="text" id="brand" value="${dto.brand }">
+			</td>
+			<td>
+				<input type="text" id="category" value="${dto.category }">
+			</td>
+			<td>
+				<input type="text" id="type" value="${dto.type }">
+			</td>
+			<td>
+				<input type="text" id="product_Name" value="${dto.product_Name }">
+			</td>
+			<td>
+				<input type="text" id="product_Price" value="${dto.product_Price }">
+			</td>
+			<td>
+				<input type="text" id="qty" value="${dto.qty }">
+			</td>
+			<td>
+				<input type="hidden" name="code" value="${dto.code}">
+				<input type="hidden" name="pageNum" value="${pageNum }"> <a onclick="">수정</a>/<a href="" style="text-decoration: none;">삭제</a>
+			</td>
+		</tr>
+			</c:forEach>
 	</table>
 	</div>
-</body>
+	</body>
 </html>

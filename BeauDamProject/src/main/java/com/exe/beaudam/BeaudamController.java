@@ -1,8 +1,11 @@
 package com.exe.beaudam;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
 import com.dao.adminDAO.*;
 import com.dao.productDAO.*;
+import com.dao.saleDAO.SaleServiceImpl;
 import com.dao.viewDAO.*;
 import com.file.upload.*;
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -28,26 +31,8 @@ import com.naver.naverlogin.*;
 import com.table.adminDTO.*;
 import com.table.memberDTO.*;
 import com.table.productDTO.*;
-import com.view.view.*;
-=======
-import com.dao.adminDAO.AdminServiceImpl;
-import com.dao.productDAO.ProductServiceImpl;
-import com.dao.saleDAO.SaleServiceImpl;
-import com.dao.viewDAO.ViewServiceImpl;
-import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.naver.naverlogin.NaverLoginBO;
-import com.table.adminDTO.Admin_BrandDTO;
-import com.table.adminDTO.Admin_CategoryDTO;
-import com.table.adminDTO.Admin_TypeDTO;
-import com.table.memberDTO.Member_InfoDTO;
-import com.table.productDTO.BrandDTO;
-import com.table.productDTO.ColorDTO;
-import com.table.productDTO.ProductDTO;
 import com.table.saleDTO.Sale_DateDTO;
-import com.view.view.MemberView;
-import com.view.view.ProductView;
-import com.view.view.SaleView;
->>>>>>> 395eb32b4c61ec369b79a2e38f9ef20446a035a3
+import com.view.view.*;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -118,22 +103,16 @@ public class BeaudamController {
 	@Resource(name="viewService")
 	private ViewServiceImpl viewService1;
 
-<<<<<<< HEAD
+
 	@Resource(name="productService")
 	private ProductServiceImpl productService;
 	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
-=======
+
 	@Resource(name="saleService")
 	private SaleServiceImpl saleService;
->>>>>>> 395eb32b4c61ec369b79a2e38f9ef20446a035a3
 
-	@Resource(name="productService")
-	private ProductServiceImpl productServiece;
-
-	@Resource(name="naverLoginBO")
-	private NaverLoginBO naverLoginBO;
 	
 	// ********************** Beaudam Page **********************
 	
@@ -222,19 +201,11 @@ public class BeaudamController {
 		return "beaudam/newUser";
 	}
 
-	@RequestMapping(value = "/mainTop.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainTop() {
-
-		// 메인 페이지 이동
-		return "beaudam/mainTop";
-	}
-
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView main(HttpSession session) {
 		
 		String id = (String) session.getAttribute("id");
-
-
+		
 		// 메인 페이지 이동
 		return new ModelAndView("beaudam/main","id",id);
 	}
@@ -251,6 +222,34 @@ public class BeaudamController {
 
 		// 상품상세 페이지 이동
 		return "beaudam/productDetail";
+	}
+	
+	@RequestMapping(value = "/event.action", method = RequestMethod.GET)
+	public String event() {
+
+		// 이벤트 리스트 페이지 이동
+		return "beaudam/event";
+	}
+	
+	@RequestMapping(value = "/event1.action", method = RequestMethod.GET)
+	public String event1() {
+
+		// 이벤트1 페이지 이동
+		return "beaudam/event1";
+	}
+	
+	@RequestMapping(value = "/event2.action", method = RequestMethod.GET)
+	public String event2() {
+
+		// 이벤트2 페이지 이동
+		return "beaudam/event2";
+	}
+	
+	@RequestMapping(value = "/event3.action", method = RequestMethod.GET)
+	public String event3() {
+
+		// 이벤트3 페이지 이동
+		return "beaudam/event3";
 	}
 
 	// msj
@@ -436,7 +435,7 @@ public class BeaudamController {
 		List<ProductView> productView = viewService1.getAllProductData(searchPack);
 
 		List<Admin_BrandDTO> brandLists = adminService.getAdminBrand();
-		List<Admin_CategoryDTO> categoryLists = adminService.getAdminCatogory();
+		List<Admin_CategoryDTO> categoryLists = adminService.getAdminCategory();
 		List<Admin_TypeDTO> typeLists = adminService.getAdminType();
 			
 		
@@ -464,9 +463,9 @@ public class BeaudamController {
 
 		String pageNum = request.getParameter("pageNum");
 		
-		productServiece.updateBrand(bdto);
-		productServiece.updateColor(cdto);
-		productServiece.updateProduct(pdto);						
+		productService.updateBrand(bdto);
+		productService.updateColor(cdto);
+		productService.updateProduct(pdto);						
 			
 		// 상품수정완료 페이지 이동
 		return "admin/adminProduct";
@@ -478,10 +477,10 @@ public class BeaudamController {
 		String pageNum = request.getParameter("pageNum");
 		String code = request.getParameter("code");	
 		
-		productServiece.deleteBrand(code);
-		productServiece.deleteColor(code);
-		productServiece.deleteImg(code);
-		productServiece.deleteProduct(code);
+		productService.deleteBrand(code);
+		productService.deleteColor(code);
+		productService.deleteImg(code);
+		productService.deleteProduct(code);
 		
 		return "redirect:/adminProduct.action?pageNum="+pageNum;
 		
@@ -592,13 +591,6 @@ public class BeaudamController {
 	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminBrand(HttpServletRequest req) {
 
-
-		// 브랜드 관리 페이지 이동
-		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
-		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
-
-
-		
 		//브랜드 추가
 		String addBrand = req.getParameter("addbrand");
 		
@@ -651,19 +643,16 @@ public class BeaudamController {
 			adminService.deleteType(delType);			
 			return "redirect:/adminBrand.action";
 		}
+		
 		//관리 페이지 이동
-<<<<<<< HEAD
-		List<Admin_CategoryDTO> category = adminService.getAdminCategory();
-		List<Admin_BrandDTO> brand = adminService.getAdminBrand();		
-=======
-		List<Admin_CategoryDTO> category1 = adminService.getAdminCatogory();
-		List<Admin_BrandDTO> brand1 = adminService.getAdminBrand();		
 
->>>>>>> 395eb32b4c61ec369b79a2e38f9ef20446a035a3
+		List<Admin_CategoryDTO> category = adminService.getAdminCategory();
+		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
+
 		List<Admin_TypeDTO> type = adminService.getAdminType();
 
-		req.setAttribute("brand", brand1);
-		req.setAttribute("category", category1);
+		req.setAttribute("brand", brand);
+		req.setAttribute("category", category);
 		req.setAttribute("type", type);
 
 		return "admin/adminBrand";

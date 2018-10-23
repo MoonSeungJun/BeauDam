@@ -42,29 +42,29 @@
 
 <jsp:include page="adminHeader.jsp"/>
 <div class="wrapper">
-<h1>회원조회</h1>
-	<br><br>
+<h2 class="text-center">회원조회</h2>
+<hr>
 <form action="" method="post" name="userSearchForm">
-	<table border="1">
+	<table border="1" style="margin: 0 auto;">
 		<tr align="center">
-			<td>아이디</td>
-			<td><input type="text" id="id" name="id"></td>
-			<td>이름</td>
-			<td><input type="text" id="name" name="name"></td>
-			<td>전화번호</td>
-			<td><input type="text" id="tel" name="tel"></td>
-			<td rowspan="3">
-				<button type="button" id="searchButton" onclick="searchMember();" value="ok">검색</button>
-			</td>
+			<td class="title">아이디</td>
+			<td><input type="text" id="id" name="id" style="border: none;"></td>
+			<td class="title">이름</td>
+			<td><input type="text" id="name" name="name" style="border: none;"></td>
+			<td class="title">전화번호</td>
+			<td><input type="text" id="tel" name="tel" style="border: none;"></td>
 		</tr>
 		<tr>
 			<td colspan="6"></td>
 		</tr>
 		<tr>
-			<td>핸드폰</td>
-			<td><input type="text" id="cellphone" name="cellphone"></td>
-			<td>생일</td>
-			<td><input type="text" id="birth" name="birth"></td>
+			<td class="title">핸드폰</td>
+			<td><input type="text" id="cellphone" name="cellphone" style="border: none;"></td>
+			<td class="title">생일</td>
+			<td><input type="text" id="birth" name="birth" style="border: none;"></td>
+			<td colspan="2" style="text-align: center;">
+				<button type="button" id="searchButton" onclick="searchMember();" value="ok">검색</button>
+			</td>
 		</tr>
 
 	</table>
@@ -72,18 +72,18 @@
 	<br/>
 	<br/>
 
-	<table border="1" id="listTable">
+	<table border="1" id="listTable" style="margin: 0 auto;">
 		<tr>
-			<td>아이디</td>
-			<td>비밀번호</td>
-			<td>이름</td>
-			<td>전화번호</td>
-			<td>핸드폰</td>
-			<td>주소</td>
-			<td>생일</td>
-			<td>성별</td>
-			<td>가입일</td>
-			<td>관리</td>
+			<td class="title">아이디</td>
+			<td class="title">비밀번호</td>
+			<td class="title">이름</td>
+			<td class="title">전화번호</td>
+			<td class="title">핸드폰</td>
+			<td class="title">주소</td>
+			<td class="title">생일</td>
+			<td class="title">성별</td>
+			<td class="title">가입일</td>
+			<td class="title">관리</td>
 		</tr>
 
 		<c:if test="${!empty memberList }">

@@ -23,7 +23,6 @@ session="false" pageEncoding="UTF-8"%>
                 <div class="right">
                     <div class="right_header">
                         <h2>시럽 빼고 테이크 아웃 키트</h2>
-                        <p>깊고 그윽한 아메리카노룩을 연출해주는 메이크업 테이크 아웃 키트</p>
                     </div>
                     <div class="right_content">
                        	<dl>

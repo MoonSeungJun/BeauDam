@@ -97,93 +97,85 @@
 <body>
 
 <jsp:include page="adminHeader.jsp"/>
-
-<h1>Admin Brand/Category Page</h1>
-
-<table border="1">
-	<tr>
-		<td>
-			브랜드
-		</td>		
-		<td>
-			<input type="text" name="brand" id="brandInput">
-		</td>
-		<td>
-			<input type="button" value="+"  onclick="addBrand();">
-		</td>		
-	</tr>
-	
-	<c:forEach var="dto" items="${brand }">
-		<tr>
-			<td colspan="2">
-				${dto.brand }
-			</td>
-			<td>
-				<a href="javascript:void(0);" style="text-decoration: none;" onclick="delBrand('${dto.brand}');">삭제</a>
-			</td>
-		</tr>		
-	</c:forEach>
-
-</table>
-
-<table border="1">
-	<tr>
-		<td>
-			카테고리
-		</td>		
-		<td>
-			<input type="text" name="category" id="cateInput">
-		</td>
-		<td>
-			<input type="button" value="+" onclick="addCate();">
-		</td>
-	</tr>
-		<c:forEach var="dto" items="${category }">
-		<tr>
-			<td colspan="2">
-				${dto.category }
-			</td>
-			<td>
-				<a href="javascript:void(0);" style="text-decoration: none;" onclick="delCate('${dto.category}');">삭제</a>
-			</td>
-		</tr>		
-	</c:forEach>
-</table>
-
-<table border="1">
-	<tr>	
-		<td>
-			타입
-		</td>		
-		<td>
-			<input type="text" name="type" id="typeInput">
-		</td>
-		<td>
-			<input type="button" value="+" onclick="addType();">
-		</td>		
-	
-	</tr>
-		<c:forEach var="dto" items="${type }">
-		<tr>
-			<td colspan="2">
-				${dto.type }
-			</td>
-			<td>
-				<a href="javascript:void(0);" style="text-decoration: none;" onclick="delType('${dto.type}');">삭제</a>
-			</td>
-		</tr>		
-	</c:forEach>
-
-</table>
-
-
-
-
-
-
-
-
-
-
+	<div class="wrapper">
+	<h2 class="text-center">Admin Brand / Category Page</h2>
+	<hr>
+		<div style="margin: 0 auto; text-align: center; overflow: hidden;">
+			<table border="1" style="margin: 10px; float: left; width: 30%; ">
+				<tr>
+					<td style="background-color: gainsboro; padding: 3px;">
+						브랜드
+					</td>		
+					<td>
+						<input type="text" name="brand" id="brandInput" style="border: none; width: 100%;">
+					</td>
+					<td	>
+						<input type="button" value="+"  onclick="addBrand();">
+					</td>		
+				</tr>
+				
+				<c:forEach var="dto" items="${brand }">
+					<tr>
+						<td colspan="2">
+							${dto.brand }
+						</td>
+						<td>
+							<a href="javascript:void(0);" style="text-decoration: none;" onclick="delBrand('${dto.brand}');">삭제</a>
+						</td>
+					</tr>		
+				</c:forEach>
+			
+			</table>
+			
+			<table border="1" style="margin: 10px; float: left; width: 30%;">
+				<tr>
+					<td style="background-color: gainsboro; padding: 3px;">
+						카테고리
+					</td>		
+					<td>
+						<input type="text" name="category" id="cateInput" style="border: none; width: 100%;">
+					</td>
+					<td>
+						<input type="button" value="+" onclick="addCate();">
+					</td>
+				</tr>
+					<c:forEach var="dto" items="${category }">
+					<tr>
+						<td colspan="2">
+							${dto.category }
+						</td>
+						<td>
+							<a href="javascript:void(0);" style="text-decoration: none;" onclick="delCate('${dto.category}');">삭제</a>
+						</td>
+					</tr>		
+				</c:forEach>
+			</table>
+			
+			<table border="1" style="margin: 10px; float: left; width: 35%;">
+				<tr>	
+					<td style="background-color: gainsboro;">
+						타입
+					</td>		
+					<td>
+						<input type="text" name="type" id="typeInput" style="border: none; width: 100%;">
+					</td>
+					<td>
+						<input type="button" value="+" onclick="addType();">
+					</td>		
+				
+				</tr>
+					<c:forEach var="dto" items="${type }">
+					<tr>
+						<td colspan="2">
+							${dto.type }
+						</td>
+						<td>
+							<a href="javascript:void(0);" style="text-decoration: none;" onclick="delType('${dto.type}');">삭제</a>
+						</td>
+					</tr>		
+				</c:forEach>
+			</table>
+		</div>
+	</div>
 </body>
 </html>
