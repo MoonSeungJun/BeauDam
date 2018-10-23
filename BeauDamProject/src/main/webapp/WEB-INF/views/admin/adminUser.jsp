@@ -74,6 +74,7 @@
 
 	<table border="1" id="listTable" style="margin: 0 auto;">
 		<tr>
+
 			<td class="title">아이디</td>
 			<td class="title">비밀번호</td>
 			<td class="title">이름</td>
@@ -84,6 +85,19 @@
 			<td class="title">성별</td>
 			<td class="title">가입일</td>
 			<td class="title">관리</td>
+
+			<td>아이디</td>
+			<td>비밀번호</td>
+			<td>이름</td>
+			<td>전화번호</td>
+			<td>핸드폰</td>
+			<td>주소</td>
+			<td>생일</td>
+			<td>성별</td>
+			<td>가입일</td>
+			<td>탈퇴여부</td>
+			<td>관리</td>
+
 		</tr>
 
 		<c:if test="${!empty memberList }">
@@ -96,8 +110,14 @@
 					<td>${dto.cellphone }</td>
 					<td>${dto.zip } ${dto.city } ${dto.street }</td>
 					<td>${dto.birth }</td>
-					<td>${dto.gender }</td>
+					<td>${dto.gender }</td>					
 					<td>${dto.created }</td>
+					<c:if test="${dto.isLeave eq 1 }">
+						<td>탈퇴</td>	
+					</c:if>
+					<c:if test="${dto.isLeave ne 1 }">
+						<td>-</td>	
+					</c:if>
 					<td><a href="#" style="text-decoration: none;">수정</a>/<a
 						href="#" style="text-decoration: none;">삭제</a></td>
 				</tr>
@@ -113,8 +133,14 @@
 					<td>${dto.cellphone }</td>
 					<td>${dto.zip } ${dto.city } ${dto.street }</td>
 					<td>${dto.birth }</td>
-					<td>${dto.gender }</td>
+					<td>${dto.gender }</td>				
 					<td>${dto.created }</td>
+					<c:if test="${dto.isLeave eq 1 }">
+						<td>탈퇴</td>	
+					</c:if>
+					<c:if test="${dto.isLeave ne 1 }">
+						<td>-</td>	
+					</c:if>
 					<td><a href="#" style="text-decoration: none;">수정</a>/
 					<a href="#" style="text-decoration: none;">삭제</a></td>
 				</tr>
