@@ -23,7 +23,7 @@ session="false" pageEncoding="UTF-8"%>
          </div>
      </div>
      <div class="side">
-         <a href=""><img src="<%=cp%>/resources/image/beaudam/main/side.png"></a> 
+         <a href="./event1.action"><img src="<%=cp%>/resources/image/beaudam/main/side.png"></a> 
      </div>
 </body>
 </html>

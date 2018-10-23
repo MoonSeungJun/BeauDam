@@ -1,31 +1,50 @@
 package com.exe.beaudam;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-import javax.annotation.*;
-import javax.servlet.http.*;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.json.simple.*;
-import org.json.simple.parser.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.*;
-import org.springframework.web.servlet.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.dao.adminDAO.*;
-import com.dao.productDAO.*;
-import com.dao.saleDAO.*;
-import com.dao.viewDAO.*;
-import com.file.upload.*;
-import com.github.scribejava.core.model.*;
-import com.naver.naverlogin.*;
-import com.table.adminDTO.*;
-import com.table.memberDTO.*;
-import com.table.productDTO.*;
-import com.table.saleDTO.*;
-import com.view.view.*;
-
+import com.dao.adminDAO.AdminServiceImpl;
+import com.dao.productDAO.ProductServiceImpl;
+import com.dao.saleDAO.SaleServiceImpl;
+import com.dao.viewDAO.ViewServiceImpl;
+import com.file.upload.ProductUpload;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.naver.naverlogin.NaverLoginBO;
+import com.table.adminDTO.Admin_BrandDTO;
+import com.table.adminDTO.Admin_CategoryDTO;
+import com.table.adminDTO.Admin_TypeDTO;
+import com.table.memberDTO.Member_InfoDTO;
+import com.table.productDTO.BrandDTO;
+import com.table.productDTO.ColorDTO;
+import com.table.productDTO.ImgDTO;
+import com.table.productDTO.ProductDTO;
+import com.table.saleDTO.Sale_DateDTO;
+import com.view.view.AdminView;
+import com.view.view.MemberView;
+import com.view.view.ProductView;
+import com.view.view.SaleView;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -106,7 +125,7 @@ public class BeaudamController {
 
 	@Resource(name="saleService")
 	private SaleServiceImpl saleService;
-	
+
 	
 	// ********************** Beaudam Page **********************
 	
@@ -195,19 +214,11 @@ public class BeaudamController {
 		return "beaudam/newUser";
 	}
 
-	@RequestMapping(value = "/mainTop.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainTop() {
-
-		// 메인 페이지 이동
-		return "beaudam/mainTop";
-	}
-
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView main(HttpSession session) {
 		
 		String id = (String) session.getAttribute("id");
-
-
+		
 		// 메인 페이지 이동
 		return new ModelAndView("beaudam/main","id",id);
 	}
@@ -224,6 +235,34 @@ public class BeaudamController {
 
 		// 상품상세 페이지 이동
 		return "beaudam/productDetail";
+	}
+	
+	@RequestMapping(value = "/event.action", method = RequestMethod.GET)
+	public String event() {
+
+		// 이벤트 리스트 페이지 이동
+		return "beaudam/event";
+	}
+	
+	@RequestMapping(value = "/event1.action", method = RequestMethod.GET)
+	public String event1() {
+
+		// 이벤트1 페이지 이동
+		return "beaudam/event1";
+	}
+	
+	@RequestMapping(value = "/event2.action", method = RequestMethod.GET)
+	public String event2() {
+
+		// 이벤트2 페이지 이동
+		return "beaudam/event2";
+	}
+	
+	@RequestMapping(value = "/event3.action", method = RequestMethod.GET)
+	public String event3() {
+
+		// 이벤트3 페이지 이동
+		return "beaudam/event3";
 	}
 
 	// msj
@@ -448,12 +487,17 @@ public class BeaudamController {
 		String pageNum = request.getParameter("pageNum");
 		String code = request.getParameter("code");	
 		
+
+
 		ProductView view = productService.getOneProductData(code);
 		
+
 		productService.deleteBrand(code);
 		productService.deleteColor(code);
 		productService.deleteImg(code);
 		productService.deleteProduct(code);
+
+
 		
 		String thumbPath = request.getSession().getServletContext().getRealPath("/thumbImg");
 		String detailPath = request.getSession().getServletContext().getRealPath("/detailImg");
@@ -466,6 +510,7 @@ public class BeaudamController {
 		serverFile.delete();
 		serverFile = new File(detailPath + File.separator + view.getDetail_Img());
 		serverFile.delete();
+
 		
 		return "redirect:/adminProduct.action?pageNum="+pageNum;
 		
@@ -636,9 +681,8 @@ public class BeaudamController {
 	//esteban
 	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminBrand(HttpServletRequest req) {
-
-
 		// 브랜드 관리 페이지 이동		
+
 		//브랜드 추가
 		String addBrand = req.getParameter("addbrand");
 		
@@ -691,7 +735,9 @@ public class BeaudamController {
 			adminService.deleteType(delType);			
 			return "redirect:/adminBrand.action";
 		}
+		
 		//관리 페이지 이동
+
 
 		List<Admin_CategoryDTO> category = adminService.getAdminCategory();
 		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
