@@ -42,29 +42,29 @@
 
 <jsp:include page="adminHeader.jsp"/>
 <div class="wrapper">
-<h1>회원조회</h1>
-	<br><br>
+<h2 class="text-center">회원조회</h2>
+<hr>
 <form action="" method="post" name="userSearchForm">
-	<table border="1">
+	<table border="1" style="margin: 0 auto;">
 		<tr align="center">
-			<td>아이디</td>
-			<td><input type="text" id="id" name="id"></td>
-			<td>이름</td>
-			<td><input type="text" id="name" name="name"></td>
-			<td>전화번호</td>
-			<td><input type="text" id="tel" name="tel"></td>
-			<td rowspan="3">
-				<button type="button" id="searchButton" onclick="searchMember();" value="ok">검색</button>
-			</td>
+			<td class="title">아이디</td>
+			<td><input type="text" id="id" name="id" style="border: none;"></td>
+			<td class="title">이름</td>
+			<td><input type="text" id="name" name="name" style="border: none;"></td>
+			<td class="title">전화번호</td>
+			<td><input type="text" id="tel" name="tel" style="border: none;"></td>
 		</tr>
 		<tr>
 			<td colspan="6"></td>
 		</tr>
 		<tr>
-			<td>핸드폰</td>
-			<td><input type="text" id="cellphone" name="cellphone"></td>
-			<td>생일</td>
-			<td><input type="text" id="birth" name="birth"></td>
+			<td class="title">핸드폰</td>
+			<td><input type="text" id="cellphone" name="cellphone" style="border: none;"></td>
+			<td class="title">생일</td>
+			<td><input type="text" id="birth" name="birth" style="border: none;"></td>
+			<td colspan="2" style="text-align: right;">
+				<button type="button" id="searchButton" onclick="searchMember();" value="ok" style="width: 60%">검색</button>
+			</td>
 		</tr>
 
 	</table>
@@ -72,19 +72,21 @@
 	<br/>
 	<br/>
 
-	<table border="1" id="listTable">
+	<table border="1" id="listTable" style="margin: 0 auto; text-align: center;">
 		<tr>
-			<td>아이디</td>
-			<td>비밀번호</td>
-			<td>이름</td>
-			<td>전화번호</td>
-			<td>핸드폰</td>
-			<td>주소</td>
-			<td>생일</td>
-			<td>성별</td>
-			<td>가입일</td>
-			<td>탈퇴여부</td>
-			<td>관리</td>
+
+			<td class="title">아이디</td>
+			<td class="title">비밀번호</td>
+			<td class="title">이름</td>
+			<td class="title">전화번호</td>
+			<td class="title">핸드폰</td>
+			<td class="title" style="width: 200px">주소</td>
+			<td class="title">생일</td>
+			<td class="title" style="width: 50px">성별</td>
+			<td class="title">가입일</td>
+			<td class="title" style="width: 70px; text-align: center;">탈퇴여부</td>
+			<td class="title">관리</td>
+
 		</tr>
 
 		<c:if test="${!empty memberList }">
@@ -95,15 +97,15 @@
 					<td>${dto.name }</td>
 					<td>${dto.tel }</td>
 					<td>${dto.cellphone }</td>
-					<td>${dto.zip } ${dto.city } ${dto.street }</td>
+					<td style="width: 200px">${dto.zip } ${dto.city } ${dto.street }</td>
 					<td>${dto.birth }</td>
-					<td>${dto.gender }</td>					
+					<td style="width: 50px">${dto.gender }</td>					
 					<td>${dto.created }</td>
 					<c:if test="${dto.isLeave eq 1 }">
-						<td>탈퇴</td>	
+						<td style="width: 70px; text-align: center;">탈퇴</td>	
 					</c:if>
 					<c:if test="${dto.isLeave ne 1 }">
-						<td>-</td>	
+						<td style="width: 70px; text-align: center;">-</td>	
 					</c:if>
 					<td><a href="#" style="text-decoration: none;">수정</a>/<a
 						href="#" style="text-decoration: none;">삭제</a></td>

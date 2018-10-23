@@ -573,7 +573,7 @@ public class BeaudamController {
 		
 		String thumbPath = req.getSession().getServletContext().getRealPath("/thumbImg");
 		String detailPath = req.getSession().getServletContext().getRealPath("/detailImg");
-		System.out.println(thumbPath);
+		
 		File tp = new File(thumbPath);
 		File dp = new File(detailPath);
 

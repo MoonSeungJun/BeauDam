@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script type="text/javascript">
 
 function searchSend() {
@@ -53,10 +53,10 @@ function adminProductUpdate() {
 
 	}
 	
-	jQuery('#category').change(function() {
-	var state = jQuery('#category option:selected').val();
+	$('#category').change(function() {
+	var state = $('#category option:selected').val();
 	if(state == 'Accessory') {
-		jQuery('.layer').show();
+		$('.layer').show();
 	} 
 	
 	
@@ -96,80 +96,68 @@ function showSubSelect(category) {
 <body>
 
 	<jsp:include page="adminHeader.jsp" />
-
-	<h1>상품조회</h1>
-	<br>
-	<br>
+	<div class="wrapper">
+	<h2 class="text-center">상품조회</h2>
+	<hr>
 	<form action="" name="adminProductForm" method="post">
-		<table border="1">
-
+		<table border="1" style="text-align: center; margin: 0 auto;">
 			<tr>
-				<td>코드</td>
+				<td class="title">코드</td>
+				<td><input type="text" name="code" style="width: 100%; border: none; text-indent: 1em;"></td>
+				<td class="title">브랜드</td>
 
-				<td><input type="text" name="code"></td>
-				<td>브랜드</td>
-
-				<td><select name="brand" id="brand">						
+				<td style="width: 150px;">
+					<select name="brand" id="brand" style="width: 100%;  text-indent: 1em">						
 						<c:forEach var="dto" items="${brandLists }">
 							<option value="${dto.brand }">${dto.brand }</option>
 						</c:forEach>
-				</select></td>
+					</select>
+				</td>
 			</tr>
-
-
-
 			<tr>
-				
-
-				<td>분류</td>
-
-				<td>
-					<select name="category" id="category" onchange="showSubSelect(this.value);">
-						<option>선택하세요</option>
+				<td class="title">분류</td>
+				<td style="text-align: center;" colspan="3">
+					<select name="category" id="category" onchange="showSubSelect(this.value);" style="width: 48%;">
+						<option>선택</option>
 						<c:forEach var="dto" items="${categoryLists }">
 							<option value="${dto.category }">${dto.category }</option>
 						</c:forEach>
-					</select> 				
-				</td>
-				<td>
-					<select name="type" id="type">
+					</select> 	
+					<select name="type" id="type" style="width: 48%;">
 						<option value=""></option>					
-					</select>
+					</select>			
 				</td>
-
-
 			</tr>
 
 			<tr>
-				<td>상품명</td>
+				<td class="title">상품명</td>
 
-				<td><input type="text" name="product_Name"></td>
-
-				<td rowspan="2" colspan="4"><input type="button" value="검색"
-					onclick="searchSend();"></td>
+				<td colspan="3">
+					<input type="text" name="product_Name"  style="border: none; width: 80%;">
+					<input type="button" value="검색" onclick="searchSend();" style="width: 18%;">
+				</td>			
 			</tr>
 
 		</table>
 	</form>
-	<br>
-	<br>
-	<table border="1">
+	<br><br>
+	<table border="1"  style="width: 100%;">
 		<tr>
-			<td>코드</td>
+			<td class="title">코드</td>
 
-			<td>브랜드</td>
+			<td class="title">브랜드</td>
 
-			<td>카테코리</td>
+			<td class="title">카테코리</td>
 
-			<td>타입</td>
+			<td class="title" style="width: 110px;">타입</td>
 
-			<td>상품명</td>
+			<td class="title" style="width: 200px;">상품명</td>
 
-			<td>가격</td>
+			<td class="title" style="width: 100px;">가격</td>
 
-			<td>재고</td>
+			<td class="title" style="width: 100px;">재고</td>
 
-			<td>관리</td>
+			<td class="title">관리</td>
 		</tr>
 		<c:forEach var="dto" items="${lists }">
 			<tr align="center">
@@ -193,6 +181,6 @@ function showSubSelect(category) {
 			</tr>
 		</c:forEach>
 	</table>
-	
+	</div>
 </body>
 </html>
