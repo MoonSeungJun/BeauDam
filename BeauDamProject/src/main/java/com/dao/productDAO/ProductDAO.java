@@ -1,10 +1,13 @@
 package com.dao.productDAO;
 
+import java.util.*;
+
 import org.mybatis.spring.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.productDTO.*;
+import com.view.view.*;
 
 @Repository("productDAO")
 public class ProductDAO {
@@ -29,7 +32,7 @@ public class ProductDAO {
 	}
 
 	 
-	public void inserImg(ImgDTO dto) {
+	public void insertImg(ImgDTO dto) {
 		sessionTemplate.insert("beaudam.insertImg",dto);
 		
 	}
@@ -88,7 +91,16 @@ public class ProductDAO {
 		
 	}
 	
+	public List<ProductView> getProductList(){
+		List<ProductView> lists = sessionTemplate.selectList("beaudam.getProductList");
+		return lists;
+		
+	}
 	
+	public ProductView getOneProductData(String code) {
+		ProductView view = sessionTemplate.selectOne("beaudam.getOneProductData",code);
+		return view;
+	}
 	
 	
 	
