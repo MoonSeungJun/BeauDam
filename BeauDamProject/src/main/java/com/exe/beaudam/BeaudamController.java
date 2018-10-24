@@ -60,7 +60,6 @@ import com.view.view.SaleView;
  *   -> css명은 어떤 용도의 이미지인지 알 수 있도록 지을 것
  */
 
-
 /*
  * 	쿼리 insert, delete 테이블 순서
  * 	
@@ -182,7 +181,6 @@ public class BeaudamController {
 		session.setAttribute("id", id);
 		session.setAttribute("nickname", nickname);
 
-		/*return new ModelAndView("beaudam/callback","result",result);*/
 		return new ModelAndView("redirect:/main.action");
 	}
 	
@@ -198,6 +196,15 @@ public class BeaudamController {
 
 		// 회원가입 페이지 이동
 		return "beaudam/newUser";
+	}
+	
+	@RequestMapping(value = "/newUser_ok.action", method = RequestMethod.POST)
+	public ModelAndView newUser_ok() {
+		
+		//member - member_Info - member_grade - coupon
+		
+		return new ModelAndView("redirect:/login.action");
+		
 	}
 
 	@RequestMapping(value = "/mainTop.action", method = { RequestMethod.GET, RequestMethod.POST })
