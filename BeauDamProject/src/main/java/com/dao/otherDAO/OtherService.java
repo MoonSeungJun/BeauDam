@@ -16,14 +16,18 @@ public interface OtherService {
 //	update
 	void updateCoupon(HashMap<String, Object> map);
 	void updateHitCount(int num);
+	
 //	delete
 	void deleteBasket(HashMap<String, Object> map);
 	void deleteReview(int num);
 	void deleteNotification(int num);
+	
 //	select
 	int getCouponCount(String id);
 	List<CouponDTO> getCouponData(String id);
 	int getWeekCouponCount(String id);
 	List<CouponDTO> getWeekCouponData(String id);
 	List<ReviewDTO> getReviewData (String sale_Code);
+	List<BasketDTO> getBasketData(String id);
+	BasketDTO getBasketOneData(Map<String, Object> hm);
 }

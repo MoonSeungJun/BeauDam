@@ -1,7 +1,7 @@
 <!-- 제작자 : 허도휘 -->
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String cp = request.getContextPath();
 %>
@@ -11,147 +11,76 @@
 <meta charset="UTF-8">
 <title>뷰담바구니</title>
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
-<style type="text/css">
-@font-face { 
-	font-family: 'designhouseOTFLight00'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff') format('woff'); 
-	font-weight: normal; 
-	font-style: normal; }
-	
-@font-face { 
-	font-family: 'SeoulHangangM'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff') format('woff'); 
-	font-weight: normal; 
-	font-style: normal; }
-		
-#container {
-    padding-bottom: 80px;
-}
-
-.title_style {
-    overflow: hidden;
-    text-align: center;
-    height: 200px;
-}
-
-.title_style h2 {
-    font-size: 60px;
-    font-weight: 100;
-    letter-spacing: -3px;
-    line-height: 60px;
-    margin-top: 26px;
-    margin-bottom: 16px;
-    height: 60px;
-}
-
-.title_area {
-    margin: 0 auto;
-    width: 1200px;
-}
-
-td
-{
-	text-align: center;
-}
-
-input
-{
-	text-align: center;
-	font-family: SeoulHangangM;
-	font-size: 12.37pt;
-	border-style: none;
-	width: 70px
-}
-
-a{
-	text-decoration: none;
-	color: black;
-}
-
-a:hover{
-	text-decoration: underline;
-}
-
-button {
-	height: 40px;
-	font-family: SeoulHangangM;
-	font-size: 12pt;
-	border-style: none;
-	font-weight: bold;
-}
-
-button:hover {
-	background-color: black;
-	color: white;
-	cursor: pointer;
-}
-
-</style>
+<link href="./resources/css/myPage/myBasket.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
 	    $("#chk").change(function(){
+	    	var lists = new Array();
+
+	    	<c:forEach items="${lists}" var="item">
+	    		lists.push("${item.basket_Num}");
+	    	</c:forEach>
+	    	
 	        if($("#chk").prop("checked")){
-	        	$("#chk1").prop('checked', true);
-	        	$("#chk2").prop('checked', true);
+	        	$.each(lists, function(idx, val) {
+	        		$("#" + val).prop('checked', true);
+	  		   });
 	        }else{
-	        	$("#chk1").prop('checked', false);
-	        	$("#chk2").prop('checked', false);
+	        	$.each(lists, function(idx, val) {
+	        		$("#" + val).prop('checked', false);
+	  		   });
 	        }
 	    });
 	});
 	
-	function checkAmount(num){
+	function payResult(){
+		var sum = 0;
+		var lists = new Array();
+
+    	<c:forEach items="${lists}" var="item">
+    		sum += rmComma($("#pay" + ${item.basket_Num}).text());
+    	</c:forEach>
+		$("#payResult").val(addComma(sum));
+	}
+	
+	function checkAmount(num, qty, max){
 		var amountId = "#amount" + num;
 		var priceId = "#price" + num;
 		var payId = "#pay" + num;
 		
 		/* 최대범위는 재고갯수로 변경 */
-		if($(amountId).val()>99 || $(amountId).val()<1){
-			alert("범위 초과!");
+		if($(amountId).val()>max || $(amountId).val()<1){
+			alert("재고 수량과 맞지 않습니다.");
 			
 			/* 기존 사용자가 설정했던 갯수로 초기화 */
-			$(amountId).val(1);
+			$(amountId).val(qty);
 		}
 		
 		var amount = Number($(amountId).val());
 		var price = rmComma($(priceId).text());
 		
 		$(payId).val(addComma(amount*price));
-		
-		var sum = 0;
-		/* $.each(function (index, item){
-			sum += rmComma($("#pay" + item.sales_code).val());
-		}); */
-		
-		sum = rmComma($("#pay1").val()) + rmComma($("#pay2").val());
-		$("#payResult").val(addComma(sum));
+
+		payResult();
 	}
 	
-	function plus(num){
+	function plus(num, max){
 		
 		var amountId = "#amount" + num;
 		var priceId = "#price" + num;
 		var payId = "#pay" + num;
 		
-		/* 최대범위는 재고갯수로 변경 */
-		if($(amountId).val()<99)
+		if($(amountId).val()<max)
 			$(amountId).val(Number($(amountId).val())+1);
 		
 		var amount = Number($(amountId).val());
 		var price = rmComma($(priceId).text());
 		
-		$(payId).val(addComma(amount*price));
+		$(payId).text(addComma(amount*price));
 		
-		var sum = 0;
-		/* $.each(function (index, item){
-			sum += rmComma($("#pay" + item.sales_code).val());
-		}); */
-		
-		sum = rmComma($("#pay1").val()) + rmComma($("#pay2").val());
-		$("#payResult").val(addComma(sum));
-			
+		payResult();
 	}
 	
 	function minus(num){
@@ -166,16 +95,9 @@ button:hover {
 		var amount = Number($(amountId).val());
 		var price = rmComma($(priceId).text());
 		
-		$(payId).val(addCommas(amount*price));
+		$(payId).text(addComma(amount*price));
 		
-		var sum = 0;
-		/* $.each(function (index, item){
-			sum += rmComma($("#pay" + item.sales_code).val());
-		}); */
-		
-		sum = rmComma($("#pay1").val()) + rmComma($("#pay2").val());
-		$("#payResult").val(addComma(sum));
-				
+		payResult();
 	}
 	
 	function addComma(num) {
@@ -185,14 +107,25 @@ button:hover {
 	function rmComma(str) {
 		return parseInt(str.replace(/,/g,""));
 	}
-
+	
 	function buy(){
-		var root = document.productForm;
+		var f = document.myBasketForm;
+		var check = false;
+		var lists = new Array();
+
+    	<c:forEach items="${lists}" var="item">
+    		if($("#${item.basket_Num}").is(":checked")){
+    			check = true;
+    		}
+    	</c:forEach>
+    	
+    	if(!check){
+    		alert("선택된 상품이 없습니다!");
+    		return;
+    	}
 		
-		
-		
-		root.action = "<%=cp%>/pay.action";
-		root.submit();
+		f.action="<%=cp%>/pay.action";
+		f.submit();
 	}
 
 </script>
@@ -200,10 +133,7 @@ button:hover {
 </head>
 <body style="font-family: SeoulHangangM">
 
-<!-- id 뒤에 붙는 숫자는 sale_code 입력 -->
-
-<form method="post" name="productForm">
-
+<form method="post" name="myBasketForm">
 	<div id="container">
 		<div class="title_style">
 			<div class="title_area">
@@ -219,101 +149,69 @@ button:hover {
 		</div>
 		
 		<br/>
-			
+		
 		<table style="width: 1200px; margin: 0 auto" >
 			<tr bgcolor="#EAEAEA" style="font-weight: bold; height: 30px">
-				<td><input type="checkbox" id="chk"></td>
-				<td></td>
-				<td>상품명/옵션명</td>
-				<td>수량</td>
-				<td>판매가</td>
-				<td>주문금액</td>
-				
-				<td>주문</td>
+				<td width="10%"><input type="checkbox" id="chk"></td>
+				<td colspan="2" width="30%">상품명</td>
+				<td width="10%">색상</td>
+				<td width="10%">수량</td>
+				<td width="15%">판매가</td>
+				<td width="15%">주문금액</td>
+				<td width="10%">주문</td>
 			</tr>
 			
-			<tr>
-				<td><input type="checkbox" id="chk1" name="chk1"></td>
-				<td>
-					<a href="">
-						<img style="margin: 0 auto; width: 100px; height: 100px;" src="http://www.thesaemcosmetic.com/view/attach/product/17211/list"> 
-					</a>
-				</td>
+			<c:forEach var="dto" items="${lists}">
+				<tr>
+					<td><input type="checkbox" id="${dto.basket_Num}" name="check" value="${dto.basket_Num }"></td>
+					<td width="10%">
+						<a href="">
+							<img style="margin: 0 auto; width: 100px; height: 100px;" src="${dto.thumb_Img }"> 
+						</a>
+					</td>
+					
+					<td style="text-align: left;">
+						<a href="" style="font-size: 15pt; font-weight: bold; margin-left: 20px;">
+							${dto.product_Name }
+						</a>
+					</td>
+					
+					<td>${dto.color_Name }</td>
+					
+					<td>
+						<button type="button" onclick="minus(${dto.basket_Num });">-</button>
+		          		<input type="text" value="${dto.qty }" id="amount${dto.basket_Num }" name="amount${dto.basket_Num }" onchange="checkAmount(${dto.basket_Num }, ${dto.qty}, ${dto.qty_Max });" style="width: 30px">
+		          		<button type="button" onclick="plus(${dto.basket_Num }, ${dto.qty_Max });">+</button>
+		          	</td>
+		          	
+					<td>
+						<span id="price${dto.basket_Num }" >
+						<script type="text/javascript">
+							$("#price${dto.basket_Num }").html(addComma(${dto.product_Price}));
+						</script>
+						</span> 원
+					</td>
+					
+					<td>
+						<span id="pay${dto.basket_Num }" >
+						<script type="text/javascript">
+							$("#pay${dto.basket_Num }").html(addComma(${dto.product_Price} * ${dto.qty}));
+						</script>
+						</span> 원
+					</td>
+					
+					<td>
+						<button type="button" onclick="pay();">바로구매</button>
+						<br/><br/>
+						<button type="button">삭제</button>
+					</td>
+				</tr>
 				
-				<td>
-					<a href="">피토 세븐 클렌징 오일 크림</a>
-					<input type="hidden" name="saleCode" value="1">
-					<input type="hidden" name="productNum" value="123">
-				</td>
-				<td>
-					<button type="button" onclick="minus(1);">-</button>
-	          		<input type="text" value="1" id="amount1" name="amount1" onchange="checkAmount(1);" style="width: 30px">
-	          		<button type="button" onclick="plus(1);">+</button>
-	          	</td>
-				<td>
-					<span id="price1" >
-					<script type="text/javascript">
-						$("#price1").html(addComma(16000));
-					</script>
-					</span> 원
-				</td>
-				<td>
-					<input type="text" id="pay1" readonly="readonly">원
-					<script type="text/javascript">
-						$("#pay" + 1).val(addComma(16000));
-					</script>
-				</td>
-				
-				<td>
-					<button type="button" onclick="pay();">바로구매</button>
-					<br/><br/>
-					<button type="button">삭제</button>
-				</td>
-			</tr>
-			
-			<tr height="0.1px" style="background-color: #e6e4e6;"><td colspan="7"></td></tr>
-			
-			<tr>
-				<td><input type="checkbox" id="chk2" name="chk2"></td>
-				<td>
-					<a href="">
-						<img style="margin: 0 auto; width: 100px; height: 100px;" src="http://www.thesaemcosmetic.com/view/attach/product/17444/detail/1">
-					</a>
-				</td>
-				<td>
-					<a href="">어반 에코 하라케케 크림</a>
-					<input type="hidden" name="saleCode" value="2">
-					<input type="hidden" name="productNum" value="777">
-				</td>
-				<td>
-					<button type="button" onclick="minus(2);">-</button>
-	          		<input type="text" value="1" id="amount2" name="amount2" onchange="checkAmount(2);" style="width: 30px">
-	          		<button type="button" onclick="plus(2);">+</button>
-	          	</td>
-				<td>
-					<span id="price2" >
-					<script type="text/javascript">
-						$("#price2").html(addComma(17000));
-					</script>
-					</span> 원
-				</td>
-				<td>
-					<input type="text" id="pay2" readonly="readonly">원
-					<script type="text/javascript">
-						$("#pay" + 2).val(addComma(17000));
-					</script>
-				</td>
-				
-				<td>
-					<button type="button" onclick="buy();">바로주문</button>
-					<br/><br/>
-					<button type="button">삭제</button>
-				</td>
-			</tr>
-			
-			<tr height="0.1px" style="background-color: #e6e4e6;"><td colspan="7"></td></tr>
+				<tr height="0.1px" style="background-color: #e6e4e6;"><td colspan="8"></td></tr>
+			</c:forEach>
 			
 		</table>
+	
 		
 		<br/><br/>
 		
@@ -321,9 +219,9 @@ button:hover {
 		
 			<hr style="width: 30%">
 			<span style="font-size: 19.5pt;">결제금액</span>
-			<input type="text" id="payResult" readonly="readonly" style="font-size: 25pt; width: 12%; font-weight: bold;">
+			<input type="text" id="payResult" name="payResult" readonly="readonly" style="font-size: 25pt; width: 12%; font-weight: bold;">
 				<script type="text/javascript">
-					$("#payResult").val(addComma(33000));
+					payResult();
 				</script>
 			<span style="font-size: 19.5pt;">원</span>
 			<hr style="width: 30%">
@@ -337,8 +235,6 @@ button:hover {
 			</div>
 		</div>
 	</div>
-
 </form>
-
 </body>
 </html>

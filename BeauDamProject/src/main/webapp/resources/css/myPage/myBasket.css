@@ -1,0 +1,74 @@
+@charset "UTF-8";
+@font-face { 
+	font-family: 'designhouseOTFLight00'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; }
+	
+@font-face { 
+	font-family: 'SeoulHangangM'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; }
+		
+#container {
+    padding-bottom: 80px;
+}
+
+.title_style {
+    overflow: hidden;
+    text-align: center;
+    height: 200px;
+}
+
+.title_style h2 {
+    font-size: 60px;
+    font-weight: 100;
+    letter-spacing: -3px;
+    line-height: 60px;
+    margin-top: 26px;
+    margin-bottom: 16px;
+    height: 60px;
+}
+
+.title_area {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+td
+{
+	text-align: center;
+}
+
+input
+{
+	text-align: center;
+	font-family: SeoulHangangM;
+	font-size: 12.37pt;
+	border-style: none;
+	width: 70px
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+button {
+	height: 40px;
+	font-family: SeoulHangangM;
+	font-size: 12pt;
+	border-style: none;
+	font-weight: bold;
+}
+
+button:hover {
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}

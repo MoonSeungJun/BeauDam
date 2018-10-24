@@ -266,8 +266,14 @@
 		
 		<!-- Basket -->
 		<select id="getBasketData" resultType="com.table.otherDTO.BasketDTO" parameterType="String">
-			select basket_num, id, code, color_code, product_name, product_price, qty from
-			basket where id = #{id}
+			select a.basket_num, a.id, a.code, c.color_Name, a.color_code, a.product_name, a.product_price, a.qty, b.thumb_img, c.qty qty_Max
+			from basket a, img b, color c
+			where a.id = #{id} and a.code = b.code and a.code = c.code
+		</select>
+		<select id="getBasketOneData" resultType="com.table.otherDTO.BasketDTO" parameterType="Map">
+			select a.basket_num, a.id, a.code, c.color_Name, a.color_code, a.product_name, a.product_price, a.qty, b.thumb_img, c.qty qty_Max
+			from basket a, img b, color c
+			where a.id = #{id} and a.basket_Num = #{basket_Num} and a.code = b.code and a.code = c.code
 		</select>
 		
 		

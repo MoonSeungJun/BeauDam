@@ -1,8 +1,10 @@
 package com.exe.beaudam;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dao.adminDAO.AdminServiceImpl;
+import com.dao.otherDAO.OtherServiceImpl;
 import com.dao.productDAO.ProductServiceImpl;
 import com.dao.saleDAO.SaleServiceImpl;
 import com.dao.viewDAO.ViewServiceImpl;
@@ -27,6 +30,7 @@ import com.table.adminDTO.Admin_BrandDTO;
 import com.table.adminDTO.Admin_CategoryDTO;
 import com.table.adminDTO.Admin_TypeDTO;
 import com.table.memberDTO.Member_InfoDTO;
+import com.table.otherDTO.BasketDTO;
 import com.table.productDTO.BrandDTO;
 import com.table.productDTO.ColorDTO;
 import com.table.productDTO.ProductDTO;
@@ -59,7 +63,6 @@ import com.view.view.SaleView;
  *   -> 폴더명은 3번과 같이 자신의 페이지명과 똑같이 할 것
  *   -> css명은 어떤 용도의 이미지인지 알 수 있도록 지을 것
  */
-
 
 /*
  * 	쿼리 insert, delete 테이블 순서
@@ -98,80 +101,84 @@ import com.view.view.SaleView;
 @Controller
 public class BeaudamController {
 
-	@Resource(name="adminService")
+	@Resource(name = "adminService")
 	private AdminServiceImpl adminService;
 
-	@Resource(name="viewService")
+	@Resource(name = "viewService")
 	private ViewServiceImpl viewService1;
 
-	@Resource(name="saleService")
+	@Resource(name = "saleService")
 	private SaleServiceImpl saleService;
 
-	@Resource(name="productService")
+	@Resource(name = "productService")
 	private ProductServiceImpl productServiece;
 
-	@Resource(name="naverLoginBO")
+	@Resource(name = "otherService")
+	private OtherServiceImpl OtherService;
+
+	@Resource(name = "naverLoginBO")
 	private NaverLoginBO naverLoginBO;
-	
+
 	// ********************** Beaudam Page **********************
-	
+
 	@RequestMapping(value = "/login.action", method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request, HttpSession session) {
-		
+
 		/* 네아로 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
-        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-        
-        /* 생성한 인증 URL을 View로 전달 */
-        return new ModelAndView("beaudam/login", "url", naverAuthUrl);
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+
+		/* 생성한 인증 URL을 View로 전달 */
+		return new ModelAndView("beaudam/login", "url", naverAuthUrl);
 	}
-	
-	@RequestMapping(value="/login_ok.action", method = {RequestMethod.POST,RequestMethod.GET})
+
+	@RequestMapping(value = "/login_ok.action", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView doLogin(HttpServletRequest request, HttpSession session) {
-		
+
 		// 로그인 정보 받아오기
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("password");
-		
+
 		// 입력한 id 조회
 
-		if(id.equals("beaudam") && pwd.equals("a123")) {
-			
+		if (id.equals("beaudam") && pwd.equals("a123")) {
+
 			session.setAttribute("id", id);
 
 			return new ModelAndView("redirect:/main.action");
-			
-		}else {
-		
+
+		} else {
+
 			String errormessage = "아이디 또는 비밀번호가 잘못되었습니다.";
 
 			return new ModelAndView("beaudam/login", "message", errormessage);
-		
+
 		}
 	}
-	
+
 	@RequestMapping(value = "/logout.action", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpSession session) {
-		
+
 		session.removeAttribute("id");
-        
-        /* 생성한 인증 URL을 View로 전달 */
-        return new ModelAndView("redirect:/main.action");
+
+		/* 생성한 인증 URL을 View로 전달 */
+		return new ModelAndView("redirect:/main.action");
 
 	}
-	
+
 	@RequestMapping(value = "/callback.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
+	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session)
+			throws IOException, ParseException {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
-		
+
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
-		
+
 		JSONParser parser = new JSONParser();
-		
+
 		JSONObject obj1 = (JSONObject) parser.parse(apiResult);
-			
-		JSONObject obj2 =  (JSONObject) obj1.get("response");
-		
+
+		JSONObject obj2 = (JSONObject) obj1.get("response");
+
 		String id = (String) obj2.get("id");
 		String nickname = (String) obj2.get("nickname");
 		String gender = (String) obj2.get("gender");
@@ -182,10 +189,10 @@ public class BeaudamController {
 		session.setAttribute("id", id);
 		session.setAttribute("nickname", nickname);
 
-		/*return new ModelAndView("beaudam/callback","result",result);*/
+		/* return new ModelAndView("beaudam/callback","result",result); */
 		return new ModelAndView("redirect:/main.action");
 	}
-	
+
 	@RequestMapping(value = "/newTerm.action", method = RequestMethod.GET)
 	public String newTerm() {
 
@@ -209,12 +216,11 @@ public class BeaudamController {
 
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView main(HttpSession session) {
-		
+
 		String id = (String) session.getAttribute("id");
 
-
 		// 메인 페이지 이동
-		return new ModelAndView("beaudam/main","id",id);
+		return new ModelAndView("beaudam/main", "id", id);
 	}
 
 	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -232,22 +238,42 @@ public class BeaudamController {
 	}
 
 	// msj
-	@RequestMapping(value = "/pay.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String pay(HttpServletRequest request) {
+	@RequestMapping(value = "/pay.action", method = { RequestMethod.POST })
+	public ModelAndView pay(HttpServletRequest request) {
 
-		String pay = request.getParameter("pay");
-		if(pay != null) {
-
+		ModelAndView mav = new ModelAndView();
+		
+		String pay = request.getParameter("pay_ok");
+		if (pay != null) {
+			mav.setViewName("beaudam/payOk");
+			
 			// 결제완료 페이지 이동
-			return "beaudam/payOk";
+			return mav;
 		}
+		
+		mav.setViewName("beaudam/pay");
+		
+		//HttpSession session = request.getSession();
+		//String id = (String) session.getAttribute("id");
+		
+		List<BasketDTO> lists = new ArrayList<BasketDTO>();
+		Map<String, Object> hm = new HashMap<String, Object>();
+		
+		String id = "esteban"; // test Data
+		hm.put("id", id);
+		
+		String check[] = request.getParameterValues("check");
+		for(String s : check) {			
+			hm.put("basket_Num", s);
+			BasketDTO dto = OtherService.getBasketOneData(hm);
+			lists.add(dto);
+		}
+		
+		mav.addObject("lists", lists);
 
 		// 결제 페이지 이동
-		return "beaudam/pay";
+		return mav;
 	}
-
-
-
 
 	// ********************** My Page **********************
 
@@ -256,14 +282,27 @@ public class BeaudamController {
 
 		// 마이페이지 이동
 		return "myPage/myPage";
-	}	
+	}
 
-	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myBasket() {
+	// msj
+	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET })
+	public ModelAndView myBasket() {
 
 		// 장바구니(마이페이지) 페이지 이동
 
-		return "myPage/myBasket";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myPage/myBasket");
+		
+		//HttpSession session = request.getSession();
+		//String id = (String) session.getAttribute("id");
+		
+		String id = "esteban"; // test Data
+
+		List<BasketDTO> lists = OtherService.getBasketData(id);
+		
+		mav.addObject("lists", lists);
+		
+		return mav;
 	}
 
 	@RequestMapping(value = "/myInfo.action", method = RequestMethod.GET)
@@ -292,7 +331,7 @@ public class BeaudamController {
 
 	// msj
 	@RequestMapping(value = "/myOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myOrder() {
+	public String myOrder(HttpServletRequest request) {
 
 		// 주문정보 (마이페이지) 페이지 이동
 
@@ -308,76 +347,73 @@ public class BeaudamController {
 		return "myPage/myLeave";
 	}
 
-
 	// ********************** Admin Page **********************
 
-	//syj
-	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST})	
+	// syj
+	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_user(HttpServletRequest req) {
-		// 회원관리 페이지 이동			
+		// 회원관리 페이지 이동
 
-		if(req.getMethod().equalsIgnoreCase("POST")) {
-			Member_InfoDTO mv = new Member_InfoDTO();		
-			
+		if (req.getMethod().equalsIgnoreCase("POST")) {
+			Member_InfoDTO mv = new Member_InfoDTO();
+
 			String id = req.getParameter("id");
 			String name = req.getParameter("name");
 			String tel = req.getParameter("tel");
 			String cellphone = req.getParameter("cellphone");
 			String birth = req.getParameter("birth");
-			
-			System.out.println(id+name+tel+cellphone+birth);
-			
-			if(id != null && !id.equals("")) {
+
+			System.out.println(id + name + tel + cellphone + birth);
+
+			if (id != null && !id.equals("")) {
 				mv.setId(id);
-			}else {
+			} else {
 				id = "";
 				mv.setId(id);
 			}
-			if(name != null && !name.equals("")) {
+			if (name != null && !name.equals("")) {
 				mv.setName(name);
-			}else {
+			} else {
 				name = "";
 				mv.setName(name);
 			}
-			if(tel != null && !tel.equals("")) {
+			if (tel != null && !tel.equals("")) {
 				mv.setTel(tel);
-			}else {
+			} else {
 				tel = "";
 				mv.setTel(tel);
 			}
-			if(cellphone != null && !cellphone.equals("")) {
+			if (cellphone != null && !cellphone.equals("")) {
 				mv.setCellphone(cellphone);
-			}else {
+			} else {
 				cellphone = "";
 				mv.setCellphone(cellphone);
 			}
-			if(birth != null && !birth.equals("")) {
+			if (birth != null && !birth.equals("")) {
 				mv.setBirth(birth);
-			}else {
+			} else {
 				birth = "";
 				mv.setBirth(birth);
 			}
-			
+
 			List<MemberView> lists = viewService1.getSearchMemberData(mv);
-			
+
 			req.setAttribute("searchList", lists);
 
-			return "admin/adminUser"; 
-			
+			return "admin/adminUser";
+
 		}
-		
-		List<MemberView> memberList = viewService1.getAllMemberData();		
+
+		List<MemberView> memberList = viewService1.getAllMemberData();
 		req.setAttribute("memberList", memberList);
 
+		return "admin/adminUser";
 
-		return "admin/adminUser";		
-		
 	}
 
-	//syj
+	// syj
 	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProduct(HttpServletRequest request) {
-
 
 		HashMap<String, Object> searchPack = new HashMap<String, Object>();
 
@@ -387,22 +423,21 @@ public class BeaudamController {
 		String searchValue4 = request.getParameter("searchValue4");
 		String searchValue5 = request.getParameter("searchValue5");
 
-
-		if(searchValue1==null||searchValue1.equals("")) {
+		if (searchValue1 == null || searchValue1.equals("")) {
 			searchValue1 = "";
 		}
-		if(searchValue2==null||searchValue2.equals("")) {
+		if (searchValue2 == null || searchValue2.equals("")) {
 			searchValue2 = "";
 		}
-		if(searchValue3==null||searchValue3.equals("")) {
+		if (searchValue3 == null || searchValue3.equals("")) {
 			searchValue3 = "";
 		}
-		if(searchValue4==null||searchValue4.equals("")) {
+		if (searchValue4 == null || searchValue4.equals("")) {
 			searchValue4 = "";
 		}
-		if(searchValue5==null||searchValue5.equals("")) {
+		if (searchValue5 == null || searchValue5.equals("")) {
 			searchValue5 = "";
-		}	
+		}
 
 		searchPack.put("searchValue1", searchValue1);
 		searchPack.put("searchValue2", searchValue2);
@@ -410,62 +445,54 @@ public class BeaudamController {
 		searchPack.put("searchValue4", searchValue3);
 		searchPack.put("searchValue5", searchValue3);
 
-
 		List<ProductView> productView = viewService1.getAllProductData(searchPack);
 
 		List<Admin_BrandDTO> brandLists = adminService.getAdminBrand();
 		List<Admin_CategoryDTO> categoryLists = adminService.getAdminCatogory();
 		List<Admin_TypeDTO> typeLists = adminService.getAdminType();
-			
-		
-		//페이징 처리 추가		
 
-		//송출 데이터
+		// 페이징 처리 추가
+
+		// 송출 데이터
 		request.setAttribute("lists", productView);
 		request.setAttribute("brandLists", brandLists);
 		request.setAttribute("categoryLists", categoryLists);
 		request.setAttribute("typeLists", typeLists);
-		
-		
 
 		// 상품조회 페이지 이동
 		return "admin/adminProduct";
 	}
 
-	//syj
+	// syj
 	@RequestMapping(value = "/adminProduct_update.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminProduct_update(
-			BrandDTO bdto,
-			ColorDTO cdto,
-			ProductDTO pdto,
-			HttpServletRequest request) {
+	public String adminProduct_update(BrandDTO bdto, ColorDTO cdto, ProductDTO pdto, HttpServletRequest request) {
 
 		String pageNum = request.getParameter("pageNum");
-		
+
 		productServiece.updateBrand(bdto);
 		productServiece.updateColor(cdto);
-		productServiece.updateProduct(pdto);						
-			
+		productServiece.updateProduct(pdto);
+
 		// 상품수정완료 페이지 이동
 		return "admin/adminProduct";
 	}
-	
+
 	@RequestMapping(value = "/adminProductDelete.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProductdelete(HttpServletRequest request) {
-		
+
 		String pageNum = request.getParameter("pageNum");
-		String code = request.getParameter("code");	
-		
+		String code = request.getParameter("code");
+
 		productServiece.deleteBrand(code);
 		productServiece.deleteColor(code);
 		productServiece.deleteImg(code);
 		productServiece.deleteProduct(code);
-		
-		return "redirect:/adminProduct.action?pageNum="+pageNum;
-		
+
+		return "redirect:/adminProduct.action?pageNum=" + pageNum;
+
 	}
 
-	//syj
+	// syj
 	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String admin_new_product() {
 
@@ -473,73 +500,69 @@ public class BeaudamController {
 		return "admin/adminProduct_new";
 	}
 
-
-	//esteban
+	// esteban
 	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminBrand(HttpServletRequest req) {
-
 
 		// 브랜드 관리 페이지 이동
 		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
 		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
 
-
-		
-		//브랜드 추가
+		// 브랜드 추가
 		String addBrand = req.getParameter("addbrand");
-		
-		if(addBrand != null && !addBrand.equals("")) {				
-			Admin_BrandDTO dto = new Admin_BrandDTO();			
-			dto.setBrand(addBrand);	
-			req.removeAttribute("addbrand");				
-			adminService.insertBrand(dto);			
+
+		if (addBrand != null && !addBrand.equals("")) {
+			Admin_BrandDTO dto = new Admin_BrandDTO();
+			dto.setBrand(addBrand);
+			req.removeAttribute("addbrand");
+			adminService.insertBrand(dto);
 			return "redirect:/adminBrand.action";
 		}
-		
-		//브랜드 삭제
-		String delBrand = req.getParameter("delbrand");				
-		if(delBrand != null && !delBrand.equals("")) {				
-			req.removeAttribute("delBrand");			
-			adminService.deleteBrand(delBrand);			
+
+		// 브랜드 삭제
+		String delBrand = req.getParameter("delbrand");
+		if (delBrand != null && !delBrand.equals("")) {
+			req.removeAttribute("delBrand");
+			adminService.deleteBrand(delBrand);
 			return "redirect:/adminBrand.action";
 		}
-		
-		//카테고리 추가
+
+		// 카테고리 추가
 		String addCate = req.getParameter("addCate");
-		if(addCate != null && !addCate.equals("")) {				
-			Admin_CategoryDTO dto = new Admin_CategoryDTO();			
+		if (addCate != null && !addCate.equals("")) {
+			Admin_CategoryDTO dto = new Admin_CategoryDTO();
 			dto.setCategory(addCate);
-			req.removeAttribute("addCate");		
-			adminService.insertCategory(dto);			
+			req.removeAttribute("addCate");
+			adminService.insertCategory(dto);
 			return "redirect:/adminBrand.action";
 		}
-		//카테고리 삭제
-		String delCate = req.getParameter("delCate");						
-		if(delCate != null && !delCate.equals("")) {				
-			req.removeAttribute("delCate");			
-			adminService.deleteCategory(delCate);			
+		// 카테고리 삭제
+		String delCate = req.getParameter("delCate");
+		if (delCate != null && !delCate.equals("")) {
+			req.removeAttribute("delCate");
+			adminService.deleteCategory(delCate);
 			return "redirect:/adminBrand.action";
 		}
-		
-		//타입 추가
+
+		// 타입 추가
 		String addType = req.getParameter("addType");
-		if(addType != null && !addType.equals("")) {				
-			Admin_TypeDTO dto = new Admin_TypeDTO();			
+		if (addType != null && !addType.equals("")) {
+			Admin_TypeDTO dto = new Admin_TypeDTO();
 			dto.setType(addType);
-			req.removeAttribute("addType");			
-			adminService.insertType(dto);			
+			req.removeAttribute("addType");
+			adminService.insertType(dto);
 			return "redirect:/adminBrand.action";
 		}
-		//타입 삭제
+		// 타입 삭제
 		String delType = req.getParameter("delType");
-		if(delType != null && !delType.equals("")) {				
-			req.removeAttribute("delType");			
-			adminService.deleteType(delType);			
+		if (delType != null && !delType.equals("")) {
+			req.removeAttribute("delType");
+			adminService.deleteType(delType);
 			return "redirect:/adminBrand.action";
 		}
-		//관리 페이지 이동
+		// 관리 페이지 이동
 		List<Admin_CategoryDTO> category1 = adminService.getAdminCatogory();
-		List<Admin_BrandDTO> brand1 = adminService.getAdminBrand();		
+		List<Admin_BrandDTO> brand1 = adminService.getAdminBrand();
 
 		List<Admin_TypeDTO> type = adminService.getAdminType();
 
@@ -550,7 +573,7 @@ public class BeaudamController {
 		return "admin/adminBrand";
 	}
 
-	//esteban	
+	// esteban
 	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminOrder(HttpServletRequest request) {
 
@@ -560,14 +583,13 @@ public class BeaudamController {
 		String searchValue2 = request.getParameter("searchValue2");
 		String searchValue3 = request.getParameter("searchValue3");
 
-
-		if(searchValue1==null||searchValue1.equals("")) {
+		if (searchValue1 == null || searchValue1.equals("")) {
 			searchValue1 = "";
 		}
-		if(searchValue2==null||searchValue2.equals("")) {
+		if (searchValue2 == null || searchValue2.equals("")) {
 			searchValue2 = "";
 		}
-		if(searchValue3==null||searchValue3.equals("")) {
+		if (searchValue3 == null || searchValue3.equals("")) {
 			searchValue3 = "";
 		}
 
@@ -575,13 +597,12 @@ public class BeaudamController {
 		saleSearchPack.put("searchValue2", searchValue2);
 		saleSearchPack.put("searchValue3", searchValue3);
 
-
 		List<SaleView> saleView = viewService1.getAllSaleView(saleSearchPack);
 
-		//페이징 처리 추가	
-		
-		//리스트값 전송
-		request.setAttribute("lists", saleView);	
+		// 페이징 처리 추가
+
+		// 리스트값 전송
+		request.setAttribute("lists", saleView);
 
 		// 주문내역 관리 페이지 이동
 		return "admin/adminOrder";
@@ -592,11 +613,10 @@ public class BeaudamController {
 
 		saleService.updateSaleDate(dto);
 
-
 		return "admin/adminOrder";
 	}
 
-	//esteban
+	// esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminSales() {
 

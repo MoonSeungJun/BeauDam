@@ -99,5 +99,16 @@ public class OtherServiceImpl implements OtherService {
 		return lists;
 	}
 
+	@Override
+	public List<BasketDTO> getBasketData(String id) {
+		List<BasketDTO> lists = dao.getBasketData(id);
+		return lists;
+	}
 
+	public BasketDTO getBasketOneData(Map<String, Object> hm) {
+		BasketDTO dto = dao.getBasketOneData(hm);
+		
+		return dto;
+	}
+	
 }

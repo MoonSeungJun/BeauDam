@@ -105,5 +105,17 @@ public class OtherDAO {
 		return lists;
 	}
 	
+	public List<BasketDTO> getBasketData(String id) {
+		List<BasketDTO> lists = sessionTemplate.selectList("beaudam.getBasketData", id);
+		
+		return lists;
+	}
+	
+	public BasketDTO getBasketOneData(Map<String, Object> hm) {
+		BasketDTO dto = sessionTemplate.selectOne("beaudam.getBasketOneData", hm);
+		
+		return dto;
+	}
+	
 	
 }

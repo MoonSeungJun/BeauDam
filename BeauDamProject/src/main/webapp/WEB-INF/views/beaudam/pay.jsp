@@ -95,7 +95,7 @@
 <body>
 	
 	<br><br>
-	<table align="center" style="width: 650px;">
+	<table align="center" style="width: 1200px;">
 		<tr>
 			<td style="border-bottom-width: 2px; border-bottom-style: solid;border-bottom-color: black; ">
 				구매목록
@@ -103,7 +103,7 @@
 		</tr>	
 	</table>
 	
-	<table align="center" cellspacing="0" style="width: 650px; height:auto;" border="1" class="mytable">
+	<table align="center" cellspacing="0" style="width: 1200px; height:auto;" border="1" class="mytable">
 		<tr align="center">
 			<td>이미지</td>
 		
@@ -118,28 +118,30 @@
 			<td>총가격</td>
 		</tr>
 		
-		<tr align="center">
-			<td>
-				<img alt="image" src="<%=cp %>/join/img/chan.jpg">
-			</td>
-		
-			<td>에뛰드</td>
+		<c:forEach var="dto" items="${lists }">
+			<tr align="center">
+				<td width="15%">
+					<img style="margin: 0 auto; width: 100px; height: 100px;" src="${dto.thumb_Img }">
+				</td>
 			
-			<td>산호초립밤</td>
-			
-			<td>3,500원</td>
-			
-			<td>3</td>
-			
-			<td>10,500원</td>
-		</tr>
+				<td>에뛰드</td>
+				
+				<td>산호초립밤</td>
+				
+				<td>3,500원</td>
+				
+				<td>3</td>
+				
+				<td>10,500원</td>
+			</tr>
+		</c:forEach>
 		
 
 	</table>
 	
 	<br><br>
 	
-	<table align="center" style="width: 650px;">
+	<table align="center" style="width: 1200px;">
 		<tr>
 			<td style="border-bottom-width: 2px; border-bottom-style: solid;border-bottom-color: black; ">
 				할인 및 포인트
@@ -147,7 +149,7 @@
 		</tr>
 	</table>
 	
-	<table align="center" style="width: 650px;">
+	<table align="center" style="width: 1200px;">
 		<tr>
 			<td>쿠폰</td>
 			
@@ -175,7 +177,7 @@
 	
 	<br><br>
 	
-	<table style="width: 650px;" cellspacing="0" align="center" border="1" class="mytable">
+	<table style="width: 1200px;" cellspacing="0" align="center" border="1" class="mytable">
 		<tr>
 			<td colspan="2">배송정보</td>
 		</tr>
@@ -216,20 +218,24 @@
 	
 	<br><br>
 	
-	<table cellspacing="0" style="width: 650px;" height="350px;" align="center" border="1" class="mytable">
+	<table cellspacing="0" style="width: 1200px;" height="350px;" align="center" border="1" class="mytable">
 		<tr style="height: 50px" align="center">
-			<td style="width: 80%;">결제정보</td>
+			<td style="width: 75%;">결제정보</td>
 			
 			<td>결제금액</td>
 		</tr>
 		
 		<tr align="center">
-			<td style="height: 200px;">결제 수단 입력칸</td>
+			<td style="height: 200px;">
+				<input type="radio" name="payType">무통장 입금
+				<input type="radio" name="payType">카드 결제
+				<input type="radio" name="payType">
+			</td>
 			
-			<td rowspan="2">				
-				<table width="100%" border="0" style="font-size: 7pt; border: none;">
+			<td rowspan="2" valign="top">
+				<table width="80%" style="font-size: 9pt; margin-top: 10px; margin-left: 10px; margin-right: 10px;">
 					<tr>
-						<td colspan="2"><span id="pay" style="font-size: 20pt;">13,000</span><span style="font-size: 15pt;">원</span></td>
+						<td colspan="2"><span id="pay" style="font-size: 25pt;">13,000</span><span style="font-size: 20pt;">원</span></td>
 					</tr>
 					
 					<tr height="0.1px" style="background-color: black;"><td colspan="2"></td></tr>
@@ -254,13 +260,13 @@
 		</tr>
 		
 		<tr>
-			<td>
+			<td style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
 				<font size="2px">
 				<b>전자상거래 등에서의 소비자보호에 관한 법률에 따른 구매안전 서비스 이용안내</b><br><br>
-				옥션의 모든 판매자는 안전거래를 위해 구매금액, 결제수단에 상관없이<br>
+				옥션의 모든 판매자는 안전거래를 위해 구매금액, 결제수단에 상관없이
 				모든 거래에 대하여 ㈜뷰담의 구매안전서비스(에스크로)를 적용하고 있습니다.<br>
 				㈜뷰담의 전자금융거래법에 따른 결제대금예치업 등록번호는 02-006-00008입니다.<br>
-				등록여부는 금융감독원 홈페이지(www.fss.or.kr)<br/>
+				등록여부는 금융감독원 홈페이지(www.fss.or.kr)
 				"업무자료>인허가업무안내>전자금융업등록현황"에서 확인하실 수 있습니다.
 				</font>
 			</td>
