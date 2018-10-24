@@ -21,7 +21,7 @@
 			
 		<!-- Coupon -->
 			<insert id="insertCoupon" parameterType="com.table.otherDTO.CouponDTO">
-				insert into coupon (id, coupon) values (#{id},#{coupon1})
+				insert into coupon (id, coupon) values (#{id},#{coupon})
 			</insert>	
 		
 		

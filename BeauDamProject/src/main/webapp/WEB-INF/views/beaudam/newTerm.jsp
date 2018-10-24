@@ -78,24 +78,50 @@ button:hover {
 
 </style>
 
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <script type="text/javascript">
 
 /* 체크박스 전체선택, 전체해제 */
 
-   $(document).ready(function(){
-       $("#chk").change(function(){
-           if($("#chk").prop("checked")){
-        	   for(i=0; i < termForm.chk_e.length; i++) {
-        		   termForm.chk_e[i].prop('checked', true);
-        	   }
-           }else{
-        	   for(i=0; i < termForm.chk_e.length; i++) {
-        		   termForm.chk_e[i].prop('checked', false);
+	$(function(){
+	//전체선택 체크박스 클릭
+		$("#checkAll").click(function(){
+			//만약 전체 선택 체크박스가 체크된상태일경우 
+			if($("#checkAll").prop("checked")) {
+				//해당화면에 전체 checkbox들을 체크해준다 
+				$("input[type=checkbox]").prop("checked",true);
+				// 전체선택 체크박스가 해제된 경우 
+				} else { 
+					//해당화면에 모든 checkbox들의 체크를해제시킨다.
+					$("input[type=checkbox]").prop("checked",false);
 				}
-           }
-       });
-   });
-
+		})
+	})
+	
+	function nextStep(){
+		
+		var f = document.termForm;
+		var count = 0;
+		
+		for(var i=0; i<f.cb.length; i++){
+			
+			if(!f.cb[i].checked){
+				
+				count = count + 1;
+			
+			}
+				
+		}
+		
+		if(count > 0) {
+			alert("\n동의하지 않은 약관이 존재합니다!");
+			return;
+		} else if(count==0) {
+			location.href="<%=cp %>/newUser.action";
+		}
+		
+	}
+      
 </script>
 </head>
 <body style="font-family: SeoulHangangM">
@@ -112,7 +138,7 @@ button:hover {
 			<form name="termForm">
 				<div style="width: 1000px; margin: 0 auto">				
 					<h3 style="float: left">본 약관 전체를 동의합니다</h3>
-					<h3 style="float: right;"><input type="checkbox" id="chk"/>
+					<h3 style="float: right;"><input type="checkbox" name="all" id="checkAll"/>
 						전체동의
 					</h3>
 					<hr style="width: 1000px">
@@ -121,7 +147,7 @@ button:hover {
 						</iframe>
 					</div>
 					
-					<h4 style="float: right;"><input type="checkbox" name="chk_e"/>본 약관에 동의합니다</h4>
+					<h4 style="float: right;"><input type="checkbox" name="cb"/>본 약관에 동의합니다</h4>
 					<div style="height: 80px;"></div>
 					
 					<div style="box-sizing: border-box; padding: 13px 30px 25px 28px; background-color: #f4f7f8; border: 1px solid #e4eaed; height: 230px">
@@ -129,7 +155,7 @@ button:hover {
 						</iframe>
 					</div>
 					
-					<h4 style="float: right;"><input type="checkbox" name="chk_e"/>본 약관에 동의합니다</h4>
+					<h4 style="float: right;"><input type="checkbox" name="cb"/>본 약관에 동의합니다</h4>
 					<div style="height: 80px;"></div>
 					
 					<div style="box-sizing: border-box; padding: 13px 30px 25px 28px; background-color: #f4f7f8; border: 1px solid #e4eaed; height: 300px">
@@ -137,7 +163,7 @@ button:hover {
 						</iframe>
 					</div>
 					
-					<h4 style="float: right;"><input type="checkbox" name="chk_e"/>본 약관에 동의합니다</h4>
+					<h4 style="float: right;"><input type="checkbox" name="cb"/>본 약관에 동의합니다</h4>
 					<div style="height: 80px;"></div>				
 	
 	
@@ -146,7 +172,7 @@ button:hover {
 						</iframe>
 					</div>
 					
-					<h4 style="float: right;"><input type="checkbox" name="chk_e"/>본 약관에 동의합니다</h4>
+					<h4 style="float: right;"><input type="checkbox" name="cb"/>본 약관에 동의합니다</h4>
 					<div style="height: 80px;"></div>						
 				</div>
 			</form>
@@ -155,8 +181,7 @@ button:hover {
 			<div align="center" style="margin: 0 auto">
 				<button type="button" onclick=
 					"javascript:location.href='<%=cp %>/main.action'" style="width: 100px">취소</button>
-				<button type="button" onclick=
-					"javascript:location.href='<%=cp %>/newUser.action'" style="width: 100px">다음으로</button>
+				<button type="button" onclick="nextStep();" style="width: 100px">다음으로</button>
 			</div>
 	</div>
 </body>

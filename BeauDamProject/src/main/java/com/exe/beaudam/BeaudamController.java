@@ -118,7 +118,7 @@ public class BeaudamController {
 		// 이벤트1 페이지 이동
 		return "beaudam/event3";
 		
-	}	
+	}
 
 	// msj
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.GET, RequestMethod.POST })
