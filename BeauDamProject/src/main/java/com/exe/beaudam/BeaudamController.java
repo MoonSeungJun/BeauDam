@@ -64,8 +64,17 @@ import org.springframework.web.servlet.ModelAndView;
  *	파라미터 타입이 다들 다르니 사용 전 사용할 Mapper를 확인할 것
  *
  */
-@Controller
+@Controller("BeaudamController")
 public class BeaudamController {
+	
+	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView main(HttpSession session) {
+		
+		String id = (String) session.getAttribute("id");
+		
+		// 메인 페이지 이동
+		return new ModelAndView("beaudam/main","id",id);
+	}
 
 	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String productList() {
@@ -109,39 +118,7 @@ public class BeaudamController {
 		// 이벤트1 페이지 이동
 		return "beaudam/event3";
 		
-	}
-
-	@RequestMapping(value = "/newUser.action", method = RequestMethod.GET)
-	public String newUser() {
-
-		// 회원가입 페이지 이동
-		return "beaudam/newUser";
-	}
-	
-	@RequestMapping(value = "/newUser_ok.action", method = RequestMethod.POST)
-	public ModelAndView newUser_ok() {
-		
-		//member - member_Info - member_grade - coupon
-		
-		return new ModelAndView("redirect:/login.action");
-		
-	}
-
-	@RequestMapping(value = "/mainTop.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainTop() {
-
-		// 메인 페이지 이동
-		return "beaudam/mainTop";
-	}
-
-	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView main(HttpSession session) {
-		
-		String id = (String) session.getAttribute("id");
-
-		// 메인 페이지 이동
-		return new ModelAndView("beaudam/main","id",id);
-	}
+	}	
 
 	// msj
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.GET, RequestMethod.POST })

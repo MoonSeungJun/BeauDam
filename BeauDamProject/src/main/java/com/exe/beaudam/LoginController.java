@@ -49,7 +49,7 @@ import com.naver.naverlogin.*;
  *
  */
 
-@Controller
+@Controller("LoginController")
 public class LoginController {
 
 	
@@ -127,8 +127,7 @@ public class LoginController {
 
 		session.setAttribute("id", id);
 		session.setAttribute("nickname", nickname);
-
-		/*return new ModelAndView("beaudam/callback","result",result);*/
+		
 		return new ModelAndView("redirect:/main.action");
 	}
 	
@@ -144,15 +143,6 @@ public class LoginController {
 
 		// 회원가입 페이지 이동
 		return "beaudam/newUser";
-	}
-
-	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView main(HttpSession session) {
-		
-		String id = (String) session.getAttribute("id");
-		
-		// 메인 페이지 이동
-		return new ModelAndView("beaudam/main","id",id);
 	}
 
 }
