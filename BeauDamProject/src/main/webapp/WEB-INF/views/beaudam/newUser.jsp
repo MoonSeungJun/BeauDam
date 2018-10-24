@@ -62,6 +62,53 @@
             }
         }).open();
     }
+    
+    function register(){
+    	
+    	var f = document.registerForm;
+
+    	f.id.value = f.id.value.trim();
+    	
+    	if(!f.id.value){
+    		
+    		alert("아이디를 입력해주세요!");
+    		f.id.focus();
+    		return;
+    		
+    	}
+    	
+    	f.name.value = f.name.value.trim();
+    	
+    	if(!f.name.value){
+    		
+    		alert("이름을 입력해주세요!");
+    		f.name.focus();
+    		return;
+    		
+    	}
+    	
+    	f.nickname.value = f.nickname.value.trim();
+    	
+    	if(!f.nickname.value){
+    		
+    		alert("닉네임을 입력해주세요!");
+    		f.nickname.focus();
+    		return;
+    		
+    	}
+    	
+    	if(!f.gender.value){
+    		
+    		alert("성별을 선택해주세요!");
+    		f.gender.focus();
+    		return;
+    		
+    	}
+    	
+    	
+    }
+    
+    
 </script>
 
 <style type="text/css">
@@ -141,170 +188,179 @@ button:hover {
 				</div>
 			</div>
 			
-			<div style="width: 800px; margin: 0 auto">				
-				<h3 style="float: left">가입정보</h3>
-				<p style="color: red; float: right;"> * 필수입력사항</p>
-				<hr style="width: 800px">
-				<table style="width: 650px">
-					<tr>
-						<td width="150px" style="padding-left: 20px"><b>아이디</b></td>
-						<td><input type="text" name="id"/></td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px"><b>이름</b></td>
-						<td><input type="text" name="name"/></td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px"><b>닉네임</b></td>
-						<td><input type="text" name="nickname"/></td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px"><b>성별</b></td>
-						<td>
-							<input type="radio">남
-							<input type="radio">여
-						</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px"><b>생년월일</b></td>
-						<td>
-							<select>
-								<option>1994년</option>								
-							</select>
-							<select>
-								<option>06월</option>								
-							</select>
-							<select>
-								<option>11일</option>								
-							</select>
-							<input type="radio">양력
-							<input type="radio">음력
-						</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px"><b>비밀번호</b></td>
-						<td>
-							<input type="text" name="pwd"/>
-						</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px"><b>비밀번호확인</b></td>
-						<td>
-							<input type="text" name="pwd1"/>
-						</td>
-					</tr>
-					<tr>
-						<td rowspan="2" style="padding-left: 20px"><b>주소</b></td>
-						<td>
-							<input type="text" readonly="readonly" id="sample4_postcode" placeholder="우편번호">
-							<button type="button" onclick="sample4_execDaumPostcode()">우편번호 찾기</button><br/>
-							<span id="guide" style="color:#999"></span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="text" readonly="readonly" id="sample4_roadAddress" placeholder="도로명주소">
-							<input type="text" placeholder="상세주소">
-						</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px"><b>휴대폰번호</b></td>
-						<td>
-							<select name="hp1">
-								<option value="010">010</option>
-								<option value="016">016</option>
-								<option value="017">017</option>
-								<option value="018">018</option>
-								<option value="019">019</option>
-								<option value="011">011</option>
-							</select>
-							<input type="text" name="hp2"/>
-							<input type="text" name="hp3"/>
-						</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px"><b>전화번호</b></td>
-						<td>
-							<select>
-	                            <option value="">(선택)</option>
-	                            <option value="02">02</option>
-	                            <option value="031">031</option>
-	                            <option value="032">032</option>
-	                            <option value="033">033</option>
-	                            <option value="041">041</option>
-	                            <option value="042">042</option>
-	                            <option value="043">043</option>
-	                            <option value="044">044</option>
-	                            <option value="049">049</option>
-	                            <option value="051">051</option>
-	                            <option value="052">052</option>
-	                            <option value="053">053</option>
-	                            <option value="054">054</option>
-	                            <option value="055">055</option>
-	                            <option value="061">061</option>
-	                            <option value="062">062</option>
-	                            <option value="063">063</option>
-	                            <option value="064">064</option>
-	                            <option value="070">070</option>
-                            </select>
-							<input type="text" name="phone2"/>
-							<input type="text" name="phone3"/>
-						</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px"><b>이메일주소</b></td>
-						<td>
-							<input type="text" name="email1"/>
-							@
-							<input type="text" name="email2">
-							<select style="width:120px;">
-                              <option value="">직접입력</option>
-                              <option value="dreamwiz.com">dreamwiz.com</option>
-                              <option value="hanmail.net">hanmail.net</option>
-                              <option value="hotmail.com">hotmail.com</option>
-                              <option value="korea.com">korea.com</option>
-                              <option value="gmail.com">gmail.com</option>
-                              <option value="nate.com">nate.com</option>
-                              <option value="naver.com">naver.com</option>
-                              <option value="yahoo.co.kr">yahoo.co.kr</option>
-                            </select>
-						</td>
-					</tr>
-				</table>
+			<form name="registerForm" method="post">
+				<div style="width: 800px; margin: 0 auto">				
+					<h3 style="float: left">가입정보</h3>
+					<p style="color: red; float: right;"> * 필수입력사항</p>
+					<hr style="width: 800px">
+					<table style="width: 650px">
+						<tr>
+							<td width="150px" style="padding-left: 20px"><b>아이디</b></td>
+							<td><input type="text" name="id"/></td>
+						</tr>
+						<tr>
+							<td style="padding-left: 20px"><b>이름</b></td>
+							<td><input type="text" name="name"/></td>
+						</tr>
+						<tr>
+							<td style="padding-left: 20px"><b>닉네임</b></td>
+							<td><input type="text" name="nickname"/></td>
+						</tr>
+						<tr>
+							<td style="padding-left: 20px"><b>성별</b></td>
+							<td>
+								<input type="radio" name="gender" value="M">남
+								<input type="radio" name="gender" value="F">여
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-left: 20px"><b>생년월일</b></td>
+							<td>
+								<input type="text" name="year" placeholder="---- 년" style="text-align: center; width: 120;"/>
+								<select name="month" style="text-align: center;">
+									<option value="0">-- 월</option>	
+									<option value="1">01</option>	
+									<option value="2">02</option>	
+									<option value="3">03</option>	
+									<option value="4">04</option>	
+									<option value="5">05</option>	
+									<option value="6">06</option>	
+									<option value="7">07</option>	
+									<option value="8">08</option>			
+									<option value="9">09</option>	
+									<option value="10">10</option>	
+									<option value="11">11</option>
+									<option value="12">12</option>							
+								</select>
+								<input type="text" name="day" placeholder="-- 일" style="text-align: center;"/>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-left: 20px"><b>비밀번호</b></td>
+							<td>
+								<input type="password" name="pwd"/>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-left: 20px"><b>비밀번호확인</b></td>
+							<td>
+								<input type="password" name="pwd1"/>
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="2" style="padding-left: 20px"><b>주소</b></td>
+							<td>
+								<input type="text" readonly="readonly" id="sample4_postcode" placeholder="우편번호">
+								<button type="button" onclick="sample4_execDaumPostcode()">우편번호 찾기</button><br/>
+								<span id="guide" style="color:#999"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" readonly="readonly" id="sample4_roadAddress" placeholder="도로명주소">
+								<input type="text" placeholder="상세주소">
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-left: 20px"><b>휴대폰번호</b></td>
+							<td>
+								<select name="hp1">
+									<option value="010">010</option>
+									<option value="016">016</option>
+									<option value="017">017</option>
+									<option value="018">018</option>
+									<option value="019">019</option>
+									<option value="011">011</option>
+								</select>
+								<input type="text" name="hp2"/>
+								<input type="text" name="hp3"/>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-left: 20px"><b>전화번호</b></td>
+							<td>
+								<select>
+		                            <option value="">(선택)</option>
+		                            <option value="02">02</option>
+		                            <option value="031">031</option>
+		                            <option value="032">032</option>
+		                            <option value="033">033</option>
+		                            <option value="041">041</option>
+		                            <option value="042">042</option>
+		                            <option value="043">043</option>
+		                            <option value="044">044</option>
+		                            <option value="049">049</option>
+		                            <option value="051">051</option>
+		                            <option value="052">052</option>
+		                            <option value="053">053</option>
+		                            <option value="054">054</option>
+		                            <option value="055">055</option>
+		                            <option value="061">061</option>
+		                            <option value="062">062</option>
+		                            <option value="063">063</option>
+		                            <option value="064">064</option>
+		                            <option value="070">070</option>
+	                            </select>
+								<input type="text" name="phone2"/>
+								<input type="text" name="phone3"/>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-left: 20px"><b>이메일주소</b></td>
+							<td>
+								<input type="text" name="email1"/>
+								@
+								<input type="text" name="email2">
+								<select style="width:120px;">
+	                              <option value="">직접입력</option>
+	                              <option value="dreamwiz.com">dreamwiz.com</option>
+	                              <option value="hanmail.net">hanmail.net</option>
+	                              <option value="hotmail.com">hotmail.com</option>
+	                              <option value="korea.com">korea.com</option>
+	                              <option value="gmail.com">gmail.com</option>
+	                              <option value="nate.com">nate.com</option>
+	                              <option value="naver.com">naver.com</option>
+	                              <option value="yahoo.co.kr">yahoo.co.kr</option>
+	                            </select>
+							</td>
+						</tr>
+					</table>
+					
+					
+					<h3 style="float: left">부가정보 입력</h3>
+					<hr style="width: 800px">
+					<table>
+						<tr>
+							<td rowspan="2" width="150px" style="padding-left: 20px"><b>SMS 수신동의</b></td>
+							<td>SMS를 통해 이벤트 등 각종 소식을 받으시겠습니까?</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="radio" >동의
+								<input type="radio">동의하지 않음
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="2" style="padding-left: 20px"><b>이메일 수신동의</b></td>
+							<td>뷰담에서 제공하는 각종 소식을 이메일로 받으시겠습니까?</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="radio">동의
+								<input type="radio">동의하지 않음
+							</td>
+						</tr>
+					</table>
+				</div>
 				
-				
-				<h3 style="float: left">부가정보 입력</h3>
-				<hr style="width: 800px">
-				<table>
-					<tr>
-						<td rowspan="2" width="150px" style="padding-left: 20px"><b>SMS 수신동의</b></td>
-						<td>SMS를 통해 이벤트 등 각종 소식을 받으시겠습니까?</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="radio" >동의
-							<input type="radio">동의하지 않음
-						</td>
-					</tr>
-					<tr>
-						<td rowspan="2" style="padding-left: 20px"><b>이메일 수신동의</b></td>
-						<td>뷰담에서 제공하는 각종 소식을 이메일로 받으시겠습니까?</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="radio">동의
-							<input type="radio">동의하지 않음
-						</td>
-					</tr>
-				</table>
-			</div>
-			
-			<br/>
-			<div align="center" style="margin: 0 auto">
-				<button type="button" onclick=
-				"javascript:location.href='<%=cp %>/main.action'" style="width: 60px">취소</button>
-				<button type="button" style="width: 60px">가입</button>
-			</div>
+				<br/>
+				<div align="center" style="margin: 0 auto">
+					<button type="button" onclick=
+					"javascript:location.href='<%=cp %>/main.action'" style="width: 60px">취소</button>
+					<button type="button" onclick=
+						"register();" style="width: 60px">가입</button>
+				</div>
+			</form>
 	</div>
 </body>
 </html>
