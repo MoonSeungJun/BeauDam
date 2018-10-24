@@ -1,6 +1,6 @@
 package com.exe.beaudam;
 
-<<<<<<< HEAD
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -141,7 +141,7 @@ public class BeaudamController {
         /* 생성한 인증 URL을 View로 전달 */
         return new ModelAndView("beaudam/login", "url", naverAuthUrl);
 
-
+	}
 	@RequestMapping(value="/productList.action", method = {RequestMethod.GET,RequestMethod.POST})
 	public String productList() {
 		
