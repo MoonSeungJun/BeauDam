@@ -11,10 +11,18 @@
 <meta charset="UTF-8">
 <title>회원가입｜뷰담</title>
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
+<!-- <link rel="stylesheet" href="myTooltip.css"> -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- <script src="/beaudam/resources/js/myTooltip.js"></script> -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+
+	function checkId(){
+		window.open("<%=cp%>/checkId.action","아이디 중복체크","width=400, height=300, toolbar=no, menubar=no, scrollbars=no, resizable=no");
+	}
+	
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-    function sample4_execDaumPostcode() {
+    function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -43,8 +51,8 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+                document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('roadAddress').value = fullRoadAddr;
 
                 // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
                 if(data.autoRoadAddress) {
@@ -67,7 +75,6 @@
     	
     	var f = document.registerForm;
 
-    	f.id.value = f.id.value.trim();
     	
     	if(!f.id.value){
     		
@@ -77,8 +84,6 @@
     		
     	}
     	
-    	f.name.value = f.name.value.trim();
-    	
     	if(!f.name.value){
     		
     		alert("이름을 입력해주세요!");
@@ -87,28 +92,83 @@
     		
     	}
     	
-    	f.nickname.value = f.nickname.value.trim();
-    	
-    	if(!f.nickname.value){
+    	if(!f.nickName.value){
     		
     		alert("닉네임을 입력해주세요!");
-    		f.nickname.focus();
+    		f.nickName.focus();
     		return;
     		
     	}
     	
-    	if(!f.gender.value){
+    	if(!f.year.value){
     		
-    		alert("성별을 선택해주세요!");
-    		f.gender.focus();
+    		alert("태어난 년도를 입력해주세요!");
+    		f.year.focus();
     		return;
     		
     	}
     	
+    	if(f.month.value==0){
+    		
+    		alert("태어난 월을 선택해주세요!");
+    		f.month.focus();
+    		return;
+    		
+    	}
+    	
+    	if(!f.day.value){
+    		
+    		alert("태어난 일을 입력해주세요!");
+    		f.day.focus();
+    		return;
+    		
+    	}
+    	
+    	if(!f.pwd.value){
+    		
+    		alert("태어난 일을 입력해주세요!");
+    		f.day.focus();
+    		return;
+    		
+    	}
+    	
+    	if(!f.zip.value){
+    		
+    		alert("주소검색을 통해 우편번호를 검색해주세요!");
+    		return;
+    		
+    	}
+    	
+    	if(!f.street.value){
+    		
+    		alert("상세주소를 입력해주세요!");
+    		f.addr3.focus();
+    		return;
+    		
+    	}
+    	
+    	f.action = 'newUser_ok.action';
+    	f.submit();
     	
     }
     
-    
+
+	function checkPwd() {
+
+		var f = document.registerForm;
+		var pw1 = f.pwd.value;
+		var pw2 = f.pwd1.value;
+		if (pw1 != pw2) {
+
+			document.getElementById('checkPwd').style.color = "red";
+			document.getElementById('checkPwd').innerHTML = "비밀번호가 일치하지 않습니다";
+		} else {
+			document.getElementById('checkPwd').style.color = "green";
+			document.getElementById('checkPwd').innerHTML = "비밀번호가 일치합니다";
+
+		}
+
+	}
 </script>
 
 <style type="text/css">
@@ -175,6 +235,9 @@ button:hover {
 	cursor: pointer;
 }
 
+.mytooltip-content {
+	width: 300px;
+} 
 
 </style>
 </head>
@@ -196,7 +259,12 @@ button:hover {
 					<table style="width: 650px">
 						<tr>
 							<td width="150px" style="padding-left: 20px"><b>아이디</b></td>
-							<td><input type="text" name="id"/></td>
+							<td width="600px">
+								<input type="text" name="id"/>
+								<button type="button" onclick="checkId()"> 
+									아이디 중복 체크
+								</button>
+							</td>
 						</tr>
 						<tr>
 							<td style="padding-left: 20px"><b>이름</b></td>
@@ -204,7 +272,7 @@ button:hover {
 						</tr>
 						<tr>
 							<td style="padding-left: 20px"><b>닉네임</b></td>
-							<td><input type="text" name="nickname"/></td>
+							<td><input type="text" name="nickName"/></td>
 						</tr>
 						<tr>
 							<td style="padding-left: 20px"><b>성별</b></td>
@@ -219,15 +287,15 @@ button:hover {
 								<input type="text" name="year" placeholder="---- 년" style="text-align: center; width: 120;"/>
 								<select name="month" style="text-align: center;">
 									<option value="0">-- 월</option>	
-									<option value="1">01</option>	
-									<option value="2">02</option>	
-									<option value="3">03</option>	
-									<option value="4">04</option>	
-									<option value="5">05</option>	
-									<option value="6">06</option>	
-									<option value="7">07</option>	
-									<option value="8">08</option>			
-									<option value="9">09</option>	
+									<option value="01">01</option>	
+									<option value="02">02</option>	
+									<option value="03">03</option>	
+									<option value="04">04</option>	
+									<option value="05">05</option>	
+									<option value="06">06</option>	
+									<option value="07">07</option>	
+									<option value="08">08</option>			
+									<option value="09">09</option>	
 									<option value="10">10</option>	
 									<option value="11">11</option>
 									<option value="12">12</option>							
@@ -238,27 +306,32 @@ button:hover {
 						<tr>
 							<td style="padding-left: 20px"><b>비밀번호</b></td>
 							<td>
-								<input type="password" name="pwd"/>
+								<input class="js-mytooltip-pw form-control" id="ch_new_pw" type="password" name="pwd"
+								tabindex="3" data-mytooltip-direction="right" 
+								data-mytooltip-dinamic-content="true" 
+								data-mytooltip-action="focus" 
+								data-mytooltip-animate-duration="0"/>
 							</td>
 						</tr>
 						<tr>
 							<td style="padding-left: 20px"><b>비밀번호확인</b></td>
 							<td>
-								<input type="password" name="pwd1"/>
+								<input type="password" name="pwd1" onkeyup="checkPwd()"/>
+								<span id="checkPwd"></span>
 							</td>
 						</tr>
 						<tr>
 							<td rowspan="2" style="padding-left: 20px"><b>주소</b></td>
 							<td>
-								<input type="text" readonly="readonly" id="sample4_postcode" placeholder="우편번호">
-								<button type="button" onclick="sample4_execDaumPostcode()">우편번호 찾기</button><br/>
+								<input type="text" readonly="readonly" id="postcode" name="zip" placeholder="우편번호">
+								<button type="button" onclick="execDaumPostcode()">우편번호 찾기</button><br/>
 								<span id="guide" style="color:#999"></span>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="text" readonly="readonly" id="sample4_roadAddress" placeholder="도로명주소">
-								<input type="text" placeholder="상세주소">
+								<input type="text" readonly="readonly" id="roadAddress" name="city" placeholder="도로명주소">
+								<input type="text" name="street" placeholder="상세주소">
 							</td>
 						</tr>
 						<tr>
@@ -279,7 +352,7 @@ button:hover {
 						<tr>
 							<td style="padding-left: 20px"><b>전화번호</b></td>
 							<td>
-								<select>
+								<select name="phone1">
 		                            <option value="">(선택)</option>
 		                            <option value="02">02</option>
 		                            <option value="031">031</option>
@@ -310,7 +383,7 @@ button:hover {
 							<td>
 								<input type="text" name="email1"/>
 								@
-								<input type="text" name="email2">
+								<input type="text" name="email2"/>
 								<select style="width:120px;">
 	                              <option value="">직접입력</option>
 	                              <option value="dreamwiz.com">dreamwiz.com</option>
@@ -336,8 +409,8 @@ button:hover {
 						</tr>
 						<tr>
 							<td>
-								<input type="radio" >동의
-								<input type="radio">동의하지 않음
+								<input type="radio" name="smsAd" value="Y">동의
+								<input type="radio" name="smsAd" value="N" checked="checked">동의하지 않음
 							</td>
 						</tr>
 						<tr>
@@ -346,8 +419,8 @@ button:hover {
 						</tr>
 						<tr>
 							<td>
-								<input type="radio">동의
-								<input type="radio">동의하지 않음
+								<input type="radio" name="emailAd" value="Y">동의
+								<input type="radio" name="emailAd" value="N" checked="checked">동의하지 않음
 							</td>
 						</tr>
 					</table>
