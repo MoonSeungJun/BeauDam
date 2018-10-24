@@ -110,35 +110,12 @@ public class BeaudamController {
 		return "beaudam/event3";
 		
 	}
-
-	@RequestMapping(value = "/newUser.action", method = RequestMethod.GET)
-	public String newUser() {
-
-		// 회원가입 페이지 이동
-		return "beaudam/newUser";
-	}
 	
-	@RequestMapping(value = "/newUser_ok.action", method = RequestMethod.POST)
-	public ModelAndView newUser_ok() {
-		
-		//member - member_Info - member_grade - coupon
-		
-		return new ModelAndView("redirect:/login.action");
-		
-	}
-
-	@RequestMapping(value = "/mainTop.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainTop() {
-
-		// 메인 페이지 이동
-		return "beaudam/mainTop";
-	}
-
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView main(HttpSession session) {
 		
 		String id = (String) session.getAttribute("id");
-
+		
 		// 메인 페이지 이동
 		return new ModelAndView("beaudam/main","id",id);
 	}
