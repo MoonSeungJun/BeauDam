@@ -7,12 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<table border="1">
+	<jsp:include page="../beaudam/mainTop.jsp"/>
+	<table border="1" style="margin: 0 auto; background-color: aqua;">
 		<tr>
 			<td colspan="4">쿠폰조회</td>
 		</tr>
-
 		<tr>
 			<td width="20%">
 				<img src="./resources/image/coupon.jpg" height="100px">
@@ -30,11 +29,9 @@
 				<b style="font-size: 30pt; color: red;">1</b>장
 			</td>
 		</tr>
-
 		<tr>
 			<td colspan="4">쿠폰 내역</td>
 		</tr>
-		
 		<tr>
 			<td colspan="4">
 				<table border="1">
@@ -63,7 +60,6 @@
 						<td>20%</td>
 					</tr>
 					<!-- 출력 -->
-					
 					<tr>
 						<td colspan="5" style="background-color: #e6e4e6;">
 						<b>유의사항</b><br/>
