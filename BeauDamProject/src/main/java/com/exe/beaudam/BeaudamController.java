@@ -38,6 +38,7 @@ import com.view.view.SaleView;
 import javax.servlet.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 
 /*
@@ -64,7 +65,6 @@ import org.springframework.web.bind.annotation.*;
  *   -> 폴더명은 3번과 같이 자신의 페이지명과 똑같이 할 것
  *   -> css명은 어떤 용도의 이미지인지 알 수 있도록 지을 것
  */
-
 
 /*
  * 	쿼리 insert, delete 테이블 순서
@@ -100,8 +100,17 @@ import org.springframework.web.bind.annotation.*;
  *	파라미터 타입이 다들 다르니 사용 전 사용할 Mapper를 확인할 것
  *
  */
-@Controller
+@Controller("BeaudamController")
 public class BeaudamController {
+	
+	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView main(HttpSession session) {
+		
+		String id = (String) session.getAttribute("id");
+		
+		// 메인 페이지 이동
+		return new ModelAndView("beaudam/main","id",id);
+	}
 
 
 	@Resource(name="adminService")
@@ -158,6 +167,7 @@ public class BeaudamController {
 
 		// 이벤트1 페이지 이동
 		return "beaudam/event1";
+		
 	}
 	
 	@RequestMapping(value = "/event2.action", method = RequestMethod.GET)
@@ -169,10 +179,11 @@ public class BeaudamController {
 	
 	@RequestMapping(value = "/event3.action", method = RequestMethod.GET)
 	public String event3() {
-
-		// 이벤트3 페이지 이동
+		
+		// 이벤트1 페이지 이동
 		return "beaudam/event3";
-	}
+		
+	}	
 
 	// msj
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.GET, RequestMethod.POST })

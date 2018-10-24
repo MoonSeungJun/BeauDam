@@ -18,130 +18,7 @@ session="false" pageEncoding="UTF-8"%>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
     </head>
     <body>
-        <!-- 상단 시작 -->
-        <div class="header">
-            <div class="top">
-                GRAND OPEN! 신규 회원 20% 즉시 할인 쿠폰 증정!
-                <img src="<%=cp%>/resources/image/beaudam/main/top.png" onclick="$('.top').slideUp(400);" style="cursor:pointer">
-            </div>
-           <!-- <div class="login">
-                <ul>
-                    <li><a href="">고객센터</a></li>
-                    <li><a href="">회원가입</a></li>
-                    <li><a href="">LOGIN</a></li>
-                </ul>
-            </div>-->
-            <!-- 로고 영역 -->
-            <div class="header_wrapper">
-                <div class="login">
-                    <ul>
-                        <li><a href="">고객센터</a></li>
-               			<c:if test="${!empty id}">
-               			<li><a href="<%=cp%>/myPage.action">MY PAGE</a></li>
-                        <li><a href="<%=cp%>/logout.action">LOGOUT</a></li>
-                        <li><p>${id }님 환영합니다♥</p></li>
-               			</c:if>         
-               			<c:if test="${empty id }">
-                        <li><a href="<%=cp%>/newTerm.action">회원가입</a></li>
-                        <li><a href="<%=cp%>/login.action">LOGIN</a></li>
-                        </c:if>
-                    </ul>
-                </div>
-                <div class="header_container">
-                    <div class="header_grid">
-                        <div class="header_event">
-                            <p>GET IT!</p>
-                            <ul>
-                                <li><img src="<%=cp%>/resources/image/beaudam/main/header_event_l.png"></li>
-                                <li><img class="list_logo" src="<%=cp%>/resources/image/beaudam/main/etude.png"></li>
-                                <li>에뛰드하우스 틴트<br/>5,000원</li>
-                                <li><img src="<%=cp%>/resources/image/beaudam/main/header_event_r.png"></li>
-                            </ul>
-                        </div>
-                        <div class="header_logo">
-                            <a href="<%=cp %>/main.action"><img src="<%=cp%>/resources/image/beaudam/main/logo.png"></a>
-                        </div>
-                        <div class="header_search"> 
-                            <!-- 수정부분 -->
-                            <ul class="search_icon">
-                                <li><input type="button" value="GO!"></li>
-                                <li><input type="text" class="form-control" id="usr" placeholder="에뛰드 틴트" ></li>
-                            </ul>
-                            <ul class="search_icon">
-                                <li><img src="<%=cp%>/resources/image/beaudam/main/icon_blog1.gif"></li>
-                                <li><img src="<%=cp%>/resources/image/beaudam/main/icon_blog2.gif"></li>
-                                <li><a href="<%=cp %>/adminProduct.action"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog3.gif"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 카테고리 -->
-        <div class="navbar_container sticky">
-        <div class="navbar">
-            <div class="dropdown" >
-            <button class="dropbtn">CATERORY 
-                <i class="fa fa-caret-down"></i>
-            </button>
-                <div class="dropdown-content" style="width: 950px;">  
-                    <div class="column">
-                    <h3>SKIN</h3>
-                        <a href="<%=cp %>/productList.action">파운데이션</a>
-                        <a href="#">베이스</a>
-                        <a href="#">쿠션</a>
-                        <a href="#">파우더/팩트</a>
-                        <a href="#">프라이머</a>
-                        <a href="#">컨투어링/하이라이터</a>
-                        <a href="#">블러셔</a>
-                    </div>
-                    <div class="column">
-                    <h3>EYE</h3>
-                        <a href="#">쉐도우</a>
-                        <a href="#">마스카라</a>
-                        <a href="#">아이라이너</a>
-                    </div>
-                    <div class="column">
-                    <h3>LIP</h3>
-                        <a href="#">립스틱</a>
-                        <a href="#">틴트</a>
-                        <a href="#">립밤</a>
-                    </div>
-                    <div class="column">
-                    <h3>PACK</h3>
-                        <a href="#">워시오프팩</a>
-                        <a href="#">시트팩</a>
-                    </div>
-                    <div class="column">
-                    <h3>CEALSING</h3>
-                        <a href="#">클렌징폼</a>
-                        <a href="#">워터/오일</a>
-                        <a href="#">필링/스크럽</a>
-                    </div>
-                    <div class="column">
-                    <h3>PERFUME</h3>
-                        <a href="#">향수</a>
-                    </div>
-                    <div class="column">
-                    <h3>ACC</h3>
-                        <a href="#">브러쉬</a>
-                        <a href="#">뷰러</a>
-                        <a href="#">퍼프</a>
-                    </div>
-                </div>
-            </div> 
-                <a href="#home">BEST ITEM</a>
-                <a href="#news">NEW ITEM</a>
-                <a href="./event.action">EVENT</a>
-                <a href="#news">LOOKS</a>
-                <a href="#news">뷰담 PICK'S</a>
-                <a href="#news">SALE</a>
-            </div>
-            </div>
-        <!--</div>-->
-        <!-- 카테고리 끝 -->
-        
+	<jsp:include page="./mainTop.jsp"/>
         <!-- 슬라이드 이미지 -->
         <div class="container" style="width: 100%">  
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -151,7 +28,6 @@ session="false" pageEncoding="UTF-8"%>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
             </ol>
-
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
@@ -238,20 +114,7 @@ session="false" pageEncoding="UTF-8"%>
              	</ul>
             </div>
         </div>
-        <div class="footer">
-            <div>
-                <p>
-                사업자등록번호 : 113-81-17562   <Br/>
-                통신판매업신고번호 : 제2011-서울종로-1012호 사업자정보확인<Br/>
-                주소 : 아이티윌 15층 6강의실<Br/>   
-                대표이사 : 김해나  개인정보 보호책임자 : 김해나<Br/>
-                호스팅 서비스 제공자 : ㈜뷰담<Br/>
-                </p>
-            </div>
-        </div>
-        <div class="side">
-            <a href="./event1.action"><img src="<%=cp%>/resources/image/beaudam/main/side.png"></a> 
-        </div>
+        <jsp:include page="./mainBottom.jsp"/>
 
     </body>
 </html>
