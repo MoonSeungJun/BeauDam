@@ -626,14 +626,46 @@ public class BeaudamController {
 	public String inquire() {
 
 		// 1:1문의 페이지 이동
-		return "customerCenter/inquire";
+		return "customerCenter/mailForm";
 	}
 
-	@RequestMapping(value = "/notification.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String notification() {
+	@RequestMapping(value = "/notification_list.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String notification_list() {
 
 		// 공지사항 페이지 이동
-		return "customerCenter/notification";
+		return "customerCenter/notification_list";
 	}
+	
+	@RequestMapping(value = "/notification_create.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String notification_create() {
+
+		// 공지사항 등록 이동
+		return "customerCenter/notification_create";
+	}
+	
+	@RequestMapping(value = "/notification_update.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String notification_update() {
+
+		// 공지사항 수정 이동
+		return "customerCenter/notification_update";
+	}
+	
+	
+	@RequestMapping(value = "/notification_delete.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String notification_delete() {
+
+		// 공지사항 삭제 이동
+		return "customerCenter/notification_delete";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
