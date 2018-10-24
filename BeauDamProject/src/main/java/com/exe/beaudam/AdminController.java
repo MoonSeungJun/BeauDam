@@ -57,7 +57,7 @@ import com.view.view.*;
  *
  */
 
-@Controller
+@Controller("AdminController")
 public class AdminController {
 	
 	

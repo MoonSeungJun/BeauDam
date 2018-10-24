@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.*;
  *	파라미터 타입이 다들 다르니 사용 전 사용할 Mapper를 확인할 것
  *
  */
-@Controller
+@Controller("MyPageController")
 public class MyPageController {
 	
 
