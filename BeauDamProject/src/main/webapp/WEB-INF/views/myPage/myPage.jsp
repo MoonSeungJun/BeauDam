@@ -14,16 +14,6 @@
 <title>My Beaudam</title>
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
 <link rel="stylesheet" href="./resources/css/myPage/aaa.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $("#1").click(function(){
-        $.ajax({url: "./myOrder.action", success: function(result){
-            $("#float_right").html(result);
-        }});
-    });
-});
-</script>
 </head>
 <body>
 	<jsp:include page="../beaudam/mainTop.jsp" />
@@ -164,6 +154,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 				</div>
+				
 			</div>
 	</div>
 	<jsp:include page="../beaudam/mainBottom.jsp" />
