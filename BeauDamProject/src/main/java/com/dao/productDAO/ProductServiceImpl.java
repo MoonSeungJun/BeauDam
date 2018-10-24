@@ -1,10 +1,13 @@
 package com.dao.productDAO;
 
+import java.util.*;
+
 import javax.annotation.*;
 
 import org.springframework.stereotype.*;
 
 import com.table.productDTO.*;
+import com.view.view.*;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
@@ -25,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void inserImg(ImgDTO dto) {
-		dao.inserImg(dto);
+	public void insertImg(ImgDTO dto) {
+		dao.insertImg(dto);
 		
 	}
 
@@ -84,6 +87,17 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 
+	@Override
+	public List<ProductView> getProductList() {
+		List<ProductView> lists = dao.getProductList();
+		return lists;
+	}
+	
+	@Override
+	public ProductView getOneProductData(String code) {
+		ProductView view = dao.getOneProductData(code);
+		return view;
+	}
 	
 	
 }

@@ -1,5 +1,6 @@
 package com.exe.beaudam;
 
+<<<<<<< HEAD
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,11 @@ import com.table.saleDTO.Sale_DateDTO;
 import com.view.view.MemberView;
 import com.view.view.ProductView;
 import com.view.view.SaleView;
+
+import javax.servlet.http.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
+
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -97,6 +103,7 @@ import com.view.view.SaleView;
 @Controller
 public class BeaudamController {
 
+
 	@Resource(name="adminService")
 	private AdminServiceImpl adminService;
 
@@ -126,83 +133,10 @@ public class BeaudamController {
         return new ModelAndView("beaudam/login", "url", naverAuthUrl);
 
 
-	}
-	
-	@RequestMapping(value="/login_ok.action", method = {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView doLogin(HttpServletRequest request, HttpSession session) {
-		
-		// 로그인 정보 받아오기
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("password");
-		
-		// 입력한 id 조회
-
-		if(id.equals("beaudam") && pwd.equals("a123")) {
-			
-			session.setAttribute("id", id);
-
-			return new ModelAndView("redirect:/main.action");
-			
-		}else {
-		
-			String errormessage = "아이디 또는 비밀번호가 잘못되었습니다.";
-
-			return new ModelAndView("beaudam/login", "message", errormessage);
-		
-		}
-	}
-	
-	@RequestMapping(value = "/callback.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
-		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
-		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		String apiResult = naverLoginBO.getUserProfile(oauthToken);
-		return new ModelAndView("beaudam/callback", "result", apiResult);
-	}
-	
-	@RequestMapping(value = "/newTerm.action", method = RequestMethod.GET)
-	public String newTerm() {
-
-		// 약관 페이지 이동
-		return "beaudam/newTerm";
-	}
-
-	@RequestMapping(value = "/newUser.action", method = RequestMethod.GET)
-	public String newUser() {
-
-		// 회원가입 페이지 이동
-		return "beaudam/newUser";
-	}
-
-	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
-
-	public String main() {
-
-		// 메인 페이지 이동
-		return "beaudam/main";
-	}
-
-	@RequestMapping(value = "/mainTop.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainTop() {
-
-		// 메인 페이지 이동
-		return "beaudam/mainTop";
-	}
-
-	public ModelAndView main(HttpSession session) {
-		
-		String id = (String) session.getAttribute("id");
-
-
-		// 메인 페이지 이동
-		return new ModelAndView("beaudam/main","id",id);
-	}
-
-	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value="/productList.action", method = {RequestMethod.GET,RequestMethod.POST})
 	public String productList() {
-
-		// 상품리스트 페이지 이동
-		return "beaudam/productList";
+		
+		return "beaudam/productList";		
 	}
 
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -210,6 +144,34 @@ public class BeaudamController {
 
 		// 상품상세 페이지 이동
 		return "beaudam/productDetail";
+	}
+	
+	@RequestMapping(value = "/event.action", method = RequestMethod.GET)
+	public String event() {
+
+		// 이벤트 리스트 페이지 이동
+		return "beaudam/event";
+	}
+	
+	@RequestMapping(value = "/event1.action", method = RequestMethod.GET)
+	public String event1() {
+
+		// 이벤트1 페이지 이동
+		return "beaudam/event1";
+	}
+	
+	@RequestMapping(value = "/event2.action", method = RequestMethod.GET)
+	public String event2() {
+
+		// 이벤트2 페이지 이동
+		return "beaudam/event2";
+	}
+	
+	@RequestMapping(value = "/event3.action", method = RequestMethod.GET)
+	public String event3() {
+
+		// 이벤트3 페이지 이동
+		return "beaudam/event3";
 	}
 
 	// msj
@@ -226,6 +188,7 @@ public class BeaudamController {
 		// 결제 페이지 이동
 		return "beaudam/pay";
 	}
+
 
 
 
@@ -395,7 +358,7 @@ public class BeaudamController {
 		List<ProductView> productView = viewService.getAllProductData(searchPack);
 
 		List<Admin_BrandDTO> brandLists = adminService.getAdminBrand();
-		List<Admin_CategoryDTO> categoryLists = adminService.getAdminCatogory();
+		List<Admin_CategoryDTO> categoryLists = adminService.getAdminCategory();
 		List<Admin_TypeDTO> typeLists = adminService.getAdminType();
 			
 		
@@ -461,7 +424,7 @@ public class BeaudamController {
 
 
 		// 브랜드 관리 페이지 이동
-		List<Admin_CategoryDTO> category = adminService.getAdminCatogory();
+		List<Admin_CategoryDTO> category = adminService.getAdminCategory();
 		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
 
 
@@ -519,7 +482,7 @@ public class BeaudamController {
 			return "redirect:/adminBrand.action";
 		}
 		//관리 페이지 이동
-		List<Admin_CategoryDTO> category1 = adminService.getAdminCatogory();
+		List<Admin_CategoryDTO> category1 = adminService.getAdminCategory();
 		List<Admin_BrandDTO> brand1 = adminService.getAdminBrand();		
 
 		List<Admin_TypeDTO> type = adminService.getAdminType();
@@ -657,15 +620,6 @@ public class BeaudamController {
 		// 공지사항 삭제 이동
 		return "customerCenter/notification_delete";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 }

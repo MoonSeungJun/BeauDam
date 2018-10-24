@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.adminDTO.*;
+import com.view.view.*;
 
 
 @Repository("adminDAO")
@@ -51,7 +52,7 @@ public class AdminDAO {
 	}
 
 	
-	public List<Admin_CategoryDTO> getAdminCatogory() {
+	public List<Admin_CategoryDTO> getAdminCategory() {
 		List<Admin_CategoryDTO> lists = sessionTemplate.selectList("beaudam.getAdminCategory");
 		return lists;
 	}
@@ -61,5 +62,10 @@ public class AdminDAO {
 		List<Admin_TypeDTO> lists = sessionTemplate.selectList("beaudam.getAdminType");
 		return lists;
 	}	
+	
+	public List<AdminView> getAdminTypeData(Map<String, Object> map) {
+		List<AdminView> lists = sessionTemplate.selectList("beaudam.getAdminTypeData",map);
+		return lists;
+	}
 	
 }

@@ -36,8 +36,15 @@ session="false" pageEncoding="UTF-8"%>
                 <div class="login">
                     <ul>
                         <li><a href="">고객센터</a></li>
+               			<c:if test="${!empty id}">
+               			<li><a href="<%=cp%>/myPage.action">MY PAGE</a></li>
+                        <li><a href="<%=cp%>/logout.action">LOGOUT</a></li>
+                        <li><p>${id }님 환영합니다♥</p></li>
+               			</c:if>         
+               			<c:if test="${empty id }">
                         <li><a href="<%=cp%>/newTerm.action">회원가입</a></li>
                         <li><a href="<%=cp%>/login.action">LOGIN</a></li>
+                        </c:if>
                     </ul>
                 </div>
                 <div class="header_container">
@@ -126,7 +133,7 @@ session="false" pageEncoding="UTF-8"%>
             </div> 
                 <a href="#home">BEST ITEM</a>
                 <a href="#news">NEW ITEM</a>
-                <a href="#news">EVENT</a>
+                <a href="./event.action">EVENT</a>
                 <a href="#news">LOOKS</a>
                 <a href="#news">뷰담 PICK'S</a>
                 <a href="#news">SALE</a>
@@ -243,7 +250,7 @@ session="false" pageEncoding="UTF-8"%>
             </div>
         </div>
         <div class="side">
-            <a href=""><img src="<%=cp%>/resources/image/beaudam/main/side.png"></a> 
+            <a href="./event1.action"><img src="<%=cp%>/resources/image/beaudam/main/side.png"></a> 
         </div>
 
     </body>

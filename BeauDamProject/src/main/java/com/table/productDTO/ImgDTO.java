@@ -16,19 +16,19 @@ public class ImgDTO {
         this.code = code;
     }
 
-    public String getThumbImg() {
+    public String getThumb_Img() {
         return thumb_Img;
     }
 
-    public void setThumbImg(String detail_Img) {
+    public void setThumb_Img(String detail_Img) {
         this.thumb_Img = detail_Img;
     }
 
-    public String getDetailImg() {
+    public String getDetai_lImg() {
         return detail_Img;
     }
 
-    public void setDetailImg(String detail_Img) {
+    public void setDetail_Img(String detail_Img) {
         this.detail_Img = detail_Img;
     }
 
