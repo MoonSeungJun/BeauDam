@@ -58,7 +58,7 @@
 						<dl>
 							<dt style="float: left;">등급</dt>
 							<dd>	
-								<span style="float: right;" >sliver</span>
+								<span style="float: right;" >silver</span>
 							</dd>
 						</dl>
 					</div>
@@ -148,7 +148,7 @@
 								</dl>
 								<dl>
 									<dt>등급</dt>
-									<dd>Sliver</dd>
+									<dd>Silver</dd>
 								</dl>
 							</div>
 						</div>
