@@ -62,7 +62,7 @@ session="false" pageEncoding="UTF-8"%>
                             <ul class="search_icon">
                                 <li><img src="<%=cp%>/resources/image/beaudam/main/icon_blog1.gif"></li>
                                 <li><img src="<%=cp%>/resources/image/beaudam/main/icon_blog2.gif"></li>
-                                <li><img src="<%=cp%>/resources/image/beaudam/main/icon_blog3.gif"></li>
+                                <li><a href="<%=cp %>/adminProduct.action"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog3.gif"></a></li>
                             </ul>
                         </div>
                     </div>
@@ -125,7 +125,7 @@ session="false" pageEncoding="UTF-8"%>
             </div> 
                 <a href="#home">BEST ITEM</a>
                 <a href="#news">NEW ITEM</a>
-                <a href="#news">EVENT</a>
+                <a href="./event.action">EVENT</a>
                 <a href="#news">LOOKS</a>
                 <a href="#news">뷰담 PICK'S</a>
                 <a href="#news">SALE</a>

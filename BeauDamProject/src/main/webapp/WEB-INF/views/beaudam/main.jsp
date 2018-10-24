@@ -133,7 +133,7 @@ session="false" pageEncoding="UTF-8"%>
             </div> 
                 <a href="#home">BEST ITEM</a>
                 <a href="#news">NEW ITEM</a>
-                <a href="#news">EVENT</a>
+                <a href="./event.action">EVENT</a>
                 <a href="#news">LOOKS</a>
                 <a href="#news">뷰담 PICK'S</a>
                 <a href="#news">SALE</a>
@@ -250,7 +250,7 @@ session="false" pageEncoding="UTF-8"%>
             </div>
         </div>
         <div class="side">
-            <a href=""><img src="<%=cp%>/resources/image/beaudam/main/side.png"></a> 
+            <a href="./event1.action"><img src="<%=cp%>/resources/image/beaudam/main/side.png"></a> 
         </div>
 
     </body>
