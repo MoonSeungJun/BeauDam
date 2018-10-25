@@ -90,16 +90,6 @@ public class BeaudamController {
 	
 	// ********************** Beaudam Page **********************
 	
-	@RequestMapping(value = "/login.action", method = RequestMethod.GET)
-	public ModelAndView login(HttpServletRequest request, HttpSession session) {
-		
-		/* 네아로 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
-        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-        
-        /* 생성한 인증 URL을 View로 전달 */
-        return new ModelAndView("beaudam/login", "url", naverAuthUrl);
-
-	}
 	@RequestMapping(value="/productList.action", method = {RequestMethod.GET,RequestMethod.POST})
 	public String productList() {
 		
