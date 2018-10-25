@@ -1,21 +1,14 @@
 package com.dao.saleDAO;
 
-<<<<<<< HEAD
-import java.util.*;
-=======
-import java.util.List;
->>>>>>> 1696839a53f603cd4c87c3d31c1409a1b91531e9
 
+import java.util.*;
 import org.mybatis.spring.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.saleDTO.*;
-<<<<<<< HEAD
+
 import com.view.view.*;
-=======
-import com.view.view.SaleView;
->>>>>>> 1696839a53f603cd4c87c3d31c1409a1b91531e9
 
 @Repository("saleDAO")
 public class SaleDAO {
@@ -44,10 +37,7 @@ public class SaleDAO {
 	public void updateSaleDate(SaleView dto) {
 		sessionTemplate.update("beaudam.updateSaleDate", dto);
 
-	}
-	
-<<<<<<< HEAD
-	
+	}	
 	
 	public List<SaleView> getAllSaleData() {
 		List<SaleView> lists = sessionTemplate.selectList("beaudam.getAllSaleData");
@@ -65,22 +55,5 @@ public class SaleDAO {
 		List<SaleView> lists = sessionTemplate.selectList("beaudam.getSearchSaleData",map);
 		return lists;
 	}
-
-=======
-	public List<Sale_DateDTO> getAdminDaySales(){
-		List<Sale_DateDTO> lists = sessionTemplate.selectList("beaudam.getAdminDaySales");
-		return lists;
-	}
-	
-	public List<Sale_DateDTO> getAdminMonthSales(String yearSearchValue){
-		List<Sale_DateDTO> lists = sessionTemplate.selectList("beaudam.getAdminMonthSales");
-		return lists;
-	}
-
-	public List<Sale_DateDTO> getAdminYearSales(){
-		List<Sale_DateDTO> lists = sessionTemplate.selectList("beaudam.getAdminYearSales");
-		return lists;
-	}
->>>>>>> 1696839a53f603cd4c87c3d31c1409a1b91531e9
 
 }
