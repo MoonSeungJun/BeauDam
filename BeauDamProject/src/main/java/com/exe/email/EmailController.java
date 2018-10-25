@@ -22,7 +22,7 @@ public class EmailController {
 		
 		emailSender.sendEmail(form);
 				
-		return "redirect:/adminUser.action";
+		return "redirect:/inquire.action";
 	}
 	
 }

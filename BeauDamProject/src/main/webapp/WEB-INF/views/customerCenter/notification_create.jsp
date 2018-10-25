@@ -32,6 +32,7 @@
 </script>
 </head>
 <body>
+<jsp:include page="../beaudam/mainTop.jsp" />
 	<form action="" name="notificationCreateForm" method="post">
 	<table border="1" align="center">
 	

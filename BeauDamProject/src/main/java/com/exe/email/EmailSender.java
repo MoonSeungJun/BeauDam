@@ -21,7 +21,7 @@ public class EmailSender {
 		MimeMessage message = mailSender.createMimeMessage();
 
 		// 받는사람
-		message.setRecipient(Message.RecipientType.TO, new InternetAddress("esteban1009@naver.com"));
+		message.setRecipient(Message.RecipientType.TO, new InternetAddress("alzkdpf24@naver.com"));
 
 		message.setSubject(emailForm.getSubject());
 		
