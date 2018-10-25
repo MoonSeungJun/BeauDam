@@ -19,6 +19,8 @@ public interface MemberService {
 	void updateIsLeave(String id);
 	
 //	delete
-
-	
+	void deleteMember(String id);
+	void deleteMemberGrade(String id);
+	void deleteMemberInfo(String id);
+	void deleteCoupon(String id);
 }

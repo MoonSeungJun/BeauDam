@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="../beaudam/mainTop.jsp" />
 <br><br>
 	<table border="0" align="center" width="40%">
 		<tr>

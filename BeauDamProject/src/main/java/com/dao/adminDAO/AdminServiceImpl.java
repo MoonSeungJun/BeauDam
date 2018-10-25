@@ -68,5 +68,10 @@ public class AdminServiceImpl implements AdminService {
 		List<AdminView> lists = dao.getAdminTypeData(map);
 		return lists;
 	}
+	@Override
+	public void deleteCateType(String category) {
+		dao.deleteCateType(category);
+		
+	}
 
 }

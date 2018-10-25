@@ -19,10 +19,20 @@
 		
 		f.action="<%=cp%>/notification.action";
 		f.submit();
-		
-		
+				
 	}
 
+	//1:1문의연결팝업
+    function popupOpen(){
+
+	var popUrl = "inquire.action";	//팝업창에 출력될 페이지 URL
+
+	var popOption = "width=300, height=300, resizable=yes, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
+
+		window.open(popUrl,"",popOption);
+
+	}
+	
 
 </script>
 
@@ -30,12 +40,61 @@
 
 </head>
 <body>
-<div style="float: left; height: 240px;">
-	<form action="" name="notificationListForm" method="post">
-	<table border="1"  style="height: 100%;">  
+<!-- 윗부분 -->
+<jsp:include page="../beaudam/mainTop.jsp" />
+<div >
+	<table border="0" align="center" style="width:25% ">
+		<tr align="center">
+			<td align="center">
+				HOME ><a href="notification.action">고객센터</a> > 공지사항
+			</td>
+		</tr>
+		
+		<tr align="center">
+			<td align="center">
+				공지사항<br>
+				Customer Center
+			</td>
+		</tr>
+			
+	</table>
+</div>
+
+<br><br>
+<!-- 왼쪽 사이드 메뉴바 -->
+
+<div style="float: left;margin-left:260px; margin-right: 30px; height: auto; width: 260px;">
+	<table border="1" align="center" style="height: 100%; width: 100%;">
+		<tr>
+			<td align="center">
+			  <a href="notification.action">공지사항</a>
+			</td>
+								
+		</tr>		
 		
 		<tr>
-			<td>
+			<td align="center">
+			 <a href="javascript:popupOpen();" > 1:1문의 </a>
+			 </td>	
+		</tr>
+		
+		<tr>
+			<td align="center">
+			  <a href="faq.action">자주묻는질문</a>
+			</td>
+									
+		</tr>
+		
+				
+	</table>
+</div>
+
+<div style="float: left; height:auto;width: 52%;">
+	<form action="" name="notificationListForm" method="post">
+	<table border="0"  style="height: 100%; width: 100%;" >  
+		
+		<tr>
+			<td align="center">
 				<select name="searchKey" >
 					<option value="subject">제목</option>
 					<option value="content">내용</option>
@@ -52,9 +111,20 @@
 			</td>
 			
 		</tr>
+		<tr align="center">
+			<td>
+			 	번호
+			</td>
+			<td>
+				제목
+			</td>
+			<td>
+				작성일
+			</td>
+		</tr>
 		
 		<c:forEach var="dto" items="${lists }">
-		<tr>
+		<tr align="center">
 			<td>
 				${dto.num }
 			</td>
@@ -68,7 +138,11 @@
 			</td>		
 		</tr>
 		</c:forEach>
-		
+		<tr>
+			<td colspan="3">
+				&nbsp;
+			</td>
+		</tr>
 		<tr align="center">
 			<td colspan="3" align="center">
 				<c:if test="${dataCount!=0 }">
@@ -79,14 +153,17 @@
 				</c:if>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="3" align="center">
-				<input type="button" value="공지등록하기" 
+		<tr style="height: 35px;">
+			<td colspan="2" align="right">
+			</td>
+			<td align="center">
+				<input type="button" value="공지등록" 
 				onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
 			</td>	
 		</tr>
 	</table>
 </form>
+</div>
 </div>
 </body>
 </html>

@@ -27,24 +27,32 @@
 			success: function() {			
 				window.location.href = "/beaudam/adminBrand.action";
 				alert('추가되었습니다.');
-			}	
+			},
+			error: function() {
+				alert("이미 추가된 브랜드입니다.");
+			}
 		});		
 	}
 	
-	function delBrand(brand) {		
-		$.ajax({			
-			type: 'POST',
-			url: "adminBrand.action",
-			data: {"delbrand":brand},
-			async:false,
-			success: function() {				
-				window.location.href = "/beaudam/adminBrand.action";
-				alert('삭제되었습니다.');
-			},
-			error: function() {
-				alert('브랜드 내 상품이 존재합니다.');
-			}
-		});				
+	function delBrand(brand) {
+		if(confirm("삭제하시겠습니까?")==true){
+			$.ajax({			
+				type: 'POST',
+				url: "adminBrand.action",
+				data: {"delbrand":brand},
+				async:false,
+				success: function() {				
+					window.location.href = "/beaudam/adminBrand.action";
+					alert('삭제되었습니다.');
+				},
+				error: function() {
+					alert('브랜드 내 상품이 존재합니다.');
+				}
+			});	
+		}else{
+			return;
+		}
+					
 	}
 
 
@@ -59,24 +67,33 @@
 			success: function() {				
 				window.location.href = "/beaudam/adminBrand.action";
 				alert('추가되었습니다.');
-			}	
+			},
+			error: function() {
+				alert('이미 추가된 카테고리입니다.');
+			}
 		});		
 	}
 	
 	function delCate(cate) {		
-		$.ajax({			
-			type: 'POST',
-			url: "adminBrand.action",
-			data: {"delCate":cate},
-			async:false,
-			success: function() {				
-				window.location.href = "/beaudam/adminBrand.action";
-				alert('삭제되었습니다.');
-			},
-			error: function() {
-				alert('카테고리 내 상품이 존재합니다.');
-			}
-		});				
+		
+		if(confirm("삭제하시겠습니까?") == true){
+			$.ajax({			
+				type: 'POST',
+				url: "adminBrand.action",
+				data: {"delCate":cate},
+				async:false,
+				success: function() {				
+					window.location.href = "/beaudam/adminBrand.action";
+					alert('삭제되었습니다.');
+				},
+				error: function() {
+					alert('카테고리 내 상품이 존재합니다.');
+				}
+			});				
+		}else{
+			return;
+		}
+		
 	}
 	
 	function findType(cate) {
@@ -104,34 +121,45 @@
 		});		
 	}
 		
-	function addType() {		
-		$.ajax({
-			type: 'POST',
-			url: "adminBrand.action",
-			data: {"addCategory":category, "addType":$('#typeInput').val()},
-			async:false,
-			dataType: "text",
-			success: function() {				
-				window.location.href = "/beaudam/adminBrand.action";
-				alert('추가되었습니다.');
-			}	
-		});		
+	function addType() {	
+		
+			$.ajax({
+				type: 'POST',
+				url: "adminBrand.action",
+				data: {"addCategory":category, "addType":$('#typeInput').val()},
+				async:false,
+				dataType: "text",
+				success: function() {				
+					window.location.href = "/beaudam/adminBrand.action";
+					alert('추가되었습니다.');
+				},
+				error: function() {
+					alert('이미 추가된 타입입니다.');
+				}
+			});		
+
+		
 	}
 	
-	function delType(type) {	
-		$.ajax({			
-			type: 'POST',
-			url: "adminBrand.action",
-			data: {"delType":type},
-			async:false,
-			success: function() {				
-				window.location.href = "/beaudam/adminBrand.action";
-				alert('삭제되었습니다.');
-			},
-			error: function() {
-				alert('타입 내 상품이 존재합니다.');
-			}
-		});				
+	function delType(type) {
+		if(confirm("삭제하시겠습니까?")==true){
+			$.ajax({			
+				type: 'POST',
+				url: "adminBrand.action",
+				data: {"delType":type},
+				async:false,
+				success: function() {				
+					window.location.href = "/beaudam/adminBrand.action";
+					alert('삭제되었습니다.');
+				},
+				error: function() {
+					alert('타입 내 상품이 존재합니다.');
+				}
+			});		
+		}else{
+			return;
+		}
+			
 	}
 
 </script>
