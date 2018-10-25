@@ -53,11 +53,7 @@
 		<tr align="center">
 			<td align="center">
 				공지사항<br>
-<<<<<<< HEAD
-				Customer Center
-=======
-				Notification
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 			</td>
 		</tr>
 			
@@ -69,32 +65,32 @@
 
 <div style="float: left;margin-left:260px; margin-right: 30px; height: auto; width: 260px;">
 	<table border="1" align="center" style="height: 100%; width: 100%;">
-<<<<<<< HEAD
+
 		<tr>
-=======
+
 		<tr style="height: 55px;">
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 			<td align="center">
 			  <a href="notification.action">공지사항</a>
 			</td>
 								
 		</tr>		
 		
-<<<<<<< HEAD
+
 		<tr>
-=======
+
 		<tr style="height: 55px;">
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 			<td align="center">
 			 <a href="javascript:popupOpen();" > 1:1문의 </a>
 			 </td>	
 		</tr>
 		
-<<<<<<< HEAD
+
 		<tr>
-=======
+
 		<tr style="height: 55px;">
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 			<td align="center">
 			  <a href="faq.action">자주묻는질문</a>
 			</td>
@@ -107,20 +103,14 @@
 
 <div style="float: left; height:auto;width: 52%;">
 	<form action="" name="notificationListForm" method="post">
-<<<<<<< HEAD
+
 	<table border="0"  style="height: 100%; width: 100%;" >  
-		
-		<tr>
-			<td align="center">
-				<select name="searchKey" >
-=======
-	<table style="height: 100%; width: 100%;" >  
-		
+				
 		<tr style="height: 50px;">
 			
 			<td colspan="2" align="right"valign="middle">
 				<select  name="searchKey" style="width: 90px;height: 24px;">
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 					<option value="subject">제목</option>
 					<option value="content">내용</option>
 								
@@ -147,24 +137,14 @@
 				작성일
 			</td>
 		</tr>
-		<tr align="center">
-			<td>
-			 	번호
-			</td>
-			<td>
-				제목
-			</td>
-			<td>
-				작성일
-			</td>
-		</tr>
+		
 		
 		<c:forEach var="dto" items="${lists }">
-<<<<<<< HEAD
+
 		<tr align="center">
-=======
+
 		<tr align="center" style="height: 50px;">
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 			<td>
 				${dto.num }
 			</td>

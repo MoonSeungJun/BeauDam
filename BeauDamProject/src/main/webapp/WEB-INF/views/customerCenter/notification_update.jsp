@@ -46,7 +46,7 @@
 
 <form action="" name="notificationEditForm" method="post">
 	<table border="1" align="center">
-<<<<<<< HEAD
+
 	
 		<tr>
 			<td>
@@ -57,7 +57,7 @@
 			</td>
 		</tr>
 	
-=======
+
 	
 		<tr>
 			<td>
@@ -67,7 +67,7 @@
 				&nbsp;
 			</td>
 		</tr>
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 	
 		<tr>
 			<td align="center">
@@ -88,10 +88,7 @@
 		</tr>
 	
 	
-<<<<<<< HEAD
-=======
-	
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 	<tr>
 			<td valign="top" align="center">
 				내용

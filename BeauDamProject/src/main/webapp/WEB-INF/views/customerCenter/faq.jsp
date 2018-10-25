@@ -45,8 +45,7 @@
 
 	}
     
-<<<<<<< HEAD
-=======
+
     function faqMove() {
 		
     	$('answer1').css('diplay','');
@@ -59,10 +58,9 @@ function faqMove2() {
     	
 	}
     
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 </script>
 </head>
-<jsp:include page="../beaudam/mainTop.jsp" />
 <body>
 <jsp:include page="../beaudam/mainTop.jsp" />
 <!-- 윗부분 -->
@@ -86,52 +84,17 @@ function faqMove2() {
 <br><br>
 <!-- 왼쪽 사이드 메뉴바 -->
 
-<<<<<<< HEAD
-<div style="float: left;margin-left:260px; margin-right: 30px; height: auto; width: 260px;">
-	<table border="1" align="center" style="height: 100%; width: 100%;">
-		<tr>
-=======
-<!-- 윗부분 -->
-<div>
-	<table border="0" align="center" style="width:25% " >
-		<tr align="center">
-			<td align="center">
-				HOME ><a href="notification.action">고객센터</a> > 자주묻는 질문
-			</td>
-		</tr>
-		
-		<tr align="center">
-			<td align="center">
-				자주묻는 질문<br>
-				Frequently Asked Questions
-			</td>
-		</tr>
-			
-	</table>
-</div>
-<br><br>
-<!-- 왼쪽 사이드 메뉴바 -->
-
 <div style="float: left;margin-left:260px; margin-right: 30px; height: auto; width: 260px;">
 	<table border="1" align="center" style="height: 100%; width: 100%;">
 		<tr style="height: 55px;">
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 			<td align="center">
 			  <a href="notification.action">공지사항</a>
 			</td>
 								
 		</tr>		
-<<<<<<< HEAD
-		
-		<tr>
-			<td align="center">
-			 <a href="javascript:popupOpen();" > 1:1문의 </a>
-			 </td>	
-		</tr>
-		
-		<tr>
-=======
-		
+
+			
 		<tr style="height: 55px;">
 			<td align="center">
 			 <a href="javascript:popupOpen();" > 1:1문의 </a>
@@ -139,7 +102,7 @@ function faqMove2() {
 		</tr>
 		
 		<tr style="height: 55px;">
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
 			<td align="center">
 			  <a href="faq.action">자주묻는질문</a>
 			</td>
@@ -152,32 +115,26 @@ function faqMove2() {
 
 <!-- faq 구문 -->
 <div style="float: left; height: 255px;width: 52%;">
-    <ul>
+
         <li class="menu">
-<<<<<<< HEAD
-            <a>Q.환불방법</a>
-            <ul class="hide">
-=======
             <a href="javascript:void(0);" onclick="faqMove();">Q.환불방법</a>
             <ul class="menu" style="display: none;" id="answer1">
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
                 <li>결제하셨던 방법 혹은 뷰담포인트로 환불가능합니다.</li>
                 
             </ul>
+             
         </li>
         
         <li class="menu">
-<<<<<<< HEAD
-            <a>Q.뷰담포인트사용방법</a>
-            <ul class="hide">
-=======
+          
             <a href="javascript:void(0);" onclick="faqMove2();">Q.뷰담포인트사용방법</a>
             <ul class="menu" style="display: none;" id="answer2">
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+
                 <li>결제시에 사용하세요.</li>
             </ul>
         </li>
-    </ul>
+ 
 </div><br><br>
 
 </body>
