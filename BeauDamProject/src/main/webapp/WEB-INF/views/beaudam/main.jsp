@@ -174,9 +174,9 @@ session="false" pageEncoding="UTF-8"%>
         <img  style="width: 100%" src="<%=cp%>/resources/image/beaudam/main/content_main04.jpg" >
         
         <div class="new_item">
-            <div class="best_wrapper">
+            <div class="new_item">
                 <h3>NEW ITEM</h3>
-                <ul>
+                <ul class="new_item" style="width: 960px;">
                     <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
                     <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
                     <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
