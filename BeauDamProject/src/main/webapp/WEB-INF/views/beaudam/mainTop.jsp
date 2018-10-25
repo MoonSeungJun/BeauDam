@@ -17,7 +17,7 @@ session="false" pageEncoding="UTF-8"%>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-   </head>
+    </head>
     <body>
         <!-- 상단 시작 -->
         <div class="header">

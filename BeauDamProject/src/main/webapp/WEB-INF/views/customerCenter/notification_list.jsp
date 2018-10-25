@@ -154,8 +154,10 @@
 			</td>
 		</tr>
 		<tr style="height: 35px;">
-			<td colspan="3" align="right">
-				<input type="button" value="공지등록하기" 
+			<td colspan="2" align="right">
+			</td>
+			<td align="center">
+				<input type="button" value="공지등록" 
 				onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
 			</td>	
 		</tr>
