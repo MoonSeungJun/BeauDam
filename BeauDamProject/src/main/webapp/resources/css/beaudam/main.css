@@ -151,7 +151,7 @@ a {
    /* overflow: hidden;*/
     width: 380px;
     /*float: right;*/
-  /*  position: relative;
+  /* position: relative;
     top: 35px;
     right: -350px;*/
 }
@@ -309,13 +309,13 @@ a {
 .content_box {
    /* width: 960px;*/
     overflow: hidden;  
-    position: relative;
-    left: 400px;
+    /* position: relative; */
+   /*  left: 400px; */
     padding: 20px;
     margin: 0 auto;
 }
 
-.content_grid {
+/* .content_grid {
     float: left;
 }
 
@@ -327,7 +327,7 @@ a {
 .content_right {
     display: inline-block;
     text-align: left;
-}
+} */
 
 .layout_img img {
     padding: 10px;

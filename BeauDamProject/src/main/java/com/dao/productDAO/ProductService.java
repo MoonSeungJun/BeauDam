@@ -26,4 +26,5 @@ public interface ProductService {
 //	select
 	List<ProductView> getProductList();
 	ProductView getOneProductData(String code);
+	List<ProductView> getAllProductData(Map<String,Object> map);
 }

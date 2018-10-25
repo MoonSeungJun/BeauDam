@@ -1,18 +1,29 @@
 package com.exe.beaudam;
 
 import java.io.*;
+import java.sql.Date;
+import java.text.DateFormat;
 
 import javax.annotation.*;
 import javax.servlet.http.*;
 
 import org.json.simple.*;
 import org.json.simple.parser.*;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
+import com.dao.memberDAO.MemberServiceImpl;
+import com.dao.otherDAO.OtherServiceImpl;
+import com.dao.viewDAO.ViewServiceImpl;
 import com.github.scribejava.core.model.*;
 import com.naver.naverlogin.*;
+import com.table.memberDTO.MemberDTO;
+import com.table.memberDTO.Member_GradeDTO;
+import com.table.memberDTO.Member_InfoDTO;
+import com.table.otherDTO.CouponDTO;
+import com.view.view.MemberView;
 
 /*
  * 	쿼리 insert, delete 테이블 순서
@@ -49,15 +60,23 @@ import com.naver.naverlogin.*;
  *
  */
 
-@Controller
+@Controller("LoginController")
 public class LoginController {
 
 	
 	/* NaverLoginBO */
 	@Resource(name="naverLoginBO")
 	private NaverLoginBO naverLoginBO;
-
-
+	
+	@Resource(name="memberService")
+	private MemberServiceImpl memberService;
+	
+	@Resource(name="otherService")
+	private OtherServiceImpl otherService;
+	
+	@Resource(name="viewService")
+	private ViewServiceImpl viewService;
+	
 	
 	// ********************** Beaudam Page **********************
 	
@@ -78,8 +97,19 @@ public class LoginController {
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("password");
 		
-		// 입력한 id 조회
+/*		// 입력한 id 조회
+		
+		MemberView mv = viewService.getOneMemberData(id);*/
+		
+//		if(mv == null) {
+//			
+//			String errormessage = "존재하지 않는 아이디입니다";
+//
+//			return new ModelAndView("beaudam/login", "message", errormessage);
+//			
+//		}
 
+//		String ck_pwd = mv.getPwd();
 		if(id.equals("beaudam") && pwd.equals("a123")) {
 			
 			session.setAttribute("id", id);
@@ -88,7 +118,7 @@ public class LoginController {
 			
 		}else {
 		
-			String errormessage = "아이디 또는 비밀번호가 잘못되었습니다.";
+			String errormessage = "잘못된 비밀번호입니다";
 
 			return new ModelAndView("beaudam/login", "message", errormessage);
 		
@@ -127,8 +157,7 @@ public class LoginController {
 
 		session.setAttribute("id", id);
 		session.setAttribute("nickname", nickname);
-
-		/*return new ModelAndView("beaudam/callback","result",result);*/
+		
 		return new ModelAndView("redirect:/main.action");
 	}
 	
@@ -146,13 +175,71 @@ public class LoginController {
 		return "beaudam/newUser";
 	}
 
-	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView main(HttpSession session) {
+	@RequestMapping(value="/checkId.action", method = RequestMethod.GET)
+	public String checkId() {
 		
-		String id = (String) session.getAttribute("id");
+		return "beaudam/checkId";
 		
-		// 메인 페이지 이동
-		return new ModelAndView("beaudam/main","id",id);
+	}
+	
+	@RequestMapping(value = "/newUser_ok.action", method = RequestMethod.POST)
+	public ModelAndView newUser_ok(HttpServletRequest request,
+			MemberDTO mDto, 
+			Member_InfoDTO mIdto, 
+			Member_GradeDTO mGdto, 
+			CouponDTO cDto) throws Exception {
+		
+		//member - member_Info - member_grade - coupon
+		
+		mDto.setNickname(request.getParameter("nickName"));
+		
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
+		String day = request.getParameter("day");
+		
+		String birth = year + "-" + month + "-" + day;
+		
+		mIdto.setBirth(birth);
+		
+		String hp1 = request.getParameter("hp1");
+		String hp2 = request.getParameter("hp2");
+		String hp3 = request.getParameter("hp3");
+		
+		String cellphone = hp1 + hp2 + hp3;
+		
+		mIdto.setCellphone(cellphone);
+		
+		String phone1 = request.getParameter("phone1");
+		String phone2 = request.getParameter("phone2");
+		String phone3 = request.getParameter("phone3");
+		
+		String tel = phone1 + phone2 + phone3;
+		
+		mIdto.setTel(tel);
+		
+		String email1 = request.getParameter("email1");
+		String email2 = request.getParameter("email2");
+		
+		String email = email1 + "@" + email2;
+		
+		mIdto.setEmail(email);
+		
+		cDto.setCoupon("10%");
+		
+/*		System.out.println("MEMBER: " + mDto.getId() + mDto.getNickname() + mDto.getPwd());
+		System.out.println("INFO1: " + mIdto.getId() + mIdto.getName() + mIdto.getBirth() + mIdto.getCellphone() + mIdto.getCity());
+		System.out.println("INFO2: " + mIdto.getCreated() + mIdto.getEmail() + mIdto.getGender() + mIdto.getStreet() + mIdto.getTel());
+		System.out.println(mIdto.getZip());
+		System.out.println("GRADE: " + mGdto.getId());
+		System.out.println("COUPON: " +cDto.getId() + cDto.getCoupon());*/
+		
+		memberService.insertMember(mDto);
+		memberService.insertMemberInfo(mIdto);
+		memberService.insertMemberGrade(mGdto);
+		otherService.insertCoupon(cDto);
+		
+		return new ModelAndView("redirect:/login.action");
+		
 	}
 
 }

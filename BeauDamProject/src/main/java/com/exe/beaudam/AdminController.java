@@ -57,7 +57,7 @@ import com.view.view.*;
  *
  */
 
-@Controller
+@Controller("AdminController")
 public class AdminController {
 	
 	
@@ -75,7 +75,7 @@ public class AdminController {
 	private SaleServiceImpl saleService;
 	// ********************** Admin Page **********************
 
-	//syj
+	//회원관리
 	@RequestMapping(value = "/adminUser.action", method = { RequestMethod.GET, RequestMethod.POST})	
 	public String admin_user(HttpServletRequest req) {
 		// 회원관리 페이지 이동			
@@ -89,7 +89,7 @@ public class AdminController {
 			String cellphone = req.getParameter("cellphone");
 			String birth = req.getParameter("birth");
 			
-			System.out.println(id+name+tel+cellphone+birth);
+			
 			
 			if(id != null && !id.equals("")) {
 				mv.setId(id);
@@ -137,97 +137,20 @@ public class AdminController {
 		return "admin/adminUser";		
 		
 	}
-
-	//syj
-	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminProduct(HttpServletRequest request) {
-
-
-		HashMap<String, Object> searchPack = new HashMap<String, Object>();
-
-		String searchValue1 = request.getParameter("searchValue1");
-		String searchValue2 = request.getParameter("searchValue2");
-		String searchValue3 = request.getParameter("searchValue3");
-		String searchValue4 = request.getParameter("searchValue4");
-		String searchValue5 = request.getParameter("searchValue5");
-
-
-		if(searchValue1==null||searchValue1.equals("")) {
-			searchValue1 = "";
-		}
-		if(searchValue2==null||searchValue2.equals("")) {
-			searchValue2 = "";
-		}
-		if(searchValue3==null||searchValue3.equals("")) {
-			searchValue3 = "";
-		}
-		if(searchValue4==null||searchValue4.equals("")) {
-			searchValue4 = "";
-		}
-		if(searchValue5==null||searchValue5.equals("")) {
-			searchValue5 = "";
-		}	
-
-		searchPack.put("searchValue1", searchValue1);
-		searchPack.put("searchValue2", searchValue2);
-		searchPack.put("searchValue3", searchValue3);
-		searchPack.put("searchValue4", searchValue3);
-		searchPack.put("searchValue5", searchValue3);
-
-
-		List<ProductView> productView = viewService1.getAllProductData(searchPack);
-
-		List<Admin_BrandDTO> brandLists = adminService.getAdminBrand();
-		List<Admin_CategoryDTO> categoryLists = adminService.getAdminCategory();
-		List<Admin_TypeDTO> typeLists = adminService.getAdminType();
-			
-		
-		//페이징 처리 추가		
-
-		//송출 데이터
-		request.setAttribute("lists", productView);
-		request.setAttribute("brandLists", brandLists);
-		request.setAttribute("categoryLists", categoryLists);
-		request.setAttribute("typeLists", typeLists);
-		
-		
-
-		// 상품조회 페이지 이동
-		return "admin/adminProduct";
-	}
-
-	//syj
-	@RequestMapping(value = "/adminProduct_update.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminProduct_update(
-			BrandDTO bdto,ColorDTO cdto,ProductDTO pdto,HttpServletRequest request) {
-
-		String pageNum = request.getParameter("pageNum");
-		
-		productService.updateBrand(bdto);
-		productService.updateColor(cdto);
-		productService.updateProduct(pdto);						
-			
-		// 상품수정완료 페이지 이동
-		return "admin/adminProduct";
-	}
 	
+	//상품 삭제
 	@RequestMapping(value = "/adminProductDelete.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProductdelete(HttpServletRequest request) {
 		
 		String pageNum = request.getParameter("pageNum");
 		String code = request.getParameter("code");	
-		
 
-
-		ProductView view = productService.getOneProductData(code);
-		
+		ProductView view = productService.getOneProductData(code);	
 
 		productService.deleteBrand(code);
 		productService.deleteColor(code);
 		productService.deleteImg(code);
 		productService.deleteProduct(code);
-
-
 		
 		String thumbPath = request.getSession().getServletContext().getRealPath("/thumbImg");
 		String detailPath = request.getSession().getServletContext().getRealPath("/detailImg");
@@ -240,64 +163,12 @@ public class AdminController {
 		serverFile.delete();
 		serverFile = new File(detailPath + File.separator + view.getDetail_Img());
 		serverFile.delete();
-
 		
 		return "redirect:/adminProduct.action?pageNum="+pageNum;
 		
-	}
-
-	//syj
-	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET})
-	public String admin_new_product(HttpServletRequest req) {
-		
-		// 상품등록 페이지 이동 시 셀렉트박스 출력				
-		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
-		List<Admin_CategoryDTO> cate = adminService.getAdminCategory();
-		List<Admin_TypeDTO> type = adminService.getAdminType();
-		
-		//상품 등록 페이지 이동 시 상품 리스트 출력
-		List<ProductView> lists = productService.getProductList();
-
-		req.setAttribute("productList", lists);					
-		req.setAttribute("brand", brand);
-		req.setAttribute("cate", cate);
-		req.setAttribute("type", type);
-		
-		return "admin/adminProduct_new";	
-		
-	}
+	}	
 	
-	
-	@RequestMapping(value="/adminProduct_newAjax.action", method=RequestMethod.POST)
-	public void selectBoxAjax(HttpServletRequest req, HttpServletResponse resp, String params, String brand) {
-		
-		try {
-			
-			String category = params;
-			
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("brand", brand);
-			map.put("category", category);
-			
-			List<AdminView> typeList = adminService.getAdminTypeData(map);			
-			JSONArray jArray = new JSONArray();			
-			
-			for(int i=0;i<typeList.size();i++) {
-				Object str = typeList.get(i).getType();
-				
-				jArray.add(str);				
-			}			
-			
-			PrintWriter pw = resp.getWriter();
-			pw.print(jArray.toString());
-			pw.flush();
-			pw.close();		
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
+	//셀렉트박스 아작스
 	@RequestMapping(value="/adminProductAjax.action", method=RequestMethod.POST)
 	public void productAjax(HttpServletRequest req, HttpServletResponse resp, String params, String brand) {
 		
@@ -306,6 +177,12 @@ public class AdminController {
 			String category = params;
 			
 			Map<String, Object> map = new HashMap<String, Object>();
+			
+			if(brand.equals("선택")) {
+				brand = "";
+				map.put("brand", brand);
+			}
+			
 			map.put("brand", brand);
 			map.put("category", category);
 			
@@ -327,7 +204,38 @@ public class AdminController {
 		}
 		
 	}
-	
+	//type 추가 아작스
+	@RequestMapping(value="/adminBrandAjax.action", method=RequestMethod.POST)
+	public void brandAjax(HttpServletRequest req, HttpServletResponse resp, String cate) {
+		
+		try {
+			
+			String category = cate;
+			
+			Map<String, Object> map = new HashMap<String, Object>();			
+			
+			map.put("category", category);
+			
+			List<AdminView> typeList = adminService.getAdminTypeData(map);			
+			JSONArray jArray = new JSONArray();			
+			
+			for(int i=0;i<typeList.size();i++) {
+				Object str = typeList.get(i).getType();
+				
+				jArray.add(str);				
+			}			
+			
+			PrintWriter pw = resp.getWriter();
+			pw.print(jArray.toString());
+			pw.flush();
+			pw.close();		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	//상품 등록
 	@RequestMapping(value="/adminProduct_new.action",method=RequestMethod.POST)
 	public ModelAndView admin_add_product( @RequestParam("thumbImg")MultipartFile f1, @RequestParam("detailImg")MultipartFile f2, ProductUpload command, HttpServletRequest req) throws Exception {
 	
@@ -407,8 +315,7 @@ public class AdminController {
 					
 	}
 
-
-	//esteban
+	//브랜드 추가삭제
 	@RequestMapping(value = "/adminBrand.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminBrand(HttpServletRequest req) {
 		// 브랜드 관리 페이지 이동		
@@ -451,9 +358,13 @@ public class AdminController {
 		
 		//타입 추가
 		String addType = req.getParameter("addType");
+		String addCategory = req.getParameter("addCategory");
+		
+		
 		if(addType != null && !addType.equals("")) {				
 			Admin_TypeDTO dto = new Admin_TypeDTO();			
 			dto.setType(addType);
+			dto.setCategory(addCategory);
 			req.removeAttribute("addType");			
 			adminService.insertType(dto);			
 			return "redirect:/adminBrand.action";
@@ -480,7 +391,7 @@ public class AdminController {
 		return "admin/adminBrand";
 	}
 
-	//esteban	
+	//주문조회
 	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminOrder(HttpServletRequest request) {
 
@@ -516,6 +427,150 @@ public class AdminController {
 		// 주문내역 관리 페이지 이동
 		return "admin/adminOrder";
 	}
+	
+	@RequestMapping(value = "/adminProduct.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String adminProduct(HttpServletRequest req) {
+		
+		List<Admin_BrandDTO> brandLists = adminService.getAdminBrand();
+		List<Admin_CategoryDTO> categoryLists = adminService.getAdminCategory();
+		
+		req.setAttribute("brandLists", brandLists);
+		req.setAttribute("categoryLists", categoryLists);
+		
+		// 상품조회 페이지 이동
+		return "admin/adminProduct";
+		
+	}
+	
+	
+	//상품조회아작스
+	@RequestMapping(value = "/adminProductViewAjax.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public void adminProductAjax(HttpServletResponse resp, HttpServletRequest req, String code,String brand,String category,String type,String productName) {		
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(code==null||code.equals("")) {
+			code = "";
+			map.put("code", code);
+		}else {
+			map.put("code", code);
+		}
+		if(brand==null||brand.equals("")) {
+			brand = "";
+			map.put("brand", brand);
+		}else {
+			map.put("brand", brand);
+		}
+		if(category==null||category.equals("")||category.equals("선택")) {
+			category = "";
+			map.put("category", category);
+		}else {
+			map.put("category", category);
+		}
+		if(type==null||type.equals("")||type.equals("선택")) {
+			type = "";
+			map.put("type", type);
+		}else {
+			map.put("type", type);
+		}
+		if(productName==null||productName.equals("")) {
+			productName = "";
+			map.put("productName", productName);
+		}else {
+			map.put("productName", productName);
+		}		
+		
+		try {
+			
+			List<ProductView> productList = productService.getAllProductData(map);
+			JSONArray jarray = new JSONArray();
+			JSONObject jCode = new JSONObject();
+			
+			for(int i=0;i<productList.size();i++) {
+				Object codeVO = productList.get(i).getCode();
+				Object brandVO = productList.get(i).getBrand();
+				Object categoryVO = productList.get(i).getCategory();
+				Object typeVO = productList.get(i).getType();
+				Object productNameVO = productList.get(i).getProduct_Name();
+				Object colorCodeVO = productList.get(i).getColor_Code();
+				Object colorNameVO = productList.get(i).getColor_Name();
+				Object productPrice = productList.get(i).getProduct_Price();				
+				Object qty = productList.get(i).getQty();
+				
+				
+				jarray.add(codeVO);
+				jarray.add(brandVO);
+				jarray.add(categoryVO);
+				jarray.add(typeVO);
+				jarray.add(productNameVO);
+				jarray.add(colorCodeVO);
+				jarray.add(colorNameVO);
+				jarray.add(productPrice);				
+				jarray.add(qty);						
+				
+			}
+			
+			
+			
+			PrintWriter pw = resp.getWriter();
+			pw.print(jarray.toString());
+			pw.flush();
+			pw.close();
+			
+			//페이징 처리 추가		
+
+			//송출 데이터
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+
+	}
+
+	//상품 수정
+	@RequestMapping(value = "/adminProduct_update.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String adminProduct_update(
+			BrandDTO bdto,ColorDTO cdto,ProductDTO pdto,HttpServletRequest request) {
+
+		String pageNum = request.getParameter("pageNum");
+		
+		productService.updateBrand(bdto);
+		productService.updateColor(cdto);
+		productService.updateProduct(pdto);						
+			
+		// 상품수정완료 페이지 이동
+		return "admin/adminProduct";
+		
+	}
+	
+	
+
+	//상품 등록
+	@RequestMapping(value = "/adminProduct_new.action", method = { RequestMethod.GET})
+	public String admin_new_product(HttpServletRequest req) {
+		
+		// 상품등록 페이지 이동 시 셀렉트박스 출력				
+		List<Admin_BrandDTO> brand = adminService.getAdminBrand();
+		List<Admin_CategoryDTO> cate = adminService.getAdminCategory();
+//		List<Admin_TypeDTO> type = adminService.getAdminType();
+		
+		//상품 등록 페이지 이동 시 상품 리스트 출력
+		List<ProductView> lists = productService.getProductList();
+
+		req.setAttribute("productList", lists);					
+		req.setAttribute("brand", brand);
+		req.setAttribute("cate", cate);
+//		req.setAttribute("type", type);
+		
+		return "admin/adminProduct_new";	
+		
+	}
+	
+	
+
 
 	@RequestMapping(value = "/adminOrderUpdate", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminOrderUpdate(SaleView dto, HttpServletRequest request) {

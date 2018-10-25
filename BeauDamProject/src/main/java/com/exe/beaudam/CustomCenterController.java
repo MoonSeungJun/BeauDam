@@ -51,7 +51,7 @@ import com.table.otherDTO.NotificationDTO;
  *	파라미터 타입이 다들 다르니 사용 전 사용할 Mapper를 확인할 것
  *
  */
-@Controller
+@Controller("CustomCenterController")
 public class CustomCenterController {
 
 	@Resource(name="otherService")

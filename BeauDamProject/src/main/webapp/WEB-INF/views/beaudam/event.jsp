@@ -7,13 +7,14 @@ session="false" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
     <html>
         <head>
+        	<meta charset="UTF-8">
             <title>event</title>
             <link rel="stylesheet" href="./resources/css/beaudam/event.css">
             <link rel="stylesheet" href="./resources/css/beaudam/main.css">
             </head>
         <body>
             <div class="event_title">
-                <h2 style="text-align: center; font-weight: normal;">EVENT</h2>
+                <h2 style="text-align: center; font-weight: normal;">이벤트</h2>
                 <hr style=" border: 0; height: 2px; background-color: gray;">
             </div>
             <div class="event_content">
