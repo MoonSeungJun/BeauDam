@@ -1,13 +1,14 @@
 package com.dao.saleDAO;
 
-import java.util.List;
 
+import java.util.*;
 import javax.annotation.*;
-
 import org.springframework.stereotype.*;
-
 import com.table.saleDTO.*;
-import com.view.view.SaleView;
+import com.view.view.*;
+
+
+
 
 @Service("saleService")
 public class SaleServiceImpl implements SaleService {
@@ -40,24 +41,20 @@ public class SaleServiceImpl implements SaleService {
 	}
 
 	@Override
-	public List<Sale_DateDTO> getAdminDaySales() {
-		
-		List<Sale_DateDTO> lists = dao.getAdminDaySales();
-		
+	public List<SaleView> getAllSaleData() {
+		List<SaleView> lists = dao.getAllSaleData();
 		return lists;
 	}
 
 	@Override
-	public List<Sale_DateDTO> getAdminMonthSales(String yearSearchValue) {
-		List<Sale_DateDTO> lists = dao.getAdminMonthSales(yearSearchValue);
-		
-		return lists;
+	public SaleView getOneSaleData(String sale_Code) {
+		SaleView dto = dao.getOneSaleData(sale_Code);
+		return dto;
 	}
 
 	@Override
-	public List<Sale_DateDTO> getAdminYearSales() {
-		List<Sale_DateDTO> lists = dao.getAdminYearSales();
-		
+	public List<SaleView> getSearchSaleData(Map<String, Object> map) {
+		List<SaleView> lists = dao.getSearchSaleData(map);
 		return lists;
 	}
 

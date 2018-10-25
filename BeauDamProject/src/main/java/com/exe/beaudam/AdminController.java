@@ -46,36 +46,96 @@ public class AdminController {
 
 	//주문조회
 	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminOrder(HttpServletRequest request) {
+	public String adminOrder(HttpServletRequest req) {
 
-		HashMap<String, Object> saleSearchPack = new HashMap<String, Object>();
-
-		String searchValue1 = request.getParameter("searchValue1");
-		String searchValue2 = request.getParameter("searchValue2");
-		String searchValue3 = request.getParameter("searchValue3");
-
-		if(searchValue1==null||searchValue1.equals("")) {
-			searchValue1 = "";
-		}
-		if(searchValue2==null||searchValue2.equals("")) {
-			searchValue2 = "";
-		}
-		if(searchValue3==null||searchValue3.equals("")) {
-			searchValue3 = "";
-		}
-
-		saleSearchPack.put("searchValue1", searchValue1);
-		saleSearchPack.put("searchValue2", searchValue2);
-		saleSearchPack.put("searchValue3", searchValue3);
-
-
-		List<SaleView> saleView = viewService1.getAllSaleView(saleSearchPack);
-
-		//페이징 처리 추가	
 		
-		//리스트값 전송
-		request.setAttribute("lists", saleView);	
-
+		if(req.getMethod().equalsIgnoreCase("POST")) {
+			
+			String sale_Code = req.getParameter("sale_Code");
+			String delivery_Status = req.getParameter("delState");
+			String pay_Status = req.getParameter("payState");
+			
+			
+			SaleView dto = saleService.getOneSaleData(sale_Code);
+			
+			
+			
+			dto.setPay_Status(pay_Status);
+			dto.setDelivery_Status(delivery_Status);
+			
+			saleService.updateSaleDate(dto);
+			
+		}
+		
+		
+		int pay_ready = 0;			
+		int pay_compl = 0;
+		
+		int ready = 0;
+		int ing = 0;
+		int compl = 0;
+		
+		int refund = 0;
+		int cancel = 0;
+		int change = 0;
+		List<SaleView> saleView = saleService.getAllSaleData();
+		
+		Iterator<SaleView> it = saleView.iterator();
+		
+		while(it.hasNext()) {
+			
+			SaleView vo = it.next();			
+			
+			if(vo.getPay_Status().equals("pay_ready")) {
+				pay_ready++;
+				System.out.println(pay_ready + "payR");
+			}
+			if (vo.getPay_Status().equals("pay_compl")) {
+				pay_compl++;
+				System.out.println(pay_compl + "payCom");
+			}
+			if (vo.getPay_Status().equals("refund")) {
+				refund++;
+				System.out.println(refund + "refun");
+			}
+			if (vo.getPay_Status().equals("cancel")) {
+				cancel++;
+				System.out.println(cancel + "canc");
+			}
+			if (vo.getDelivery_Status().equals("ready")) {
+				ready++;
+				System.out.println(ready + "rea");
+			}
+			if (vo.getDelivery_Status().equals("ing")) {
+				ing++;
+				System.out.println(ing + "ing");
+			}
+			if (vo.getDelivery_Status().equals("compl")) {
+				compl++;
+				System.out.println(compl + "compl");
+			}
+			if(vo.getPay_Status().equals("change")) {
+				change++;
+				System.out.println(change + "chan");
+			}
+			
+		}
+		
+		req.setAttribute("payReady", pay_ready);
+		req.setAttribute("payCompl", pay_compl);
+		req.setAttribute("refund", refund);
+		req.setAttribute("cancel", cancel);
+		req.setAttribute("ready", ready);
+		req.setAttribute("ing", ing);
+		req.setAttribute("compl", compl);
+		req.setAttribute("change", change);
+		req.setAttribute("saleList", saleView);
+	
+		
+	
+		
+		
+	
 		// 주문내역 관리 페이지 이동
 		return "admin/adminOrder";
 	}
@@ -83,11 +143,13 @@ public class AdminController {
 	@RequestMapping(value = "/adminOrderUpdate", method = { RequestMethod.GET, RequestMethod.POST })
 
 	public String adminOrderUpdate(SaleView dto, HttpServletRequest request) {
-	saleService.updateSaleDate(dto);
+
+		saleService.updateSaleDate(dto);
 
 
 		return "admin/adminOrder";
 	}
+
 
 	//esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })

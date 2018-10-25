@@ -1,9 +1,11 @@
 package com.dao.saleDAO;
 
-import java.util.List;
 
+import java.util.*;
 import com.table.saleDTO.*;
+import com.view.view.*;
 import com.view.view.SaleView;
+
 
 public interface SaleService {
 
@@ -15,7 +17,8 @@ public interface SaleService {
 	void updateSaleDate(SaleView dto);
 //	delete
 //	select
-	List<Sale_DateDTO> getAdminDaySales();
-	List<Sale_DateDTO> getAdminMonthSales(String yearSearchValue);
-	List<Sale_DateDTO> getAdminYearSales();
+
+	List<SaleView> getAllSaleData();
+	SaleView getOneSaleData(String sale_Code);
+	List<SaleView> getSearchSaleData(Map<String, Object> map);
 }
