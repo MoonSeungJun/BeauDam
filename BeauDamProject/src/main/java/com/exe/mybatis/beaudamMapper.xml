@@ -144,8 +144,8 @@
 		<!-- Sale -->
 			
 			<!-- 결제상태, 배송상태 수정 -->			
-			<update id="updateSaleDate" parameterType="com.table.saleDTO.Sale_DateDTO">
-				update sale_date set pay_status=#{pay_status},delivery_status=#{delivery_status} where sale_code = #{sale_code}
+			<update id="updateSaleDate" parameterType="com.view.view.SaleView">
+				update sale_date set pay_status=#{pay_Status},delivery_status=#{delivery_Status} where sale_code = #{sale_Code}
 			</update>					
 			
 		<!-- Coupon -->
@@ -328,18 +328,23 @@
 		</select>
 		
 		<!-- Sale -->
-		<select id="getAllSaleView" resultType="com.view.view.SaleView" parameterType="map">
+		<select id="getAllSaleData" resultType="com.view.view.SaleView" >
 			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code, use_Coupon, payment_Method, addr, message, pay_Status, delivery_Status,
-			 product_Price, qty, use_Point, total_Price from saleView			
-			 where  name like '%' || #{searchValue1} || '%' and
-				    id like '%' || #{searchValue2} || '%' and
-				    cellPhone like '%' || #{searchValue3} || '%'
+			 product_Price, qty, use_Point, total_Price, to_char(saledate, 'yyyy-mm-dd') saledate from saleView	
 		</select>
 		
-		<select id="getOneSaleView" resultType="com.view.view.SaleView" parameterType="String">
+		<select id="getOneSaleData" resultType="com.view.view.SaleView" parameterType="String">
 			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code, use_Coupon, payment_Method, addr, message, pay_Status, delivery_Status,
 			 product_Price, qty, use_Point, total_Price from saleView
 			 where sale_Code=#{sale_Code}
+		</select>
+		
+		<select id="getSearchSaleData" resultType="com.view.view.SaleView" parameterType="map">
+			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code, use_Coupon, payment_Method, addr, message, pay_Status, delivery_Status,
+			 product_Price, qty, use_Point, total_Price, to_char(saledate, 'yyyy-mm-dd') saledate from saleView			
+			 where  name like '%' || #{searchValue1} || '%' and
+				    id like '%' || #{searchValue2} || '%' and
+				    cellPhone like '%' || #{searchValue3} || '%'
 		</select>
 					
 </mapper>

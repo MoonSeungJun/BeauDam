@@ -2,9 +2,20 @@ package com.view.view;
 
 public class SaleView {
 
-	private String sale_Code, id, name, cellPhone, tel, code, brand, product_Name;
+	private String sale_Code, id, name, cellphone, tel, code, brand, product_Name;
 	private String color_Code, use_Coupon, payment_Method, addr, message, pay_Status, delivery_Status;
 	private int product_Price, qty, use_Point, total_Price;
+	private String saleDate;
+	
+	
+	
+	public String getSaleDate() {
+		return saleDate;
+	}
+
+	public void setSaleDate(String saleDate) {
+		this.saleDate = saleDate;
+	}
 
 	public String getSale_Code() {
 		return sale_Code;
@@ -30,12 +41,12 @@ public class SaleView {
 		this.name = name;
 	}
 
-	public String getCellPhone() {
-		return cellPhone;
+	public String getCellphone() {
+		return cellphone;
 	}
 
-	public void setCellPhone(String cellPhone) {
-		this.cellPhone = cellPhone;
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
 	}
 
 	public String getTel() {

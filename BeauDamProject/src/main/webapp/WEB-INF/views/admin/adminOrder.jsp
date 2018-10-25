@@ -1,63 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>BeauDam Admin</title>
 <link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
-	function orderSearch() {
+	function orderUpdate(code) {		
 		
-		f = document.adminOrderForm;
-		
-		searchValue1 = f.id.value;
-		searchValue1 = searchValue1.trim();
-		
-		searchValue2 = f.name.value;
-		searchValue2 = searchValue2.trim();
-		
-		searchValue3 = f.cellphone.value;
-		searchValue3 = searchValue3.trim();
-		
-		if(!searchValue1&&!searchValue2&&!searchValue3){
-			alert("\검색어를 입력하세요.");
-			f.id.focus();
-			return;
-		}
-		
-		f.action = "<%=cp%>/adminOrder.action";
-		f.submit();
-		
-	}
-	
-	function adminOrderUpdate() {
-		
-		
-		f.action = "<%=cp%>/adminOrderUpdate.action";
-		f.submit();
-		
+		var delState = $('#delivery_Status option:selected').val();
+		var payState = $('#pay_Status option:selected').val();
+		var sale_Code = code;	
+		alert(payState +"  " +delState + "  " +  sale_Code);
+		$.ajax({
+			
+			type:'post',
+			data: {'delState':delState,'payState':payState,'sale_Code':sale_Code},
+			url: '/beaudam/adminOrder.action',
+			success: function() {
+				alert('변경 되었습니다.');
+				window.location.href = "/beaudam/adminOrder.action";
+			},
+			error: function() {
+				
+			}		
+			
+		});		
 		
 	}
-	
-	
-	
-	
 	
 </script>
 </head>
 <body>
-
 <jsp:include page="adminHeader.jsp"/>
-
 
 <div class="wrapper">
 <h2 class="text-center">주문 조회</h2>
@@ -67,16 +50,22 @@
 			<tr>
 				<td class="title">입금대기</td>
 				<td class="title">결제완료</td>
+				<td class="title">상품준비중</td>
 				<td class="title">배송중</td>
 				<td class="title">배송완료</td>
 				<td class="title">환불</td>
+				<td class="title">교환</td>
+				<td class="title">취소</td>
 			</tr>
 			<tr>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
-				<td>0</td>
+				<td>${payReady }</td>
+				<td>${payCompl }</td>
+				<td>${ready }</td>
+				<td>${ing }</td>
+				<td>${compl }</td>
+				<td>${refund }</td>
+				<td>${change }</td>
+				<td>${cancel }</td>				
 			</tr>
 		</table>
 		<br><br>
@@ -106,7 +95,7 @@
 	</form>
 </div>
 <br/><br/>
-<form action="" name="adminOrderEditForm" method="post">
+<form action="" name="orderView" method="post">
 	<table border="1" style="margin: 0 auto; width: 90%; text-align: center;">
 		<tr>
 			<td class="title">
@@ -123,13 +112,16 @@
 			</td>				
 			<td class="title">
 				주소
-			</td>			
+			</td>	
+			<td class="title">
+				상품코드
+			</td>		
 			<td class="title">
 				상품명
-			</td>			
+			</td>
 			<td class="title">
-				상품색상
-			</td>						
+				색상코드
+			</td>													
 			<td class="title">
 				상품가격
 			</td>
@@ -153,7 +145,7 @@
 			</td>		
 		</tr>
 
-		<c:forEach var = "dto" items="${lists }"> 
+		<c:forEach var="dto" items="${saleList }"> 
 			<tr>
 				<td>
 					${dto.sale_Code }
@@ -169,6 +161,9 @@
 				</td>				
 				<td>
 					${dto.addr }
+				</td>
+				<td>
+					${dto.code }
 				</td>			
 				<td>
 					${dto.product_Name }
@@ -183,7 +178,7 @@
 					${dto.qty }
 				</td>
 				<td>
-					${dto.totalPrice }
+					${dto.total_Price }
 				</td>
 				<td>
 					${dto.saleDate }
@@ -191,8 +186,10 @@
 				
 				<td>
 					<select id="pay_Status">
+						<option value="pay_ready">입금대기</option>
+						<option value="pay_compl">결제완료</option>
 						<option value="change">교환</option>
-						<option value="returns">반품</option>
+						<option value="refund">환불</option>
 						<option value="cancel">취소</option>									
 					</select>
 				</td>
@@ -201,13 +198,11 @@
 					<select id="delivery_Status">
 						<option value="ready">상품 준비중</option>
 						<option value="ing">배송중</option>
-						<option value="complete">배송완료</option>				
+						<option value="compl">배송완료</option>				
 					</select>
 				</td>
-				<td>
-					<input type="hidden" name="sale_Code" value="${dto.sale_Code }">
-					<input type="hidden" name="pageNum" value="${pageNum }">
-					<a onclick="adminOrderUpdate();" style="text-decoration: none;">수정</a>
+				<td>					
+					<a href="javascript:void(0);" onclick="orderUpdate('${dto.sale_Code}');" style="text-decoration: none;">수정</a>
 				</td>			
 			</tr>
 		</c:forEach>
