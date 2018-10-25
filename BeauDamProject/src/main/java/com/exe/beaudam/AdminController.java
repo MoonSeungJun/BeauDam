@@ -81,7 +81,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/adminOrderUpdate", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminOrderUpdate(Sale_DateDTO dto, HttpServletRequest request) {
+	public String adminOrderUpdate(SaleView dto, HttpServletRequest request) {
 
 		saleService.updateSaleDate(dto);
 

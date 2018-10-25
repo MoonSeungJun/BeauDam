@@ -14,12 +14,22 @@
 	
 	function sendIt() {
 		
-		var f= document.notificationEditForm;
+		var f = document.notificationCreateForm;
 		var subVal = f.subject.value;
 		var contVal = f.content.value;
 		
-		if(!subVal&&!contVal){
-			alert("입력내용을 확인하세요")
+		subVal = subVal.trim();
+		contVal = contVal.trim();
+		
+		if(!subVal){
+			alert("제목을 확인해주세요")
+			f.subject.focus();			
+			return;
+		}
+		if(!contVal){
+			alert("내용을 확인해주세요")
+			f.content.focus();			
+			return;
 		}
 		
 		f.action = "<%=cp%>/notification_update_ok.action"

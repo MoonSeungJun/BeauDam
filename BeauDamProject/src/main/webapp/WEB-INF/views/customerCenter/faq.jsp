@@ -45,10 +45,23 @@
 
 	}
     
+    function faqMove() {
+		
+    	$('answer1').css('diplay','');
+    	
+	}
+    
+function faqMove2() {
+		
+    	$('answer2').css('diplay','');
+    	
+	}
+    
 </script>
 </head>
-<body>
 <jsp:include page="../beaudam/mainTop.jsp" />
+<body>
+
 <!-- 윗부분 -->
 <div>
 	<table border="0" align="center" style="width:25% " >
@@ -72,20 +85,20 @@
 
 <div style="float: left;margin-left:260px; margin-right: 30px; height: auto; width: 260px;">
 	<table border="1" align="center" style="height: 100%; width: 100%;">
-		<tr>
+		<tr style="height: 55px;">
 			<td align="center">
 			  <a href="notification.action">공지사항</a>
 			</td>
 								
 		</tr>		
 		
-		<tr>
+		<tr style="height: 55px;">
 			<td align="center">
 			 <a href="javascript:popupOpen();" > 1:1문의 </a>
 			 </td>	
 		</tr>
 		
-		<tr>
+		<tr style="height: 55px;">
 			<td align="center">
 			  <a href="faq.action">자주묻는질문</a>
 			</td>
@@ -100,16 +113,16 @@
 <div style="float: left; height: 255px;width: 52%;">
     <ul>
         <li class="menu">
-            <a>Q.환불방법</a>
-            <ul class="hide">
+            <a href="javascript:void(0);" onclick="faqMove();">Q.환불방법</a>
+            <ul class="menu" style="display: none;" id="answer1">
                 <li>결제하셨던 방법 혹은 뷰담포인트로 환불가능합니다.</li>
                 
             </ul>
         </li>
         
         <li class="menu">
-            <a>Q.뷰담포인트사용방법</a>
-            <ul class="hide">
+            <a href="javascript:void(0);" onclick="faqMove2();">Q.뷰담포인트사용방법</a>
+            <ul class="menu" style="display: none;" id="answer2">
                 <li>결제시에 사용하세요.</li>
             </ul>
         </li>

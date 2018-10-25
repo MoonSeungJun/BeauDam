@@ -53,7 +53,7 @@
 		<tr align="center">
 			<td align="center">
 				공지사항<br>
-				Customer Center
+				Notification
 			</td>
 		</tr>
 			
@@ -65,20 +65,20 @@
 
 <div style="float: left;margin-left:260px; margin-right: 30px; height: auto; width: 260px;">
 	<table border="1" align="center" style="height: 100%; width: 100%;">
-		<tr>
+		<tr style="height: 55px;">
 			<td align="center">
 			  <a href="notification.action">공지사항</a>
 			</td>
 								
 		</tr>		
 		
-		<tr>
+		<tr style="height: 55px;">
 			<td align="center">
 			 <a href="javascript:popupOpen();" > 1:1문의 </a>
 			 </td>	
 		</tr>
 		
-		<tr>
+		<tr style="height: 55px;">
 			<td align="center">
 			  <a href="faq.action">자주묻는질문</a>
 			</td>
@@ -91,27 +91,28 @@
 
 <div style="float: left; height:auto;width: 52%;">
 	<form action="" name="notificationListForm" method="post">
-	<table border="0"  style="height: 100%; width: 100%;" >  
+	<table style="height: 100%; width: 100%;" >  
 		
-		<tr>
-			<td align="center">
-				<select name="searchKey" >
+		<tr style="height: 50px;">
+			
+			<td colspan="2" align="right"valign="middle">
+				<select  name="searchKey" style="width: 90px;height: 24px;">
 					<option value="subject">제목</option>
 					<option value="content">내용</option>
 								
 				</select>
-			</td>
-			<td>
-				<input type="text" name="searchValue"/>
+				&nbsp;&nbsp;			
+				<input style="width: 250px;" type="text" name="searchValue"/>
+				&nbsp;
 			</td>
 			
-			<td>
-				<input type="button" value="검색" 
-				onclick="sendIt();">
+			<td align="center" style="width: 96px;">
+				<input style="width: 80px;" type="button" value="검색" onclick="sendIt();">
 			</td>
+			
 			
 		</tr>
-		<tr align="center">
+		<tr align="center" style="height: 50px; background-color: #F5F5DD;">
 			<td>
 			 	번호
 			</td>
@@ -124,7 +125,7 @@
 		</tr>
 		
 		<c:forEach var="dto" items="${lists }">
-		<tr align="center">
+		<tr align="center" style="height: 50px;">
 			<td>
 				${dto.num }
 			</td>
