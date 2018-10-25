@@ -68,4 +68,9 @@ public class AdminDAO {
 		return lists;
 	}
 	
+	public void deleteCateType(String category) {
+		sessionTemplate.delete("beaudam.deleteAdminCateType", category);
+		
+	}
+	
 }

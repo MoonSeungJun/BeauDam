@@ -46,4 +46,51 @@ public class MemberDAO {
 	public void updateIsLeave(String id) {
 		sessionTemplate.update("beaudam.updateIsLeave",id);
 	}
+	
+	
+	public void deleteMember(String id) {
+		sessionTemplate.delete("beaudam.deleteMember",id);
+		
+	}
+
+	
+	public void deleteMemberGrade(String id) {
+		sessionTemplate.delete("beaudam.deleteMemberGrade",id);
+		
+	}
+
+	
+	public void deleteMemberInfo(String id) {
+		sessionTemplate.delete("beaudam.deleteMemberInfo",id);
+		
+	}
+
+	
+	public void deleteCoupon(String id) {
+		sessionTemplate.delete("beaudam.deleteCoupon",id);
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

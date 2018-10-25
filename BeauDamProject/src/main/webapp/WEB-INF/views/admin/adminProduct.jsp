@@ -14,8 +14,10 @@
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script type="text/javascript">
 
-function popUp() {
-	 window.open("adminProduct_new.action", "a", "width=800, height=800, left=100, top=50"); 
+function popUp(code) {
+	var url = "adminProduct_update.action?code="+code;
+	var option = "width=1300, height=300, resizable=no, scrollbars=no, status=no, toolbar=no;";
+	 window.open(url,"",option); 
 }
 
 function searchSend() {
@@ -60,7 +62,9 @@ function searchSend() {
 					var j = i;					
 				}
 				if((i+1)%9==0){					
-					data += "<td><a href='javascript:void(0)' onclick='popUp(); return false;'>수정</a>/<a href='adminProductDelete.action?code=" + result[i-8] + "' style='text-decoration: none;'>삭제</a></td></tr>";
+					data += "<td><a href='javascript:void(0)' onclick='popUp(\"";
+					data += result[i-8];
+					data += "\"); return false;'>수정</a>/<a href='adminProductDelete.action?code=" + result[i-8] + "' style='text-decoration: none;'>삭제</a></td></tr>";
 				}			
 			});
 			

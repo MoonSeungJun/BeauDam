@@ -119,6 +119,15 @@ session="false" pageEncoding="UTF-8"%>
         		</li>
         	</ul>
         </div>
+        <div class="page">
+        	<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/pre.gif"></a>
+        	<ol start="1">
+        		<li>1</li>
+        		<li>2</li>
+        		<li>3</li>
+        	</ol>
+        	<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/next.gif"></a>
+        </div>
         <jsp:include page="./mainBottom.jsp" />
     </body>
 </html>

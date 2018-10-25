@@ -56,6 +56,31 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public void deleteMember(String id) {
+		dao.deleteMember(id);
+		
+	}
+
+	@Override
+	public void deleteMemberGrade(String id) {
+		dao.deleteMemberGrade(id);
+		
+	}
+
+	@Override
+	public void deleteMemberInfo(String id) {
+		dao.deleteMemberInfo(id);
+		
+	}
+
+	@Override
+	public void deleteCoupon(String id) {
+		dao.deleteCoupon(id);
+		
+	}
+
+	
 	
 	
 }

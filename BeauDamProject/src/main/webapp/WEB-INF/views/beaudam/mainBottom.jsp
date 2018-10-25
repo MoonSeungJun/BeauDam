@@ -9,6 +9,22 @@ session="false" pageEncoding="UTF-8"%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=cp%>/resources/css/beaudam/main.css">
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$( window ).scroll( function() {
+		if ( $( this ).scrollTop() > 200 ) {
+			$( '.goTop' ).fadeIn();
+		} else {
+			$( '.goTop' ).fadeOut();
+		}
+	} );
+	$( document ).ready( function() {
+	  $( '.goTop' ).click( function() {
+	    $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+	    return false;
+	  } );
+	} );
+</script>
 </head>
 <body>
      <div class="footer">
@@ -24,6 +40,10 @@ session="false" pageEncoding="UTF-8"%>
      </div>
      <div class="side">
          <a href="./event1.action"><img src="<%=cp%>/resources/image/beaudam/main/side.png"></a> 
+     </div>
+     <div class="goTop">
+         <img src="<%=cp%>/resources/image/beaudam/main/goTop.png">
+         <p>TOP</p>
      </div>
 </body>
 </html>

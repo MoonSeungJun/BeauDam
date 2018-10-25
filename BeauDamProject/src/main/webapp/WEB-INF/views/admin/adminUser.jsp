@@ -33,6 +33,30 @@
 	}
 	
 	
+	function deleteMember(id) {
+		
+		if(confirm("삭제한 회원의 정보는 복구할 수 없습니다.") == true){
+			$.ajax({				
+				type:'post',
+				data: {'id':id},
+				url: 'adminMemberDelete.action',
+				success: function() {
+					alert("삭제되었습니다.");
+					window.location.href = "/beaudam/adminUser.action";
+					
+				},
+				error: function() {
+					alert("삭제할 수 없습니다.");
+				}				
+			});
+			
+		}else{
+			return;
+		}	
+		
+	}
+	
+	
 	
 
 </script>
@@ -107,8 +131,7 @@
 					<c:if test="${dto.isLeave ne 1 }">
 						<td style="width: 70px; text-align: center;">-</td>	
 					</c:if>
-					<td><a href="#" style="text-decoration: none;">수정</a>/<a
-						href="#" style="text-decoration: none;">삭제</a></td>
+					<td><a href="javascript:void(0)" style="text-decoration: none;" onclick="deleteMember('${dto.id}');">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</c:if>
@@ -130,8 +153,7 @@
 					<c:if test="${dto.isLeave ne 1 }">
 						<td>-</td>	
 					</c:if>
-					<td><a href="#" style="text-decoration: none;">수정</a>/
-					<a href="#" style="text-decoration: none;">삭제</a></td>
+					<td><a href="#" style="text-decoration: none;" onclick="deleteMember('${dto.id}');">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</c:if>
