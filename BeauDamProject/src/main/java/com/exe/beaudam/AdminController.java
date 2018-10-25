@@ -140,8 +140,6 @@ public class AdminController {
 		return "admin/adminOrder";
 	}
 
-<<<<<<< HEAD
-=======
 	@RequestMapping(value = "/adminOrderUpdate", method = { RequestMethod.GET, RequestMethod.POST })
 
 	public String adminOrderUpdate(SaleView dto, HttpServletRequest request) {
@@ -152,7 +150,7 @@ public class AdminController {
 		return "admin/adminOrder";
 	}
 
->>>>>>> 1696839a53f603cd4c87c3d31c1409a1b91531e9
+
 	//esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminSales() {
