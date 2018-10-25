@@ -37,7 +37,10 @@
 .title_style {
     overflow: hidden;
     text-align: center;
-    height: 150px;
+}
+
+.title_style h3 {
+	font-family: 'designhouseOTFLight00';
 }
 
 .title_style h2 {
@@ -113,6 +116,7 @@ a:hover{
 	<div id="container">
 			<div class="title_style">
 				<div>
+					<a href="<%=cp %>/main.action" style="text-decoration: none; color: black;"><h3>뷰티를 담다 뷰ː담</h3></a> 
 					<h2 style="font-family: designhouseOTFLight00">로그인</h2>
 					<p style="font-family: Black Han Sans">Membership</p>
 				</div>
@@ -166,25 +170,9 @@ a:hover{
 				</h4>
 			</div>
 			
+			
 	</div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		
 </body>
