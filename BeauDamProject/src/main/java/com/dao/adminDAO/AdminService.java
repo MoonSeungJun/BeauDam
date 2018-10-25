@@ -24,7 +24,7 @@ public interface AdminService {
 	void deleteBrand(String brand);
 	void deleteCategory(String category);
 	void deleteType(String type);
-	
+	void deleteCateType(String category);
 	
 	
 	

@@ -71,19 +71,19 @@ session="false" pageEncoding="UTF-8"%>
         <!-- 이미지 레이아웃  -->
         <div class="content_layout">
             <div class="content_box">
-                <div class="content_grid">
-                    <div class="content_left">
+                <div class="content_grid row">
+                    <div class="content_left col-sm-6">
                         <div class="layout_img">
                             <img src="<%=cp%>/resources/image/beaudam/main/content_layout06.jpg">
                         </div>
-                        <div class="layout_img">
+                     	<div class="layout_img">
                             <img src="<%=cp%>/resources/image/beaudam/main/content_layout03.jpg">
-                        </div>
+                     	</div>
                     </div>
-                    <div class="content_right">
-                        <div class="layout_img">
+                    <div class="content_right col-sm-6">
+                       <div class="layout_img">
                             <img src="<%=cp%>/resources/image/beaudam/main/content_layout01.jpg">
-                        </div>
+                       	</div>
                         <div class="layout_img">
                             <img src="<%=cp%>/resources/image/beaudam/main/content_layout07.jpg">
                         </div>

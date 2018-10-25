@@ -111,6 +111,23 @@ html, body, ul, li, h1, h2 {
 	text-align: center;
 }
 
+.page {
+	background-color: fuchsia; 
+	margin: 30px auto 0 auto; 
+	width: 960px;
+	text-align: center;
+}
+
+.page ol {
+	overflow: hidden;
+}
+
+.page li {
+	width: 34px;
+	height: 34px;
+	border: 1px solid gray;
+	float: left;
+}
 
 
 
