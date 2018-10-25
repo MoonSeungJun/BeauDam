@@ -139,7 +139,7 @@ session="false" pageEncoding="UTF-8"%>
 					<li><img src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></li>
 					<li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
 					<li><img src="<%=cp%>/resources/image/beaudam/main/sample2.jpg"></li>
-					<li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
+					<li><img src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></li>
 				</ul>
 				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_r.png"></a></div>-->
 			</div>
