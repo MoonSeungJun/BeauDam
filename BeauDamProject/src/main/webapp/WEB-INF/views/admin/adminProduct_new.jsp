@@ -18,7 +18,7 @@
 		$.ajax({
 		
 			type:'post',
-			url: "/beaudam/adminProduct_newAjax.action",
+			url: "/beaudam/adminProductAjax.action",
 			dataType: "json",
 			data:{'params':category,'brand':$('#brand option:selected').val()},
 			success: function (result) {
@@ -51,7 +51,8 @@
 				</td>
 				
 				<td style="text-align: left; text-indent: 1em;">			
-					<select name="brand" id="brand" style="width: 80%;">						
+					<select name="brand" id="brand" style="width: 80%;">
+						<option value="">선택</option>						
 						<c:forEach var="brand" items="${brand }">
 							<option value="${brand.brand }">${brand.brand }</option>	
 						</c:forEach>								
@@ -136,7 +137,7 @@
 				</td>
 										
 				<td colspan="4">
-					<input type="submit" name="addProduct" value="등록하기">
+					<input type="submit" name="addProduct" value="등록하기" id="addProduct">
 				</td>
 			</tr>			
 		</table>

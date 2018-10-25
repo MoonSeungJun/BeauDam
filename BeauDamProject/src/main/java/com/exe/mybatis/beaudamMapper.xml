@@ -21,7 +21,7 @@
 			
 		<!-- Coupon -->
 			<insert id="insertCoupon" parameterType="com.table.otherDTO.CouponDTO">
-				insert into coupon (id, coupon) values (#{id},#{coupon1})
+				insert into coupon (id, coupon) values (#{id},#{coupon})
 			</insert>	
 		
 		
@@ -88,7 +88,7 @@
 				insert into admin_category values (#{category})
 			</insert>		
 			<insert id="insertAdminType" parameterType="com.table.adminDTO.Admin_TypeDTO">
-				insert into admin_type values (#{type})
+				insert into admin_type (type, category) values (#{type}, #{category})
 			</insert>		
 		
 		
@@ -238,11 +238,7 @@
 		<!-- Product -->
 		<select id="getAllProductData" resultType="com.view.view.ProductView" parameterType="map">
 			select code,brand,category,type,product_Name,color_Code,color_Name,product_Price,thumb_Img,detail_Img,qty from productView
-			where code like '%' || #{searchValue1} || '%' and
-				  brand like '%' || #{searchValue2} || '%' and
-				  category like '%' || #{searchValue3} || '%' and
-				  type like '%' || #{searchValue4} || '%' and
-				  product_Name like '%' || #{searchValue5} || '%'	
+			where upper(code) = upper(#{code}) or  upper(brand) = upper(#{brand}) or  upper(category) = upper(#{category}) or upper(type) = upper(#{type}) or upper(product_Name) = upper(#{productName})	
 			
 		</select>	
 		<select id="getProductList" resultType="com.view.view.ProductView">
@@ -266,7 +262,7 @@
 			select type from admin_type
 		</select>
 		<select id="getAdminTypeData" resultType="com.view.view.AdminView" parameterType="map">
-			select type from adminView where category = #{category} and brand = #{brand}
+			select type from admin_type where category = #{category}
 		</select>
 		
 		<select id="getAdminDaySales" resultType="com.table.saleDTO.Sale_DateDTO">

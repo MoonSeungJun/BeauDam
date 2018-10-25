@@ -11,101 +11,76 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
-
-
-<script type="text/javascript">
-
-	function searchSend() {
-		
-		f = document.adminProductForm;
-		
-		searchValue1 = f.code.value;
-		searchValue1 =searchValue1.trim();
-		
-		searchValue2 = f.brand.value;
-		searchValue2 =searchValue2.trim();
-		
-		searchValue3 = f.category.value;
-		searchValue3 =searchValue3.trim();
-		
-		searchValue4 = f.type.value;
-		searchValue4 =searchValue4.trim();
-		
-		searchValue5 = f.product_Name.value;
-		searchValue5 =searchValue5.trim();
-		
-		if(!searchValue1&&!searchValue5){		
-			alert("\검색어를 입력하세요.");
-			f.code.focus();
-			return;
-		}
-		
-		f.action = "<%=cp%>/adminProduct.action";
-		f.submit();
-	}	
-			
-</script>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-
 <script type="text/javascript">
+
+function popUp() {
+	 window.open("adminProduct_new.action", "a", "width=800, height=800, left=100, top=50"); 
+}
 
 function searchSend() {
-	
-	var f = document.adminProductForm;
-	
-	searchValue1 = f.code.value;
-	searchValue1 =searchValue1.trim();
-	
-	searchValue2 = f.brand.value;
-	searchValue2 =searchValue2.trim();
-	
-	searchValue3 = f.category.value;
-	searchValue3 =searchValue3.trim();
-	
-	searchValue4 = f.type.value;
-	searchValue4 =searchValue4.trim();
-	
-	searchValue5 = f.product_Name.value;
-	searchValue5 =searchValue5.trim();
-	
-	if(!searchValue1&&!searchValue5){		
-		alert("\검색어를 입력하세요.");
-		f.code.focus();
+
+	var code = $('#code').val();
+	var brand = $('#brand option:selected').val();
+	var category = $('#category option:selected').val();
+	var type = $('#type option:selected').val();
+	var productName = $('#product_Name').val();
+		
+	if(code=="" && brand=='선택' && category=='선택' && type=='선택' && productName==""){
+		alert('데이터를 입력하세요');		
 		return;
-
-	
-	f.action = "<%=cp%>/adminProduct.action";
-	f.submit();
-	
-		
-}
-	
-function adminProductUpdate() {
-		
-		
-		f.action = "<%=cp%>	/adminProduct_update.action";
-		f.submit();
-
+	}
+	if(brand =='선택'){
+		brand = "";
+	}
+	if(category=='선택'){
+		category=="";
+	}
+	if(type=='선택'){
+		type=="";
 	}
 	
-	$('#category').change(function() {
-	var state = $('#category option:selected').val();
-	if(state == 'Accessory') {
-		$('.layer').show();
-	} 
+	$.ajax({
+		type:'post',
+		url: '/beaudam/adminProductViewAjax.action',
+		dataType: 'json',		
+		data:{'code':code,'brand':brand,'category':category,'type':type,'productName':productName},
+		beforeSend: function() {
+			$('#tester').empty();
+		},
+		success: function(result) {	
+			
+			var data = "<tr align='center'>";			
+			$.each(result, function(i) {
+				if( i>8 && (i+1)%9 == 1){
+					data += "<tr align='center'>";
+				}				
+				data += "<td>"+result[i]+"</td>";	
+				if(i%9==0){
+					var j = i;					
+				}
+				if((i+1)%9==0){					
+					data += "<td><a href='javascript:void(0)' onclick='popUp(); return false;'>수정</a>/<a href='adminProductDelete.action?code=" + result[i-8] + "' style='text-decoration: none;'>삭제</a></td></tr>";
+				}			
+			});
+			
+			if(result == ''){
+				alert("데이터가 없습니다.");
+			}			
+			$("#tester").append(data);
+		},
+		error: function(result) {
+			alert(result);
+		}
+		
+	});
 	
+}
 	
-	
-	
-});
-	
-
 function showSubSelect(category) {
-		
-		$.ajax({
-		
+	
+		$.ajax({						
+			
 			type:'post',
 			url: "/beaudam/adminProductAjax.action",
 			dataType: "json",
@@ -127,7 +102,7 @@ function showSubSelect(category) {
 	}
 	
 	
-
+	
 </script>
 
 </head>
@@ -141,11 +116,12 @@ function showSubSelect(category) {
 		<table border="1" style="text-align: center; margin: 0 auto;">
 			<tr>
 				<td class="title">코드</td>
-				<td><input type="text" name="code" style="width: 100%; border: none; text-indent: 1em;"></td>
+				<td><input type="text" name="code" style="width: 100%; border: none; text-indent: 1em;" id="code" onkeydown="if(event.keyCode == 13) searchSend();"></td>
 				<td class="title">브랜드</td>
 
 				<td style="width: 150px;">
-					<select name="brand" id="brand" style="width: 100%;  text-indent: 1em">						
+					<select name="brand" id="brand" style="width: 100%;  text-indent: 1em">	
+						<option>선택</option>					
 						<c:forEach var="dto" items="${brandLists }">
 							<option value="${dto.brand }">${dto.brand }</option>
 						</c:forEach>
@@ -162,7 +138,7 @@ function showSubSelect(category) {
 						</c:forEach>
 					</select> 	
 					<select name="type" id="type" style="width: 48%;">
-						<option value=""></option>					
+						<option>선택</option>
 					</select>			
 				</td>
 			</tr>
@@ -171,7 +147,7 @@ function showSubSelect(category) {
 				<td class="title">상품명</td>
 
 				<td colspan="3">
-					<input type="text" name="product_Name"  style="border: none; width: 80%;">
+					<input type="text" id="product_Name" name="product_Name"  style="border: none; width: 80%;"onkeydown="if(event.keyCode == 13) searchSend();">
 					<input type="button" value="검색" onclick="searchSend();" style="width: 18%;">
 				</td>			
 			</tr>
@@ -179,7 +155,7 @@ function showSubSelect(category) {
 		</table>
 	</form>
 	<br><br>
-	<table border="1"  style="width: 100%;">
+	<table border="1"  style="width: 100%;" id="view">
 		<tr>
 			<td class="title">코드</td>
 
@@ -193,32 +169,18 @@ function showSubSelect(category) {
 
 			<td class="title" style="width: 100px;">가격</td>
 
+			<td class="title" style="width: 100px;">색상코드</td>
+			<td class="title" style="width: 100px;">색상</td>
 			<td class="title" style="width: 100px;">재고</td>
 
 			<td class="title">관리</td>
 		</tr>
-		<c:forEach var="dto" items="${lists }">
-			<tr align="center">
-				<td>${dto.code }</td>
-
-				<td>${dto.brand }</td>
-
-				<td>${dto.category }</td>
-
-				<td>${dto.type }</td>
-
-				<td>${dto.product_Name }</td>
-
-				<td>${dto.product_Price }</td>
-
-				<td>${dto.qty }</td>
-				<td>
-					<a>수정</a>/
-					<a href="adminProductDelete.action?code=${dto.code }" style="text-decoration: none;">삭제</a>
-				</td>
-			</tr>
-		</c:forEach>
+		<tbody id="tester">
+		
+		
+		</tbody>
 	</table>
+
 	</div>
 </body>
 </html>
