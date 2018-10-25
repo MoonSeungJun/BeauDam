@@ -297,7 +297,7 @@
 			select count(*) from coupon where id = #{id} and period > sysdate
 		</select>
 		<select id="getCouponData" resultType="com.table.otherDTO.CouponDTO" parameterType="String">
-			select num,id,coupon,to_char(period, 'yyyy-mm-dd') period, usedate from coupon
+			select num, id, coupon, to_char(period, 'yyyy-mm-dd') period from coupon
 			where id = #{id} and period > sysdate
 		</select>		
 		

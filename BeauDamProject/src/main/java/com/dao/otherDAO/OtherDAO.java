@@ -82,7 +82,7 @@ public class OtherDAO {
 
 	 
 	public List<CouponDTO> getCouponData(String id) {
-		List<CouponDTO> lists = sessionTemplate.selectList("beaudam.getCountData", id);
+		List<CouponDTO> lists = sessionTemplate.selectList("beaudam.getCouponData", id);
 		return lists;
 	}
 

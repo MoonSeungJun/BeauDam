@@ -33,15 +33,15 @@
 			}
 		});
 		
-		$("#coupon").change(function(){
+		/* $("#coupon").change(function(){
 			if($("#coupon").val()!=1){
 				$("#point").attr("readonly", true);
 				var totalPrice;
 				
-				if($("#coupon").val()=="coupon1"){
+				if($("#coupon").val()=="10%"){
 					totalPrice = Number(rmComma($("#totalPrice").text()))*0.1;
 					$("#discount").text(addComma(totalPrice));
-				}else if($("#coupon").val()=="coupon2"){
+				}else if($("#coupon").val()=="20%"){
 					totalPrice = Number(rmComma($("#totalPrice").text()))*0.2;
 					$("#discount").text(addComma(totalPrice));
 				}
@@ -54,18 +54,22 @@
 			
 			var pay = rmComma($("#totalPrice").text()) + rmComma($("#shipping").text()) - rmComma($("#discount").text());
 			$("#pay").text(addComma(pay));
-		});
+		}); */
 		
 		$("#point").change(function(){
 			var point = Number($("#point").val());
 			$("#coupon").prop("disabled", true);
 			
-			if(point != 0){				
-				if(point>0 && point<=11809){
+			if(point != 0){
+				if(${member.point}==0){
+					point=${member.point};
+					$("#point").val(addComma(point));
+					$("#coupon").prop("disabled", false);
+				} else if(point>0 && point<=${member.point}) {
 					$("#point").val(addComma(point));
 					$("#discount").text(addComma(point));
 				} else {
-					point=11809;
+					point=${member.point};
 					$("#point").val(addComma(point));
 					$("#discount").text(addComma(point));
 				}
@@ -78,6 +82,32 @@
 			$("#pay").text(addComma(pay));
 		});
 	});
+	
+	function setCouponNum(num){
+		alert(num);
+		$("#couponNum").val(num);
+		
+		if($("#coupon").val()!=1){
+			$("#point").attr("readonly", true);
+			var totalPrice;
+			
+			if($("#coupon").val()=="10%"){
+				totalPrice = Number(rmComma($("#totalPrice").text()))*0.1;
+				$("#discount").text(addComma(totalPrice));
+			}else if($("#coupon").val()=="20%"){
+				totalPrice = Number(rmComma($("#totalPrice").text()))*0.2;
+				$("#discount").text(addComma(totalPrice));
+			}
+			
+			$("#point").val(0);
+		} else {
+			$("#point").attr("readonly", false);
+			$("#discount").text("0");
+		}
+		
+		var pay = rmComma($("#totalPrice").text()) + rmComma($("#shipping").text()) - rmComma($("#discount").text());
+		$("#pay").text(addComma(pay));
+	}
 	
 	function addComma(num) {
 	    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -118,7 +148,7 @@
 			<td>총가격</td>
 		</tr>
 		
-		<c:forEach var="dto" items="${lists }">
+		<c:forEach var="dto" items="${buyLists }">
 			<tr align="center">
 				<td width="15%">
 					<img style="margin: 0 auto; width: 100px; height: 100px;" src="${dto.thumb_Img }">
@@ -126,13 +156,25 @@
 			
 				<td>에뛰드</td>
 				
-				<td>산호초립밤</td>
+				<td>${dto.product_Name }</td>
 				
-				<td>3,500원</td>
+				<td>
+					<span id="price${dto.basket_Num }" >
+					<script type="text/javascript">
+						$("#price${dto.basket_Num }").html(addComma(${dto.product_Price}));
+					</script>
+					</span> 원
+				</td>
 				
-				<td>3</td>
+				<td>${dto.qty }</td>
 				
-				<td>10,500원</td>
+				<td>
+					<span id="pay${dto.basket_Num }" >
+					<script type="text/javascript">
+						$("#pay${dto.basket_Num }").html(addComma(${dto.product_Price} * ${dto.qty}));
+					</script>
+					</span> 원
+				</td>
 			</tr>
 		</c:forEach>
 		
@@ -159,9 +201,11 @@
 			 			<option value="1" selected="selected">선택</option>
 			 			
 			 			<!-- jstl로 쿠폰 나열 -->
-			 			<option value="coupon1">10% 할인</option>
-			 			<option value="coupon2">20% 할인</option>
-			 		</select> (사용가능 쿠폰 : 2장)
+			 			<c:forEach var="dto" items="${couponLists }">
+			 				<option value="${dto.coupon }" onclick="setCouponNum(${dto.num});">${dto.coupon } 할인</option>
+			 			</c:forEach>
+			 		</select> (사용가능 쿠폰 : ${couponCount }장)
+			 		<input type="hidden" id="couponNum" name="couponNum" value="">
 		 		</div>
 			</td>
 		</tr>
@@ -170,7 +214,14 @@
 			<td>포인트</td>
 			
 			<td>
-				<input type="text" value="0" id="point" style="width: 70px"> Point (사용가능 포인트 : 11,809 Point)
+				<input type="text" value="0" id="point" style="width: 70px"> Point 
+				(사용가능 포인트 : 
+					<span id="usepoint" >
+					<script type="text/javascript">
+						$("#usepoint").html(addComma(${member.point}));
+					</script>
+					</span> 
+				Point)
 			</td>
 		</tr>
 	</table>
@@ -185,19 +236,19 @@
 		<tr>	
 			<td>받는사람</td>
 				
-			<td>서영진</td>
+			<td>${member.name }</td>
 		</tr>
 		
 		<tr>	
 			<td>주소</td>
 				
-			<td>인천시 계양구 만양로 210-11 로앙블루 101동 2222호</td>
+			<td>${member.zip } ${member.city } ${member.street }</td>
 		</tr>
 		
 		<tr>	
 			<td>연락처</td>
 			
-			<td>010-3301-0881/032-313-3111</td>
+			<td>${member.cellphone }/${member.tel }</td>
 		</tr>
 		
 		<tr>	
@@ -229,7 +280,7 @@
 			<td style="height: 200px;">
 				<input type="radio" name="payType">무통장 입금
 				<input type="radio" name="payType">카드 결제
-				<input type="radio" name="payType">
+				<input type="radio" name="payType">실시간 계좌이체
 			</td>
 			
 			<td rowspan="2" valign="top">

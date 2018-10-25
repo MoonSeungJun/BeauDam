@@ -11,8 +11,13 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dao.memberDAO.MemberServiceImpl;
 import com.dao.otherDAO.OtherServiceImpl;
+import com.dao.viewDAO.ViewService;
+import com.table.memberDTO.MemberDTO;
 import com.table.otherDTO.BasketDTO;
+import com.table.otherDTO.CouponDTO;
+import com.view.view.MemberView;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -73,11 +78,15 @@ import com.table.otherDTO.BasketDTO;
  *	파라미터 타입이 다들 다르니 사용 전 사용할 Mapper를 확인할 것
  *
  */
+
 @Controller("BeaudamController")
 public class BeaudamController {
 
+	@Resource(name = "viewService")
+	private ViewService viewService;
+
 	@Resource(name = "otherService")
-	private OtherServiceImpl OtherService;
+	private OtherServiceImpl otherService;
 
 	// ********************** Beaudam Page **********************
 
@@ -121,17 +130,17 @@ public class BeaudamController {
 
 	@RequestMapping(value = "/event2.action", method = RequestMethod.GET)
 	public String event2() {
-			
+
 		// 이벤트2 페이지 이동
-		return"beaudam/event2";
+		return "beaudam/event2";
 	}
 
 	@RequestMapping(value = "/event3.action", method = RequestMethod.GET)
 	public String event3() {
-		
+
 		// 이벤트3 페이지 이동
 		return "beaudam/event3";
-		
+
 	}
 
 	// msj
@@ -140,8 +149,8 @@ public class BeaudamController {
 
 		ModelAndView mav = new ModelAndView();
 
-		String pay = request.getParameter("pay_ok");
-		if (pay != null) {
+		String pay = request.getParameter("pay");
+		if (pay == "pay_ok") {
 			mav.setViewName("beaudam/payOk");
 
 			// 결제완료 페이지 이동
@@ -150,23 +159,35 @@ public class BeaudamController {
 
 		mav.setViewName("beaudam/pay");
 
+		List<BasketDTO> buyLists = new ArrayList<BasketDTO>();
+		Map<String, Object> hm = new HashMap<String, Object>();
+
 		// HttpSession session = request.getSession();
 		// String id = (String) session.getAttribute("id");
-
-		List<BasketDTO> lists = new ArrayList<BasketDTO>();
-		Map<String, Object> hm = new HashMap<String, Object>();
 
 		String id = "esteban"; // test Data
 		hm.put("id", id);
 
-		String check[] = request.getParameterValues("check");
-		for (String s : check) {
-			hm.put("basket_Num", s);
-			BasketDTO dto = OtherService.getBasketOneData(hm);
-			lists.add(dto);
-		}
+		MemberView member = viewService.getOneMemberData(id);
 
-		mav.addObject("lists", lists);
+		int amount = 0;
+		String check[] = request.getParameterValues("check");
+		for (String selectedProduct : check) {
+			amount = Integer.parseInt(request.getParameter("amount" + selectedProduct));
+			hm.put("basket_Num", selectedProduct);
+			BasketDTO dto = otherService.getBasketOneData(hm);
+			dto.setQty(amount);
+			buyLists.add(dto);
+		}
+		System.out.println(member.getPoint()+"aaaaaaaaaaaaaaaa");
+
+		List<CouponDTO> couponLists = otherService.getCouponData(id);
+		int couponCount = otherService.getCouponCount(id);
+
+		mav.addObject("member", member);
+		mav.addObject("buyLists", buyLists);
+		mav.addObject("couponLists", couponLists);
+		mav.addObject("couponCount", couponCount);
 
 		// 결제 페이지 이동
 		return mav;

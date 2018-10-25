@@ -18,7 +18,6 @@ public class MemberDAO {
 		this.sessionTemplate = sessionTemplate;
 	}
 
-	
 	public void insertMember(MemberDTO dto) {
 		sessionTemplate.insert("beaudam.insertMember", dto);
 	}
