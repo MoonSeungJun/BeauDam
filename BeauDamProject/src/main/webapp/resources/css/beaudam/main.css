@@ -329,10 +329,9 @@ a {
 
 .best_wrapper {
     padding-bottom: 50px;
-    
 }
 
-.best_wrapper h3 {
+.best_wrapper h3, .new_item h3 {
     font-family: 'WONBatang';
     letter-spacing: 0.4em;
     text-align: center;
@@ -342,24 +341,32 @@ a {
     
 }
 
-.best_wrapper ul {
+.best_wrapper ul, .new_item ul {
     text-align: center;
     overflow: hidden;
-    width: 960px;
+    width: 1200px;
     margin: 0 auto;
 }
 
-.best_wrapper li {
+.best_wrapper li, .new_item li {
     float: left;
     text-align: center;
 }
 
-.best_wrapper img {
+.rolling_panel img, .new_item img {
     width: 220px;
+    height: 265px;
     margin: 10px;
     border-radius: 30px;
 }
 
+<<<<<<< HEAD
+=======
+.new_item {
+	
+}
+
+>>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
 .footer {
     background-color: #F9F9F9;
     height: 300px;

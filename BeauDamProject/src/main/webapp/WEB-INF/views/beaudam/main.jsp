@@ -16,6 +16,79 @@ session="false" pageEncoding="UTF-8"%>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+		<script type="text/javascript">
+            $(document).ready(function() {
+ 
+                var $panel = $(".rolling_panel").find("ul");
+ 
+                var itemWidth = $panel.children().outerWidth(); // 아이템 가로 길이
+                var itemLength = $panel.children().length;      // 아이템 수
+ 
+                // Auto 롤링 아이디
+                var rollingId;
+ 
+                auto();
+ 
+                // 이전 이벤트
+                $("#prev").on("click", prev);
+ 
+                $("#prev").mouseover(function(e) {
+                    clearInterval(rollingId);
+                });
+ 
+                $("#prev").mouseout(auto);
+ 
+                // 다음 이벤트
+                $("#next").on("click", next);
+ 
+                $("#next").mouseover(function(e) {
+                    clearInterval(rollingId);
+                });
+ 
+                $("#next").mouseout(auto);
+ 
+                function auto() {
+ 
+                    // 2초마다 start 호출
+                    rollingId = setInterval(function() {
+                        start();
+                    }, 2500);
+                }
+ 
+                function start() {
+                    $panel.css("width", itemWidth * itemLength);
+                    $panel.animate({"left": - itemWidth + "px"}, function() {
+ 
+                        // 첫번째 아이템을 마지막에 추가하기
+                        $(this).append("<li>" + $(this).find("li:first").html() + "</li>");
+ 
+                        // 첫번째 아이템을 삭제하기
+                        $(this).find("li:first").remove();
+ 
+                        // 좌측 패널 수치 초기화
+                        $(this).css("left", 0);
+                    });
+                }
+ 
+                // 이전 이벤트 실행
+                function prev(e) {
+                    $panel.css("left", - itemWidth);
+                    $panel.prepend("<li>" + $panel.find("li:last").html() + "</li>");
+                    $panel.animate({"left": "0px"}, function() {
+                        $(this).find("li:last").remove();
+                    });
+                }
+ 
+                // 다음 이벤트 실행
+                function next(e) {
+                    $panel.animate({"left": - itemWidth + "px"}, function() {
+                        $(this).append("<li>" + $(this).find("li:first").html() + "</li>");
+                        $(this).find("li:first").remove();
+                        $(this).css("left", 0);
+                    });
+                }
+            });
+        </script>    
     </head>
     <body>
 	<jsp:include page="./mainTop.jsp"/>
@@ -57,14 +130,19 @@ session="false" pageEncoding="UTF-8"%>
         <!-- 슬라이드 이미지 끝 -->
         
         <!-- 베스트 상품 -->
-        <div class="best_wrapper">
-            <h3>BEST ITEM</h3>
-            <ul>
-                <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-            </ul>
+        <div class="best_wrapper rolling_wrapper">
+        <h3>BEST ITEM</h3>
+        	<div class="rolling_panel">
+				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_l.png"></a></div>-->
+				<ul class="rolling_panel">
+					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a></li>
+					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></a></li>
+					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a></li>
+					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample2.jpg"></a></li>
+					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></a></li>
+				</ul>
+				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_r.png"></a></div>-->
+			</div>
         </div>
         <!-- 베스트 상품 끝 -->
         
@@ -96,9 +174,9 @@ session="false" pageEncoding="UTF-8"%>
         <img  style="width: 100%" src="<%=cp%>/resources/image/beaudam/main/content_main04.jpg" >
         
         <div class="new_item">
-            <div class="best_wrapper">
+            <div class="new_item">
                 <h3>NEW ITEM</h3>
-                <ul>
+                <ul class="new_item" style="width: 960px;">
                     <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
                     <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
                     <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>

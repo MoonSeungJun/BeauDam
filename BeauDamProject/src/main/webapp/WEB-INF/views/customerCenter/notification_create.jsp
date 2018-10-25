@@ -21,8 +21,15 @@
 		subVal = subVal.trim();
 		contVal = contVal.trim();
 		
-		if(!subVal&&!contVal){
-			alert("입력값을 확인해주세요")
+		if(!subVal){
+			alert("제목을 확인해주세요")
+			f.subject.focus();			
+			return;
+		}
+		if(!contVal){
+			alert("내용을 확인해주세요")
+			f.content.focus();			
+			return;
 		}
 		
 		f.action = "<%=cp%>/notification_create_ok.action";

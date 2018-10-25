@@ -14,12 +14,22 @@
 	
 	function sendIt() {
 		
-		var f= document.notificationEditForm;
+		var f = document.notificationCreateForm;
 		var subVal = f.subject.value;
 		var contVal = f.content.value;
 		
-		if(!subVal&&!contVal){
-			alert("입력내용을 확인하세요")
+		subVal = subVal.trim();
+		contVal = contVal.trim();
+		
+		if(!subVal){
+			alert("제목을 확인해주세요")
+			f.subject.focus();			
+			return;
+		}
+		if(!contVal){
+			alert("내용을 확인해주세요")
+			f.content.focus();			
+			return;
 		}
 		
 		f.action = "<%=cp%>/notification_update_ok.action"
@@ -36,6 +46,7 @@
 
 <form action="" name="notificationEditForm" method="post">
 	<table border="1" align="center">
+<<<<<<< HEAD
 	
 		<tr>
 			<td>
@@ -46,6 +57,26 @@
 			</td>
 		</tr>
 	
+=======
+	
+		<tr>
+			<td>
+				운영자
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+>>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+	
+		<tr>
+			<td align="center">
+				제목
+			</td>
+			<td align="center">
+				<input type="text" name="subject" style="width: 95%;" value="${dto.subject }"/>
+			</td>
+		</tr>
 	
 		<tr>
 			<td align="center">
@@ -57,7 +88,10 @@
 		</tr>
 	
 	
+<<<<<<< HEAD
+=======
 	
+>>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
 	<tr>
 			<td valign="top" align="center">
 				내용
