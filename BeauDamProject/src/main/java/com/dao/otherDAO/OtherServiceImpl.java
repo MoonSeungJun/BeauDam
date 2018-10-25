@@ -99,5 +99,40 @@ public class OtherServiceImpl implements OtherService {
 		return lists;
 	}
 
+	@Override
+	public void updateNotification(NotificationDTO dto) {
+		dao.updateNotification(dto);
+		
+	}
+
+	@Override
+	public int getNotificationMaxNum() {
+		int result = dao.getNotificationMaxNum();
+		return result;
+	}
+
+	@Override
+	public List<NotificationDTO> getNotificationAllData(int start, int end, String searchKey, String searchValue) {
+		List<NotificationDTO> lists = dao.getNotificationAllData(start, end, searchKey, searchValue);
+	
+		return lists;
+		
+	}
+
+	@Override
+	public NotificationDTO getOneNotification(int num) {
+		
+		NotificationDTO dto = dao.getOneNotification(num);
+		return dto;
+	}
+
+	@Override
+	public int getNotificationCount(String searchKey, String searchValue) {
+		
+		int result = dao.getNotificationCount(searchKey, searchValue);
+		
+		return result;
+	}
+
 
 }

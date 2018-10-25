@@ -55,6 +55,10 @@ public class OtherDAO {
 		sessionTemplate.update("beaudam.updateHitCount",num);
 		
 	}
+	
+	public void updateNotification(NotificationDTO dto) {
+		sessionTemplate.update("beaudam.updateNotification",dto);
+	}
 
 	 
 	public void deleteBasket(HashMap<String, Object> map) {
@@ -104,6 +108,51 @@ public class OtherDAO {
 		
 		return lists;
 	}
+	
+	public int getNotificationMaxNum() {
+		int maxNum = 0;
+		maxNum = sessionTemplate.selectOne("beaudam.getNotificationMaxNum");
+	
+		return maxNum;
+	
+	}
+	
+	public List<NotificationDTO> getNotificationAllData(int start,int end,String searchKey,String searchValue){
+	
+		HashMap<String, Object> detail = new HashMap<String, Object>();
+		
+		detail.put("start", start);
+		detail.put("end", end);
+		detail.put("searchValue", searchValue);
+		detail.put("searchKey", searchKey);
+		
+	
+		List<NotificationDTO> lists = sessionTemplate.selectList("beaudam.getNotificationAllData",detail);
+		
+				
+		return lists;
+	}
+	
+	public NotificationDTO getOneNotification(int num) {
+		
+		NotificationDTO dto = sessionTemplate.selectOne("beaudam.getOneNotification",num);
+		
+		return dto;
+	}
+	
+	public int getNotificationCount(String searchKey,String searchValue) {
+		
+		HashMap<String, Object> detail = new HashMap<String, Object>();
+		
+		detail.put("searchKey", searchKey);
+		detail.put("searchValue",searchValue);
+		
+		int result = sessionTemplate.selectOne("beaudam.getNotificationCount",detail);
+		
+		return result;
+		
+	}
+	
 	
 	
 }

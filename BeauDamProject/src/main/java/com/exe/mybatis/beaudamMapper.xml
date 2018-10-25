@@ -157,7 +157,10 @@
 			<update id="updateHitCount" parameterType="int">
 				update notification set hitCount = hitCount + 1 where num = #{num}
 			</update>
-		
+			
+			<update id="updateNotification" parameterType="com.table.otherDTO.NotificationDTO" >
+				update notification set subject=#{subject},content=#{content} where num=#{num}
+			</update>
 				
 		
 	
@@ -312,10 +315,34 @@
 		
 		
 		<!-- Notification -->
-		<select id="getNotificationData" resultType="com.table.otherDTO.NotificationDTO">
-			select num, id, subject, content, hitCount,to_char(created, 'yyyy-mm-dd') created
-			from notification
+		
+		<select id="getNotificationMaxNum" resultType="int">
+			select nvl(max(num),0) from notification
+			
 		</select>
+			
+		<select id="getNotificationAllData" parameterType="map" resultType="com.table.otherDTO.NotificationDTO">
+			
+			select *from (
+			select rownum rnum,data.*from (
+			select num,id,subject,content,hitCount,to_char(created,'YYYY-MM-DD') created from notification
+			where ${searchKey} like '%' || #{searchValue} || '%' 
+			order by num desc) data)
+			<![CDATA[
+			where rnum>=#{start} and rnum <=#{end}
+			]]>			
+		</select>
+		
+		<select id="getOneNotification" parameterType="int" resultType="com.table.otherDTO.NotificationDTO">
+			select num,id,subject,content,hitCount,created from notification
+			where num=#{num}
+		</select>
+		
+		<select id="getNotificationCount" parameterType="map" resultType="int">
+				select nvl(count(*),0) from notification where ${searchKey} like '%' || #{searchValue} || '%'	
+		</select>
+		
+		
 		
 		
 		<!-- Coupon -->
