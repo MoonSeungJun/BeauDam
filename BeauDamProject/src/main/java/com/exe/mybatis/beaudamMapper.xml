@@ -124,17 +124,17 @@
 		<!-- Product -->
 			<!-- 상품수정 -->
 			<update id="updateProduct" parameterType="com.table.productDTO.ProductDTO">
-				update product set product_name = #{product_name}, product_price = #{product_price} where code = #{code}
+				update product set product_name = #{product_Name}, product_price = #{product_Price} where code = #{code}
 			</update>
 			
 			<update id="updateBrand" parameterType="com.table.productDTO.BrandDTO">
-				update product set brand=#{brand},category=#{category},type=#{type} where code=#{code}
+				update brand set brand=#{brand},category=#{category},type=#{type} where code=#{code}
 			</update>
 			<update id="updateImg" parameterType="com.table.productDTO.ImgDTO">
-				update img set thumb_img=#{thumb_img},detail_img=#{detail_img} where code = #{code}
+				update img set thumb_img=#{thumb_Img},detail_img=#{detail_Img} where code = #{code}
 			</update>
 			<update id="updateColor" parameterType="com.table.productDTO.ColorDTO">
-				update color set color_code=#{color_code},color_name=#{color_name},qty=#{qty} where code = #{code}
+				update color set color_code=#{color_Code},color_name=#{color_Name},qty=#{qty} where code = #{code}
 			</update>
 			
 			
@@ -185,6 +185,9 @@
 		<delete id="deleteAdminCategory" parameterType="String">
 			delete admin_category where category = #{category}
 		</delete>
+		<delete id="deleteAdminCateType" parameterType="String">
+			delete admin_type where category = #{category}
+		</delete>
 		<delete id="deleteAdminType" parameterType="String">
 			delete admin_type where type = #{type}
 		</delete>
@@ -208,6 +211,19 @@
 			delete notification where num = #{num}			
 		</delete>
 	
+		<!-- Member -->
+		<delete id="deleteMemberGrade" parameterType="String">
+			delete member_grade where id = #{id}
+		</delete>
+		<delete id="deleteMember" parameterType="String">
+			delete member where id = #{id}
+		</delete>
+		<delete id="deleteMemberInfo" parameterType="String">
+			delete member_info where id = #{id}
+		</delete>
+		<delete id="deleteCoupon" parameterType="String">
+			delete coupon where id = #{id}
+		</delete>
 		
 		
 	<!-- Select -->
@@ -232,14 +248,13 @@
 		
 		<select id="getSearchMemberData" resultType="com.view.view.MemberView" parameterType="com.table.memberDTO.Member_InfoDTO">
 			select ID,PWD,NAME,NICKNAME,CELLPHONE,TEL,to_char(birth,'yyyy-mm-dd') BIRTH,EMAIL,ZIP,CITY,STREET,GENDER,PAY,GRADE,POINT, to_char(created,'yyyy-mm-dd') CREATED,ISLEAVE from
-			memberView where id = #{id} or name = #{name} or tel = #{tel} or cellphone = #{cellphone} or birth = #{birth} 
+			memberView where id = #{id} or upper(name) = upper(#{name}) or tel = #{tel} or cellphone = #{cellphone} or birth = #{birth} 
 		</select>
 		
 		<!-- Product -->
 		<select id="getAllProductData" resultType="com.view.view.ProductView" parameterType="map">
 			select code,brand,category,type,product_Name,color_Code,color_Name,product_Price,thumb_Img,detail_Img,qty from productView
-			where upper(code) = upper(#{code}) or  upper(brand) = upper(#{brand}) or  upper(category) = upper(#{category}) or upper(type) = upper(#{type}) or upper(product_Name) = upper(#{productName})	
-			
+			where upper(code) = upper(#{code}) or  upper(brand) = upper(#{brand}) or  upper(category) = upper(#{category}) or upper(type) = upper(#{type}) or upper(product_Name) = upper(#{productName})		
 		</select>	
 		<select id="getProductList" resultType="com.view.view.ProductView">
 			select code,brand,category,type,product_name,product_price,color_code,color_name,qty from productView
