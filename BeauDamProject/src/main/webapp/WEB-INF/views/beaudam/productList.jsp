@@ -3,15 +3,41 @@ session="false" pageEncoding="UTF-8"%>
 <%
 	String cp = request.getContextPath();
 %>
-
-
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>list</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="./resources/css/beaudam/list.css">
-        <link rel="stylesheet" href="./resources/css/beaudam/main.css">
+    <title>list</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./resources/css/beaudam/list.css">
+    <style type="text/css">
+   	.pageing {
+		padding: 30px;
+		text-align: center;
+		margin-top: 30px;
+
+	}
+	
+	.pageing ol {
+		overflow: hidden; 
+		display: inline-block; 
+		padding: 0;
+		margin: 0;
+		
+	}
+	
+	.pageing li {
+		width: 34px;
+		height: 34px;
+		line-height: 34px;
+		float: left;
+		border: 1px solid #d7d5d5;
+	}
+	
+	.pageing li:hover {
+        background-color: rgba( 237, 237, 237, 0.5 ); 
+	}
+	
+    </style>
     </head>
     <body>
     	<jsp:include page="./mainTop.jsp" />
@@ -64,7 +90,7 @@ session="false" pageEncoding="UTF-8"%>
         			</div>
         		</li>
         	</ul>
-        </div>
+        </div> 
 		<div class="list">
 		총 <font style="color: #ff4d4d">14개</font>의 상품이 있습니다.
         	<ul>
@@ -118,6 +144,21 @@ session="false" pageEncoding="UTF-8"%>
         			</div>
         		</li>
         	</ul>
+        </div>
+<<<<<<< HEAD
+        <div class="page">
+        	<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/pre.gif"></a>
+        	<ol start="1">
+=======
+        <div class="pageing">
+        	<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/pre.gif"></a>
+        	<ol>
+>>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
+        		<li>1</li>
+        		<li>2</li>
+        		<li>3</li>
+        	</ol>
+        	<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/next.gif"></a>
         </div>
         <jsp:include page="./mainBottom.jsp" />
     </body>

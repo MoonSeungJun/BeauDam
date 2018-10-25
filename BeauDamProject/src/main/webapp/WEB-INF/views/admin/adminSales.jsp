@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <%
 	String cp = request.getContextPath();
 %>
@@ -10,6 +13,24 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
 </head>
+<script type="text/javascript">
+
+
+	$(function(){
+		$("#selectYear").change(function() {
+		var yearSearchValue = $("#yearDto option:selected").val();
+		
+		$("#yearBox").val(yearSearchValue);
+		});	
+	});	
+	
+		
+		f.action = "<%=cp%>/adminSales.action";
+		f.submit();
+
+
+
+</script>
 <body>
 
 <jsp:include page="adminHeader.jsp"/>
@@ -186,7 +207,10 @@
 			</tr>
 		</table>
 
-		<table border="1" style="margin: 10px; float: left; width: 30%;">
+
+<h3>연간</h3>
+
+	<table border="1" style="margin: 10px; float: left; width: 30%;">
 			<tr>
 				<td colspan="2" style="background-color: gainsboro">
 					<h3 style="margin: 0px; padding: 3px;">연간</h3>
@@ -210,6 +234,7 @@
 			</tr>
 		</table>
 	</div>
+
 </div>
 </body>
 </html>

@@ -16,6 +16,7 @@ public interface OtherService {
 //	update
 	void updateCoupon(HashMap<String, Object> map);
 	void updateHitCount(int num);
+	void updateNotification(NotificationDTO dto);
 //	delete
 	void deleteBasket(HashMap<String, Object> map);
 	void deleteReview(int num);
@@ -26,4 +27,8 @@ public interface OtherService {
 	int getWeekCouponCount(String id);
 	List<CouponDTO> getWeekCouponData(String id);
 	List<ReviewDTO> getReviewData (String sale_Code);
+	int getNotificationMaxNum();
+	List<NotificationDTO> getNotificationAllData(int start,int end,String searchKey,String searchValue);
+	public NotificationDTO getOneNotification(int num);
+	int getNotificationCount(String searchKey,String searchValue);
 }

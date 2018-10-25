@@ -14,7 +14,58 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
+<<<<<<< HEAD
 	function orderUpdate(code) {		
+=======
+	function orderSearch() {
+		
+		var f = document.adminOrderForm;
+		
+		var searchValue1 = f.id.value;
+		searchValue1 = searchValue1.trim();
+		
+		var searchValue2 = f.name.value;
+		searchValue2 = searchValue2.trim();
+		
+		var searchValue3 = f.cellphone.value;
+		searchValue3 = searchValue3.trim();
+		
+		if(!searchValue1&&!searchValue2&&!searchValue3){
+			alert("\검색어를 입력하세요.");
+			f.id.focus();
+			return;
+		}
+		
+		f.action = "<%=cp%>/adminOrder.action";
+		f.submit();
+		
+	}
+	
+	function adminOrderUpdate() {
+		
+		
+		$(function(){
+			$("#pay_Status").change(function(){
+				
+				var pay_Status = $("#pay_Status option:selected").val();
+				
+				
+			});	
+		});
+		
+		$(function(){
+			$("#delivery_Status").change(function(){
+				
+				var delivery_Status = $("#delivery_Status option:selected").val();
+				
+				
+			});	
+		});
+		
+		
+		f.action = "<%=cp%>/adminOrderUpdate.action";
+		f.submit();
+>>>>>>> 1696839a53f603cd4c87c3d31c1409a1b91531e9
 		
 		var delState = $('#delivery_Status option:selected').val();
 		var payState = $('#pay_Status option:selected').val();
@@ -145,6 +196,7 @@
 			</td>		
 		</tr>
 
+<<<<<<< HEAD
 		<c:forEach var="dto" items="${saleList }"> 
 			<tr>
 				<td>
@@ -207,6 +259,72 @@
 			</tr>
 		</c:forEach>
 	</table>
+=======
+
+	<c:forEach var = "dto" items="${lists }"> 
+		<tr>
+			<td>
+				${dto.sale_Code }
+			</td>
+			<td>
+				${dto.id }
+			</td>				
+			<td>
+				${dto.name }
+			</td>
+			<td>
+				${dto.cellphone }
+			</td>				
+			<td>
+				${dto.addr }
+			</td>			
+			<td>
+				${dto.product_Name }
+			</td>			
+			<td>
+				${dto.color_Code }
+			</td>						
+			<td>
+				${dto.product_Price }
+			</td>
+			<td>
+				${dto.qty }
+			</td>
+			<td>
+				${dto.totalPrice }
+			</td>
+			<td>
+				${dto.saleDate }
+			</td>
+			
+			<td>
+				<select id="pay_Status">
+					<option value="change">교환</option>
+					<option value="returns">반품</option>
+					<option value="cancel">취소</option>									
+				</select>
+			</td>
+			
+			<td>
+				<select id="delivery_Status">
+					<option value="ready">상품 준비중</option>
+					<option value="ing">배송중</option>
+					<option value="complete">배송완료</option>				
+				</select>
+			</td>
+			<td>
+				<input type="hidden" name="sale_Code" value="${dto.sale_Code }">
+				<input type="hidden" name="pageNum" value="${pageNum }">
+				<input type="hidden" name="pay_Status" value="${dto.pay_Status }">
+				<input type="hidden" name="delivery_Status" value="${dto.delivery_Status }">
+				
+				<a onclick="adminOrderUpdate();" style="text-decoration: none;">수정</a>
+			</td>			
+		</tr>
+	</c:forEach>
+
+</table>
+>>>>>>> 1696839a53f603cd4c87c3d31c1409a1b91531e9
 </form>
 </body>
 </html>

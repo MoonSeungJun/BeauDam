@@ -3,7 +3,7 @@
 @font-face { font-family: 'WONBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONBatang.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'Binggrae-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae-Bold.woff') format('woff'); font-weight: normal; font-style: normal; }
 
-html, body, ul, li, h1, h2 {
+html, body, ul, ol, li, h1, h2 {
     padding: 0px;
     margin: 0px;
     list-style: none;   
@@ -106,9 +106,26 @@ html, body, ul, li, h1, h2 {
 	transform: scale(1.1);
 }
 
-
 .listitem p {
 	text-align: center;
+}
+
+.page {
+	background-color: fuchsia; 
+	margin: 30px auto 0 auto; 
+	width: 960px;
+	text-align: center;
+}
+
+.page ol {
+	overflow: hidden;
+}
+
+.page li {
+	width: 34px;
+	height: 34px;
+	border: 1px solid gray;
+	float: left;
 }
 
 

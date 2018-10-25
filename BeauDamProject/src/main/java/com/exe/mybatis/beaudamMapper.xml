@@ -145,7 +145,11 @@
 			
 			<!-- 결제상태, 배송상태 수정 -->			
 			<update id="updateSaleDate" parameterType="com.view.view.SaleView">
+<<<<<<< HEAD
 				update sale_date set pay_status=#{pay_Status},delivery_status=#{delivery_Status} where sale_code = #{sale_Code}
+=======
+				update sale_date set pay_status=#{pay_status},delivery_status=#{delivery_status} where sale_code = #{sale_code}
+>>>>>>> 1696839a53f603cd4c87c3d31c1409a1b91531e9
 			</update>					
 			
 		<!-- Coupon -->
@@ -157,7 +161,10 @@
 			<update id="updateHitCount" parameterType="int">
 				update notification set hitCount = hitCount + 1 where num = #{num}
 			</update>
-		
+			
+			<update id="updateNotification" parameterType="com.table.otherDTO.NotificationDTO" >
+				update notification set subject=#{subject},content=#{content} where num=#{num}
+			</update>
 				
 		
 	
@@ -280,6 +287,27 @@
 			select type from admin_type where category = #{category}
 		</select>
 		
+		<select id="getAdminDaySales" resultType="com.table.saleDTO.Sale_DateDTO">
+			select to_char(saledate,'day') saleDate, sum(total_price) total_Price
+			from sale_date 
+			where to_char(saledate,'ww')=to_char(sysdate,'ww')
+			group by to_char(saledate,'day')
+			order by to_char(saledate,'day')			
+		</select>
+		<select id="getAdminMonthSales" resultType="com.table.saleDTO.Sale_DateDTO" parameterType="String">
+			select to_char(saledate,'mm') saleDate,sum(total_price) total_Price from sale_date
+			where to_char(saledate,'yyyy-mm')
+			between '${yearSearchValue}-01' and '${yearSearchValue}-12'
+			group by to_char(saledate,'mm')
+			order by to_char(saledate,'mm') asc
+		</select>
+		<select id="getAdminYearSales" resultType="com.table.saleDTO.Sale_DateDTO">
+			select to_char(saledate,'yyyy') saleDate, sum(total_price) total_Price from sale_date
+			group by to_char(saledate,'yyyy')
+			order by to_char(saledate,'yyyy')
+		</select>
+		
+		
 		
 		<!-- Basket -->
 		<select id="getBasketData" resultType="com.table.otherDTO.BasketDTO" parameterType="String">
@@ -291,10 +319,34 @@
 		
 		
 		<!-- Notification -->
-		<select id="getNotificationData" resultType="com.table.otherDTO.NotificationDTO">
-			select num, id, subject, content, hitCount,to_char(created, 'yyyy-mm-dd') created
-			from notification
+		
+		<select id="getNotificationMaxNum" resultType="int">
+			select nvl(max(num),0) from notification
+			
 		</select>
+			
+		<select id="getNotificationAllData" parameterType="map" resultType="com.table.otherDTO.NotificationDTO">
+			
+			select *from (
+			select rownum rnum,data.*from (
+			select num,id,subject,content,hitCount,to_char(created,'YYYY-MM-DD') created from notification
+			where ${searchKey} like '%' || #{searchValue} || '%' 
+			order by num desc) data)
+			<![CDATA[
+			where rnum>=#{start} and rnum <=#{end}
+			]]>			
+		</select>
+		
+		<select id="getOneNotification" parameterType="int" resultType="com.table.otherDTO.NotificationDTO">
+			select num,id,subject,content,hitCount,created from notification
+			where num=#{num}
+		</select>
+		
+		<select id="getNotificationCount" parameterType="map" resultType="int">
+				select nvl(count(*),0) from notification where ${searchKey} like '%' || #{searchValue} || '%'	
+		</select>
+		
+		
 		
 		
 		<!-- Coupon -->

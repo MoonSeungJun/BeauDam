@@ -129,6 +129,7 @@ button:hover {
 	<div id="container">
 			<div class="title_style">
 				<div>
+					<a href="<%=cp %>/main.action" style="text-decoration: none; color: black; font-family: 'designhouseOTFLight00';"><h3>뷰티를 담다 뷰ː담</h3></a> 
 					<h2 style="font-family: designhouseOTFLight00">약관동의</h2>
 					<p style="font-family: Black Han Sans">Agree Terms And Condition</p>
 					<p style="color: grey">회원가입을 위해서 아래 이용약관 및 개인정보 수집 및 이용에 대한 약관을 읽고 동의해주세요.</p>
