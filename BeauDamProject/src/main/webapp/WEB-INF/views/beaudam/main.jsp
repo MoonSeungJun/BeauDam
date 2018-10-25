@@ -135,11 +135,11 @@ session="false" pageEncoding="UTF-8"%>
         	<div class="rolling_panel">
 				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_l.png"></a></div>-->
 				<ul class="rolling_panel">
-					<li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-					<li><img src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></li>
-					<li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-					<li><img src="<%=cp%>/resources/image/beaudam/main/sample2.jpg"></li>
-					<li><img src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></li>
+					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a></li>
+					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></a></li>
+					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a></li>
+					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample2.jpg"></a></li>
+					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></a></li>
 				</ul>
 				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_r.png"></a></div>-->
 			</div>
