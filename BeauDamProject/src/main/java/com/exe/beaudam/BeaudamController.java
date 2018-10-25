@@ -140,7 +140,6 @@ public class BeaudamController {
 
 		// 이벤트3 페이지 이동
 		return "beaudam/event3";
-
 	}
 
 	// msj

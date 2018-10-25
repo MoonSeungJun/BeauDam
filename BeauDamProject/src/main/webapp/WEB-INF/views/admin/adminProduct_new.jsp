@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	String cp = request.getContextPath();
+	String cp = request.getContextPath();	
 %>
 <!DOCTYPE html>
 <html>
@@ -18,10 +18,11 @@
 		$.ajax({
 		
 			type:'post',
-			url: "/beaudam/adminProduct_newAjax.action",
+			url: "/beaudam/adminProductAjax.action",
 			dataType: "json",
 			data:{'params':category,'brand':$('#brand option:selected').val()},
 			success: function (result) {
+						
 				
 				$('#type').find('option').remove().end().append("<option value=''>전체</option>");
 				
@@ -36,6 +37,25 @@
 			}					
 		});		
 	}
+	
+	window.onload = function() {
+	    document.getElementById('addProduct').onclick = function() {
+	    	
+	    	var f = document.adminProductForm;
+	    	if(f.count.value==""||f.code.value==""||f.productName.value==""||f.price.value==""||f.colorCode.value==""||f.color.value==""||f.thumbImg.value==""||f.detailImg.value==""){
+	    		alert("값을 모두 입력하세요");
+	    		
+	    	}else{
+	    		document.getElementById('adminProductForm').submit();	    		
+	    	}
+	    	
+	        
+	        return false;
+	    };
+	};
+
+
+	
 </script>
 </head>
 <body>
@@ -43,7 +63,7 @@
 <div class="wrapper">
 	<h2 class="text-center">상품등록</h2>
 	<hr>	
-	<form method="post" enctype="multipart/form-data" action="adminProduct_new.action" name="adminProductForm">
+	<form method="post" enctype="multipart/form-data" action="" name="adminProductForm" id="adminProductForm">
 		<table border="1" style="text-align: center;">
 			<tr>
 				<td class="title">
@@ -51,7 +71,8 @@
 				</td>
 				
 				<td style="text-align: left; text-indent: 1em;">			
-					<select name="brand" id="brand" style="width: 80%;">						
+					<select name="brand" id="brand" style="width: 80%;">
+						<option value="">선택</option>						
 						<c:forEach var="brand" items="${brand }">
 							<option value="${brand.brand }">${brand.brand }</option>	
 						</c:forEach>								
@@ -136,7 +157,7 @@
 				</td>
 										
 				<td colspan="4">
-					<input type="submit" name="addProduct" value="등록하기">
+					<input type="submit" name="addProduct" value="등록하기" id="addProduct">
 				</td>
 			</tr>			
 		</table>

@@ -3,8 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-	String cp = request.getContextPath();
-	String data = request.getParameter("data");
+	String cp = request.getContextPath();	
 %>
 
 <!DOCTYPE html>
@@ -15,36 +14,50 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
 <script type="text/javascript">
+	var category;
 		
 	function addBrand() {
-		var data = <%=data%>;
+		
 		$.ajax({
 			type: 'POST',
 			url: "adminBrand.action",
 			data: {"addbrand":$('#brandInput').val()},
 			async:false,
 			dataType: "text",
-			success: function() {				
+			success: function() {			
 				window.location.href = "/beaudam/adminBrand.action";
-			}	
+				alert('추가되었습니다.');
+			},
+			error: function() {
+				alert("이미 추가된 브랜드입니다.");
+			}
 		});		
 	}
 	
-	function delBrand(brand) {		
-		$.ajax({			
-			type: 'POST',
-			url: "adminBrand.action",
-			data: {"delbrand":brand},
-			async:false,
-			success: function() {				
-				window.location.href = "/beaudam/adminBrand.action";
-			}			
-		});				
+	function delBrand(brand) {
+		if(confirm("삭제하시겠습니까?")==true){
+			$.ajax({			
+				type: 'POST',
+				url: "adminBrand.action",
+				data: {"delbrand":brand},
+				async:false,
+				success: function() {				
+					window.location.href = "/beaudam/adminBrand.action";
+					alert('삭제되었습니다.');
+				},
+				error: function() {
+					alert('브랜드 내 상품이 존재합니다.');
+				}
+			});	
+		}else{
+			return;
+		}
+					
 	}
 
 
 	function addCate() {
-		var data = <%=data%>;
+		
 		$.ajax({
 			type: 'POST',
 			url: "adminBrand.action",
@@ -53,47 +66,100 @@
 			dataType: "text",
 			success: function() {				
 				window.location.href = "/beaudam/adminBrand.action";
-			}	
+				alert('추가되었습니다.');
+			},
+			error: function() {
+				alert('이미 추가된 카테고리입니다.');
+			}
 		});		
 	}
 	
 	function delCate(cate) {		
-		$.ajax({			
-			type: 'POST',
-			url: "adminBrand.action",
-			data: {"delCate":cate},
-			async:false,
-			success: function() {				
-				window.location.href = "/beaudam/adminBrand.action";
-			}			
-		});				
+		
+		if(confirm("삭제하시겠습니까?") == true){
+			$.ajax({			
+				type: 'POST',
+				url: "adminBrand.action",
+				data: {"delCate":cate},
+				async:false,
+				success: function() {				
+					window.location.href = "/beaudam/adminBrand.action";
+					alert('삭제되었습니다.');
+				},
+				error: function() {
+					alert('카테고리 내 상품이 존재합니다.');
+				}
+			});				
+		}else{
+			return;
+		}
+		
 	}
 	
-	
-	function addType() {
-		var data = <%=data%>;
-		$.ajax({
+	function findType(cate) {
+		category = cate;
+		
+		$.ajax({			
 			type: 'POST',
-			url: "adminBrand.action",
-			data: {"addType":$('#typeInput').val()},
+			url: "adminBrandAjax.action",
+			data: {"cate":cate},
 			async:false,
-			dataType: "text",
-			success: function() {				
-				window.location.href = "/beaudam/adminBrand.action";
-			}	
+			dataType: 'json',
+			beforeSend: function() {
+				$('#typeView').empty();
+			},
+			success: function(result) {		
+				$('#typeTable').css('display','');
+				var data = "<tr align='center'>";			
+				$.each(result, function(i) {	
+					data += "<td colspan='2'>"+result[i]+"</td>";										
+					data += "<td><a href='#' style='text-decoration: none;' onclick='delType(&#39;";
+					data += result[i] + "&#39;);'>삭제</a></td></tr>";					
+				});
+				$("#typeView").append(data);
+			}		
 		});		
 	}
+		
+	function addType() {	
+		
+			$.ajax({
+				type: 'POST',
+				url: "adminBrand.action",
+				data: {"addCategory":category, "addType":$('#typeInput').val()},
+				async:false,
+				dataType: "text",
+				success: function() {				
+					window.location.href = "/beaudam/adminBrand.action";
+					alert('추가되었습니다.');
+				},
+				error: function() {
+					alert('이미 추가된 타입입니다.');
+				}
+			});		
+
+		
+	}
 	
-	function delType(type) {		
-		$.ajax({			
-			type: 'POST',
-			url: "adminBrand.action",
-			data: {"delType":type},
-			async:false,
-			success: function() {				
-				window.location.href = "/beaudam/adminBrand.action";
-			}			
-		});				
+	function delType(type) {
+		if(confirm("삭제하시겠습니까?")==true){
+			$.ajax({			
+				type: 'POST',
+				url: "adminBrand.action",
+				data: {"delType":type},
+				async:false,
+				success: function() {				
+					window.location.href = "/beaudam/adminBrand.action";
+					alert('삭제되었습니다.');
+				},
+				error: function() {
+					alert('타입 내 상품이 존재합니다.');
+				}
+			});		
+		}else{
+			return;
+		}
+			
 	}
 
 </script>
@@ -113,7 +179,7 @@
 					브랜드
 				</td>		
 				<td>
-					<input type="text" name="brand" id="brandInput" style="border: none; width: 100%">
+					<input type="text" name="brand" id="brandInput" style="border: none; width: 100%"onkeydown="if(event.keyCode == 13) addBrand();">
 				</td>
 				<td>
 					<input type="button" value="+"  onclick="addBrand();">
@@ -139,7 +205,7 @@
 					카테고리
 				</td>		
 				<td>
-					<input type="text" name="category" id="cateInput" style="border: none; width: 100%;">
+					<input type="text" name="category" id="cateInput" style="border: none; width: 100%;"onkeydown="if(event.keyCode == 13) addCate();">
 				</td>
 				<td>
 					<input type="button" value="+" onclick="addCate();">
@@ -148,7 +214,7 @@
 				<c:forEach var="dto" items="${category }">
 				<tr>
 					<td colspan="2">
-						${dto.category }
+						<a href="javascript:void(0);" onclick="findType('${dto.category}');">${dto.category }</a>
 					</td>
 					<td>
 						<a href="javascript:void(0);" style="text-decoration: none;" onclick="delCate('${dto.category}');">삭제</a>
@@ -157,28 +223,20 @@
 			</c:forEach>
 		</table>
 
-		<table border="1" style="margin: 10px; float: left; width: 35%;">
+		<table border="1" style="margin: 10px; float: left; width: 35%; display: none;" id="typeTable">
 			<tr>	
 				<td style="background-color: gainsboro;">
 					타입
 				</td>		
 				<td>
-					<input type="text" name="type" id="typeInput"  style="border: none; width: 100%;">
+					<input type="text" name="type" id="typeInput"  style="border: none; width: 100%;" onkeydown="if(event.keyCode == 13) addType();">
 				</td>
 				<td>
 					<input type="button" value="+" onclick="addType();">
 				</td>		
 			</tr>
-				<c:forEach var="dto" items="${type }">
-				<tr>
-					<td colspan="2">
-						${dto.type }
-					</td>
-					<td>
-						<a href="javascript:void(0);" style="text-decoration: none;" onclick="delType('${dto.type}');">삭제</a>
-					</td>
-				</tr>		
-			</c:forEach>
+			<tbody id="typeView"></tbody>
+
 		</table>
 	</div>
 </div>

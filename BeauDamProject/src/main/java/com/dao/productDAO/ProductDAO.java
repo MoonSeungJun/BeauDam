@@ -102,6 +102,11 @@ public class ProductDAO {
 		return view;
 	}
 	
+	public List<ProductView> getAllProductData(Map<String,Object> map) {
+		List<ProductView> lists = sessionTemplate.selectList("beaudam.getAllProductData",map);
+		return lists;
+	}
+	
 	
 	
 }

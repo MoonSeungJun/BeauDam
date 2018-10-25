@@ -98,6 +98,11 @@ public class ProductServiceImpl implements ProductService {
 		ProductView view = dao.getOneProductData(code);
 		return view;
 	}
-	
+
+	@Override
+	public List<ProductView> getAllProductData(Map<String,Object> map) {
+		List<ProductView> lists = dao.getAllProductData(map);
+		return lists;
+	}
 	
 }
