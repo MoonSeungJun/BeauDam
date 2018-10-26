@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>My Beaudam</title>
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
-<link rel="stylesheet" href="./resources/css/myPage/aaa.css">
+<link rel="stylesheet" href="./resources/css/myPage/myPage.css">
 </head>
 <body>
 	<jsp:include page="../beaudam/mainTop.jsp" />
@@ -69,12 +69,15 @@
 					<nav>	
 						<ul>
 							<li>
-								<a href="#" id="1">나의 주문 현황</a>
+								<a href="<%=cp %>/myBasket.action">나의 장바구니</a>
+							</li>
+							<li>
+								<a href="<%=cp %>/myOrder.action">나의 주문 현황</a>
 							</li>
 							<li><a href="" style="margin-bottom: 15px;">나의 정보</a>
 								<ul class="sub_lnb">
 									<li><a href="<%=cp%>/myCoupon.action" style="color: #9a9a9;">쿠폰조회</a></li>
-									<li><a href="/page/mythesaem/member/address">배송지 관리</a></li>
+									<li><a href="#">배송지 관리</a></li>
 									<li><a href="<%=cp%>/myEdit.action">개인정보수정</a></li>
 									<li><a href="<%=cp%>/myLeave.action">회원탈퇴</a></li>
 								</ul>
@@ -154,7 +157,6 @@
 						</div>
 					</div>
 				</div>
-				
 			</div>
 	</div>
 	<jsp:include page="../beaudam/mainBottom.jsp" />
