@@ -69,6 +69,9 @@
 					<nav>	
 						<ul>
 							<li>
+								<a href="<%=cp %>/myBasket.action">나의 장바구니</a>
+							</li>
+							<li>
 								<a href="<%=cp %>/myOrder.action">나의 주문 현황</a>
 							</li>
 							<li><a href="" style="margin-bottom: 15px;">나의 정보</a>
