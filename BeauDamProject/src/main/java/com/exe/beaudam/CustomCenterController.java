@@ -164,6 +164,7 @@ public class CustomCenterController {
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
 		
+		
 		if(searchKey != null)
 			searchValue = URLDecoder.decode(searchValue, "UTF-8");
 		
@@ -184,8 +185,8 @@ public class CustomCenterController {
 		request.setAttribute("dto", dto);
 		request.setAttribute("detail", detail);
 		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("cusId", session.getAttribute("id"));
-		
+		request.setAttribute("cusId",session.getAttribute("id"));
+				
 		// 공지사항 본문  이동
 		return "customerCenter/notification_article";
 	}

@@ -14,7 +14,7 @@
 <body>
 <jsp:include page="../beaudam/mainTop.jsp" />
 <br><br>
-	<table border="0" align="center" width="40%">
+	<table border="1" align="center" width="40%">
 		<tr>
 			<td colspan="4" align="center"style="background-color: #F6F6F6;">
 				${dto.subject }
@@ -48,7 +48,7 @@
 			</td>
 		</tr>
 		<tr>
-			<c:if test="${cusId==Admin }">
+			<c:if test="${cusId eq'Admin' }">
 			<td colspan="4" align="center">
 				<input type="button" value="수정"
 						onclick="javascript:location.href='<%=cp%>/notification_update.action?num=${dto.num}&pageNum=${pageNum}'"/>
@@ -59,13 +59,16 @@
 				<input type="button" value="취소"
 						onclick="javascript:location.href='<%=cp%>/notification.action?${detail}'"/>
 								
-			</td>
+			</td>			
 			</c:if>
-			<c:if test="${cusId!=Admin }">
-				<input type="button" value="뒤로가기"
+			</tr>
+			<tr>
+				<td colspan="4" align="center">
+					<c:if test="${cusId!=Admin }">
+					<input type="button" value="뒤로가기"
 						onclick="javascript:location.href='<%=cp%>/notification.action?${detail}'"/>
-			</c:if>
-			
+					</c:if>
+				</td>
 		</tr>
 
 
