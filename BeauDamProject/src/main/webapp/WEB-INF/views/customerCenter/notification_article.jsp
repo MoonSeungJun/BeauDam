@@ -48,28 +48,21 @@
 			</td>
 		</tr>
 		<tr>
-			<c:if test="${cusId eq'Admin' }">
+			
 			<td colspan="4" align="center">
+			<c:if test="${cusId eq'Admin' }">
 				<input type="button" value="수정"
 						onclick="javascript:location.href='<%=cp%>/notification_update.action?num=${dto.num}&pageNum=${pageNum}'"/>
 				
 				<input type="button" value="삭제"
 						onclick="javascript:location.href='<%=cp%>/notification_delete.action?num=${dto.num}&pageNum=${pageNum}'"/>
-				
-				<input type="button" value="취소"
+			</c:if>
+				<input type="button" value="뒤로가기"
 						onclick="javascript:location.href='<%=cp%>/notification.action?${detail}'"/>
 								
 			</td>			
-			</c:if>
-			</tr>
-			<tr>
-				<td colspan="4" align="center">
-					<c:if test="${cusId!=Admin }">
-					<input type="button" value="뒤로가기"
-						onclick="javascript:location.href='<%=cp%>/notification.action?${detail}'"/>
-					</c:if>
-				</td>
-		</tr>
+			
+			</tr>			
 
 
 </table>

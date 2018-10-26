@@ -163,7 +163,7 @@ public class CustomCenterController {
 		
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
-		
+				
 		
 		if(searchKey != null)
 			searchValue = URLDecoder.decode(searchValue, "UTF-8");
