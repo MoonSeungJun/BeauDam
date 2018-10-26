@@ -66,8 +66,6 @@
 <div style="float: left;margin-left:260px; margin-right: 30px; height: auto; width: 260px;">
 	<table border="1" align="center" style="height: 100%; width: 100%;">
 
-		<tr>
-
 		<tr style="height: 55px;">
 
 			<td align="center">
@@ -77,17 +75,19 @@
 		</tr>		
 		
 
-		<tr>
-
 		<tr style="height: 55px;">
-
+		<c:if test="${!empty cusId }">
 			<td align="center">
 			 <a href="javascript:popupOpen();" > 1:1문의 </a>
-			 </td>	
+			 </td>
+		</c:if>
+		<c:if test="${empty cusId }"> 
+			 <td align="center">
+			  1:1문의
+			 </td>		
+		</c:if> 		
 		</tr>
 		
-
-		<tr>
 
 		<tr style="height: 55px;">
 
@@ -176,10 +176,18 @@
 		<tr style="height: 35px;">
 			<td colspan="2" align="right">
 			</td>
+			<c:if test="${cusId=='Admin' }">
 			<td align="center">
 				<input type="button" value="공지등록" 
 				onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
-			</td>	
+			</td>
+			</c:if>	
+			<c:if test="${empty cusId }">
+				<td>
+					&nbsp;
+				</td>
+			</c:if>
+			
 		</tr>
 	</table>
 </form>
