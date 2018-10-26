@@ -85,7 +85,7 @@
 		<table border="1" style="margin: 10px; float: left; width: 30%;">
 			<tr>
 				<td colspan="2" style="background-color: gainsboro">
-					<h3 style="margin: 0px; padding: 3px;">월간</h3>
+					<h3 style="margin: 0px; padding: 3px;">${yearSearchValue }년도 월간</h3>
 				</td>
 			</tr>
 			<c:forEach var="dto" items="${monthSales}">

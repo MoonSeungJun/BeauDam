@@ -176,7 +176,7 @@ public class AdminController {
 		request.setAttribute("monthSales", monthSales);
 		request.setAttribute("yearSales", yearSales);
 		request.setAttribute("yearsList", yearsList);
-		
+		request.setAttribute("yearSearchValue", yearSearchValue);
 		
 		// 매출 페이지 이동
 		return "admin/adminSales";
