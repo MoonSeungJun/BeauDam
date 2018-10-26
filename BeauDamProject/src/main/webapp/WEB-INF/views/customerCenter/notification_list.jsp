@@ -176,7 +176,7 @@
 		<tr style="height: 35px;">
 			<td colspan="2" align="right">
 			</td>
-			<c:if test="${cusId=='Admin' }">
+			<c:if test="${cusId==Admin }">
 			<td align="center">
 				<input type="button" value="공지등록" 
 				onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
