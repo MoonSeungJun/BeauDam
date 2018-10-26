@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ser.CustomSerializerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +65,13 @@ public class CustomCenterController {
 
 	// 고객센터 default 페이지
 	@RequestMapping(value = "/faq.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String faq() {
+	public String faq(HttpServletRequest request) {
 
+		HttpSession session= request.getSession();
+		
+		request.setAttribute("cusId",session.getAttribute("id"));
+		
+		
 		// FAQ 페이지 이동
 		return "customerCenter/faq";
 	}
@@ -82,6 +88,9 @@ public class CustomCenterController {
 		String cp = request.getContextPath();
 		String pageNum = request.getParameter("pageNum");
 		int currentPage = 1;
+		HttpSession session = request.getSession();
+		
+		
 		
 		if(pageNum != null)
 			currentPage = Integer.parseInt(pageNum);
@@ -136,7 +145,7 @@ public class CustomCenterController {
 			request.setAttribute("pageIndexList",pageIndexList);
 			request.setAttribute("dataCount",dataCount);
 			request.setAttribute("articleUrl",articleUrl);
-			
+			request.setAttribute("cusId", session.getAttribute("id"));
 		
 		
 		// 공지사항 페이지 이동
@@ -147,12 +156,14 @@ public class CustomCenterController {
 	public String notification_article(HttpServletRequest request) throws Exception {
 
 		String cp = request.getContextPath();
+		HttpSession session = request.getSession();
 		
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 		
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
+				
 		
 		if(searchKey != null)
 			searchValue = URLDecoder.decode(searchValue, "UTF-8");
@@ -174,8 +185,8 @@ public class CustomCenterController {
 		request.setAttribute("dto", dto);
 		request.setAttribute("detail", detail);
 		request.setAttribute("pageNum", pageNum);
-		
-		
+		request.setAttribute("cusId",session.getAttribute("id"));
+				
 		// 공지사항 본문  이동
 		return "customerCenter/notification_article";
 	}

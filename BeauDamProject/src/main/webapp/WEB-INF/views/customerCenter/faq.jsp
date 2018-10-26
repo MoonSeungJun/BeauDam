@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("UTF-8"); 
 	String cp = request.getContextPath();
@@ -86,6 +87,7 @@ function faqMove2() {
 
 <div style="float: left;margin-left:260px; margin-right: 30px; height: auto; width: 260px;">
 	<table border="1" align="center" style="height: 100%; width: 100%;">
+
 		<tr style="height: 55px;">
 
 			<td align="center">
@@ -93,14 +95,22 @@ function faqMove2() {
 			</td>
 								
 		</tr>		
+		
 
-			
 		<tr style="height: 55px;">
+		<c:if test="${!empty cusId }">
 			<td align="center">
 			 <a href="javascript:popupOpen();" > 1:1문의 </a>
-			 </td>	
+			 </td>
+		</c:if>
+		<c:if test="${empty cusId }"> 
+			 <td align="center">
+			  1:1문의
+			 </td>		
+		</c:if> 		
 		</tr>
 		
+
 		<tr style="height: 55px;">
 
 			<td align="center">

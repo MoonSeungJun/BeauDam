@@ -58,4 +58,31 @@ public class SaleServiceImpl implements SaleService {
 		return lists;
 	}
 
+	@Override
+	public List<Sale_DateDTO> getAdminDaySales() {
+		List<Sale_DateDTO> lists = dao.getAdminDaySales();
+		return lists;
+	}
+
+
+	@Override
+	public List<Sale_DateDTO> getAdminMonthSales(HashMap<String, Object> yearSearchPack) {
+		List<Sale_DateDTO> lists = dao.getAdminMonthSales(yearSearchPack);
+		return lists;
+	}	
+
+	@Override
+	public List<Sale_DateDTO> getAdminYearSales() {
+		List<Sale_DateDTO> lists = dao.getAdminYearSales();
+		return lists;
+	}
+
+	@Override
+	public List<Sale_DateDTO> getSalesYears() {
+		List<Sale_DateDTO> lists = dao.getSalesYears();
+		return lists;
+	}
+	
+	
+
 }

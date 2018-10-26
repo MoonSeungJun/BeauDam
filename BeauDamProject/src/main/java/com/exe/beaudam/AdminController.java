@@ -130,11 +130,7 @@ public class AdminController {
 		req.setAttribute("compl", compl);
 		req.setAttribute("change", change);
 		req.setAttribute("saleList", saleView);
-	
-		
-	
-		
-		
+			
 	
 		// 주문내역 관리 페이지 이동
 		return "admin/adminOrder";
@@ -153,8 +149,35 @@ public class AdminController {
 
 	//esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminSales() {
+	public String adminSales(HttpServletRequest request) {
 
+		String yearSearchValue = request.getParameter("yearSearchValue");
+		
+		if(yearSearchValue==null||yearSearchValue.equals("")) {
+			yearSearchValue= "2018";			
+		}	
+		
+		String yearSearchValue1 = yearSearchValue+"-01";
+		String yearSearchValue2 = yearSearchValue+"-12";
+	
+		
+		HashMap<String, Object> yearSearchPack = new HashMap<String, Object>();
+		yearSearchPack.put("yearSearchValue1", yearSearchValue1);
+		yearSearchPack.put("yearSearchValue2", yearSearchValue2);
+		
+		
+		
+		List<Sale_DateDTO> daySales = saleService.getAdminDaySales();
+		List<Sale_DateDTO> monthSales = saleService.getAdminMonthSales(yearSearchPack);
+		List<Sale_DateDTO> yearSales = saleService.getAdminYearSales();	
+		List<Sale_DateDTO> yearsList = saleService.getSalesYears();
+				
+		request.setAttribute("daySales", daySales);
+		request.setAttribute("monthSales", monthSales);
+		request.setAttribute("yearSales", yearSales);
+		request.setAttribute("yearsList", yearsList);
+		request.setAttribute("yearSearchValue", yearSearchValue);
+		
 		// 매출 페이지 이동
 		return "admin/adminSales";
 	}
@@ -771,7 +794,7 @@ public class AdminController {
 	
 
 
-
+	
 
 
 

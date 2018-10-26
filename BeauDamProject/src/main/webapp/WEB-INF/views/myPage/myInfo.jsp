@@ -71,6 +71,7 @@ button:hover {
 	<div id="container" style="width: 800px;  margin: 0 auto">
 			<div class="title_style">
 				<div>
+					<a href="<%=cp %>/main.action" style="text-decoration: none; color: black; font-family: 'designhouseOTFLight00';"><h3>뷰티를 담다 뷰ː담</h3></a> 
 					<h2 style="font-family: designhouseOTFLight00">회원정보</h2>
 					<p style="font-family: Black Han Sans">My INFO</p>
 				</div>

@@ -130,11 +130,7 @@ a {
     float: right;
 }
 
-.container {
-     margin-top: -23px;
-}
-
-.navbar-container {
+.navbar_container {
     width: 100%;
 }
 
@@ -145,7 +141,7 @@ a {
     width: 960px;
     margin: 0 auto;
     font-size: 15px;
-    z-index: 999999;
+    z-index: 99999;
     /*background-color: forestgreen;*/
 }
 
@@ -157,14 +153,13 @@ a {
     padding: 14px 16px;
     text-decoration: none;
     width: 135px;
-    
 }
 
 .dropdown {
     float: left;
     overflow: visible;
     margin: 0 auto;
-    z-index: 999999;
+    z-index: 99999;
 }
 
 .dropdown .dropbtn {
@@ -189,8 +184,9 @@ a {
     display: none;
     position: absolute;
     background-color: white;
-    z-index: 999999;
+    z-index: 99999;
     border: none;
+    border-top: 1px solid gray;
 }
 
 .dropdown-content .header {
@@ -308,13 +304,17 @@ a {
 
 .footer {
     background-color: #F9F9F9;
-    height: 300px;
+    height: 350px;
     margin-top: 80px;
     padding: 20px; 
     background-image: url(/beaudam/resources/image/beaudam/main/logo.png);
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: 150px;
+}
+
+.footer p {
+	text-align: center;
 }
    
 .side img {
@@ -323,9 +323,9 @@ a {
     right: 10px;
 }
 
-.goTop {
+.basket_order {
     position: fixed;
-    bottom: 500px;
+    bottom: 400px;
     right: 10px;
     cursor: pointer;
 }

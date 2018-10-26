@@ -4,6 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 <body>
 <jsp:include page="../beaudam/mainTop.jsp" />
 <br><br>
-	<table border="0" align="center" width="40%">
+	<table border="1" align="center" width="40%">
 		<tr>
 			<td colspan="4" align="center"style="background-color: #F6F6F6;">
 				${dto.subject }
@@ -47,18 +48,21 @@
 			</td>
 		</tr>
 		<tr>
+			
 			<td colspan="4" align="center">
+			<c:if test="${cusId eq'Admin' }">
 				<input type="button" value="수정"
 						onclick="javascript:location.href='<%=cp%>/notification_update.action?num=${dto.num}&pageNum=${pageNum}'"/>
 				
 				<input type="button" value="삭제"
 						onclick="javascript:location.href='<%=cp%>/notification_delete.action?num=${dto.num}&pageNum=${pageNum}'"/>
-				
-				<input type="button" value="취소"
+			</c:if>
+				<input type="button" value="뒤로가기"
 						onclick="javascript:location.href='<%=cp%>/notification.action?${detail}'"/>
 								
-			</td>
-		</tr>
+			</td>			
+			
+			</tr>			
 
 
 </table>
