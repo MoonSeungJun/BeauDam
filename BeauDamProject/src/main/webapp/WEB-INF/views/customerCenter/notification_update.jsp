@@ -14,7 +14,7 @@
 	
 	function sendIt() {
 		
-		var f = document.notificationCreateForm;
+		var f = document.notificationEditForm;
 		var subVal = f.subject.value;
 		var contVal = f.content.value;
 		
@@ -47,34 +47,13 @@
 <form action="" name="notificationEditForm" method="post">
 	<table border="1" align="center">
 
-	
+		
 		<tr>
 			<td>
 				운영자
 			</td>
 			<td>
 				&nbsp;
-			</td>
-		</tr>
-	
-
-	
-		<tr>
-			<td>
-				운영자
-			</td>
-			<td>
-				&nbsp;
-			</td>
-		</tr>
-
-	
-		<tr>
-			<td align="center">
-				제목
-			</td>
-			<td align="center">
-				<input type="text" name="subject" style="width: 95%;" value="${dto.subject }"/>
 			</td>
 		</tr>
 	

@@ -63,11 +63,12 @@ public class CustomCenterController {
 	
 	// ********************** Customer Center Page **********************
 
-	// 고객센터 default 페이지
+	
 	@RequestMapping(value = "/faq.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String faq(HttpServletRequest request) {
 
 		HttpSession session= request.getSession();
+		
 		
 		request.setAttribute("cusId",session.getAttribute("id"));
 		
@@ -82,7 +83,8 @@ public class CustomCenterController {
 		// 1:1문의 페이지 이동
 		return "customerCenter/mailForm";
 	}
-
+	
+	// 고객센터 default 페이지
 	@RequestMapping(value = "/notification.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String notification(HttpServletRequest request) throws Exception {
 		String cp = request.getContextPath();
@@ -157,6 +159,7 @@ public class CustomCenterController {
 
 		String cp = request.getContextPath();
 		HttpSession session = request.getSession();
+		
 		
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
