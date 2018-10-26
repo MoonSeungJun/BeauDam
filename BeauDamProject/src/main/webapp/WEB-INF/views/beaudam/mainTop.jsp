@@ -88,7 +88,7 @@ session="false" pageEncoding="UTF-8"%>
                         <a href="#">쿠션</a>
                         <a href="#">파우더/팩트</a>
                         <a href="#">프라이머</a>
-                        <a href="#">컨투어링/하이라이터</a>
+                        <a href="#">컨투어링 / <br>하이라이터</a>
                         <a href="#">블러셔</a>
                     </div>
                     <div class="column">

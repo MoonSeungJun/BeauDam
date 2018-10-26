@@ -48,8 +48,10 @@ session="false" pageEncoding="UTF-8"%>
             <table class="brandname">
             	<tr>
             		<th style="font-size: 20px; padding: 10px;">BRAND</th>
-                    <!-- <td colspan="2" style="text-align: right;"><input type="button" value="조회"></td> -->
-                </tr>
+                    <td colspan="2" style="text-align: right; marg">
+                    	<input type="button" value="조회" onclick="" style="margin-right: 30px; border: none; padding: 5px;">
+                    </td>
+                </tr>                
                 <tr>
                     <td><input type="checkbox"> NATURE REPUBLIC</td>
                     <td><input type="checkbox"> THE FACE SHOP</td>

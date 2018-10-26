@@ -12,7 +12,7 @@ session="false" pageEncoding="UTF-8"%>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 	$( window ).scroll( function() {
-		if ( $( this ).scrollTop() > 200 ) {
+		if ( $( this ).scrollTop() > 300 ) {
 			$( '.goTop' ).fadeIn();
 		} else {
 			$( '.goTop' ).fadeOut();
