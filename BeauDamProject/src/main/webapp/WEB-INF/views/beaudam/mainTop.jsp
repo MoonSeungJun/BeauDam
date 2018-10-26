@@ -17,6 +17,7 @@ session="false" pageEncoding="UTF-8"%>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+        
     </head>
     <body>
         <!-- 상단 시작 -->
@@ -73,13 +74,13 @@ session="false" pageEncoding="UTF-8"%>
         </div>
         
         <!-- 카테고리 -->
-        <div class="navbar_container sticky">
+        <div class="navbar_container sticky sticky_border">
         <div class="navbar">
             <div class="dropdown" >
             <button class="dropbtn">CATERORY 
                 <i class="fa fa-caret-down"></i>
             </button>
-                <div class="dropdown-content" style="width: 950px;">  
+                <div class="dropdown-content" style="width: 950px;  border-top: 1px solid gray; padding-top: 15px;">  
                     <div class="column">
                     <h3>SKIN</h3>
                         <a href="<%=cp %>/productList.action">파운데이션</a>
@@ -133,6 +134,7 @@ session="false" pageEncoding="UTF-8"%>
                 <a href="#news">SALE</a>
             </div>
             </div>
+           
         <!-- 카테고리 끝 -->
 </body>
 </html>

@@ -130,11 +130,7 @@ a {
     float: right;
 }
 
-.container {
-     margin-top: -23px;
-}
-
-.navbar-container {
+.navbar_container {
     width: 100%;
 }
 
@@ -145,7 +141,7 @@ a {
     width: 960px;
     margin: 0 auto;
     font-size: 15px;
-    z-index: 999999;
+    z-index: 99999;
     /*background-color: forestgreen;*/
 }
 
@@ -157,14 +153,13 @@ a {
     padding: 14px 16px;
     text-decoration: none;
     width: 135px;
-    
 }
 
 .dropdown {
     float: left;
     overflow: visible;
     margin: 0 auto;
-    z-index: 999999;
+    z-index: 99999;
 }
 
 .dropdown .dropbtn {
@@ -189,8 +184,9 @@ a {
     display: none;
     position: absolute;
     background-color: white;
-    z-index: 999999;
+    z-index: 99999;
     border: none;
+    border-top: 1px solid gray;
 }
 
 .dropdown-content .header {
@@ -335,6 +331,7 @@ a {
     top: 0px;
     z-index: 999;
     background-color: white;
+    border-bottom: 1px solid red;
     
 }
 
