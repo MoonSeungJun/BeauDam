@@ -304,13 +304,17 @@ a {
 
 .footer {
     background-color: #F9F9F9;
-    height: 300px;
+    height: 350px;
     margin-top: 80px;
     padding: 20px; 
     background-image: url(/beaudam/resources/image/beaudam/main/logo.png);
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: 150px;
+}
+
+.footer p {
+	text-align: center;
 }
    
 .side img {
@@ -331,7 +335,6 @@ a {
     top: 0px;
     z-index: 999;
     background-color: white;
-    border-bottom: 1px solid red;
     
 }
 
