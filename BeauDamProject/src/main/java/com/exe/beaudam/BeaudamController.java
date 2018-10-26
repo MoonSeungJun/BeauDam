@@ -89,7 +89,7 @@ public class BeaudamController {
 	private NaverLoginBO naverLoginBO;
 	
 	// ********************** Beaudam Page **********************
-
+	
 	@RequestMapping(value="/productList.action", method = {RequestMethod.GET,RequestMethod.POST})
 	public String productList() {
 		

@@ -145,15 +145,9 @@ session="false" pageEncoding="UTF-8"%>
         		</li>
         	</ul>
         </div>
-<<<<<<< HEAD
-        <div class="page">
-        	<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/pre.gif"></a>
-        	<ol start="1">
-=======
         <div class="pageing">
         	<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/pre.gif"></a>
         	<ol>
->>>>>>> 1ef6c92bb6265bd7bb74dbf679dd001ffc0be456
         		<li>1</li>
         		<li>2</li>
         		<li>3</li>
