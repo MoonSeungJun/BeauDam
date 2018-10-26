@@ -64,20 +64,24 @@ public class SaleServiceImpl implements SaleService {
 		return lists;
 	}
 
-	
-
-	@Override
-	public List<Sale_DateDTO> getAdminYearSales(String yearSearchValue) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Sale_DateDTO> getAdminMonthSales(HashMap<String, Object> yearSearchPack) {
 		List<Sale_DateDTO> lists = dao.getAdminMonthSales(yearSearchPack);
-		return null;
+		return lists;
 	}	
 
+	@Override
+	public List<Sale_DateDTO> getAdminYearSales() {
+		List<Sale_DateDTO> lists = dao.getAdminYearSales();
+		return lists;
+	}
+
+	@Override
+	public List<Sale_DateDTO> getSalesYears() {
+		List<Sale_DateDTO> lists = dao.getSalesYears();
+		return lists;
+	}
 	
 	
 

@@ -12,6 +12,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <script type="text/javascript">
 
@@ -22,11 +23,18 @@
 		
 		$("#yearBox").val(yearSearchValue);
 		});	
+			
+	});	
+	
+	function searchIt() {
+		
+		var f = document.adminSalesForm;
 		
 		f.action = "<%=cp%>/adminSales.action";
 		f.submit();
-		
-	});	
+	}
+	
+	
 
 </script>
 <body>
@@ -43,12 +51,14 @@
 			<tr>
 				<td>
 					<select id="selectYear">
-						<c:forEach var="dto" items="${yearSales }">
-							<option>${dto.saledate }</option>
+						<option>선택하세요</option>
+						<c:forEach var="dto" items="${yearsList }">
+							<option>${dto.saleDate }</option>
 						</c:forEach>
 										
 					</select>
-					<input type="hidden" id="yearBox" name="yearSearchValue" value=""/>
+					<input type="hidden" id="yearBox" name="yearSearchValue"/>
+					<input type="button"  value="찾기" onclick="searchIt();">
 				</td>
 			</tr>
 		</table>
@@ -63,7 +73,7 @@
 			<tr>
 				<c:forEach var="dto" items="${daySales }">
 					<td>
-						${dto.saledate }
+						${dto.saleDate }
 					</td>
 					<td>
 						${dto.total_Price }
@@ -81,7 +91,7 @@
 			<c:forEach var="dto" items="${monthSales}">
 				<tr>
 					<td>
-						${dto.saledate }
+						${dto.saleDate }
 					</td>
 					<td>
 						${dto.total_Price }
@@ -103,7 +113,7 @@
 			<c:forEach var="dto" items="${yearSales }">
 				<tr>
 					<td>
-						${dto.saledate }
+						${dto.saleDate }
 					</td>
 					<td>
 						${dto.total_Price }

@@ -284,27 +284,35 @@
 		</select>
 		
 		<select id="getAdminDaySales" resultType="com.table.saleDTO.Sale_DateDTO">
-			select to_char(saledate,'day') saleDate, sum(total_price) total_Price
+			select to_char(saleDate,'day') saleDate, sum(total_Price) total_Price
 			from sale_date 
-			where to_char(saledate,'ww')=to_char(sysdate,'ww')
-			group by to_char(saledate,'day')
-			order by to_char(saledate,'day')			
+			where to_char(saleDate,'ww')=to_char(sysDate,'ww') and to_char(saleDate,'yyyy')=to_char(sysdate,'yyyy')
+			group by to_char(saleDate,'day')
+			order by saleDate	asc		
 		</select>
 		
 		<select id="getAdminMonthSales" resultType="com.table.saleDTO.Sale_DateDTO" parameterType="map">
-			select to_char(saledate,'mm') saleDate,sum(total_price) total_Price from sale_date
-			where to_char(saledate,'yyyy-mm')
+			select to_char(saleDate,'mm') saleDate,sum(total_Price) as total_Price from sale_date
+			where to_char(saleDate,'yyyy-mm')
 			between #{yearSearchValue1} and #{yearSearchValue2}
-			group by to_char(saledate,'mm')
-			order by to_char(saledate,'mm') asc
+			group by to_char(saleDate,'mm')
+			order by saleDate asc
 		</select> 	
 		
-		<select id="getAdminYearSales" resultType="com.table.saleDTO.Sale_DateDTO" parameterType="String">
-			select to_char(saledate,'yyyy') saledate, sum(total_price) total_Price from sale_date
-			where saledate=#{yearSearchValue}
-			group by to_char(saledate,'yyyy')
-			order by to_char(saledate,'yyyy'); 
+		
+		<select id="getAdminYearSales" resultType="com.table.saleDTO.Sale_DateDTO">
+			select to_char(saleDate,'yyyy') saleDate, sum(total_Price) as total_Price from sale_date
+			group by to_char(saleDate,'yyyy')
+			order by saleDate desc 
 		</select> 	
+		
+		<select id="getSalesYears" resultType="com.table.saleDTO.Sale_DateDTO">
+			select to_char(saleDate,'yyyy') saleDate from sale_date group by to_char(saleDate,'yyyy')
+			order by saleDate asc
+		</select>
+		
+		
+		
 		
 		<!-- Basket -->
 		<select id="getBasketData" resultType="com.table.otherDTO.BasketDTO" parameterType="String">

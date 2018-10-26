@@ -23,5 +23,6 @@ public interface SaleService {
 	List<SaleView> getSearchSaleData(Map<String, Object> map);
 	List<Sale_DateDTO> getAdminDaySales();
 	List<Sale_DateDTO> getAdminMonthSales(HashMap<String, Object>yearSearchPack);
-    List<Sale_DateDTO> getAdminYearSales(String yearSearchValue);
+    List<Sale_DateDTO> getAdminYearSales();
+    List<Sale_DateDTO> getSalesYears();
 }

@@ -77,11 +77,11 @@ public class Sale_DateDTO {
         this.use_Point = use_Point;
     }
 
-    public int getTotalPrice() {
+    public int getTotal_Price() {
         return total_Price;
     }
 
-    public void setTotalPrice(int total_Price) {
+    public void setTotal_Price(int total_Price) {
         this.total_Price = total_Price;
     }
 
