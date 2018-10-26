@@ -159,11 +159,7 @@ public class AdminController {
 		
 		String yearSearchValue1 = yearSearchValue+"-01";
 		String yearSearchValue2 = yearSearchValue+"-12";
-		
-		System.out.println(yearSearchValue);
-		System.out.println(yearSearchValue1);
-		System.out.println(yearSearchValue2);
-		
+	
 		
 		HashMap<String, Object> yearSearchPack = new HashMap<String, Object>();
 		yearSearchPack.put("yearSearchValue1", yearSearchValue1);
