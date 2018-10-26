@@ -10,33 +10,50 @@ session="false" pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./resources/css/beaudam/list.css">
     <style type="text/css">
-   	.pageing {
-		padding: 30px;
-		text-align: center;
-		margin-top: 30px;
+    .page {
+	background-color: fuchsia; 
+	margin: 30px auto 0 auto; 
+	width: 960px;
+	text-align: center;
+}
 
-	}
+.page ol {
+	overflow: hidden;
+}
+
+.page li {
+	width: 34px;
+	height: 34px;
+	border: 1px solid gray;
+	float: left;
+}
+
+.pageing {
+	padding: 30px;
+	text-align: center;
+	margin-top: 30px;
+
+}
+
+.pageing ol {
+	overflow: hidden; 
+	display: inline-block; 
+	padding: 0;
+	margin: 0;
 	
-	.pageing ol {
-		overflow: hidden; 
-		display: inline-block; 
-		padding: 0;
-		margin: 0;
-		
-	}
-	
-	.pageing li {
-		width: 34px;
-		height: 34px;
-		line-height: 34px;
-		float: left;
-		border: 1px solid #d7d5d5;
-	}
-	
-	.pageing li:hover {
-        background-color: rgba( 237, 237, 237, 0.5 ); 
-	}
-	
+}
+
+.pageing li {
+	width: 34px;
+	height: 34px;
+	line-height: 34px;
+	float: left;
+	border: 1px solid #d7d5d5;
+}
+
+.pageing li:hover {
+       background-color: rgba( 237, 237, 237, 0.5 ); 
+}
     </style>
     </head>
     <body>
@@ -69,7 +86,7 @@ session="false" pageEncoding="UTF-8"%>
         	<ul>
         		<li>
         			<div>
-        				<a href="<%=cp %>/productDetail.action"><img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a>
+        				<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a>
         				<p style="font-size: 20px; color: #ff4d4d">BEST 01</p>
         				솔솔 말린 솔방울
         				<p>5,000원</p>

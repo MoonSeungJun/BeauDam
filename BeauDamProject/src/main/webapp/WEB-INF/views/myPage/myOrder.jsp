@@ -231,11 +231,6 @@
 				</div>
 			</div>
 	</div>
-	
-	
-	<!-- 주문현황 페이지 -->
-
-	</table>
 <jsp:include page="../beaudam/mainBottom.jsp" />
 </body>
 </html>
