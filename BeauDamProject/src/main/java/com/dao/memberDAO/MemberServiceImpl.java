@@ -25,6 +25,12 @@ public class MemberServiceImpl implements MemberService {
 		dao.insertMemberInfo(dto);
 		
 	}
+	
+	@Override
+	public void insertMemberInfoEX(Member_InfoDTO dto) {
+		dao.insertMemberInfoEX(dto);
+		
+	}
 
 	@Override
 	public void insertMemberGrade(Member_GradeDTO dto) {

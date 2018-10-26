@@ -10,6 +10,7 @@ public interface ViewService {
 //	select
 	List<MemberView> getAllMemberData();
 	MemberView getOneMemberData(String id);
+	String getSearchId(HashMap<String, Object> nameBirth);
 	List<MemberView> getLeaveMemberData();
 	List<ProductView> getAllProductData(HashMap<String, Object> searchPack);
 	ProductView getOneProductData(String code);

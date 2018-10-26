@@ -67,6 +67,12 @@ public class ViewServiceImpl implements ViewService {
 		return lists;
 	}
 
-	
+	@Override
+	public String getSearchId(HashMap<String, Object> nameBirth) {
+
+		String id = dao.getSearchId(nameBirth);
+		return id;
+	}
+
 	
 }

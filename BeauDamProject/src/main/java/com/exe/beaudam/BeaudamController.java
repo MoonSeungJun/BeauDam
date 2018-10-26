@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.exe.util.MyUtil;
 import com.naver.naverlogin.NaverLoginBO;
 
+import ch.qos.logback.classic.sift.MDCBasedDiscriminator;
+
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
  *   -> 그냥 냅두지말고 필요에 따라 get, post, get/post 중 사용할 방식 선택해서 세팅할 것
@@ -73,64 +75,64 @@ import com.naver.naverlogin.NaverLoginBO;
  */
 @Controller("BeaudamController")
 public class BeaudamController {
+
 	
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView main(HttpSession session) {
 		
-		String id = (String) session.getAttribute("id");
-		
 		// 메인 페이지 이동
-		return new ModelAndView("beaudam/main","id",id);
+		return new ModelAndView("beaudam/main","id",(String) session.getAttribute("id"));
 	}
 
 	@Autowired
 	MyUtil myUtil;
 	
-	private NaverLoginBO naverLoginBO;
-	
 	// ********************** Beaudam Page **********************
 	
 	@RequestMapping(value="/productList.action", method = {RequestMethod.GET,RequestMethod.POST})
-	public String productList() {
+	public ModelAndView productList(HttpSession session) {
 		
-		return "beaudam/productList";		
+		return new ModelAndView("beaudam/productList","id",(String) session.getAttribute("id"));
+	
 	}
 
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String productDetail() {
+	public ModelAndView productDetail(HttpSession session) {
 
 		// 상품상세 페이지 이동
-		return "beaudam/productDetail";
+		return new ModelAndView("beaudam/productDetail","id",(String) session.getAttribute("id"));
+
 	}
 	
 	@RequestMapping(value = "/event.action", method = RequestMethod.GET)
-	public String event() {
+	public ModelAndView event(HttpSession session) {
 
 		// 이벤트 리스트 페이지 이동
-		return "beaudam/event";
+		return new ModelAndView("beaudam/event","id",(String) session.getAttribute("id"));
+
 	}
 	
 	@RequestMapping(value = "/event1.action", method = RequestMethod.GET)
-	public String event1() {
+	public ModelAndView event1(HttpSession session) {
 
 		// 이벤트1 페이지 이동
-		return "beaudam/event1";
+		return new ModelAndView("beaudam/event1","id",(String) session.getAttribute("id"));
 		
 	}
 	
 	@RequestMapping(value = "/event2.action", method = RequestMethod.GET)
-	public String event2() {
+	public ModelAndView event2(HttpSession session) {
 
 		// 이벤트2 페이지 이동
-		return "beaudam/event2";
+		return new ModelAndView("beaudam/event2","id",(String) session.getAttribute("id"));
+
 	}
 	
 	@RequestMapping(value = "/event3.action", method = RequestMethod.GET)
-	public String event3() {
+	public ModelAndView event3(HttpSession session) {
 		
 		// 이벤트1 페이지 이동
-		return "beaudam/event3";
-		
+		return new ModelAndView("beaudam/event3","id",(String) session.getAttribute("id"));		
 	}
 
 	// msj

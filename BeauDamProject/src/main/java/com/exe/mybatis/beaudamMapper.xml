@@ -15,6 +15,11 @@
 				values (#{id},#{name},#{birth},#{tel},#{cellphone},#{zip},#{city},#{street},#{email},#{gender})
 			</insert>
 			
+			<insert id="insertMemberInfoEX" parameterType="com.table.memberDTO.Member_InfoDTO">
+				insert into member_Info (id,name,birth,cellphone,zip,city,street,email,gender) 
+				values (#{id},#{name},#{birth},#{cellphone},#{zip},#{city},#{street},#{email},#{gender})
+			</insert>
+			
 			<insert id="insertMemberGrade" parameterType="com.table.memberDTO.Member_GradeDTO">
 				insert into member_Grade (id) values (#{id})
 			</insert>
@@ -241,6 +246,11 @@
 			select id,pwd,name,nickName,cellPhone,tel,to_char(birth,'yyyy-mm-dd') birth,email,
 			zip,city,street,gender,pay,grade,point,to_char(created,'yyyy-mm-dd') created, isLeave from memberView
 			where id = #{id}
+		</select>
+		
+		<select id="getSearchId" resultType="String" parameterType="map">
+			select id, name, birth from member_info
+			where name=#{name} and birth=#{birth};
 		</select>
 		
 		<select id="getLeaveMemberData" resultType="com.view.view.MemberView">

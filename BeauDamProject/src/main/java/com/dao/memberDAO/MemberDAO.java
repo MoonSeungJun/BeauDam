@@ -18,13 +18,16 @@ public class MemberDAO {
 		this.sessionTemplate = sessionTemplate;
 	}
 
-	
 	public void insertMember(MemberDTO dto) {
 		sessionTemplate.insert("beaudam.insertMember", dto);
 	}
 	
 	public void insertMemberInfo(Member_InfoDTO dto) {
 		sessionTemplate.insert("beaudam.insertMemberInfo",dto);
+	}
+	
+	public void insertMemberInfoEX(Member_InfoDTO dto) {
+		sessionTemplate.insert("beaudam.insertMemberInfoEX",dto);
 	}
 	
 	public void insertMemberGrade(Member_GradeDTO dto) {
@@ -47,25 +50,22 @@ public class MemberDAO {
 		sessionTemplate.update("beaudam.updateIsLeave",id);
 	}
 	
-	
 	public void deleteMember(String id) {
 		sessionTemplate.delete("beaudam.deleteMember",id);
 		
 	}
 
-	
 	public void deleteMemberGrade(String id) {
 		sessionTemplate.delete("beaudam.deleteMemberGrade",id);
 		
 	}
 
-	
+
 	public void deleteMemberInfo(String id) {
 		sessionTemplate.delete("beaudam.deleteMemberInfo",id);
 		
 	}
 
-	
 	public void deleteCoupon(String id) {
 		sessionTemplate.delete("beaudam.deleteCoupon",id);
 		

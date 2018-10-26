@@ -10,6 +10,7 @@ public interface MemberService {
 //	insert
 	void insertMember(MemberDTO dto);
 	void insertMemberInfo(Member_InfoDTO dto);
+	void insertMemberInfoEX(Member_InfoDTO dto);
 	void insertMemberGrade(Member_GradeDTO dto);	
 	
 //	update
