@@ -4,6 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,6 +48,7 @@
 			</td>
 		</tr>
 		<tr>
+			<c:if test="${cusId==Admin }">
 			<td colspan="4" align="center">
 				<input type="button" value="수정"
 						onclick="javascript:location.href='<%=cp%>/notification_update.action?num=${dto.num}&pageNum=${pageNum}'"/>
@@ -58,6 +60,12 @@
 						onclick="javascript:location.href='<%=cp%>/notification.action?${detail}'"/>
 								
 			</td>
+			</c:if>
+			<c:if test="${cusId!=Admin }">
+				<input type="button" value="뒤로가기"
+						onclick="javascript:location.href='<%=cp%>/notification.action?${detail}'"/>
+			</c:if>
+			
 		</tr>
 
 

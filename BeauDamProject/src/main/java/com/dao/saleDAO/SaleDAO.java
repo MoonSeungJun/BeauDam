@@ -55,5 +55,24 @@ public class SaleDAO {
 		List<SaleView> lists = sessionTemplate.selectList("beaudam.getSearchSaleData",map);
 		return lists;
 	}
+	
+	public List<Sale_DateDTO> getAdminDaySales() {
+		List<Sale_DateDTO> lists = sessionTemplate.selectList("beaudam.getAdminDaySales");
+		return lists;
+	}
+	
+	public List<Sale_DateDTO> getAdminMonthSales(HashMap<String, Object>yearSearchPack){
+		List<Sale_DateDTO> lists = sessionTemplate.selectList("beaudam.getAdminMonthSales",yearSearchPack);
+		
+		return lists;
+	}
+	public List<Sale_DateDTO> getAdminYearSales(String yearSearchValue){
+		List<Sale_DateDTO> lists = sessionTemplate.selectList("beaudam.getAdminYearSales",yearSearchValue);
+		
+		return lists;
+	}
+	
+	
+	
 
 }

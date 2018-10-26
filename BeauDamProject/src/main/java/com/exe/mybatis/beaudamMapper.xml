@@ -290,20 +290,21 @@
 			group by to_char(saledate,'day')
 			order by to_char(saledate,'day')			
 		</select>
-		<select id="getAdminMonthSales" resultType="com.table.saleDTO.Sale_DateDTO" parameterType="String">
+		
+		<select id="getAdminMonthSales" resultType="com.table.saleDTO.Sale_DateDTO" parameterType="map">
 			select to_char(saledate,'mm') saleDate,sum(total_price) total_Price from sale_date
 			where to_char(saledate,'yyyy-mm')
-			between '${yearSearchValue}-01' and '${yearSearchValue}-12'
+			between #{yearSearchValue1} and #{yearSearchValue2}
 			group by to_char(saledate,'mm')
 			order by to_char(saledate,'mm') asc
-		</select>
-		<select id="getAdminYearSales" resultType="com.table.saleDTO.Sale_DateDTO">
-			select to_char(saledate,'yyyy') saleDate, sum(total_price) total_Price from sale_date
+		</select> 	
+		
+		<select id="getAdminYearSales" resultType="com.table.saleDTO.Sale_DateDTO" parameterType="String">
+			select to_char(saledate,'yyyy') saledate, sum(total_price) total_Price from sale_date
+			where saledate=#{yearSearchValue}
 			group by to_char(saledate,'yyyy')
-			order by to_char(saledate,'yyyy')
-		</select>
-		
-		
+			order by to_char(saledate,'yyyy'); 
+		</select> 	
 		
 		<!-- Basket -->
 		<select id="getBasketData" resultType="com.table.otherDTO.BasketDTO" parameterType="String">

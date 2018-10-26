@@ -156,6 +156,7 @@ public class CustomCenterController {
 	public String notification_article(HttpServletRequest request) throws Exception {
 
 		String cp = request.getContextPath();
+		HttpSession session = request.getSession();
 		
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
@@ -183,7 +184,7 @@ public class CustomCenterController {
 		request.setAttribute("dto", dto);
 		request.setAttribute("detail", detail);
 		request.setAttribute("pageNum", pageNum);
-		
+		request.setAttribute("cusId", session.getAttribute("id"));
 		
 		// 공지사항 본문  이동
 		return "customerCenter/notification_article";
