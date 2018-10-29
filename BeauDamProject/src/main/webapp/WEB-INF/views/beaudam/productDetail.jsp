@@ -62,7 +62,7 @@ session="false" pageEncoding="UTF-8"%>
         </div>
         <div class="detail">
         	<hr>
-        	<h4 style="font-weight: bold;">상세정보</h4>
+        	<h4 style="font-weight: bold; margin-bottom: 20px;">상세정보</h4>
         	<img class="detailimg" src="<%=cp %>/resources/image/beaudam/productDetail/detail.jpg">
         </div>
         <div class="review">
