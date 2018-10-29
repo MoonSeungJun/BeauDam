@@ -33,7 +33,6 @@ public class AdminController {
 	@Resource(name="viewService")
 	private ViewServiceImpl viewService1;
 
-
 	@Resource(name="productService")
 	private ProductServiceImpl productService;
 	
@@ -119,12 +118,7 @@ public class AdminController {
 			searchCellPhone="";
 		}
 		
-		System.out.println("************************");		
-		System.out.println("네임값 : "+searchName);
-		System.out.println("아이디값 : "+searchId);
-		System.out.println("전번값 : "+searchCellPhone);
-		System.out.println("************************");
-		
+				
 		HashMap<String, Object> salesSearchKeyPack = new HashMap<String, Object>();
 		
 		salesSearchKeyPack.put("searchName", searchName);
