@@ -62,8 +62,13 @@ session="false" pageEncoding="UTF-8"%>
         </div>
         <div class="detail">
         	<hr>
+<<<<<<< HEAD
         	<h4 style="font-weight: bold;">상세정보</h4>
         	<img class="detailimg" src="<%=cp %>/detailImg/${dto.detail_Img}">
+=======
+        	<h4 style="font-weight: bold; margin-bottom: 20px;">상세정보</h4>
+        	<img class="detailimg" src="<%=cp %>/resources/image/beaudam/productDetail/detail.jpg">
+>>>>>>> 김해나브랜치
         </div>
         <div class="review">
         	<hr>

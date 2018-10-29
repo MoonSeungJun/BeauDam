@@ -99,12 +99,6 @@ p, label, span, strong, i, em, a, textarea, input, select {
     
 }
 
-p, label, span, strong, i, em, a, textarea, input, select {
-    color: inherit;
-    font: inherit;
-    line-height: inherit;
-}
-
 .lnb_mypage .benefit_result dl dd span {
     font-family: "Gotham";
     font-weight: bold;
@@ -155,38 +149,16 @@ p, label, span, strong, i, em, a, textarea, input, select {
 	color: #9a9a9;
 }
 
-/* .float_container .lnb_menu .sub_lnb  a {
-	text-decoration: none;
-	color: #9a9a9;
-}
-
-.float_container .lnb_menu .sub_lnb a:hover {
-	color: #9a9a9;
-} */
-
  a:link { color: gray; text-decoration: none;}
  a:visited { color: gray; text-decoration: none;}
  a:hover { color: gray; text-decoration: none;}
 
-/* .lnb_menu nav>ul>li>a i {
-    position: absolute;
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    width: 24px;
-    height: 24px;
-    left: -40px;
-    top: 0;
-    bottom: 0;
-} */
+
 
 p, label, span, strong, i, em, a, textarea, input, select {
     color: inherit;
     font: inherit;
     line-height: inherit;
-}
-
-div {
-    display: block;
 }
 
 .lnb_menu nav>ul>li>a {
@@ -207,7 +179,6 @@ ul, li, ol {
 }
 
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, big, cite, code, del, dfn, em, img, ins, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, button, figure {
-    border: 0 none;
     font-size: 14px;
     margin: 0;
     padding: 0;
@@ -304,7 +275,6 @@ ul, menu, dir {
 .mypage_index_conts {
 	border: 1px solid #e4eaed;
 	margin-top: 20px;
-	height: 255px;
 }
 
 .mypage_index_conts .title_content {
@@ -440,6 +410,10 @@ dl {
 .calendar .input_date input[type='text'] {
 	border: none;
 	width: 150px;
+}
+
+.mypageWrapper .orderInfo {
+	border: 1px solid gray;
 }
 
 

@@ -18,10 +18,9 @@
 		<div class="title_style">
 			<div class="title_area">
 				<h2 style="font-family: 'designhouseOTFLight00'; font-weight: normal;">나의 주문 현황</h2>
-				<hr style=" border: 0; height: 2px; background-color: gray;">
+				<hr style=" border: 0; height: 1px; background-color: gray;">
 			</div>
 		</div>
-		
 		<div class="float_container">
 			<div style="background-color: white; width: 260px; float: left" class="lnb_mypage">
 				<!-- 사용자 정보 -->
@@ -83,7 +82,7 @@
 					</nav>
 				</div>
 			</div>
-			<!-- 우측 정보부분 -->
+			<!-- 우측 정보부분 / 주문현황-->
 			<div class="float_right">
 				<div class="float_conts">
 					<!-- 마이페이지 INDEX -->
@@ -161,16 +160,16 @@
 							<span style="display: block; font-size: 14pt; font-weight: bold">나의 주문 내역 </span>
 						</div>
 						<hr style="margin: 0; padding: 0;">
-						<div class="mypage_index_state div_style col3 possession">
-							<div class="mypageWrapper" style="width: 80%; margin: 30px auto 0 auto;">
-								<table border="1">
+						<div class="mypage_index_state">
+							<div class="mypageWrapper" style="width: 80%; margin: 30px auto 30px auto;">
+								<table class="orderInfo" style="border: 1px solid gray;">
 									<!-- 주문내역 표시(TheSaem 주문내역 참조) -->
 									<tr>			
 										<td colspan="2" style="text-align: center;">
 											주문정보
 										</td>
 										<td>
-											가격(수량)
+											가격 (수량)
 										</td>
 										<td>
 											쿠폰/포인트 내역
@@ -186,7 +185,7 @@
 									<!-- 반복문을 통해 출력 -->
 										<tr>			
 											<td>
-												<img src="./resources/image/Sample_Image.jpg" height="135px">
+												<img src="/beaudam/resources/image/myPage/hour.jpg" style="width: 130px;">
 											</td>
 											<td>
 												(결제완료) 2018.10.15 | 2018101533524<br/>
@@ -207,26 +206,47 @@
 										</tr>
 										<tr>			
 											<td>
-												상품 이미지
+												<img src="/beaudam/resources/image/myPage/hour.jpg" height="135px">
 											</td>
 											<td>
-												(결제상태 -> 꾸미기) 주문날짜 | 주문번호<br/>
-												(제품번호) 제품명-색상
+												(결제완료) 2018.10.15 | 2018101533524<br/>
+												(bk150624) 머엇진 마스카라 - bk257
 											</td>
 											<td>
-												가격(수량)
+												16,000원 (3개)
 											</td>
 											<td>
-												쿠폰/포인트 내역
+												1,600 Point
 											</td>
 											<td>
-												최종결제금액
+												14,400 원
 											</td>
 											<td>
-												배송상태
+												배송중
 											</td>
 										</tr>
-									<!-- 출력 -->
+										<tr>			
+											<td>
+												<img src="/beaudam/resources/image/myPage/hour.jpg" height="135px">
+											</td>
+											<td>
+												(결제완료) 2018.10.15 | 2018101533524<br/>
+												(bk150624) 머엇진 마스카라 - bk257
+											</td>
+											<td>
+												16,000원 (3개)
+											</td>
+											<td>
+												1,600 Point
+											</td>
+											<td>
+												14,400 원
+											</td>
+											<td>
+												배송중
+											</td>
+										</tr>
+										
 								</table>
 							</div>
 						</div>

@@ -1,13 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+session="false" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%
+	String cp = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<script type="text/javascript">
+function leave() {
+	
+	f = document.myLeave;
+	var result = confirm("정말로 탈퇴하시겠습니까?");
+	
+	if(result) {
+		alert("탈퇴 되었습니다.");
+		f.action = "<%=cp%>/main.action";
+	}
+	else {
+		alert("탈퇴 취소되었습니다.");	
+		f.action = "<%=cp%>/main.action";
+	}
+	
+	f.submit();
+	
+}
 
+</script>
+<body>
+<form action="" name="myLeave">
 	<table border="1">
 	
 		<tr>
@@ -70,11 +95,11 @@
 		
 		<tr>
 			<td colspan="2" align="center">
-				<button>회원탈퇴하기</button>
+				<button onclick="leave();">회원탈퇴하기</button>
 			</td>
 		</tr>
 	
 	</table>
-
+</form>
 </body>
 </html>
