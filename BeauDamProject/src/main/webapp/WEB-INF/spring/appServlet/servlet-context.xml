@@ -23,6 +23,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.exe.beaudam"/>
+	<context:component-scan base-package="com.pay.iamport"/>
 	<context:component-scan base-package="com.exe.email"/>
 	<context:component-scan base-package="com.naver.naverlogin" />
 	<context:component-scan base-package="com.dao.*"/>

@@ -1,18 +1,23 @@
 package com.exe.beaudam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import javax.annotation.Resource;
+import javax.servlet.http.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.exe.util.MyUtil;
-import com.naver.naverlogin.NaverLoginBO;
-
-import ch.qos.logback.classic.sift.MDCBasedDiscriminator;
+import com.dao.memberDAO.MemberServiceImpl;
+import com.dao.otherDAO.OtherServiceImpl;
+import com.dao.viewDAO.ViewService;
+import com.table.memberDTO.MemberDTO;
+import com.table.otherDTO.BasketDTO;
+import com.table.otherDTO.CouponDTO;
+import com.view.view.MemberView;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -73,81 +78,120 @@ import ch.qos.logback.classic.sift.MDCBasedDiscriminator;
  *	파라미터 타입이 다들 다르니 사용 전 사용할 Mapper를 확인할 것
  *
  */
+
 @Controller("BeaudamController")
 public class BeaudamController {
 
-	
+	@Resource(name = "viewService")
+	private ViewService viewService;
+
+	@Resource(name = "otherService")
+	private OtherServiceImpl otherService;
+
+	// ********************** Beaudam Page **********************
+
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView main(HttpSession session) {
-		
+
+		String id = (String) session.getAttribute("id");
+
 		// 메인 페이지 이동
-		return new ModelAndView("beaudam/main","id",(String) session.getAttribute("id"));
+		return new ModelAndView("beaudam/main", "id", id);
 	}
 
-	@Autowired
-	MyUtil myUtil;
-	
-	// ********************** Beaudam Page **********************
-	
-	@RequestMapping(value="/productList.action", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView productList(HttpSession session) {
-		
-		return new ModelAndView("beaudam/productList","id",(String) session.getAttribute("id"));
-	
+
+		return new ModelAndView("beaudam/productList", "id", (String) session.getAttribute("id"));
+
 	}
 
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView productDetail(HttpSession session) {
 
 		// 상품상세 페이지 이동
-		return new ModelAndView("beaudam/productDetail","id",(String) session.getAttribute("id"));
+		return new ModelAndView("beaudam/productDetail", "id", (String) session.getAttribute("id"));
 
 	}
-	
+
 	@RequestMapping(value = "/event.action", method = RequestMethod.GET)
 	public ModelAndView event(HttpSession session) {
 
 		// 이벤트 리스트 페이지 이동
-		return new ModelAndView("beaudam/event","id",(String) session.getAttribute("id"));
+		return new ModelAndView("beaudam/event", "id", (String) session.getAttribute("id"));
 
 	}
-	
+
 	@RequestMapping(value = "/event1.action", method = RequestMethod.GET)
 	public ModelAndView event1(HttpSession session) {
 
 		// 이벤트1 페이지 이동
-		return new ModelAndView("beaudam/event1","id",(String) session.getAttribute("id"));
-		
+		return new ModelAndView("beaudam/event1", "id", (String) session.getAttribute("id"));
+
 	}
-	
+
 	@RequestMapping(value = "/event2.action", method = RequestMethod.GET)
 	public ModelAndView event2(HttpSession session) {
 
 		// 이벤트2 페이지 이동
-		return new ModelAndView("beaudam/event2","id",(String) session.getAttribute("id"));
+		return new ModelAndView("beaudam/event2", "id", (String) session.getAttribute("id"));
 
 	}
-	
+
 	@RequestMapping(value = "/event3.action", method = RequestMethod.GET)
 	public ModelAndView event3(HttpSession session) {
-		
-		// 이벤트1 페이지 이동
-		return new ModelAndView("beaudam/event3","id",(String) session.getAttribute("id"));		
+
+		// 이벤트3 페이지 이동
+		return new ModelAndView("beaudam/event3", "id", (String) session.getAttribute("id"));
 	}
 
 	// msj
-	@RequestMapping(value = "/pay.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String pay(HttpServletRequest request) {
+	@RequestMapping(value = "/pay.action", method = { RequestMethod.POST })
+	public ModelAndView pay(HttpServletRequest request) {
+
+		ModelAndView mav = new ModelAndView();
 
 		String pay = request.getParameter("pay");
-		if(pay != null) {
+		if (pay == "pay_ok") {
+			mav.setViewName("beaudam/payOk");
 
 			// 결제완료 페이지 이동
-			return "beaudam/payOk";
+			return mav;
 		}
 
+		mav.setViewName("beaudam/pay");
+
+		List<BasketDTO> buyLists = new ArrayList<BasketDTO>();
+		Map<String, Object> hm = new HashMap<String, Object>();
+
+		// HttpSession session = request.getSession();
+		// String id = (String) session.getAttribute("id");
+
+		String id = "esteban"; // test Data
+		hm.put("id", id);
+
+		MemberView member = viewService.getOneMemberData(id);
+
+		int amount = 0;
+		String check[] = request.getParameterValues("check");
+		for (String selectedProduct : check) {
+			amount = Integer.parseInt(request.getParameter("amount" + selectedProduct));
+			hm.put("basket_Num", selectedProduct);
+			BasketDTO dto = otherService.getBasketOneData(hm);
+			dto.setQty(amount);
+			buyLists.add(dto);
+		}
+
+		List<CouponDTO> couponLists = otherService.getCouponData(id);
+		int couponCount = otherService.getCouponCount(id);
+
+		mav.addObject("member", member);
+		mav.addObject("buyLists", buyLists);
+		mav.addObject("couponLists", couponLists);
+		mav.addObject("couponCount", couponCount);
+
 		// 결제 페이지 이동
-		return "beaudam/pay";
+		return mav;
 	}
 
 }

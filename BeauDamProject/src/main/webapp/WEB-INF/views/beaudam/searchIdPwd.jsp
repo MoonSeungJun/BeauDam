@@ -147,7 +147,7 @@ a:hover {
 		var popupX = (window.screen.width/2)-(400/2);
 		var popupY= (window.screen.height/2)-200;
 		
-		window.open('<%=cp%>/searchPwd.action',
+		window.open("<%=cp%>/searchPwd.action?searchId="+f.id.value+"&name="+f.name.value+"&email="+f.email.value,
 				'아이디 찾기',
 				'width=400, height=200, toolbar=no, menubar=no, scrollbars=no, resizable=no, left='
 				+ popupX 
