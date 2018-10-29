@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> customMain created
 # Created by https://www.gitignore.io/api/java,maven,eclipse
 
 ### Eclipse ###
@@ -105,20 +101,9 @@ pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
-<<<<<<< HEAD
-./m2e-wtp/web-resources/META-INF/maven/com.exe/beaudam/pom.properties
-=======
->>>>>>> customMain created
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
-
-
-<<<<<<< HEAD
-# End of https://www.gitignore.io/api/java,maven,eclipse
-=======
-# End of https://www.gitignore.io/api/java,maven,eclipse
 pom.properties
->>>>>>> customMain created

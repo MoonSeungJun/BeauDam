@@ -2,6 +2,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String cp = request.getContextPath();
 %>
@@ -18,7 +19,19 @@
 <script>
 
 	function checkId(){
-		window.open("<%=cp%>/checkId.action","아이디 중복체크","width=400, height=300, toolbar=no, menubar=no, scrollbars=no, resizable=no");
+		
+		var f = document.registerForm;
+		
+		if(!f.id.value){
+			alert("아이디를 입력한 후에 클릭해주세요!");
+			return;
+		}
+		
+		var popupX = (window.screen.width/2)-(400/2);
+		var popupY= (window.screen.height/2)-200;
+		
+		window.open('<%=cp%>/checkId.action?ck_id='+f.id.value,'아이디 중복체크','width=400, height=200, toolbar=no, menubar=no, scrollbars=no, resizable=no, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+	
 	}
 	
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -74,11 +87,10 @@
     function register(){
     	
     	var f = document.registerForm;
-
     	
-    	if(!f.id.value){
+    	if(!f.id.value||f.ok.value==0){
     		
-    		alert("아이디를 입력해주세요!");
+    		alert("아이디 중복체크를 해주세요!");
     		f.id.focus();
     		return;
     		
@@ -126,8 +138,24 @@
     	
     	if(!f.pwd.value){
     		
-    		alert("태어난 일을 입력해주세요!");
-    		f.day.focus();
+    		alert("비밀번호를 입력해주세요!");
+    		f.pwd.focus();
+    		return;
+    		
+    	}
+    	
+  		if(!f.pwd1.value){
+    		
+    		alert("비밀번호확인을 입력해주세요!");
+    		f.pwd1.focus();
+    		return;
+    		
+    	}
+    	
+    	if(f.pwd.value!=f.pwd1.value){
+    		
+    		alert("비밀번호의 일치여부를 확인해주세요!");
+    		f.pwd1.focus();
     		return;
     		
     	}
@@ -147,11 +175,72 @@
     		
     	}
     	
+    	if(!f.hp2.value){
+    		
+    		alert("휴대폰번호를 입력해주세요!");
+    		f.hp2.focus();
+    		return;
+    		
+    	}
+    	
+    	if(!f.hp3.value){
+    		
+    		alert("휴대폰번호를 입력해주세요!");
+    		f.hp3.focus();
+    		return;
+    		
+    	}
+    	
+    	if(f.phone1.value!="0"){
+    		if(!f.phone2.value){
+    			alert("전화번호를 입력해주세요!");
+        		f.phone2.focus();
+        		return;
+    		}
+    		if(!f.phone3.value){
+    			alert("전화번호를 입력해주세요!");
+        		f.phone3.focus();
+        		return;
+    		}    		
+    	}
+    	
+    	if(!f.email1.value){
+    		
+    		alert("이메일을 입력해주세요!");
+    		f.email1.focus();
+    		return;
+    		
+    	}
+    	
+    	if(!f.email2.value){
+    		
+    		alert("이메일 입력해주세요!");
+    		f.email2.focus();
+    		return;
+    		
+    	}
+    	
     	f.action = 'newUser_ok.action';
     	f.submit();
     	
     }
-    
+
+    function selectEmail(){
+    	
+    	var f = document.registerForm;
+    	
+    	if(f.email3.value==0){
+    		f.email2.value="";
+    		f.email2.readOnly=false;
+    		f.email2.style.background="white";
+    		f.email2.focus();
+    	}else{
+    		f.email2.value = f.email3.value;
+    		f.email2.readOnly=true;
+    		f.email2.style.background="#BDBDBD";
+    	}
+    	
+    }
 
 	function checkPwd() {
 
@@ -255,13 +344,14 @@ button:hover {
 			<form name="registerForm" method="post">
 				<div style="width: 800px; margin: 0 auto">				
 					<h3 style="float: left">가입정보</h3>
-					<p style="color: red; float: right;"> * 필수입력사항</p>
+					<p style="color: red; float: right;"> * 필수입력사항 (전화번호 제외)</p>
 					<hr style="width: 800px">
 					<table style="width: 650px">
 						<tr>
 							<td width="150px" style="padding-left: 20px"><b>아이디</b></td>
 							<td width="600px">
-								<input type="text" name="id"/>
+								<input type="text" name="id" />
+								<input type="hidden" name="ok" value="0"/>
 								<button type="button" onclick="checkId()"> 
 									아이디 중복 체크
 								</button>
@@ -354,7 +444,7 @@ button:hover {
 							<td style="padding-left: 20px"><b>전화번호</b></td>
 							<td>
 								<select name="phone1">
-		                            <option value="">(선택)</option>
+		                            <option value="0">(선택)</option>
 		                            <option value="02">02</option>
 		                            <option value="031">031</option>
 		                            <option value="032">032</option>
@@ -385,7 +475,7 @@ button:hover {
 								<input type="text" name="email1"/>
 								@
 								<input type="text" name="email2"/>
-								<select style="width:120px;">
+								<select style="width:120px;" name="email3" onchange="selectEmail();">
 	                              <option value="">직접입력</option>
 	                              <option value="dreamwiz.com">dreamwiz.com</option>
 	                              <option value="hanmail.net">hanmail.net</option>

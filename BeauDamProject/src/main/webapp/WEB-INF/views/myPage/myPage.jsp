@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>My Beaudam</title>
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
-<link rel="stylesheet" href="./resources/css/myPage/aaa.css">
+<link rel="stylesheet" href="./resources/css/myPage/myPage.css">
 </head>
 <body>
 	<jsp:include page="../beaudam/mainTop.jsp" />
@@ -21,7 +21,7 @@
 		<div class="title_style">
 			<div class="title_area">
 				<h2 style="font-family: 'designhouseOTFLight00'; font-weight: normal;">마이뷰담</h2>
-				<hr style=" border: 0; height: 2px; background-color: gray;">
+				<hr style=" border: 0; height: 1px; background-color: gray;">
 			</div>
 		</div>
 		
@@ -69,12 +69,15 @@
 					<nav>	
 						<ul>
 							<li>
-								<a href="#" id="1">나의 주문 현황</a>
+								<a href="<%=cp %>/myBasket.action">나의 장바구니</a>
+							</li>
+							<li>
+								<a href="<%=cp %>/myOrder.action">나의 주문 현황</a>
 							</li>
 							<li><a href="" style="margin-bottom: 15px;">나의 정보</a>
 								<ul class="sub_lnb">
 									<li><a href="<%=cp%>/myCoupon.action" style="color: #9a9a9;">쿠폰조회</a></li>
-									<li><a href="/page/mythesaem/member/address">배송지 관리</a></li>
+									<li><a href="#">배송지 관리</a></li>
 									<li><a href="<%=cp%>/myEdit.action">개인정보수정</a></li>
 									<li><a href="<%=cp%>/myLeave.action">회원탈퇴</a></li>
 								</ul>
@@ -92,7 +95,7 @@
 							나의 주문 현황 </span>
 					</div>
 					<div class="infobox" style="height: 205px;">
-						<table border="1" style="width: 100%; height: 100px;">
+						<table style="width: 100%; height: 100px;">
 								<tr>
 									<td>
 										<img style="width: 40px" src="/beaudam/resources/image/myPage/hour.jpg">	
@@ -131,13 +134,13 @@
 							</table>
 						</div>
 					</div>
-					<div class="mypage_index_conts">
+					<div class="mypage_index_conts" style="height: 255px;">
 						<div class="title_content" style="padding: 20px 18px;">
 							<span style="display: block; font-size: 14pt; font-weight: bold">나의 보유 현황 </span>
 						</div>
 						<hr style="margin: 0; padding: 0;">
 						<div class="mypage_index_state div_style col3 possession">
-							<div class="mypageWrapper" style="width: 80%; margin: 30px auto 0 auto;">
+							<div class="mypageWrapper" style="width: 80%; margin: 30px auto 30px auto;">
 								<dl>
 									<dt>포인트</dt>
 									<dd class="point">0</dd>
@@ -154,7 +157,6 @@
 						</div>
 					</div>
 				</div>
-				
 			</div>
 	</div>
 	<jsp:include page="../beaudam/mainBottom.jsp" />

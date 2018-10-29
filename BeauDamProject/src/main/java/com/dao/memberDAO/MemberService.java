@@ -1,15 +1,13 @@
 package com.dao.memberDAO;
 
-import java.util.*;
-
 import com.table.memberDTO.*;
-import com.view.view.*;
 
 public interface MemberService {
 
 //	insert
 	void insertMember(MemberDTO dto);
 	void insertMemberInfo(Member_InfoDTO dto);
+	void insertMemberInfoEX(Member_InfoDTO dto);
 	void insertMemberGrade(Member_GradeDTO dto);	
 	
 //	update

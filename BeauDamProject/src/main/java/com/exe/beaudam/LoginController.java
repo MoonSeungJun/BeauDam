@@ -3,6 +3,7 @@ package com.exe.beaudam;
 import java.io.*;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.util.HashMap;
 
 import javax.annotation.*;
 import javax.servlet.http.*;
@@ -11,6 +12,7 @@ import org.json.simple.*;
 import org.json.simple.parser.*;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.*;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
@@ -91,26 +93,27 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login_ok.action", method = {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView doLogin(HttpServletRequest request, HttpSession session) {
+	public ModelAndView login_ok(HttpServletRequest request, HttpSession session) {
 		
 		// 로그인 정보 받아오기
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("password");
 		
-/*		// 입력한 id 조회
+		// 입력한 id 조회
 		
-		MemberView mv = viewService.getOneMemberData(id);*/
+		MemberView dto = viewService.getOneMemberData(id);
 		
-//		if(mv == null) {
-//			
-//			String errormessage = "존재하지 않는 아이디입니다";
-//
-//			return new ModelAndView("beaudam/login", "message", errormessage);
-//			
-//		}
+		if(dto == null) {
+			
+			String errormessage = "존재하지 않는 아이디입니다";
 
-//		String ck_pwd = mv.getPwd();
-		if(id.equals("beaudam") && pwd.equals("a123")) {
+			return new ModelAndView("beaudam/login", "message", errormessage);
+			
+		}
+
+		String ck_pwd = dto.getPwd();
+		
+		if(pwd.equals(ck_pwd)) {
 			
 			session.setAttribute("id", id);
 
@@ -123,16 +126,6 @@ public class LoginController {
 			return new ModelAndView("beaudam/login", "message", errormessage);
 		
 		}
-	}
-	
-	@RequestMapping(value = "/logout.action", method = RequestMethod.GET)
-	public ModelAndView logout(HttpServletRequest request, HttpSession session) {
-		
-		session.removeAttribute("id");
-        
-        /* 생성한 인증 URL을 View로 전달 */
-        return new ModelAndView("redirect:/main.action");
-
 	}
 	
 	@RequestMapping(value = "/callback.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -161,26 +154,110 @@ public class LoginController {
 		return new ModelAndView("redirect:/main.action");
 	}
 	
+	@RequestMapping(value="/searchIdPwd.action", method = RequestMethod.GET)
+	public ModelAndView searchIdPwd() {
+		
+		return new ModelAndView("beaudam/searchIdPwd");
+		
+	}
+	
+	@RequestMapping(value="/searchId.action", method = {RequestMethod.GET ,RequestMethod.POST})
+	public ModelAndView searchId(HttpServletRequest request) {
+		
+		HashMap<String, Object> nameBirth = new HashMap<String, Object>();
+		
+		nameBirth.put("name", request.getParameter("name"));
+		nameBirth.put("birth", request.getParameter("birth"));
+
+		String resultId = viewService.getSearchId(nameBirth);
+		
+		return new ModelAndView("beaudam/searchId","resultId",resultId);
+		
+	}
+	
+	@RequestMapping(value="/searchPwd.action", method = {RequestMethod.GET ,RequestMethod.POST})
+	public ModelAndView searchPwd(HttpServletRequest request) {
+		
+		HashMap<String, Object> nameEmail = new HashMap<String, Object>();
+		
+		nameEmail.put("id", request.getParameter("searchId"));
+		nameEmail.put("name", request.getParameter("name"));
+		nameEmail.put("email", request.getParameter("email"));
+		
+		String resultPwd = viewService.getSearchPwd(nameEmail);		
+		
+		return new ModelAndView("beaudam/searchPwd","resultPwd",resultPwd);
+		
+	}	
+	
+	@RequestMapping(value = "/logout.action", method = RequestMethod.GET)
+	public void logout(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script type='text/javascript'>");
+		out.println("var result=confirm('로그아웃하시겠습니까?');");
+		out.println("if(result==true){");
+		out.println("location.href='/beaudam/logout_ok.action';");
+		out.println("}else{");
+		out.println("location.href='/beaudam/main.action';");
+		out.println("}");
+		out.println("</script>");
+		out.flush();
+
+	}
+	
+	@RequestMapping(value="/logout_ok.action", method = RequestMethod.GET)
+	public ModelAndView logout_ok(HttpServletRequest request,
+			HttpSession session) {
+		
+		session.removeAttribute("id");
+		return new ModelAndView("redirect:/main.action");
+		
+	}
+	
 	@RequestMapping(value = "/newTerm.action", method = RequestMethod.GET)
-	public String newTerm() {
+	public ModelAndView newTerm() {
 
 		// 약관 페이지 이동
-		return "beaudam/newTerm";
+		return new ModelAndView("beaudam/newTerm");
+
 	}
 
-	@RequestMapping(value = "/newUser.action", method = RequestMethod.GET)
-	public String newUser() {
+	
+	@RequestMapping(value = "/newUser.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView newUser(HttpServletRequest request) {
+		
+		String newId = request.getParameter("newId");
 
 		// 회원가입 페이지 이동
-		return "beaudam/newUser";
+		return new ModelAndView("beaudam/newUser","newId",newId);
+
 	}
 
-	@RequestMapping(value="/checkId.action", method = RequestMethod.GET)
-	public String checkId() {
+	
+	@RequestMapping(value="/checkId.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView checkId(HttpServletRequest request) {
 		
-		return "beaudam/checkId";
+		String flag = "false";
+		
+		String ck_id = request.getParameter("ck_id");
+		
+		MemberView dto = viewService.getOneMemberData(ck_id);
+		
+		if(dto!=null) 
+			flag = "true";
+		
+		request.setAttribute("ck_id", ck_id);
+		request.setAttribute("flag", flag);
+		
+		return new ModelAndView("beaudam/checkId");
 		
 	}
+	
 	
 	@RequestMapping(value = "/newUser_ok.action", method = RequestMethod.POST)
 	public ModelAndView newUser_ok(HttpServletRequest request,
@@ -192,6 +269,8 @@ public class LoginController {
 		//member - member_Info - member_grade - coupon
 		
 		mDto.setNickname(request.getParameter("nickName"));
+		
+		memberService.insertMember(mDto);
 		
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
@@ -205,17 +284,9 @@ public class LoginController {
 		String hp2 = request.getParameter("hp2");
 		String hp3 = request.getParameter("hp3");
 		
-		String cellphone = hp1 + hp2 + hp3;
+		String cellphone = hp1 + "-" + hp2 + "-" + hp3;
 		
 		mIdto.setCellphone(cellphone);
-		
-		String phone1 = request.getParameter("phone1");
-		String phone2 = request.getParameter("phone2");
-		String phone3 = request.getParameter("phone3");
-		
-		String tel = phone1 + phone2 + phone3;
-		
-		mIdto.setTel(tel);
 		
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
@@ -226,15 +297,25 @@ public class LoginController {
 		
 		cDto.setCoupon("10%");
 		
-/*		System.out.println("MEMBER: " + mDto.getId() + mDto.getNickname() + mDto.getPwd());
-		System.out.println("INFO1: " + mIdto.getId() + mIdto.getName() + mIdto.getBirth() + mIdto.getCellphone() + mIdto.getCity());
-		System.out.println("INFO2: " + mIdto.getCreated() + mIdto.getEmail() + mIdto.getGender() + mIdto.getStreet() + mIdto.getTel());
-		System.out.println(mIdto.getZip());
-		System.out.println("GRADE: " + mGdto.getId());
-		System.out.println("COUPON: " +cDto.getId() + cDto.getCoupon());*/
+		String phone1 = request.getParameter("phone1");
 		
-		memberService.insertMember(mDto);
-		memberService.insertMemberInfo(mIdto);
+		if(!phone1.equals("0")) {
+
+			String phone2 = request.getParameter("phone2");
+			String phone3 = request.getParameter("phone3");
+			
+			String tel = phone1 + "-" + phone2 + "-" + phone3;
+		
+			mIdto.setTel(tel);
+			
+			memberService.insertMemberInfo(mIdto);
+			
+		}else {
+
+			memberService.insertMemberInfoEX(mIdto);
+			
+		}
+
 		memberService.insertMemberGrade(mGdto);
 		otherService.insertCoupon(cDto);
 		

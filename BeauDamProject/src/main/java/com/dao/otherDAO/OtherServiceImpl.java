@@ -6,8 +6,8 @@ import javax.annotation.*;
 
 import org.springframework.stereotype.*;
 
-import com.table.memberDTO.*;
 import com.table.otherDTO.*;
+import com.view.view.*;
 
 @Service("otherService")
 public class OtherServiceImpl implements OtherService {
@@ -134,5 +134,21 @@ public class OtherServiceImpl implements OtherService {
 		return result;
 	}
 
+	public List<BasketDTO> getBasketData(String id) {
+		List<BasketDTO> lists = dao.getBasketData(id);
+		return lists;
+	}
 
+	public BasketDTO getBasketOneData(Map<String, Object> hm) {
+		BasketDTO dto = dao.getBasketOneData(hm);
+		
+		return dto;
+	}
+	@Override
+	public List<SaleView> getBestItem() {
+		List<SaleView> lists = dao.getBestItem();
+		return lists;
+	}
+	
+	
 }

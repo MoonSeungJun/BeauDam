@@ -1,4 +1,4 @@
-<!-- 제작자 : 서영진 + 허도휘 -->
+<!-- 제작자 : 허도휘 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -166,7 +166,7 @@ a:hover{
 				<a href="<%=cp %>/newTerm.action" style="float: right;">회원가입</a>
 				</h4>
 				<h4>· 아이디나 비밀번호가 기억이 안나신다면 
-				<a href="" style="float: right;">아이디 / 비밀번호 찾기</a>
+				<a href="<%=cp %>/searchIdPwd.action" style="float: right;">아이디 / 비밀번호 찾기</a>
 				</h4>
 			</div>
 			

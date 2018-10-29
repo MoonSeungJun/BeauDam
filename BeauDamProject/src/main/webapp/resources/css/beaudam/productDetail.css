@@ -24,7 +24,7 @@ a {
     overflow: hidden;
     /* background-color: blue; */
     margin: 0 auto;
-    width: 960px;
+    width: 1200px;
     margin-top: 130px;
 }
 
@@ -32,6 +32,11 @@ a {
     float: left;
     display: inline-block;
     /* margin-bottom: 10px; */
+}
+
+.wrapper .left  img {
+	width: 500px;
+	height: 500px;
 }
 
 .right {

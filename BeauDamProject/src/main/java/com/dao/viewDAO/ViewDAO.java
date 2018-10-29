@@ -38,8 +38,22 @@ public class ViewDAO {
 	
 	public MemberView getOneMemberData(String id) {
 		
-		MemberView dto = sessionTemplate.selectOne("beaudam.getOneMemberData");
+		MemberView dto = sessionTemplate.selectOne("beaudam.getOneMemberData", id);
 		return dto;
+		
+	}
+	
+	public String getSearchId(HashMap<String, Object> nameBirth) {
+		
+		String id = sessionTemplate.selectOne("beaudam.getSearchId", nameBirth);
+		return id;
+		
+	}
+	
+	public String getSearchPwd(HashMap<String, Object> nameEmail) {
+		
+		String pwd = sessionTemplate.selectOne("beaudam.getSearchPwd", nameEmail);
+		return pwd;
 		
 	}
 

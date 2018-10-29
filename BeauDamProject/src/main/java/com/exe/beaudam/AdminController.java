@@ -1,6 +1,7 @@
 package com.exe.beaudam;
 
 import java.io.*;
+import java.net.*;
 import java.util.*;
 
 import javax.annotation.*;
@@ -295,7 +296,7 @@ public class AdminController {
 	
 	
 	
-	//상품조회아작스 -- 수정해야함
+	//상품조회아작스
 	@RequestMapping(value = "/adminProductViewAjax.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public void adminProductAjax(HttpServletResponse resp, HttpServletRequest req, String code,String brand,String category,String type,String productName) {		
 
@@ -321,7 +322,7 @@ public class AdminController {
 		if(type==null||type.equals("")||type.equals("선택")) {
 			type = "";
 			map.put("type", type);
-		}else {
+		}else { 
 			map.put("type", type);
 		}
 		if(productName==null||productName.equals("")) {
@@ -341,12 +342,16 @@ public class AdminController {
 				Object brandVO = productList.get(i).getBrand();
 				Object categoryVO = productList.get(i).getCategory();
 				Object typeVO = productList.get(i).getType();
-				Object productNameVO = productList.get(i).getProduct_Name();
+				Object productNameVO = URLEncoder.encode(productList.get(i).getProduct_Name(),"utf-8");
+				productNameVO = ((String) productNameVO).replaceAll("\\+","%20");
+				
 				Object colorCodeVO = productList.get(i).getColor_Code();
 				Object colorNameVO = productList.get(i).getColor_Name();
 				Object productPrice = productList.get(i).getProduct_Price();				
 				Object qty = productList.get(i).getQty();				
 
+				
+				
 				jarray.add(codeVO);
 				jarray.add(brandVO);
 				jarray.add(categoryVO);
@@ -464,10 +469,12 @@ public class AdminController {
 			ColorDTO color = new ColorDTO();
 			ImgDTO img = new ImgDTO();          
 
+			
+			
 			product.setCode(command.getCode());
 			product.setProductName(command.getProductName());
 			product.setProductPrice(Integer.parseInt(command.getPrice()));
-
+			
 			brand.setBrand(command.getBrand());
 			brand.setCategory(command.getCategory());
 			brand.setCode(command.getCode());
