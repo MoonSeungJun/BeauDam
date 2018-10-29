@@ -97,7 +97,10 @@
 			</insert>		
 		
 		
-		
+		<!-- best item -->
+		<select id="getBestItems" resultType="com.view.view.Saleview">
+			select code, sum(qty) qty from saleview group by code order by qty desc
+		</select>
 		
 		
 	

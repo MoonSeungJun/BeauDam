@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
+	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
@@ -51,9 +50,11 @@ function searchSend() {
 			$('#tester').empty();
 		},
 		success: function(result) {	
-			
+				
 			var data = "<tr align='center'>";			
-			$.each(result, function(i) {
+			$.each(result, function(i) {				
+				result[i] = decodeURI(result[i]);
+				
 				if( i>8 && (i+1)%9 == 1){
 					data += "<tr align='center'>";
 				}				
@@ -169,12 +170,11 @@ function showSubSelect(category) {
 
 			<td class="title" style="width: 110px;">타입</td>
 
-			<td class="title" style="width: 200px;">상품명</td>
-
-			<td class="title" style="width: 100px;">가격</td>
+			<td class="title" style="width: 200px;">상품명</td>		
 
 			<td class="title" style="width: 100px;">색상코드</td>
 			<td class="title" style="width: 100px;">색상</td>
+			<td class="title" style="width: 100px;">가격</td>
 			<td class="title" style="width: 100px;">재고</td>
 
 			<td class="title">관리</td>
