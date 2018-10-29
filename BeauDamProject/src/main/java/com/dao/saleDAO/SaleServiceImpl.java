@@ -53,8 +53,8 @@ public class SaleServiceImpl implements SaleService {
 	}
 
 	@Override
-	public List<SaleView> getSearchSaleData(Map<String, Object> map) {
-		List<SaleView> lists = dao.getSearchSaleData(map);
+	public List<SaleView> getSearchSaleData(Map<String, Object> salesSearchKeyPack) {
+		List<SaleView> lists = dao.getSearchSaleData(salesSearchKeyPack);
 		return lists;
 	}
 

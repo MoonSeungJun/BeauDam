@@ -51,8 +51,8 @@ public class SaleDAO {
 	}
 
 	
-	public List<SaleView> getSearchSaleData(Map<String, Object> map) {
-		List<SaleView> lists = sessionTemplate.selectList("beaudam.getSearchSaleData",map);
+	public List<SaleView> getSearchSaleData(Map<String, Object> salesSearchKeyPack) {
+		List<SaleView> lists = sessionTemplate.selectList("beaudam.getSearchSaleData",salesSearchKeyPack);
 		return lists;
 	}
 	

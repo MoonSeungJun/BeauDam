@@ -20,7 +20,7 @@ public interface SaleService {
 
 	List<SaleView> getAllSaleData();
 	SaleView getOneSaleData(String sale_Code);
-	List<SaleView> getSearchSaleData(Map<String, Object> map);
+	List<SaleView> getSearchSaleData(Map<String, Object> salesSearchKeyPack);
 	List<Sale_DateDTO> getAdminDaySales();
 	List<Sale_DateDTO> getAdminMonthSales(HashMap<String, Object>yearSearchPack);
     List<Sale_DateDTO> getAdminYearSales();

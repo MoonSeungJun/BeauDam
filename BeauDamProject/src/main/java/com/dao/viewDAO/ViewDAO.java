@@ -58,9 +58,9 @@ public class ViewDAO {
 		
 	}
 	
-	public List<SaleView> getAllSaleView(HashMap<String, Object> saleSearchPack){
+	public List<SaleView> getAllSaleView(){
 		
-		List<SaleView> lists = sessionTemplate.selectList("beaudam.getAllSaleView", saleSearchPack);
+		List<SaleView> lists = sessionTemplate.selectList("beaudam.getAllSaleView");
 		
 		return lists;
 		
@@ -79,7 +79,7 @@ public class ViewDAO {
 		return searchMemberList;
 
 	}
-	
+		
 	
 	
 }

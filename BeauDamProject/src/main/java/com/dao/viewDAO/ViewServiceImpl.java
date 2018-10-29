@@ -61,12 +61,11 @@ public class ViewServiceImpl implements ViewService {
 	}
 
 	@Override
-	public List<SaleView> getAllSaleView(HashMap<String, Object> saleSearchPack) {
+	public List<SaleView> getAllSaleView() {
 
-		List<SaleView> lists = dao.getAllSaleView(saleSearchPack);
+		List<SaleView> lists = dao.getAllSaleView();
 		return lists;
 	}
 
-	
 	
 }

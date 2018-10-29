@@ -48,24 +48,10 @@ public class AdminController {
 	@RequestMapping(value = "/adminOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminOrder(HttpServletRequest req) {
 
+		String searchName = req.getParameter("name");
+		String searchId = req.getParameter("id");
+		String searchCellPhone = req.getParameter("cellphone");
 		
-		if(req.getMethod().equalsIgnoreCase("POST")) {
-			
-			String sale_Code = req.getParameter("sale_Code");
-			String delivery_Status = req.getParameter("delState");
-			String pay_Status = req.getParameter("payState");
-			
-			
-			SaleView dto = saleService.getOneSaleData(sale_Code);
-			
-			
-			
-			dto.setPay_Status(pay_Status);
-			dto.setDelivery_Status(delivery_Status);
-			
-			saleService.updateSaleDate(dto);
-			
-		}
 		
 		
 		int pay_ready = 0;			
@@ -119,8 +105,35 @@ public class AdminController {
 				System.out.println(change + "chan");
 			}
 			
+		}	
+			
+		
+		
+		if(searchName==null||searchName.equals("")) {
+			searchName="";
+		}
+		if(searchId==null||searchId.equals("")) {
+			searchId="";
+		}
+		if(searchCellPhone==null||searchCellPhone.equals("")) {
+			searchCellPhone="";
 		}
 		
+		System.out.println("************************");		
+		System.out.println("네임값 : "+searchName);
+		System.out.println("아이디값 : "+searchId);
+		System.out.println("전번값 : "+searchCellPhone);
+		System.out.println("************************");
+		
+		HashMap<String, Object> salesSearchKeyPack = new HashMap<String, Object>();
+		
+		salesSearchKeyPack.put("searchName", searchName);
+		salesSearchKeyPack.put("searchId", searchId);
+		salesSearchKeyPack.put("searchCellPhone", searchCellPhone);
+		
+		List<SaleView> searchSaleData = saleService.getSearchSaleData(salesSearchKeyPack);
+	
+				
 		req.setAttribute("payReady", pay_ready);
 		req.setAttribute("payCompl", pay_compl);
 		req.setAttribute("refund", refund);
@@ -130,31 +143,121 @@ public class AdminController {
 		req.setAttribute("compl", compl);
 		req.setAttribute("change", change);
 		req.setAttribute("saleList", saleView);
-			
+		req.setAttribute("searchSaleData", searchSaleData);
+					
 	
 		// 주문내역 관리 페이지 이동
 		return "admin/adminOrder";
 	}
 
-	@RequestMapping(value = "/adminOrderUpdate", method = { RequestMethod.GET, RequestMethod.POST })
+	/*@RequestMapping(value = "/adminOrderSearch", method = { RequestMethod.GET, RequestMethod.POST })
 
-	public String adminOrderUpdate(SaleView dto, HttpServletRequest request) {
-
-		saleService.updateSaleDate(dto);
-
-
+	public String adminOrderSearch(SaleView dto, HttpServletRequest request) {
+		
+		String searchName = request.getParameter("name");
+		String searchId = request.getParameter("id");
+		String searchCellPhone = request.getParameter("cellphone");
+		
+		if(searchName==null||searchName.equals("")) {
+			searchName="";
+		}
+		if(searchId==null||searchId.equals("")) {
+			searchId="";
+		}
+		if(searchCellPhone==null||searchCellPhone.equals("")) {
+			searchCellPhone="";
+		}
+		
+		System.out.println("************************");		
+		System.out.println("네임값"+searchName);
+		System.out.println("아이디값 "+searchId);
+		System.out.println("전번값"+searchCellPhone);
+		System.out.println("************************");
+		
+		HashMap<String, Object> salesSearchKeyPack = new HashMap<String, Object>();
+		
+		salesSearchKeyPack.put("searchName", searchName);
+		salesSearchKeyPack.put("searchId", searchId);
+		salesSearchKeyPack.put("searchCellPhone", searchCellPhone);
+		
+		List<SaleView> searchSaleData = saleService.getSearchSaleData(salesSearchKeyPack);
+		
+		
+		request.setAttribute("searchSaleData", searchSaleData);
+		
 		return "admin/adminOrder";
+		
+	
+	}*/
+	
+	@RequestMapping(value = "/adminOrderPop", method = {RequestMethod.GET,RequestMethod.POST })
+	public String adminOrderPop(HttpServletRequest request) {
+		
+		
+		
+		
+		
+		String sale_Code = request.getParameter("sale_Code");
+		System.out.println("*****************");
+		System.out.println("*****************");
+		System.out.println(sale_Code);
+		System.out.println("*****************");
+		System.out.println("*****************");
+		
+		request.setAttribute("sale_Code", sale_Code);
+		
+		return "admin/editForm";
+		
+		
+	}
+	
+	
+	@RequestMapping(value = "/adminOrderUpdate", method = {RequestMethod.GET,RequestMethod.POST })
+	public String adminOrderUpdate(HttpServletRequest request) {	
+		
+		String sale_Code = request.getParameter("sale_Code");
+		String delivery_Status = request.getParameter("delState");
+		String pay_Status = request.getParameter("payState");
+		
+		System.out.println("***********");
+		System.out.println("세일코드"+sale_Code);
+		System.out.println("델리코드"+delivery_Status);
+		System.out.println("페이코드"+pay_Status);
+		System.out.println("***********");
+		
+		
+		if((delivery_Status==null||delivery_Status.equals(""))&&(pay_Status==null||pay_Status.equals(""))) {
+			
+			return "redirect:/adminOrder.action";
+		}		
+		
+		
+		SaleView dto = saleService.getOneSaleData(sale_Code);
+		
+				
+		dto.setPay_Status(pay_Status);
+		dto.setDelivery_Status(delivery_Status);
+		
+		saleService.updateSaleDate(dto);
+		
+	
+		return "redirect:/adminOrder.action"; 
 	}
 
 
 	//esteban
 	@RequestMapping(value = "/adminSales.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminSales(HttpServletRequest request) {
-
+		
+		// 검색 년도가 null이면 기본으로 해당년도 값을 잡아주는 부분
+		Calendar cal = new GregorianCalendar(Locale.KOREA);
+		int nyear = cal.get(Calendar.YEAR);
+		String nowYear = Integer.toString(nyear);
+					
 		String yearSearchValue = request.getParameter("yearSearchValue");
 		
 		if(yearSearchValue==null||yearSearchValue.equals("")) {
-			yearSearchValue= "2018";			
+			yearSearchValue= nowYear;			
 		}	
 		
 		String yearSearchValue1 = yearSearchValue+"-01";

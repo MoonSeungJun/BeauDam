@@ -15,29 +15,28 @@
 <script type="text/javascript">
 
 
-	function orderUpdate(code) {		
 
+function orderUpdate(code) {		
 	
-		var delState = $('#delivery_Status option:selected').val();
-		var payState = $('#pay_Status option:selected').val();
-		var sale_Code = code;	
-		alert(payState +"  " +delState + "  " +  sale_Code);
-		$.ajax({
-			
-			type:'post',
-			data: {'delState':delState,'payState':payState,'sale_Code':sale_Code},
-			url: '/beaudam/adminOrder.action',
-			success: function() {
-				alert('변경 되었습니다.');
-				window.location.href = "/beaudam/adminOrder.action";
-			},
-			error: function() {
-				
-			}		
-			
-		});		
+	var popUrl = "adminOrderPop.action?sale_Code=";	//팝업창에 출력될 페이지 URL
+	var sale_Code = code;
+	var popOption = "width=300, height=300, resizable=yes, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
+	var popUrl = popUrl+sale_Code;
+	
+		window.open(popUrl,"",popOption);
+	
+}
+	
+	function orderSearch() {
 		
+		var f = document.adminOrderForm;
+		
+		f.action = "<%=cp%>/adminOrder.action";
+		f.submit();
+				
 	}
+	
+	
 	
 </script>
 </head>
@@ -148,7 +147,7 @@
 		</tr>
 
 
-		<c:forEach var="dto" items="${saleList }"> 
+		<c:forEach var="dto" items="${searchSaleData }"> 
 			<tr>
 				<td>
 					${dto.sale_Code }
@@ -188,24 +187,44 @@
 				</td>
 				
 				<td>
-					<select id="pay_Status">
-						<option value="pay_ready">입금대기</option>
-						<option value="pay_compl">결제완료</option>
-						<option value="change">교환</option>
-						<option value="refund">환불</option>
-						<option value="cancel">취소</option>									
-					</select>
+				<c:choose>
+  					<c:when test="${dto.pay_Status=='pay_ready'}">
+     					입금대기
+  						</c:when>
+  					<c:when test="${dto.pay_Status=='pay_compl'}">
+    					 결제완료
+  						</c:when>
+  					
+  					<c:when test="${dto.pay_Status=='change'}">
+     					교환
+  						</c:when>
+  					<c:when test="${dto.pay_Status=='refund'}">
+     					환불
+  					</c:when>
+  					
+  					<c:otherwise>
+     					취소
+  					</c:otherwise>
+				</c:choose> 
+					
+					
 				</td>
 				
 				<td>
-					<select id="delivery_Status">
-						<option value="ready">상품 준비중</option>
-						<option value="ing">배송중</option>
-						<option value="compl">배송완료</option>				
-					</select>
+				<c:choose>
+  					<c:when test="${dto.delivery_Status=='ready'}">
+     					상품 준비중
+  						</c:when>
+  					<c:when test="${dto.delivery_Status=='ing'}">
+    					 배송중
+  						</c:when>  					 					
+  					<c:otherwise>
+     					배송완료
+  					</c:otherwise>
+				</c:choose> 				
 				</td>
-				<td>					
-					<a href="javascript:void(0);" onclick="orderUpdate('${dto.sale_Code}');" style="text-decoration: none;">수정</a>
+				<td>									
+					<a href="javascript:void(0);" onclick="orderUpdate(${dto.sale_Code });" style="text-decoration: none;">수정</a>
 				</td>			
 			</tr>
 		</c:forEach>

@@ -399,9 +399,10 @@
 		<select id="getSearchSaleData" resultType="com.view.view.SaleView" parameterType="map">
 			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code, use_Coupon, payment_Method, addr, message, pay_Status, delivery_Status,
 			 product_Price, qty, use_Point, total_Price, to_char(saledate, 'yyyy-mm-dd') saledate from saleView			
-			 where  name like '%' || #{searchValue1} || '%' and
-				    id like '%' || #{searchValue2} || '%' and
-				    cellPhone like '%' || #{searchValue3} || '%'
+			 where  name like '%' || #{searchName} || '%' and
+				    id like '%' || #{searchId} || '%' and
+				    cellPhone like '%' || #{searchCellPhone} || '%'
+			order by sale_Code asc
 		</select>
 					
 </mapper>
