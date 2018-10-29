@@ -8,6 +8,8 @@ public class BasketDTO {
 
 	private String code;
 
+	private String brand;
+
 	private String color_Name;
 
 	private String color_Code;
@@ -44,6 +46,14 @@ public class BasketDTO {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public String getColor_Name() {

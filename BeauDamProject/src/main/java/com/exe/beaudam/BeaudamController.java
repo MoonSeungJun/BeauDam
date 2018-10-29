@@ -178,7 +178,6 @@ public class BeaudamController {
 			dto.setQty(amount);
 			buyLists.add(dto);
 		}
-		System.out.println(member.getPoint()+"aaaaaaaaaaaaaaaa");
 
 		List<CouponDTO> couponLists = otherService.getCouponData(id);
 		int couponCount = otherService.getCouponCount(id);

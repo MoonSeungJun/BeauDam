@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
-	
+
 	$(document).ready(function(){
 		$("#val").hide();
 		
@@ -26,22 +26,19 @@
 		});
 		
 		$("#totalPrice").change(function(){
-			if(rmComma($("#totalPrice").text())>50000){
-				$("#shipping").text(0);
-			} else {
-				$("#shipping").text("2,500");
-			}
+			setShppingPrice();
 		});
 		
-		/* $("#coupon").change(function(){
+		$("#coupon").change(function(){
 			if($("#coupon").val()!=1){
 				$("#point").attr("readonly", true);
-				var totalPrice;
+				var totalPrice = 0;
+				var val = $("#coupon").val().substring(0, 3);
 				
-				if($("#coupon").val()=="10%"){
+				if(val=="10%"){
 					totalPrice = Number(rmComma($("#totalPrice").text()))*0.1;
 					$("#discount").text(addComma(totalPrice));
-				}else if($("#coupon").val()=="20%"){
+				}else if(val=="20%"){
 					totalPrice = Number(rmComma($("#totalPrice").text()))*0.2;
 					$("#discount").text(addComma(totalPrice));
 				}
@@ -52,9 +49,10 @@
 				$("#discount").text("0");
 			}
 			
-			var pay = rmComma($("#totalPrice").text()) + rmComma($("#shipping").text()) - rmComma($("#discount").text());
-			$("#pay").text(addComma(pay));
-		}); */
+			setTotalPrice();
+			
+			setPayResult();
+		});
 		
 		$("#point").change(function(){
 			var point = Number($("#point").val());
@@ -78,35 +76,40 @@
 				$("#discount").text("0");
 			}
 			
-			var pay = rmComma($("#totalPrice").text()) + rmComma($("#shipping").text()) - rmComma($("#discount").text());
-			$("#pay").text(addComma(pay));
+			setTotalPrice();
+			
+			setPayResult();
 		});
 	});
 	
-	function setCouponNum(num){
-		alert(num);
-		$("#couponNum").val(num);
+	function setTotalPrice(){
+		var lists = new Array();
+		var sum = 0;
+
+    	<c:forEach items="${buyLists}" var="item">
+    		lists.push("${item.basket_Num}");
+    	</c:forEach>
 		
-		if($("#coupon").val()!=1){
-			$("#point").attr("readonly", true);
-			var totalPrice;
-			
-			if($("#coupon").val()=="10%"){
-				totalPrice = Number(rmComma($("#totalPrice").text()))*0.1;
-				$("#discount").text(addComma(totalPrice));
-			}else if($("#coupon").val()=="20%"){
-				totalPrice = Number(rmComma($("#totalPrice").text()))*0.2;
-				$("#discount").text(addComma(totalPrice));
-			}
-			
-			$("#point").val(0);
+    	$.each(lists, function(idx, val) {
+   			sum += rmComma($("#pay" + val).text());
+		});
+    	
+    	$("#totalPrice").text(addComma(sum));
+	}
+	
+	function setShppingPrice(){
+		if(rmComma($("#totalPrice").text())>50000){
+			$("#shipping").text("0");
 		} else {
-			$("#point").attr("readonly", false);
-			$("#discount").text("0");
+			$("#shipping").text("2,500");
 		}
+	}
+	
+	function setPayResult(){
+		var pay = rmComma($("#totalPrice").text()) + Number(rmComma($("#shipping").text())) - Number(rmComma($("#discount").text()));
+		$("#payResult").val(addComma(pay));
 		
-		var pay = rmComma($("#totalPrice").text()) + rmComma($("#shipping").text()) - rmComma($("#discount").text());
-		$("#pay").text(addComma(pay));
+		setShppingPrice();
 	}
 	
 	function addComma(num) {
@@ -114,9 +117,33 @@
 	}
 	
 	function rmComma(str) {
+		
+		if(str=="")
+			return 0;
+		
 		return parseInt(str.replace(/,/g,""));
 	}
-
+	
+	function auth(){		
+		$.ajax({
+			url : "https://api.iamport.kr/users/getToken",
+			headers : {'Access-Control-Allow-Origin' : '*'},
+			contentType : "application/json",
+			type : "post",
+			data : {
+				"imp_key" : "8304328758939014", 
+				"imp_secret" : "bEzquPEmbFRvWHduwaOse0R5XMUSYDgaiQBMFf9QU1mRIzleKaGYay38kY1jBhtU84HNjQEeS05AArPk"
+			},
+			dataType : "json",
+			success : function(json){
+				alert(json);
+			},
+			error : function(request,status,error, result){   
+				alert("code: " + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error + result); 
+			}
+		});
+	}
+	
 </script>
 
 </head>
@@ -132,6 +159,8 @@
 			</td>
 		</tr>	
 	</table>
+	
+	<form action="<%=cp %>/iampay.action" method="post">
 	
 	<table align="center" cellspacing="0" style="width: 1200px; height:auto;" border="1" class="mytable">
 		<tr align="center">
@@ -154,7 +183,7 @@
 					<img style="margin: 0 auto; width: 100px; height: 100px;" src="${dto.thumb_Img }">
 				</td>
 			
-				<td>에뛰드</td>
+				<td>${dto.brand }</td>
 				
 				<td>${dto.product_Name }</td>
 				
@@ -197,12 +226,12 @@
 			
 			<td>
 				<div>
-			 		<select id="coupon" style="width: 15%">
+			 		<select id="coupon" style="width: 15%" onchange="test();">
 			 			<option value="1" selected="selected">선택</option>
 			 			
 			 			<!-- jstl로 쿠폰 나열 -->
 			 			<c:forEach var="dto" items="${couponLists }">
-			 				<option value="${dto.coupon }" onclick="setCouponNum(${dto.num});">${dto.coupon } 할인</option>
+			 				<option value="${dto.coupon }${dto.num}">${dto.coupon } 할인</option>
 			 			</c:forEach>
 			 		</select> (사용가능 쿠폰 : ${couponCount }장)
 			 		<input type="hidden" id="couponNum" name="couponNum" value="">
@@ -278,27 +307,41 @@
 		
 		<tr align="center">
 			<td style="height: 200px;">
-				<input type="radio" name="payType">무통장 입금
-				<input type="radio" name="payType">카드 결제
-				<input type="radio" name="payType">실시간 계좌이체
+				<input type="radio" name="payType" value="vbank">무통장 입금
+				<input type="radio" name="payType" value="card">카드 결제
+				<input type="radio" name="payType" value="trans">실시간 계좌이체
 			</td>
 			
 			<td rowspan="2" valign="top">
 				<table width="80%" style="font-size: 9pt; margin-top: 10px; margin-left: 10px; margin-right: 10px;">
 					<tr>
-						<td colspan="2"><span id="pay" style="font-size: 25pt;">13,000</span><span style="font-size: 20pt;">원</span></td>
+						<td colspan="2">
+							<input type="text" id="payResult" value="" style="width: 80%; text-align: center; font-size: 27pt; border: none;" readonly="readonly">
+							<span style="font-size: 20pt;">원</span>
+						</td>
 					</tr>
 					
 					<tr height="0.1px" style="background-color: black;"><td colspan="2"></td></tr>
 					
 					<tr>
 						<td width="50%">총 상품금액</td>
-						<td width="50%" style="text-align: right;"><span id="totalPrice">100,500</span>원</td>
+						<td width="50%" style="text-align: right;"><span id="totalPrice">
+						<script type="text/javascript">
+							setTotalPrice();
+							setPayResult();
+						</script>
+						</span>원</td>
 					</tr>
 
 					<tr>
 						<td>배송비</td>
-						<td style="text-align: right;">(+) <span id="shipping">2,500</span>원</td>
+						<td style="text-align: right;">(+) 
+							<span id="shipping">
+							<script type="text/javascript">
+								setShppingPrice();
+							</script>
+							</span>원
+						</td>
 					</tr>
 					
 					<tr>
@@ -325,11 +368,13 @@
 		
 		<tr height="70px">
 			<td colspan="2" align="center">
-				<input type="button" value="결제하기" style="width: 30%; height: 30px;">
+				<input type="button" value="결제하기" onclick="submit();" style="width: 30%; height: 30px;">
 			</td>
 		</tr>
 		
 	</table>
+	
+	</form>
 	
 </body>
 </html>
