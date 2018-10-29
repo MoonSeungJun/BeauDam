@@ -1,89 +1,140 @@
 <!-- 제작자 : 허도휘 -->
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String cp = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>뷰담바구니</title>
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
-<style type="text/css">
-@font-face { 
-	font-family: 'designhouseOTFLight00'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff') format('woff'); 
-	font-weight: normal; 
-	font-style: normal; }
+<link href="./resources/css/myPage/myBasket.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+	    $("#chk").change(function(){
+	    	var lists = new Array();
+
+	    	<c:forEach items="${lists}" var="item">
+	    		lists.push("${item.basket_Num}");
+	    	</c:forEach>
+	    	
+	        if($("#chk").prop("checked")){
+	        	$.each(lists, function(idx, val) {
+	        		$("#" + val).prop('checked', true);
+	  		   });
+	        }else{
+	        	$.each(lists, function(idx, val) {
+	        		$("#" + val).prop('checked', false);
+	  		   });
+	        }
+	    });
+	});
 	
-@font-face { 
-	font-family: 'SeoulHangangM'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff') format('woff'); 
-	font-weight: normal; 
-	font-style: normal; }
+	function payResult(){
+		var sum = 0;
+		var lists = new Array();
+
+    	<c:forEach items="${lists}" var="item">
+    		sum += rmComma($("#pay" + ${item.basket_Num}).text());
+    	</c:forEach>
+		$("#payResult").val(addComma(sum));
+	}
+	
+	function checkAmount(num, qty, max){
+		var amountId = "#amount" + num;
+		var priceId = "#price" + num;
+		var payId = "#pay" + num;
 		
-#container {
-    padding-bottom: 80px;
-}
+		/* 최대범위는 재고갯수로 변경 */
+		if($(amountId).val()>max || $(amountId).val()<1){
+			alert("재고 수량과 맞지 않습니다.");
+			
+			/* 기존 사용자가 설정했던 갯수로 초기화 */
+			$(amountId).val(qty);
+		}
+		
+		var amount = Number($(amountId).val());
+		var price = rmComma($(priceId).text());
+		
+		$(payId).val(addComma(amount*price));
 
-.title_style {
-    overflow: hidden;
-    text-align: center;
-    height: 200px;
-}
+		payResult();
+	}
+	
+	function plus(num, max){
+		
+		var amountId = "#amount" + num;
+		var priceId = "#price" + num;
+		var payId = "#pay" + num;
+		
+		if($(amountId).val()<max)
+			$(amountId).val(Number($(amountId).val())+1);
+		
+		var amount = Number($(amountId).val());
+		var price = rmComma($(priceId).text());
+		
+		$(payId).text(addComma(amount*price));
+		
+		payResult();
+	}
+	
+	function minus(num){
+		
+		var amountId = "#amount" + num;
+		var priceId = "#price" + num;
+		var payId = "#pay" + num;
+		
+		if($(amountId).val()>1)
+			$(amountId).val(Number($(amountId).val())-1);
+		
+		var amount = Number($(amountId).val());
+		var price = rmComma($(priceId).text());
+		
+		$(payId).text(addComma(amount*price));
+		
+		payResult();
+	}
+	
+	function addComma(num) {
+	    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 
-.title_style h2 {
-    font-size: 60px;
-    font-weight: 100;
-    letter-spacing: -3px;
-    line-height: 60px;
-    margin-top: 26px;
-    margin-bottom: 16px;
-    height: 60px;
-}
+	function rmComma(str) {
+		return parseInt(str.replace(/,/g,""));
+	}
+	
+	function buy(){
+		var f = document.myBasketForm;
+		var check = false;
+		var lists = new Array();
 
-.title_area {
-    margin: 0 auto;
-    width: 1200px;
-}
+    	<c:forEach items="${lists}" var="item">
+    		if($("#${item.basket_Num}").is(":checked")){
+    			check = true;
+    		}
+    	</c:forEach>
+    	
+    	if(!check){
+    		alert("선택된 상품이 없습니다!");
+    		return;
+    	}
+		
+		f.action="<%=cp%>/pay.action";
+		f.submit();
+	}
 
-td
-{
-	text-align: center;
-}
+</script>
 
-input
-{
-	text-align: center;
-}
-
-a{
-	text-decoration: none;
-	color: black;
-}
-
-a:hover{
-	text-decoration: underline;
-}
-
-button {
-	height: 40px;
-	font-family: SeoulHangangM;
-	font-size: 12pt;
-	border-style: none;
-	font-weight: bold;
-}
-
-button:hover {
-	background-color: black;
-	color: white;
-	cursor: pointer;
-}
-
-</style>
 </head>
 <body style="font-family: SeoulHangangM">
 
-<div id="container">
+<form method="post" name="myBasketForm">
+	<div id="container">
 		<div class="title_style">
 			<div class="title_area">
 				<h2 style="font-family: designhouseOTFLight00">뷰담바구니</h2>
@@ -97,107 +148,93 @@ button:hover {
 			<button type="button">삭제</button>
 		</div>
 		
-			<br/>
+		<br/>
+		
+		<table style="width: 1200px; margin: 0 auto" >
+			<tr bgcolor="#EAEAEA" style="font-weight: bold; height: 30px">
+				<td width="10%"><input type="checkbox" id="chk"></td>
+				<td colspan="2" width="30%">상품명</td>
+				<td width="10%">색상</td>
+				<td width="10%">수량</td>
+				<td width="15%">판매가</td>
+				<td width="15%">주문금액</td>
+				<td width="10%">주문</td>
+			</tr>
 			
-			<table style="width: 1200px; margin: 0 auto" >
-				<tr bgcolor="#EAEAEA" style="font-weight: bold; height: 30px">
-					<td><input type="checkbox"></td>
-					<td></td>
-					<td>상품명/옵션명</td>
-					<td>수량</td>
-					<td>판매가</td>
-					<td>주문금액</td>
-					<td>적립 예정 포인트</td>
-					<td>주문</td>
-				</tr>
+			<c:forEach var="dto" items="${lists}">
 				<tr>
-					<td><input type="checkbox"></td>
-					<td>
+					<td><input type="checkbox" id="${dto.basket_Num}" name="check" value="${dto.basket_Num }"></td>
+					<td width="10%">
 						<a href="">
-							<img style="margin: 0 auto; width: 100px; height: 100px;" src="http://www.thesaemcosmetic.com/view/attach/product/17211/list"> 
+							<img style="margin: 0 auto; width: 100px; height: 100px;" src="${dto.thumb_Img }"> 
 						</a>
 					</td>
 					
-					<td><a href="">피토 세븐 클렌징 오일 크림</a></td>
+					<td style="text-align: left;">
+						<a href="" style="font-size: 15pt; font-weight: bold; margin-left: 20px;">
+							${dto.product_Name }
+						</a>
+					</td>
+					
+					<td>${dto.color_Name }</td>
+					
 					<td>
-						<button type="button">-</button>
-            			<input type="text" value="1" style="width: 30px">
-            			<button type="button">+</button>
-            		</td>
-					<td>16,000원</td>
-					<td>16,000원</td>
-					<td>160P</td>
+						<button type="button" onclick="minus(${dto.basket_Num });">-</button>
+		          		<input type="text" value="${dto.qty }" id="amount${dto.basket_Num }" name="amount${dto.basket_Num }" onchange="checkAmount(${dto.basket_Num }, ${dto.qty}, ${dto.qty_Max });" style="width: 30px">
+		          		<button type="button" onclick="plus(${dto.basket_Num }, ${dto.qty_Max });">+</button>
+		          	</td>
+		          	
 					<td>
-						<button type="button">바로구매</button>
+						<span id="price${dto.basket_Num }" >
+						<script type="text/javascript">
+							$("#price${dto.basket_Num }").html(addComma(${dto.product_Price}));
+						</script>
+						</span> 원
+					</td>
+					
+					<td>
+						<span id="pay${dto.basket_Num }" >
+						<script type="text/javascript">
+							$("#pay${dto.basket_Num }").html(addComma(${dto.product_Price} * ${dto.qty}));
+						</script>
+						</span> 원
+					</td>
+					
+					<td>
+						<button type="button" onclick="pay();">바로구매</button>
 						<br/><br/>
 						<button type="button">삭제</button>
 					</td>
 				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td>
-						<a href="">
-							<img style="margin: 0 auto; width: 100px; height: 100px;" src="http://www.thesaemcosmetic.com/view/attach/product/17444/detail/1">
-						</a>
-					</td>
-					<td><a href="">어반 에코 하라케케 크림</a></td>
-					<td>
-						<button type="button">-</button>
-            			<input type="text" value="1" style="width: 30px">
-            			<button type="button">+</button>
-            		</td>
-					<td>17,000원</td>
-					<td>17,000원</td>
-					<td>170P</td>
-					<td>
-						<button type="button">바로주문</button>
-						<br/><br/>
-						<button type="button">삭제</button>
-					</td>
-				</tr>
-			</table>
+				
+				<tr height="0.1px" style="background-color: #e6e4e6;"><td colspan="8"></td></tr>
+			</c:forEach>
 			
-			<div style="width: 1200px; margin: 0 auto">
-				<h3>결제금액</h3>
-				<hr style="width: 1200px">
-				<table style="width: 1200px; margin: 0 auto">
-					<tr style="font-weight: bold; height: 30px">
-						<td bgcolor="#EAEAEA" >총 주문금액</td>
-						<td rowspan="2">-</td>
-						<td bgcolor="#EAEAEA" >할인 금액</td>
-						<td rowspan="2">+</td>
-						<td bgcolor="#EAEAEA" >배송비</td>
-						<td rowspan="2">=</td>
-						<td bgcolor="#EAEAEA" >예상 결제금액</td>
-					</tr>
-					
-					<tr>
-						<td>33,000원</td>
-						<td>0원</td>
-						<td>0원</td>
-						<td>33,000원</td>
-					</tr>
-				</table>
+		</table>
 	
-				<h3>적립예정 포인트</h3>
-				<hr style="width: 1200px">
-				<table style="width: 100%">
-					<tr style="height: 30px; font-weight: bold;">
-						<td bgcolor="#EAEAEA" width="25%">구매 포인트</td>
-						<td width="25%">660P</td>
-						<td bgcolor="#EAEAEA" width="25%">뷰담 포인트</td>
-						<td width="25%">0P</td>
-					</tr>
-				</table>
-				<br/><br/>
-				<div style="text-align: center; display: block;">
-					<button type="button" style="width: 100px">선택주문</button>
-					
-					<button type="button" style="width: 100px">전체주문</button>
-					<button type="button" style="float: right; display: block;">쇼핑 계속하기</button>
-				</div>
+		
+		<br/><br/>
+		
+		<div style="width: 1200px; margin: 0 auto; text-align: center;" align="center">
+		
+			<hr style="width: 30%">
+			<span style="font-size: 19.5pt;">결제금액</span>
+			<input type="text" id="payResult" name="payResult" readonly="readonly" style="font-size: 25pt; width: 12%; font-weight: bold;">
+				<script type="text/javascript">
+					payResult();
+				</script>
+			<span style="font-size: 19.5pt;">원</span>
+			<hr style="width: 30%">
+			
+			<br/><br/>
+			<div style="text-align: center; display: block;">
+				<button type="button" style="width: 100px" onclick="buy();">선택주문</button>
+				
+				<button type="button" style="width: 100px">전체주문</button><br/><br/>
+				<button type="button" style="float: right; display: block;">쇼핑 계속하기</button>
 			</div>
+		</div>
 	</div>
-
+</form>
 </body>
 </html>

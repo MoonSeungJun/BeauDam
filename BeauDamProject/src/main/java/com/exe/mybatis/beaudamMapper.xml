@@ -331,8 +331,14 @@
 		
 		<!-- Basket -->
 		<select id="getBasketData" resultType="com.table.otherDTO.BasketDTO" parameterType="String">
-			select basket_num, id, code, color_code, product_name, product_price, qty from
-			basket where id = #{id}
+			select a.basket_num, a.id, a.code, b.color_Name, a.color_code, a.product_name, a.product_price, a.qty, b.thumb_img, b.qty qty_Max, b.brand
+			from basket a, productView b
+			where a.id = #{id} and a.code = b.code
+		</select>
+		<select id="getBasketOneData" resultType="com.table.otherDTO.BasketDTO" parameterType="Map">
+			select a.basket_num, a.id, a.code, b.color_Name, a.color_code, a.product_name, a.product_price, a.qty, b.thumb_img, b.qty qty_Max, b.brand
+			from basket a, productView b
+			where a.id = #{id} and a.code = b.code and a.basket_num = #{basket_Num}
 		</select>
 		
 		
@@ -374,7 +380,7 @@
 			select count(*) from coupon where id = #{id} and period > sysdate
 		</select>
 		<select id="getCouponData" resultType="com.table.otherDTO.CouponDTO" parameterType="String">
-			select num,id,coupon,to_char(period, 'yyyy-mm-dd') period, usedate from coupon
+			select num, id, coupon, to_char(period, 'yyyy-mm-dd') period from coupon
 			where id = #{id} and period > sysdate
 		</select>		
 		

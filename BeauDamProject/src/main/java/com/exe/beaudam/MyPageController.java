@@ -1,7 +1,13 @@
 package com.exe.beaudam;
 
+import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.dao.otherDAO.OtherServiceImpl;
+import com.table.otherDTO.BasketDTO;
 
 /*
  * 	쿼리 insert, delete 테이블 순서
@@ -39,7 +45,9 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller("MyPageController")
 public class MyPageController {
-	
+
+	@Resource(name = "otherService")
+	private OtherServiceImpl OtherService;
 
 	// ********************** My Page **********************
 
@@ -48,14 +56,6 @@ public class MyPageController {
 
 		// 마이페이지 이동
 		return "myPage/myPage";
-	}	
-
-	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myBasket() {
-
-		// 장바구니(마이페이지) 페이지 이동
-
-		return "myPage/myBasket";
 	}
 
 	@RequestMapping(value = "/myInfo.action", method = RequestMethod.GET)
@@ -99,5 +99,26 @@ public class MyPageController {
 
 		return "myPage/myLeave";
 	}
-	
+
+	// msj
+	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET })
+	public ModelAndView myBasket() {
+
+		// 장바구니(마이페이지) 페이지 이동
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myPage/myBasket");
+
+		// HttpSession session = request.getSession();
+		// String id = (String) session.getAttribute("id");
+
+		String id = "esteban"; // test Data
+
+		List<BasketDTO> lists = OtherService.getBasketData(id);
+
+		mav.addObject("lists", lists);
+
+		return mav;
+	}
+
 }
