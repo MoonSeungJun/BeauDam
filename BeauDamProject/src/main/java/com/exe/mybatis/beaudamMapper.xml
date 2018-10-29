@@ -249,8 +249,13 @@
 		</select>
 		
 		<select id="getSearchId" resultType="String" parameterType="map">
-			select id, name, birth from member_info
-			where name=#{name} and birth=#{birth};
+			select id from memberView
+			where name=#{name} and birth=#{birth}
+		</select>
+		
+		<select id="getSearchPwd" resultType="String" parameterType="map">
+			select pwd from memberView
+			where id=#{id} and name=#{name} and email=#{email}
 		</select>
 		
 		<select id="getLeaveMemberData" resultType="com.view.view.MemberView">

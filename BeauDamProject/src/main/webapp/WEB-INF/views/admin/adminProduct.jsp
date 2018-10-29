@@ -54,6 +54,7 @@ function searchSend() {
 			
 			var data = "<tr align='center'>";			
 			$.each(result, function(i) {
+				result[i] = decodeURI(result[i]);
 				if( i>8 && (i+1)%9 == 1){
 					data += "<tr align='center'>";
 				}				

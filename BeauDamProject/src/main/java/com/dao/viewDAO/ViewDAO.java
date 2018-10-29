@@ -49,6 +49,13 @@ public class ViewDAO {
 		return id;
 		
 	}
+	
+	public String getSearchPwd(HashMap<String, Object> nameEmail) {
+		
+		String pwd = sessionTemplate.selectOne("beaudam.getSearchPwd", nameEmail);
+		return pwd;
+		
+	}
 
 	public List<ProductView> getAllproductData(HashMap<String, Object> searchPack) {
 		

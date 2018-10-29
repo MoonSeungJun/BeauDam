@@ -74,5 +74,12 @@ public class ViewServiceImpl implements ViewService {
 		return id;
 	}
 
+	@Override
+	public String getSearchPwd(HashMap<String, Object> nameEmail) {
+
+		String pwd = dao.getSearchPwd(nameEmail);
+		return pwd;
+	}
+
 	
 }

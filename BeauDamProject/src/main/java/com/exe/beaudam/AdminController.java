@@ -1,6 +1,7 @@
 package com.exe.beaudam;
 
 import java.io.*;
+import java.net.URLEncoder;
 import java.util.*;
 
 import javax.annotation.*;
@@ -244,7 +245,7 @@ public class AdminController {
 				Object brandVO = productList.get(i).getBrand();
 				Object categoryVO = productList.get(i).getCategory();
 				Object typeVO = productList.get(i).getType();
-				Object productNameVO = productList.get(i).getProduct_Name();
+				Object productNameVO = URLEncoder.encode(productList.get(i).getProduct_Name(),"utp-8");
 				Object colorCodeVO = productList.get(i).getColor_Code();
 				Object colorNameVO = productList.get(i).getColor_Name();
 				Object productPrice = productList.get(i).getProduct_Price();				

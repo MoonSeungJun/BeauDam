@@ -168,7 +168,7 @@ public class LoginController {
 		
 		nameBirth.put("name", request.getParameter("name"));
 		nameBirth.put("birth", request.getParameter("birth"));
-		
+
 		String resultId = viewService.getSearchId(nameBirth);
 		
 		return new ModelAndView("beaudam/searchId","resultId",resultId);
@@ -176,9 +176,17 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/searchPwd.action", method = {RequestMethod.GET ,RequestMethod.POST})
-	public ModelAndView searchPwd() {
+	public ModelAndView searchPwd(HttpServletRequest request) {
 		
-		return new ModelAndView("beaudam/searchPwd");
+		HashMap<String, Object> nameEmail = new HashMap<String, Object>();
+		
+		nameEmail.put("id", request.getParameter("searchId"));
+		nameEmail.put("name", request.getParameter("name"));
+		nameEmail.put("email", request.getParameter("email"));
+		
+		String resultPwd = viewService.getSearchPwd(nameEmail);		
+		
+		return new ModelAndView("beaudam/searchPwd","resultPwd",resultPwd);
 		
 	}	
 	
