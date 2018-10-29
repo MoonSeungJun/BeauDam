@@ -85,7 +85,7 @@ session="false" pageEncoding="UTF-8"%>
 	<div class="bestlist">
 		<ul>
 			<li>
-				<div class="bestlist_img">
+				<div>
 					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></a>
 					<p style="font-size: 20px; color: #ff4d4d">BEST 01</p>
 					솔솔 말린 솔방울
@@ -93,7 +93,7 @@ session="false" pageEncoding="UTF-8"%>
 				</div>
 			</li>
 			<li>
-				<div class="bestlist_img">
+				<div>
 					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample2.jpg"></a>
 					<p style="font-size: 20px; color: #ff4d4d">BEST 02</p>
 					솔솔 말린 솔방울
@@ -101,7 +101,7 @@ session="false" pageEncoding="UTF-8"%>
 				</div>
 			</li>
 			<li>
-				<div class="bestlist_img">
+				<div>
 					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample3.jpg"></a>
 					<p style="font-size: 20px; color: #ff4d4d">BEST 03</p>
 	      				솔솔 말린 솔방울
