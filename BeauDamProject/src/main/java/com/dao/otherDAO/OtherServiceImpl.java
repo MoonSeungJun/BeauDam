@@ -7,6 +7,7 @@ import javax.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.otherDTO.*;
+import com.view.view.*;
 
 @Service("otherService")
 public class OtherServiceImpl implements OtherService {
@@ -143,5 +144,11 @@ public class OtherServiceImpl implements OtherService {
 		
 		return dto;
 	}
+	@Override
+	public List<SaleView> getBestItem() {
+		List<SaleView> lists = dao.getBestItem();
+		return lists;
+	}
+	
 	
 }

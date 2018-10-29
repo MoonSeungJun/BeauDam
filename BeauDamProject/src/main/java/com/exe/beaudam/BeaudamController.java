@@ -1,9 +1,7 @@
 package com.exe.beaudam;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.*;
@@ -11,13 +9,13 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dao.memberDAO.MemberServiceImpl;
 import com.dao.otherDAO.OtherServiceImpl;
+import com.dao.productDAO.*;
 import com.dao.viewDAO.ViewService;
-import com.table.memberDTO.MemberDTO;
+
 import com.table.otherDTO.BasketDTO;
 import com.table.otherDTO.CouponDTO;
-import com.view.view.MemberView;
+import com.view.view.*;
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -87,14 +85,41 @@ public class BeaudamController {
 
 	@Resource(name = "otherService")
 	private OtherServiceImpl otherService;
+	
+	@Resource(name="productService")
+	private ProductServiceImpl productService;
 
 	// ********************** Beaudam Page **********************
 
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView main(HttpSession session) {
+	public ModelAndView main(HttpSession session, HttpServletRequest req) {
 
 		String id = (String) session.getAttribute("id");
-
+		
+		List<SaleView> bestItems = otherService.getBestItem();	
+		
+		Iterator<SaleView> it = bestItems.iterator();
+		
+		List<ProductView> productList = new ArrayList<ProductView>();
+		
+		
+		while(it.hasNext()) {
+			SaleView saleVO = it.next();
+			
+			ProductView productVO = productService.getOneProductData(saleVO.getCode());		
+			
+			
+			productVO.setThumb_Img("thumbImg\\"+productVO.getThumb_Img());
+			productList.add(productVO);		
+			
+		}
+		
+		
+		req.setAttribute("bestItem", bestItems);
+		req.setAttribute("productList", productList);
+		
+		
+		
 		// 메인 페이지 이동
 		return new ModelAndView("beaudam/main", "id", id);
 	}
@@ -107,7 +132,13 @@ public class BeaudamController {
 	}
 
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView productDetail(HttpSession session) {
+	public ModelAndView productDetail(HttpSession session, HttpServletRequest req) {
+			
+		ProductView detailData = productService.getOneProductData(req.getParameter("code"));
+		
+		
+		req.setAttribute("dto", detailData);
+		
 
 		// 상품상세 페이지 이동
 		return new ModelAndView("beaudam/productDetail", "id", (String) session.getAttribute("id"));

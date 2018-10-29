@@ -8,6 +8,7 @@ import org.springframework.stereotype.*;
 
 import com.table.memberDTO.*;
 import com.table.otherDTO.*;
+import com.view.view.*;
 
 @Repository("otherDAO")
 public class OtherDAO {
@@ -147,6 +148,10 @@ public class OtherDAO {
 		BasketDTO dto = sessionTemplate.selectOne("beaudam.getBasketOneData", hm);
 
 		return dto;
+	}
+	public List<SaleView> getBestItem() {
+		List<SaleView> lists = sessionTemplate.selectList("beaudam.getBestItems");
+		return lists;
 	}
 
 }

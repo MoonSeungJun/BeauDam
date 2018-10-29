@@ -17,16 +17,16 @@ session="false" pageEncoding="UTF-8"%>
         <div class="container">
             <div class="wrapper">
                 <div class="left">
-                    <img src="<%=cp %>/resources/image/beaudam/productDetail/content_layout06.jpg">
+                    <img src="<%=cp %>/thumbImg/${dto.thumb_Img}">
                 </div>
                 <div class="right">
                     <div class="right_header">
-                        <h2>시럽 빼고 테이크 아웃 키트</h2>
+                        <h2>${dto.product_Name }</h2>
                     </div>
                     <div class="right_content">
                        	<dl>
                            	<dt>판매가</dt>
-                           	<dd>18,000원</dd>
+                           	<dd>${dto.product_Price }원</dd>
                        	</dl>
                        	<dl>
                            	<dt>배송비</dt>
@@ -34,7 +34,7 @@ session="false" pageEncoding="UTF-8"%>
                        	</dl>
                        	<dl>
                            	<dt>포인트</dt>
-                           	<dd>000 point</dd>
+                           	<dd>${dto.product_Price*0.1 } point</dd>
                         </dl>
                     	<dl>
                        		<dt>수량 선택</dt>
@@ -63,7 +63,7 @@ session="false" pageEncoding="UTF-8"%>
         <div class="detail">
         	<hr>
         	<h4 style="font-weight: bold;">상세정보</h4>
-        	<img class="detailimg" src="<%=cp %>/resources/image/beaudam/productDetail/detail.jpg">
+        	<img class="detailimg" src="<%=cp %>/detailImg/${dto.detail_Img}">
         </div>
         <div class="review">
         	<hr>

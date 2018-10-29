@@ -135,11 +135,9 @@ session="false" pageEncoding="UTF-8"%>
         	<div class="rolling_panel">
 				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_l.png"></a></div>-->
 				<ul class="rolling_panel">
-					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></a></li>
-					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample2.jpg"></a></li>
-					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample3.jpg"></a></li>
-					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample4.jpg"></a></li>
-					<li><a href=""><img src="<%=cp%>/resources/image/beaudam/main/sample5.jpg"></a></li>
+				<c:forEach var="dto" items="${productList }">					
+					<li><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}"></a></li>
+				</c:forEach>
 				</ul>
 				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_r.png"></a></div>-->
 			</div>

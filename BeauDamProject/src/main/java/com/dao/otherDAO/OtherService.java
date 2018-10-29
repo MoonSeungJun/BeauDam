@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.table.memberDTO.*;
 import com.table.otherDTO.*;
+import com.view.view.*;
 
 public interface OtherService {
 	
@@ -36,5 +37,8 @@ public interface OtherService {
 	int getNotificationCount(String searchKey,String searchValue);
 	List<BasketDTO> getBasketData(String id);
 	BasketDTO getBasketOneData(Map<String, Object> hm);
-
+	
+	List<SaleView> getBestItem();
+	
+	
 }

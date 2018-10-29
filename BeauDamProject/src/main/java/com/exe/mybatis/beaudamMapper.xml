@@ -98,8 +98,10 @@
 		
 		
 		<!-- best item -->
-		<select id="getBestItems" resultType="com.view.view.Saleview">
-			select code, sum(qty) qty from saleview group by code order by qty desc
+		<select id="getBestItems" resultType="com.view.view.SaleView">
+		<![CDATA[
+			select * from ( select rownum rnum, data.* from (select code, sum(qty) qty from saleview group by code order by qty desc) data) where rnum <=5
+		]]>
 		</select>
 		
 		
