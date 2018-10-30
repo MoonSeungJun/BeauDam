@@ -156,7 +156,7 @@ a:hover{
 							로그인
 						</button>
 						<a href="${url}">
-							<img src="<%=cp %>/resources/image/beaudam/login/naver_login.PNG" height=40/>
+							<img src="<%=cp %>/resources/image/beaudam/login/naver_login.PNG" height=40px;/>
 						</a>
 					</div>
 				
