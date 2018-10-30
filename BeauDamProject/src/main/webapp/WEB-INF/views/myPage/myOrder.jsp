@@ -27,7 +27,7 @@
 				<!-- 사용자 정보 -->
 				<div class="user_info">
 					<div style="float: left;">
-						<span style="font-size: 18px;">dohwi9406</span>
+						<a href="<%=cp%>/myPage.action"><span style="font-size: 18px; color: black; text-decoration: none;">dohwi9406</span></a>
 					</div>
 					<a href="<%=cp%>/myInfo.action" class="setting_btn"> 
 						<img src="/beaudam/resources/image/myPage/setting.jpg" height="30px" align="bottom">
@@ -73,10 +73,9 @@
 							<li>
 								<a href="<%=cp %>/myOrder.action">나의 주문 현황</a>
 							</li>
-							<li><a href="" style="margin-bottom: 15px;">나의 정보</a>
+							<li><a style="margin-bottom: 15px;">나의 정보</a>
 								<ul class="sub_lnb">
 									<li><a href="<%=cp%>/myCoupon.action" style="color: #9a9a9;">쿠폰조회</a></li>
-									<li><a href="#">배송지 관리</a></li>
 									<li><a href="<%=cp%>/myEdit.action">개인정보수정</a></li>
 									<li><a href="<%=cp%>/myLeave.action">회원탈퇴</a></li>
 								</ul>
@@ -105,11 +104,9 @@
 									<div class="calendar">
 										<div class="input_date">
 											<input type="date" style="border: none; text-align: center; color: #9a9a9a">
-											<!-- <button type="submit"><img src="/beaudam/resources/image/myPage/calendar.png"></button> -->
 										</div>
 										<div class="input_date">
 											<input type="date" style="border: none; text-align: center; color: #9a9a9a">
-											<!-- button type="submit"><img src="/beaudam/resources/image/myPage/calendar.png"></button> -->
 										</div>
 									</div>
 								</li>
@@ -171,18 +168,8 @@
 									<td>결제 금액</td>
 									<td>배송 상태</td>
 								</tr>
-								<tr style="width: 100%;">
-									<td style="width: 100px;">
-										<img src="/beaudam/resources/image/myPage/hour.jpg" height="80px" width="80px;">
-									</td>
-									<td style="width: 300px;">
-										(결제완료) 2018.10.15 | 2018101533524<br/>(bk150624) 머엇진 마스카라
-									</td>
-									<td>16,000원 (3개)</td>
-									<td class="bbb">1,600</td>
-									<td>14,400 원</td>
-									<td>배송 중</td>
-								</tr>
+								
+								<!-- 반복문으로 출력 -->
 								<tr style="width: 100%;">
 									<td style="width: 100px;">
 										<img src="/beaudam/resources/image/myPage/hour.jpg" height="80px" width="80px;">
@@ -208,54 +195,10 @@
 									<td>배송 중</td>
 								</tr>
 							</table>
-								
-								<!-- <table class="orderInfo" style="border: 1px solid gray;">
-									주문내역 표시(TheSaem 주문내역 참조)
-									<tr>			
-										<td colspan="2" style="text-align: center;">
-											주문정보
-										</td>
-										<td>
-											가격 (수량)
-										</td>
-										<td>
-											쿠폰/포인트 내역
-										</td>
-										<td>
-											결제금액
-										</td>
-										<td>
-											배송상태
-										</td>
-									</tr>
-									
-									반복문을 통해 출력
-										<tr>			
-											<td>
-												<img src="/beaudam/resources/image/myPage/hour.jpg" height="135px">
-											</td>
-											<td>
-												(결제완료) 2018.10.15 | 2018101533524<br/>
-												(bk150624) 머엇진 마스카라 - bk257
-											</td>
-											<td>
-												16,000원 (3개)
-											</td>
-											<td>
-												1,600 Point
-											</td>
-											<td>
-												14,400 원
-											</td>
-											<td>
-												배송중
-											</td>
-										</tr>
-								</table> -->
-							</div>
 						</div>
 					</div>
 				</div>
+			</div>
 <jsp:include page="../beaudam/mainBottom.jsp" />
 </body>
 </html>
