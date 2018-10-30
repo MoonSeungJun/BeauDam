@@ -70,7 +70,7 @@ public class CustomCenterController {
 		HttpSession session= request.getSession();
 		
 		
-		request.setAttribute("cusId",session.getAttribute("id"));
+		request.setAttribute("id",session.getAttribute("id"));
 		
 		
 		// FAQ 페이지 이동
@@ -147,7 +147,7 @@ public class CustomCenterController {
 			request.setAttribute("pageIndexList",pageIndexList);
 			request.setAttribute("dataCount",dataCount);
 			request.setAttribute("articleUrl",articleUrl);
-			request.setAttribute("cusId", session.getAttribute("id"));
+			request.setAttribute("id", session.getAttribute("id"));
 		
 		
 		// 공지사항 페이지 이동
@@ -188,7 +188,7 @@ public class CustomCenterController {
 		request.setAttribute("dto", dto);
 		request.setAttribute("detail", detail);
 		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("cusId",session.getAttribute("id"));
+		request.setAttribute("id",session.getAttribute("id"));
 				
 		// 공지사항 본문  이동
 		return "customerCenter/notification_article";

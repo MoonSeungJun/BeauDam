@@ -76,12 +76,12 @@
 		
 
 		<tr style="height: 55px;">
-		<c:if test="${!empty cusId }">
+		<c:if test="${!empty id }">
 			<td align="center">
 			 <a href="javascript:popupOpen();" > 1:1문의 </a>
 			 </td>
 		</c:if>
-		<c:if test="${empty cusId }"> 
+		<c:if test="${empty id }"> 
 			 <td align="center">
 			  1:1문의
 			 </td>		
@@ -176,13 +176,13 @@
 		<tr style="height: 35px;">
 			<td colspan="2" align="right">
 			</td>
-			<c:if test="${cusId eq'Admin' }">
+			<c:if test="${id eq'Admin' }">
 			<td align="center">
 				<input type="button" value="공지등록" 
 				onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
 			</td>
 			</c:if>	
-			<c:if test="${empty cusId }">
+			<c:if test="${empty id }">
 				<td>
 					&nbsp;
 				</td>

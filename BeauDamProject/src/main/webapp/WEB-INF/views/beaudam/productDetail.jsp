@@ -3,6 +3,7 @@ session="false" pageEncoding="UTF-8"%>
 <%
 	String cp = request.getContextPath();
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -11,9 +12,17 @@ session="false" pageEncoding="UTF-8"%>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  		
+  		
+  		
+  		
+  		
+  		
+  		
     </head>
     <body>
     <jsp:include page="./mainTop.jsp" />
+        <form action="" name="productDetailForm">
         <div class="container">
             <div class="wrapper">
                 <div class="left">
@@ -34,14 +43,14 @@ session="false" pageEncoding="UTF-8"%>
                        	</dl>
                        	<dl>
                            	<dt>포인트</dt>
-                           	<dd>${dto.product_Price*0.1 } point</dd>
+                           	<dd><span id="point"></span> point</dd>
                         </dl>
                     	<dl>
                        		<dt>수량 선택</dt>
                        		<dd>
-                       		<img alt="" src="<%=cp %>/resources/image/beaudam/productDetail/minus.gif" onclick="amountminus();">
+                       		<img alt="" src="<%=cp %>/resources/image/beaudam/productDetail/minus.gif" onclick="amountminus();"/>
                            	<input type="text" name="amount" id="amountId" value="0" style="width: 40px; height: 20px; background-color: transparent; text-align: center; border: none;" onchange="change();"/>
-                           	<img alt="" src="<%=cp %>/resources/image/beaudam/productDetail/plus.gif" onclick="amountplus();">
+                           	<img alt="" src="<%=cp %>/resources/image/beaudam/productDetail/plus.gif" onclick="amountplus();"/>
                            	
                        		</dd>
                     	</dl>
@@ -49,7 +58,10 @@ session="false" pageEncoding="UTF-8"%>
                     <div class="result">
                         <dl>
                             <dt>금액 합계</dt>
-                            <dd class="gray">18,000원 <a>(무료배송)</a></dd>
+                            <dd class="gray"><span id="final_Price"></span>
+                            <a id="DeliveryFee""></a>
+                            <!-- <a id="freeDelivery"style="display: none;">(무료배송)</a> -->
+                            </dd>
                         </dl>
                     </div>
                     <div class="buy">
@@ -60,15 +72,16 @@ session="false" pageEncoding="UTF-8"%>
                 </div>  
             </div>
         </div>
+        </form>
         <div class="detail">
         	<hr>
-<<<<<<< HEAD
+
         	<h4 style="font-weight: bold;">상세정보</h4>
         	<img class="detailimg" src="<%=cp %>/detailImg/${dto.detail_Img}">
-=======
+
         	<h4 style="font-weight: bold; margin-bottom: 20px;">상세정보</h4>
         	<img class="detailimg" src="<%=cp %>/resources/image/beaudam/productDetail/detail.jpg">
->>>>>>> 김해나브랜치
+
         </div>
         <div class="review">
         	<hr>

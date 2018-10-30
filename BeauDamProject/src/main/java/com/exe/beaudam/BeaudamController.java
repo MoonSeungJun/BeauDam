@@ -1,10 +1,13 @@
 package com.exe.beaudam;
 
 import java.io.*;
+import java.net.URLEncoder;
 import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dao.otherDAO.OtherServiceImpl;
 import com.dao.productDAO.*;
 import com.dao.viewDAO.ViewService;
-
+import com.exe.util.MyUtil;
 import com.table.otherDTO.BasketDTO;
 import com.table.otherDTO.CouponDTO;
 import com.view.view.*;
@@ -89,6 +92,11 @@ public class BeaudamController {
 	@Resource(name="productService")
 	private ProductServiceImpl productService;
 
+	@Autowired
+	MyUtil myUtil;
+	
+	
+	
 	// ********************** Beaudam Page **********************
 
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -125,9 +133,112 @@ public class BeaudamController {
 	}
 
 	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView productList(HttpSession session) {
-
+	public ModelAndView productList(HttpSession session,HttpServletRequest request)throws Exception {
+		
+		String searchValue = request.getParameter("searchValue");
+		String id  = (String)session.getAttribute("id");
+		String cp = request.getContextPath();
+		String pageNum = request.getParameter("pageNum");
+		String searchType = request.getParameter("searchType");
+		
+		System.out.println("********************");
+		System.out.println("********************");
+		System.out.println(searchType);
+		System.out.println("********************");
+		System.out.println("********************");
+		
+		
+		if(id==null||id.equals("")) {
+			
+			return new ModelAndView("beaudam/main");
+		}
+		
+		
+		if(searchValue==null||searchValue.equals("")) {
+			searchValue="";
+		}
+		
+		if(searchType==null||searchType.equals("")) {
+			searchType="";
+		}
+		if(searchType!=null&&!searchType.equals("")) {
+			searchValue="";
+		}
+		
+				
+				
+		//검색값 사이 앞뒤 공백제거
+		searchValue = searchValue.trim();
+		searchValue= searchValue.replaceAll(" " , "");
+		searchValue = searchValue.replaceAll("\\p{Z}", "");	
+			
+		
+		HashMap<String, Object> searchPack = new HashMap<String, Object>();
+		
+		
+		searchPack.put("searchType", searchType);
+		searchPack.put("searchValue", searchValue);
+				
+		int count = viewService.getSearchDataCount(searchPack);			
+			
+		int numPerPage = 8;
+		int totalPage = myUtil.getPageCount(numPerPage, count);
+		int currentPage = 1;
+	
+		if(pageNum != null)
+			currentPage = Integer.parseInt(pageNum);
+		
+		
+		
+	    if(currentPage > totalPage) {
+	    	currentPage = totalPage;
+	    }
+		
+	    int start = (currentPage-1)*numPerPage+1;
+		int end = currentPage*numPerPage;
+	    
+	    HashMap<String, Object> searchValuePack = new HashMap<String, Object>();
+	    
+	    searchValuePack.put("searchValue", searchValue);
+	    searchValuePack.put("start", start);
+	    searchValuePack.put("end", end);
+	    searchValuePack.put("searchType", searchType);
+		
+	    List<ProductView> searchProductList = viewService.getSearchProductDataList(searchValuePack);
+		
+	    String param = "";
+	    if(!searchValue.equals("")) {
+	    	param = "searchValue="+URLEncoder.encode(searchValue, "utf-8");
+	    	
+	    }
+	    
+	    String listUrl = cp+"/productList.action";
+	    if(!param.equals("")) {
+	    	listUrl = listUrl+"?"+param;
+	    }
+	    
+	    String pageIndexList =
+	    		myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		
+	    String detailUrl = cp+"/productDetail.action?pageNum="+currentPage;
+	    
+	    if(!param.equals("")) {
+	    	detailUrl = detailUrl+"&"+param;
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+		request.setAttribute("searchProductList", searchProductList);
+		request.setAttribute("count", count);
+		request.setAttribute("detailUrl", detailUrl);
+		request.setAttribute("pageIndexList", pageIndexList);
+		
 		return new ModelAndView("beaudam/productList", "id", (String) session.getAttribute("id"));
+		
 
 	}
 

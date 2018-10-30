@@ -50,7 +50,7 @@
 		<tr>
 			
 			<td colspan="4" align="center">
-			<c:if test="${cusId eq'Admin' }">
+			<c:if test="${id eq'Admin' }">
 				<input type="button" value="수정"
 						onclick="javascript:location.href='<%=cp%>/notification_update.action?num=${dto.num}&pageNum=${pageNum}'"/>
 				
@@ -66,10 +66,5 @@
 
 
 </table>
-
-
-
-
-
 </body>
 </html>

@@ -98,12 +98,12 @@ function faqMove2() {
 		
 
 		<tr style="height: 55px;">
-		<c:if test="${!empty cusId }">
+		<c:if test="${!empty id }">
 			<td align="center">
 			 <a href="javascript:popupOpen();" > 1:1문의 </a>
 			 </td>
 		</c:if>
-		<c:if test="${empty cusId }"> 
+		<c:if test="${empty id }"> 
 			 <td align="center">
 			  1:1문의
 			 </td>		

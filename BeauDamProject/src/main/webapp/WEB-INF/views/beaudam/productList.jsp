@@ -2,7 +2,10 @@
 session="false" pageEncoding="UTF-8"%>
 <%
 	String cp = request.getContextPath();
+
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -111,65 +114,28 @@ session="false" pageEncoding="UTF-8"%>
 		</ul>
 	</div> 
 	<div class="list">
-	총 <font style="color: #ff4d4d">14개</font>의 상품이 있습니다.
+	총 <font style="color: #ff4d4d">${count }개</font>의 상품이 있습니다.
 		<ul>
+			<c:forEach var="dto" items="${searchProductList }">
 			<li>
 				<div class="listitem">
-					<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a>
-					<p>솔솔 말린 솔방울</p>
-					<p>5,000원</p>
+					<a href="${detailUrl }&code=${dto.code}"><img alt="" src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
+					<p>${dto.product_Name }</p>
+					<p>${dto.product_Price }원</p>
 				</div>
-			</li>
-			<li>
-				<div class="listitem">
-					<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a>
-					<p>솔솔 말린 솔방울</p>
-					<p>5,000원</p>
-				</div>
-			</li>
-			<li>
-				<div class="listitem">
-					<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a>
-					<p>솔솔 말린 솔방울</p>
-					<p>5,000원</p>
-				</div>
-			</li>
-			<li>
-				<div class="listitem">
-					<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a>
-					<p>솔솔 말린 솔방울</p>
-					<p>5,000원</p>
-				</div>
-			</li>
-			<li>
-				<div class="listitem">
-					<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></a>
-					<p>솔솔 말린 솔방울</p>
-					<p>5,000원</p>
-				</div>
-			</li>
-			<li>
-				<div class="listitem">
-					<img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg">
-					<p>솔솔 말린 솔방울</p>
-					<p>5,000원</p>
-				</div>
-			</li>
-			<li>
-				<div class="listitem">
-					<img alt="" src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg">
-					<p>솔솔 말린 솔방울</p>
-					<p>5,000원</p>
-				</div>
-			</li>
+			</li>			
+			</c:forEach>
 		</ul>
 	</div>
 	<div class="pageing">
 		<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/pre.gif"></a>
 		<ol>
-			<li>1</li>
-			<li>2</li>
-			<li>3</li>
+			<c:if test="${!empty pageIndexList }">
+				${pageIndexList }
+			</c:if>
+			<c:if test="${empty pageIndexList }">
+				다른 상품을 검색해 주세요
+			</c:if>
 		</ol>
 		<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/next.gif"></a>
 	</div>

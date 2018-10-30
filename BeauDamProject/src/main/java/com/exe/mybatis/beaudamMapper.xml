@@ -288,6 +288,25 @@
 			where code=#{code}
 		</select>
 		
+		<select id="getSearchProductDataList" resultType="com.view.view.ProductView" parameterType="map">
+			
+			select *from (
+			select rownum rnum,data.*from (
+			select code,(product_Name||brand) as brand, product_Name,product_Price,type,thumb_Img from productView
+			where product_Name||brand like '%'||#{searchValue}||'%' and
+			      type like '%'||#{searchType}||'%'
+			order by code desc) data)
+			<![CDATA[
+			where rnum>=#{start} and rnum <=#{end}
+			]]>	
+		
+		</select>
+		<select id="getSearchDataCount" resultType="int" parameterType="map">
+			select nvl(count(*),0) from productView 
+			where  product_Name||brand like '%'||#{searchValue}||'%' and
+			      type like '%'||#{searchType}||'%'
+		</select>
+		
 		
 		<!-- Admin -->
 		<select id="getAdminBrand" resultType="com.table.adminDTO.Admin_BrandDTO">

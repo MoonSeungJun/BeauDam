@@ -60,12 +60,7 @@ public class ViewServiceImpl implements ViewService {
 		return searchMemberList;
 	}
 
-	@Override
-	public List<SaleView> getAllSaleView(HashMap<String, Object> saleSearchPack) {
-
-		List<SaleView> lists = dao.getAllSaleView(saleSearchPack);
-		return lists;
-	}
+	
 
 	@Override
 	public String getSearchId(HashMap<String, Object> nameBirth) {
@@ -81,5 +76,26 @@ public class ViewServiceImpl implements ViewService {
 		return pwd;
 	}
 
+	@Override
+	public List<SaleView> getAllSaleView() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProductView> getSearchProductDataList(HashMap<String, Object> searchValuePack) {
+		List<ProductView> getSearchProductDataList = dao.getSearchProductDataList(searchValuePack);
+		return getSearchProductDataList;
+	}
+
+	@Override
+	public int getSearchDataCount(HashMap<String, Object> searchCountPack) {
+		int result = dao.getSearchDataCount(searchCountPack);
+		
+		return result;
+	}
+
+
+	
 	
 }
