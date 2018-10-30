@@ -18,6 +18,7 @@
 <body>
 	<jsp:include page="../beaudam/mainTop.jsp" />
 	<div style="padding-bottom: 80px;">
+	<!-- 타이틀 -->
 		<div class="title_style">
 			<div class="title_area">
 				<h2 style="font-family: 'designhouseOTFLight00'; font-weight: normal;">마이뷰담</h2>
@@ -37,30 +38,32 @@
 					</a>
 				</div>
 
-				<div class="user_benefit">
-					<div class="user_point">
+				<div class="user_benefit" style="overflow: hidden;">
+					<div class="user_point" style="float: left;">
 						<div class="title">
-							<h3 style="">뷰담 포인트</h3>
+							<h3 style="">포인트</h3>
 						</div>
 						<div>
-							<p class="point" style="font-size: 40px;">
+							<p class="point" style="font-size: 20px; color: black; font-weight: normal;">
 								0
 							</p>
 						</div>
-					</div>
-					<div class="benefit_result">
-						<dl>
-							<dt style="float: left;">쿠폰</dt>
-							<dd>	
-								<span style="float: right;" >0</span>
-							</dd>
-						</dl>
-						<dl>
-							<dt style="float: left;">등급</dt>
-							<dd>	
-								<span style="float: right;" >silver</span>
-							</dd>
-						</dl>
+						<div class="title">
+							<h3 style="">쿠폰</h3>
+						</div>
+						<div>
+							<p class="" style="font-size: 20px; font-weight: normal;" >
+								0
+							</p>
+						</div>
+						<div class="title">
+							<h3 style="">등급</h3>
+						</div>
+						<div>
+							<p class="" style="font-size: 20px; font-weight: normal;" >
+								Bronze
+							</p>
+						</div>
 					</div>
 				</div>
 
@@ -77,7 +80,6 @@
 							<li><a href="" style="margin-bottom: 15px;">나의 정보</a>
 								<ul class="sub_lnb">
 									<li><a href="<%=cp%>/myCoupon.action" style="color: #9a9a9;">쿠폰조회</a></li>
-									<li><a href="#">배송지 관리</a></li>
 									<li><a href="<%=cp%>/myEdit.action">개인정보수정</a></li>
 									<li><a href="<%=cp%>/myLeave.action">회원탈퇴</a></li>
 								</ul>
@@ -86,15 +88,18 @@
 					</nav>
 				</div>
 			</div>
+			
 			<!-- 우측 정보부분 -->
 			<div class="float_right">
 				<div class="float_conts">
 					<!-- 마이페이지 INDEX -->
+					
+					<!-- 나의 주문 현황 -->
 					<div class="float_title" style="height: 65px;">
 						<span style="display: block; font-size: 14pt; font-weight: bold; ">
 							나의 주문 현황 </span>
 					</div>
-					<div class="infobox" style="height: 205px;">
+					<div class="infobox" style="height: 252px;">
 						<table style="width: 100%; height: 100px;">
 								<tr>
 									<td>
@@ -131,15 +136,15 @@
 									<td>0</td>
 									<td>0</td>
 								</tr>
-							</table>
-						</div>
+						</table>
 					</div>
+					<!-- 나의 보유 현황 -->
 					<div class="mypage_index_conts" style="height: 255px;">
 						<div class="title_content" style="padding: 20px 18px;">
 							<span style="display: block; font-size: 14pt; font-weight: bold">나의 보유 현황 </span>
 						</div>
 						<hr style="margin: 0; padding: 0;">
-						<div class="mypage_index_state div_style col3 possession">
+						<div class="mypage_index_state">
 							<div class="mypageWrapper" style="width: 80%; margin: 30px auto 30px auto;">
 								<dl>
 									<dt>포인트</dt>
@@ -151,13 +156,43 @@
 								</dl>
 								<dl>
 									<dt>등급</dt>
-									<dd>Silver</dd>
+									<dd>Bronze</dd>
 								</dl>
 							</div>
 						</div>
 					</div>
+					<!-- 정보 관리 -->
+					<div class="imformation" style="overflow: hidden;">
+						<div class="title_content" style="padding: 20px 18px;">
+							<span style="display: block; font-size: 14pt; font-weight: bold">정보 관리</span>
+						</div>
+						<hr style="margin: 0; padding: 0;">
+						<div class="imformation_content">
+							<dl class="left aa" style="float: left; width: 50%;">
+								<dt>회원정보 수정</dt>
+								<dd>
+									<div style="margin-bottom: 10px;">
+										<p>가입 시 등록한 내용에서 변경된 내용이 있으신가요?</p>
+									</div>
+									<div>
+										<a href="<%=cp%>/myEdit.action">회원정보수정</a>
+									</div>
+								</dd>
+							</dl>
+							<dl class="right aa" style="float: right; width: 50%; ">
+								<dt>회원 탈퇴</dt>
+								<dd>
+									<div style="margin-bottom: 10px;">
+										<p>회원님의 탈퇴를 원하시나요?</p>
+									</div>
+								</dd>
+								<dd><a href="<%=cp%>/myLeave.action">회원 탈퇴</a></dd>
+							</dl>
+						</div>
+					</div>
 				</div>
 			</div>
+		</div>
 	</div>
 	<jsp:include page="../beaudam/mainBottom.jsp" />
 </body>

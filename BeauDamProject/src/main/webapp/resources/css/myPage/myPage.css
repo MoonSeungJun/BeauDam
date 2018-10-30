@@ -62,9 +62,8 @@ p, label, span, strong, i, em, a, textarea, input, select {
 }
 
 .lnb_mypage .user_point {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    text-align: center;
+	padding: 30px;
+    text-align: left;
 }
 
 .lnb_mypage .user_point .title {
@@ -77,7 +76,7 @@ p, label, span, strong, i, em, a, textarea, input, select {
 .lnb_mypage .point_result .point {
     display: inline;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 20px;
 }
 
 .float_container .point:after {
@@ -204,6 +203,7 @@ ul, menu, dir {
     background-color: #fff;
     margin-left: 20px;
     width: 900px;
+    overflow: hidden;
 }
 
 .float_container .float_conts {
@@ -310,12 +310,6 @@ ul, menu, dir {
 .mypage_index .info_manager {
     padding: 34px 0;
 }
-.float_conts .div_style {
-    overflow: hidden;
-    margin-bottom: 38px;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #cad3d8;
-}
 
 .float_conts .div_style.col2>* {
     width: 50%;
@@ -398,10 +392,6 @@ dl {
 	padding-right: 15px;
 }
 
-.calendar .input_date img {
-	background-color: white;
-}
-
 .calendar .input_date+.input_date:before {
     content: "~";
     color: #9a9a9a;
@@ -416,6 +406,62 @@ dl {
 	border: 1px solid gray;
 }
 
+.mypage_orderSateWrapper .mypage_orderSate dd {
+	display: inline;
+}
+
+.imformation {
+	border: 1px solid #e4eaed;
+	margin-top: 20px;
+	overflow: hidden;
+	font-family: "Gotham";
+}
+
+.imformation .imformation_content {
+	padding: 20px;
+	overflow: hidden;
+}
+
+.imformation .imformation_content .left {
+ 	background-image: url('/beaudam/resources/image/myPage/info.png');
+ 	background-repeat: no-repeat;
+}
+
+.imformation .imformation_content .right {
+ 	background-image: url('/beaudam/resources/image/myPage/leave.png');
+ 	background-repeat: no-repeat;
+}
+
+.imformation .imformation_content .aa {
+	padding: 20px;
+}
+
+.imformation .imformation_content .aa dt {
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.imformation .imformation_content .aa p {
+	color: gray;
+}
+
+.imformation .imformation_content .aa a {
+	text-decoration: none;
+	padding: 5px;
+	color: white;
+	background-color: gray;
+}
 
 
+.float_conts .infobox td {
+	font-size: 20px;
+	height: 50px;
+}
 
+.mypage_orderSate .bbb:after {
+	content: "point";
+}
+
+.mypage_orderSate td {
+	border-bottom: 1px solid #e4eaed;
+}

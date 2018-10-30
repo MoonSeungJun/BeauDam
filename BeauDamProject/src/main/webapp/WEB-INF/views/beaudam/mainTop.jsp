@@ -61,6 +61,7 @@ session="false" pageEncoding="UTF-8"%>
 		                        	</ul>
 	                        	</div>
 	           				</li>
+	           				<!-- 제이쿼리 수정 중 -->
 	           				<%-- <li>
 	                        	<div id="slideshow">
 		                        	<ul>
