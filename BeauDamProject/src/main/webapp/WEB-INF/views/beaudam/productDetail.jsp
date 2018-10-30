@@ -11,6 +11,69 @@ session="false" pageEncoding="UTF-8"%>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  		<script type="text/javascript">
+  		
+  			function amountminus() {
+  				if($('#amount').val() == 0){
+  					alert("수량은 0개 이상이어야 합니다.");
+  					return;
+  				}
+  				$('#amount').val(parseInt($('#amount').val())-1);
+  				change();
+  				
+			}
+  			
+  			function amountplus() {
+  				var qty = ${dto.qty};
+				if(parseInt($('#amount').val()) >= qty){
+  					alert("재고가 부족합니다.");
+  					return;
+  				}
+  				$('#amount').val(parseInt($('#amount').val())+1);
+  				
+  				
+  				
+  				change();
+			}
+  		
+  			
+  			function change() {
+				
+  				var amount = parseInt($('#amount').val());  				
+				var product_Price = ${dto.product_Price};
+  				$('#total_Price').html(amount * product_Price);  				
+  				
+			}
+  			
+  			function insertBasket(code) {
+  				var amount = parseInt($('#amount').val()); 				
+  				
+  				if(amount == 0){
+  					alert("갯수를 확인해 주세요");
+  					return;
+  				}  				
+  				
+  				$.ajax({
+  					
+  					type:'POST',
+  					url: 'insertBasket.action',
+  					data:{
+  						'amount':amount,
+  						'code':code
+  					},  			
+  					async:false,
+  					dataType: "text",
+  					complete: function() {
+						alert("장바구니에 담겼습니다.");
+					}
+  					
+  				});
+  				
+			}
+  			
+  		
+  		</script>
     </head>
     <body>
     <jsp:include page="./mainTop.jsp" />
@@ -34,13 +97,13 @@ session="false" pageEncoding="UTF-8"%>
                        	</dl>
                        	<dl>
                            	<dt>포인트</dt>
-                           	<dd>${dto.product_Price*0.1 } point</dd>
+                           	<dd>${point } point</dd>
                         </dl>
                     	<dl>
                        		<dt>수량 선택</dt>
                        		<dd>
                        		<img alt="" src="<%=cp %>/resources/image/beaudam/productDetail/minus.gif" onclick="amountminus();">
-                           	<input type="text" name="amount" id="amountId" value="0" style="width: 40px; height: 20px; background-color: transparent; text-align: center; border: none;" onchange="change();"/>
+                           	<input type="text" name="amount" id="amount" value="0" style="width: 40px; height: 20px; background-color: transparent; text-align: center; border: none;" readonly="readonly"/>
                            	<img alt="" src="<%=cp %>/resources/image/beaudam/productDetail/plus.gif" onclick="amountplus();">
                            	
                        		</dd>
@@ -49,12 +112,11 @@ session="false" pageEncoding="UTF-8"%>
                     <div class="result">
                         <dl>
                             <dt>금액 합계</dt>
-                            <dd class="gray">18,000원 <a>(무료배송)</a></dd>
+                            <dd class="gray" ><span id="total_Price">0</span>원</dd>
                         </dl>
                     </div>
-                    <div class="buy">
-                        <span><a href=""><img class="wish_button" src="<%=cp %>/resources/image/beaudam/productDetail/wish_2.png"></a></span> 
-                        <span><a href=""><img class="cart_button" src="<%=cp %>/resources/image/beaudam/productDetail/cart_2.png"></a></span>
+                    <div class="buy">                         
+                        <span><a href="javascript:void(0);" onclick="insertBasket('${dto.code}');"><img class="cart_button" src="<%=cp %>/resources/image/beaudam/productDetail/cart_2.png"></a></span>
                         <span><a href=""><img class="buy_button" src="<%=cp %>/resources/image/beaudam/productDetail/buy.png""></a></span>
                     </div>
                 </div>  

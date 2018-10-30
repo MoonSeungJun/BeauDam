@@ -16,6 +16,12 @@ public class OtherServiceImpl implements OtherService {
 	private OtherDAO dao;
 	
 	@Override
+	public void deleteAllBasket(String id) {
+		dao.deleteAllBasket(id);
+		
+	}
+	
+	@Override
 	public void insertCoupon(CouponDTO dto) {
 		dao.insertCoupon(dto);
 		
@@ -52,7 +58,7 @@ public class OtherServiceImpl implements OtherService {
 	}
 
 	@Override
-	public void deleteBasket(HashMap<String, Object> map) {
+	public void deleteBasket(Map<String, Object> map) {
 		dao.deleteBasket(map);
 		
 	}

@@ -6,6 +6,7 @@ import javax.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.memberDTO.*;
+import com.view.view.*;
 
 
 @Service("memberService")
@@ -86,7 +87,11 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
-	
+	@Override
+	public MemberView getOneMemberData(String id) {
+		MemberView view = dao.getOneMemberData(id);
+		return view;
+	}
 	
 	
 }

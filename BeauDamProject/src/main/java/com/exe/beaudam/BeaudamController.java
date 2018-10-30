@@ -9,8 +9,10 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dao.memberDAO.*;
 import com.dao.otherDAO.OtherServiceImpl;
 import com.dao.productDAO.*;
+import com.dao.saleDAO.*;
 import com.dao.viewDAO.ViewService;
 
 import com.table.otherDTO.BasketDTO;
@@ -89,8 +91,14 @@ public class BeaudamController {
 	@Resource(name="productService")
 	private ProductServiceImpl productService;
 
+	@Resource(name="memberService")
+	private MemberServiceImpl memberService;
+	
 	// ********************** Beaudam Page **********************
 
+	
+	
+	
 	@RequestMapping(value = "/main.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView main(HttpSession session, HttpServletRequest req) {
 
@@ -112,13 +120,10 @@ public class BeaudamController {
 			productVO.setThumb_Img("thumbImg\\"+productVO.getThumb_Img());
 			productList.add(productVO);		
 			
-		}
-		
+		}		
 		
 		req.setAttribute("bestItem", bestItems);
-		req.setAttribute("productList", productList);
-		
-		
+		req.setAttribute("productList", productList);		
 		
 		// 메인 페이지 이동
 		return new ModelAndView("beaudam/main", "id", id);
@@ -136,7 +141,9 @@ public class BeaudamController {
 			
 		ProductView detailData = productService.getOneProductData(req.getParameter("code"));
 		
+		int point = (int) (detailData.getProduct_Price()*0.1);
 		
+		req.setAttribute("point", point);
 		req.setAttribute("dto", detailData);
 		
 
@@ -178,7 +185,7 @@ public class BeaudamController {
 
 	// msj
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.POST })
-	public ModelAndView pay(HttpServletRequest request) {
+	public ModelAndView pay(HttpServletRequest request, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -198,7 +205,7 @@ public class BeaudamController {
 		// HttpSession session = request.getSession();
 		// String id = (String) session.getAttribute("id");
 
-		String id = "esteban"; // test Data
+		String id = (String) session.getAttribute("id");
 		hm.put("id", id);
 
 		MemberView member = viewService.getOneMemberData(id);
@@ -214,8 +221,7 @@ public class BeaudamController {
 		}
 
 		List<CouponDTO> couponLists = otherService.getCouponData(id);
-		int couponCount = otherService.getCouponCount(id);
-
+		int couponCount = otherService.getCouponCount(id);		
 		mav.addObject("member", member);
 		mav.addObject("buyLists", buyLists);
 		mav.addObject("couponLists", couponLists);
@@ -225,4 +231,53 @@ public class BeaudamController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/insertBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public void insertBasket(HttpServletRequest req, HttpSession session) {
+		
+		String code = req.getParameter("code");
+		int amount = Integer.parseInt(req.getParameter("amount"));
+		String id = (String) session.getAttribute("id");
+		
+		ProductView pView = productService.getOneProductData(code);
+		MemberView mView = memberService.getOneMemberData(id);
+		
+		BasketDTO dto = new BasketDTO();
+		dto.setId(mView.getId());
+		dto.setCode(code);
+		dto.setBrand(pView.getBrand());
+		dto.setProduct_Name(pView.getProduct_Name());
+		dto.setColor_Code(pView.getColor_Code());
+		dto.setColor_Name(pView.getColor_Name());
+		dto.setThumb_Img(pView.getThumb_Img());
+		dto.setProduct_Price(pView.getProduct_Price());
+		dto.setQty(amount);		
+		
+		otherService.insertBasket(dto);	
+		
+	}
+
+	@RequestMapping(value = "/deleteBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public void deleteBasket(HttpServletRequest req, HttpSession session) {
+	
+		String basket_Num = req.getParameter("basket_Num");
+		String id = req.getParameter("id");
+		System.out.println(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("basket_Num", basket_Num);
+		map.put("id", id);
+		
+		otherService.deleteBasket(map);
+		
+		
+	}	
+	@RequestMapping(value = "/deleteAllBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public void deleteAllBasket(HttpServletRequest req, HttpSession session) {
+	
+		String id = (String) session.getAttribute("id");
+		
+		otherService.deleteAllBasket(id);	
+		
+	}
+		
 }

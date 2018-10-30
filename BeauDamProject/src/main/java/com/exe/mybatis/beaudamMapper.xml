@@ -81,7 +81,7 @@
 		<!-- Basket -->
 			<insert id="insertBasket" parameterType="com.table.otherDTO.BasketDTO">
 				insert into basket (basket_num,id,code,color_code,product_name,product_price,qty) values
-				(#{basket_num},#{id},#{code},#{color_code},#{product_name},#{product_price},#{qty})
+				(#{basket_Num},#{id},#{code},#{color_Code},#{product_Name},#{product_Price},#{qty})
 			</insert>
 		
 		
@@ -209,9 +209,11 @@
 		
 		<!-- Basket -->
 		<delete id="deleteBasket" parameterType="map">
-			delete basket where basket_num = #{basket_num} and id = #{id}
+			delete basket where basket_num = #{basket_Num} and id = #{id}
 		</delete>
-			
+		<delete id="deleteAllBasket" parameterType="String">
+			delete basket where id = #{id}
+		</delete>	
 			
 			
 		<!-- Review -->		

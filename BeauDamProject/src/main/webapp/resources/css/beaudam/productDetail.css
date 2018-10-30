@@ -1,6 +1,5 @@
 @charset "UTF-8";
 @font-face { font-family: 'YiSunShinDotumM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff'); font-weight: normal; font-style: normal; }
-
 @font-face { font-family: 'KHNPHD'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); font-weight: normal; font-style: normal; }
 
 h2, dl {
@@ -17,14 +16,14 @@ a {
 }
 
 .container {
-	width: 100%;
+	width:  100%
 }
 
 .wrapper {
     overflow: hidden;
     /* background-color: blue; */
     margin: 0 auto;
-    width: 960px;
+    width: 100%;
     margin-top: 130px;
 }
 
@@ -32,6 +31,11 @@ a {
     float: left;
     display: inline-block;
     /* margin-bottom: 10px; */
+}
+
+.wrapper .left img {
+	width: 400px;
+	height: 400px;
 }
 
 .right {

@@ -1,6 +1,7 @@
 package com.dao.memberDAO;
 
 import com.table.memberDTO.*;
+import com.view.view.*;
 
 public interface MemberService {
 
@@ -21,4 +22,8 @@ public interface MemberService {
 	void deleteMemberGrade(String id);
 	void deleteMemberInfo(String id);
 	void deleteCoupon(String id);
+	
+	//select
+	MemberView getOneMemberData(String id);
+	
 }

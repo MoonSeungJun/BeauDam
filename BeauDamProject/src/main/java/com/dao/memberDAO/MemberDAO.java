@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.table.memberDTO.*;
+import com.view.view.*;
 
 
 
@@ -69,6 +70,10 @@ public class MemberDAO {
 	public void deleteCoupon(String id) {
 		sessionTemplate.delete("beaudam.deleteCoupon",id);
 		
+	}
+	public MemberView getOneMemberData(String id) {
+		MemberView view = sessionTemplate.selectOne("beaudam.getOneMemberData",id);
+		return view;
 	}
 
 	

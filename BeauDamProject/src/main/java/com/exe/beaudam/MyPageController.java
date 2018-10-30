@@ -1,13 +1,18 @@
 package com.exe.beaudam;
 
-import java.util.List;
+import java.util.*;
+
 import javax.annotation.Resource;
+import javax.servlet.http.*;
+
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dao.otherDAO.OtherServiceImpl;
+import com.dao.productDAO.*;
 import com.table.otherDTO.BasketDTO;
+import com.view.view.*;
 
 /*
  * 	쿼리 insert, delete 테이블 순서
@@ -49,6 +54,10 @@ public class MyPageController {
 	@Resource(name = "otherService")
 	private OtherServiceImpl OtherService;
 
+	
+	@Resource(name="productService")
+	private ProductServiceImpl productService;
+	
 	// ********************** My Page **********************
 
 	@RequestMapping(value = "/myPage.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -102,21 +111,31 @@ public class MyPageController {
 
 	// msj
 	@RequestMapping(value = "/myBasket.action", method = { RequestMethod.GET })
-	public ModelAndView myBasket() {
+	public ModelAndView myBasket(HttpServletRequest req) {
 
 		// 장바구니(마이페이지) 페이지 이동
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myPage/myBasket");
 
-		// HttpSession session = request.getSession();
-		// String id = (String) session.getAttribute("id");
-
-		String id = "esteban"; // test Data
+		 HttpSession session = req.getSession();
+		 String id = (String) session.getAttribute("id");	
 
 		List<BasketDTO> lists = OtherService.getBasketData(id);
-
-		mav.addObject("lists", lists);
+		
+		Iterator<BasketDTO> it = lists.iterator();
+		List<BasketDTO> bList = new ArrayList<BasketDTO>();
+		
+		while(it.hasNext()) {
+			BasketDTO dto = it.next();			
+			
+			ProductView pView = productService.getOneProductData(dto.getCode());
+			
+			dto.setThumb_Img(pView.getThumb_Img());
+			bList.add(dto);
+		}	
+		
+		mav.addObject("bList", bList);
 
 		return mav;
 	}

@@ -24,9 +24,12 @@
 				$("#msg").css("width", "48%");
 			}
 		});
+		setShippingPrice();
+		setTotalPrice();			
+		setPayResult();
 		
 		$("#totalPrice").change(function(){
-			setShppingPrice();
+			setShippingPrice();
 		});
 		
 		$("#coupon").change(function(){
@@ -49,8 +52,7 @@
 				$("#discount").text("0");
 			}
 			
-			setTotalPrice();
-			
+			setTotalPrice();			
 			setPayResult();
 		});
 		
@@ -77,8 +79,9 @@
 			}
 			
 			setTotalPrice();
-			
 			setPayResult();
+		
+			
 		});
 	});
 	
@@ -97,7 +100,7 @@
     	$("#totalPrice").text(addComma(sum));
 	}
 	
-	function setShppingPrice(){
+	function setShippingPrice(){
 		if(rmComma($("#totalPrice").text())>50000){
 			$("#shipping").text("0");
 		} else {
@@ -106,10 +109,11 @@
 	}
 	
 	function setPayResult(){
-		var pay = rmComma($("#totalPrice").text()) + Number(rmComma($("#shipping").text())) - Number(rmComma($("#discount").text()));
+		
+		var pay = Number(rmComma($("#totalPrice").text())) + Number(rmComma($("#shipping").text())) - Number(rmComma($("#discount").text()));
 		$("#payResult").val(addComma(pay));
 		
-		setShppingPrice();
+// 		setShippingPrice();
 	}
 	
 	function addComma(num) {
@@ -123,26 +127,63 @@
 		
 		return parseInt(str.replace(/,/g,""));
 	}
+
 	
-	function auth(){		
-		$.ajax({
-			url : "https://api.iamport.kr/users/getToken",
-			headers : {'Access-Control-Allow-Origin' : '*'},
-			contentType : "application/json",
-			type : "post",
-			data : {
-				"imp_key" : "8304328758939014", 
-				"imp_secret" : "bEzquPEmbFRvWHduwaOse0R5XMUSYDgaiQBMFf9QU1mRIzleKaGYay38kY1jBhtU84HNjQEeS05AArPk"
-			},
-			dataType : "json",
-			success : function(json){
-				alert(json);
-			},
-			error : function(request,status,error, result){   
-				alert("code: " + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error + result); 
-			}
-		});
+	function buying() {
+		
+		var f = document.payForm;	
+		
+		var payResult = Number(rmComma($("#totalPrice").text())) + Number(rmComma($("#shipping").text())) - Number(rmComma($("#discount").text()));
+		
+		var payType = $(":input:radio[name=payType]:checked").val();
+		var id = '${member.id}';
+		var lists = new Array();		
+		<c:forEach items="${buyLists}" var="item">
+			lists.push("${item.basket_Num}");
+		</c:forEach>
+		var msg;
+// 		<option value="1" selected="selected">배송 전에 미리 연락바랍니다.</option>
+// 		<option value="2">부재시 경비실에 맡겨주세요.</option>
+// 		<option value="3">부재시 전화 주시거나 문자 남겨 주세요.</option>
+// 		<option value="4">직접입력</option>
+// 	</select>
+// 	<input type="text" id="val" value="">
+		if($('#msg').val() == 1){
+			msg = '배송 전에 미리 연락바랍니다.'
+		}else if($('#msg').val() ==2){
+			msg = '부재시 경비실에 맡겨주세요.';
+		}else if($('#msg').val()==3){
+			msg='부재시 전화 주시거나 문자 남겨 주세요.';
+		}else{
+			msg = $('#val').val();
+		}
+		
+		var code = new Array();		
+		<c:forEach items="${buyLists}" var="item">
+			code.push("${item.code}");			
+		</c:forEach>
+		
+	   	var params = {'payResult':payResult, 'payType':payType, 'id':id, 'lists':lists, 'msg':msg, 'code':code};		
+
+	    var method = method || "post";	    
+	    var form = document.createElement("form");
+	    
+	    form.setAttribute("method", method);
+	    form.setAttribute("action", 'iampay.action');
+	    
+	    for(var key in params) {
+	        var hiddenField = document.createElement("input");
+	        hiddenField.setAttribute("type", "hidden");
+	        hiddenField.setAttribute("name", key);
+	        hiddenField.setAttribute("value", params[key]);
+	        form.appendChild(hiddenField);
+	    }
+	    document.body.appendChild(form);
+	    form.submit();
+		
+		
 	}
+	
 	
 </script>
 
@@ -160,7 +201,7 @@
 		</tr>	
 	</table>
 	
-	<form action="<%=cp %>/iampay.action" method="post">
+	<form action="iampay.action" method="post" name="payForm">
 	
 	<table align="center" cellspacing="0" style="width: 1200px; height:auto;" border="1" class="mytable">
 		<tr align="center">
@@ -180,7 +221,7 @@
 		<c:forEach var="dto" items="${buyLists }">
 			<tr align="center">
 				<td width="15%">
-					<img style="margin: 0 auto; width: 100px; height: 100px;" src="${dto.thumb_Img }">
+					<img style="margin: 0 auto; width: 100px; height: 100px;" src="<%=cp%>/thumbImg/${dto.thumb_Img }">
 				</td>
 			
 				<td>${dto.brand }</td>
@@ -226,7 +267,7 @@
 			
 			<td>
 				<div>
-			 		<select id="coupon" style="width: 15%" onchange="test();">
+			 		<select id="coupon" style="width: 15%">
 			 			<option value="1" selected="selected">선택</option>
 			 			
 			 			<!-- jstl로 쿠폰 나열 -->
@@ -338,7 +379,7 @@
 						<td style="text-align: right;">(+) 
 							<span id="shipping">
 							<script type="text/javascript">
-								setShppingPrice();
+								setShippingPrice();
 							</script>
 							</span>원
 						</td>
@@ -367,8 +408,8 @@
 		</tr>
 		
 		<tr height="70px">
-			<td colspan="2" align="center">
-				<input type="button" value="결제하기" onclick="submit();" style="width: 30%; height: 30px;">
+			<td colspan="2" align="center">				
+				<input type="button" value="결제하기" onclick="buying();" style="width: 30%; height: 30px;">
 			</td>
 		</tr>
 		

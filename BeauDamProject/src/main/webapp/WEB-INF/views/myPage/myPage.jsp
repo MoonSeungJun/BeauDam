@@ -30,7 +30,7 @@
 				<!-- 사용자 정보 -->
 				<div class="user_info">
 					<div style="float: left;">
-						<span style="font-size: 18px;">dohwi9406</span>
+						<span style="font-size: 18px;">${id }</span>
 					</div>
 					<a href="<%=cp%>/myInfo.action" class="setting_btn"> 
 						<img src="/beaudam/resources/image/myPage/setting.jpg" height="30px" align="bottom">

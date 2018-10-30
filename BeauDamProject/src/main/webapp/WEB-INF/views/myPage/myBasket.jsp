@@ -19,9 +19,9 @@
 	    $("#chk").change(function(){
 	    	var lists = new Array();
 
-	    	<c:forEach items="${lists}" var="item">
-	    		lists.push("${item.basket_Num}");
-	    	</c:forEach>
+	    	<c:forEach items="${bList}" var="item">	    		
+    			lists.push("${item.basket_Num}");
+    		</c:forEach>
 	    	
 	        if($("#chk").prop("checked")){
 	        	$.each(lists, function(idx, val) {
@@ -39,7 +39,7 @@
 		var sum = 0;
 		var lists = new Array();
 
-    	<c:forEach items="${lists}" var="item">
+    	<c:forEach items="${bList}" var="item">
     		sum += rmComma($("#pay" + ${item.basket_Num}).text());
     	</c:forEach>
 		$("#payResult").val(addComma(sum));
@@ -113,7 +113,7 @@
 		var check = false;
 		var lists = new Array();
 
-    	<c:forEach items="${lists}" var="item">
+    	<c:forEach items="${bList}" var="item">
     		if($("#${item.basket_Num}").is(":checked")){
     			check = true;
     		}
@@ -128,6 +128,81 @@
 		f.submit();
 	}
 
+	function keepShopping() {
+		
+		var f = document.myBasketForm;
+		f.action = "<%=cp%>/main.action";
+		f.submit();		
+	}
+	
+
+	function deleteProduct(basketNum,id) {
+		
+		$.ajax({
+			
+			type:'POST',
+			url:'deleteBasket.action',
+			data: {'basket_Num':basketNum, 'id':id},
+			complete: function() {
+				
+				alert("삭제되었습니다.");
+				window.location.href = "/beaudam/myBasket.action";
+				
+			}		
+			
+		});	
+		
+	}
+	
+	
+	function allDeleteChk() {
+		
+		$.ajax({
+			
+			type:'POST',
+			url:'deleteAllBasket.action',			
+			complete: function() {
+				
+				alert('전체 삭제 되었습니다.');
+				window.location.href = "/beaudam/myBasket.action";
+			}
+			
+		});
+		
+	}
+	
+	function allBuy() {		
+		
+		var f = document.myBasketForm;
+
+		var lists = new Array();
+		$('#payResult').val(rmComma($('#payResult').val()));
+    	<c:forEach items="${bList}" var="item">
+    		$("#${item.basket_Num}").prop('checked', true);    		
+    	</c:forEach>		
+    	
+		f.action="<%=cp%>/pay.action";
+		f.submit();
+		
+	}
+	
+	
+	function pay(basket_Num) {
+		var f = document.myBasketForm;
+		var check = false;
+		var lists = new Array();
+		
+    	<c:forEach items="${bList}" var="item">
+    		if(${item.basket_Num} == basket_Num){
+    			$("#${item.basket_Num}").prop('checked', true);    			
+    		}    		
+    	</c:forEach>
+
+		
+		f.action="<%=cp%>/pay.action";
+		f.submit();
+	}
+	
 </script>
 
 </head>
@@ -145,7 +220,7 @@
 		<div style="width: 1200px; margin: 0 auto">
 			<h3 style="float: left">장바구니 내역</h3>
 			<hr style="width: 1200px">
-			<button type="button">삭제</button>
+			<button type="button" onclick="allDeleteChk();">삭제</button>
 		</div>
 		
 		<br/>
@@ -161,12 +236,12 @@
 				<td width="10%">주문</td>
 			</tr>
 			
-			<c:forEach var="dto" items="${lists}">
+			<c:forEach var="dto" items="${bList}">
 				<tr>
 					<td><input type="checkbox" id="${dto.basket_Num}" name="check" value="${dto.basket_Num }"></td>
 					<td width="10%">
 						<a href="">
-							<img style="margin: 0 auto; width: 100px; height: 100px;" src="${dto.thumb_Img }"> 
+							<img style="margin: 0 auto; width: 100px; height: 100px;" src="<%=cp%>/thumbImg/${dto.thumb_Img }"> 
 						</a>
 					</td>
 					
@@ -201,9 +276,9 @@
 					</td>
 					
 					<td>
-						<button type="button" onclick="pay();">바로구매</button>
+						<button type="button" onclick="pay('${dto.basket_Num}');">바로구매</button>
 						<br/><br/>
-						<button type="button">삭제</button>
+						<button type="button" onclick="deleteProduct('${dto.basket_Num}','${dto.id }');">삭제</button>
 					</td>
 				</tr>
 				
@@ -230,8 +305,8 @@
 			<div style="text-align: center; display: block;">
 				<button type="button" style="width: 100px" onclick="buy();">선택주문</button>
 				
-				<button type="button" style="width: 100px">전체주문</button><br/><br/>
-				<button type="button" style="float: right; display: block;">쇼핑 계속하기</button>
+				<button type="button" style="width: 100px" onclick="allBuy();">전체주문</button><br/><br/>
+				<button type="button" style="float: right; display: block;" onclick="keepShopping();">쇼핑 계속하기</button>
 			</div>
 		</div>
 	</div>
