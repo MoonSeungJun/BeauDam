@@ -18,6 +18,7 @@ public interface ProductService {
 	void updateBrand(BrandDTO dto);
 	void updateImg(ImgDTO dto);
 	void updateColor(ColorDTO dto);
+	void updateQty(Map<String, Object> map);
 //	delete
 	void deleteProduct(String code);
 	void deleteBrand(String code);

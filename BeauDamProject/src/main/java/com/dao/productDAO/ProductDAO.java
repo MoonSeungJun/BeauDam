@@ -60,7 +60,9 @@ public class ProductDAO {
 		sessionTemplate.update("beaudam.updateImg",dto);
 		
 	}
-
+	public void updateQty(Map<String, Object> map) {
+		sessionTemplate.update("beaudam.updateQty",map);
+	}
 	 
 	public void updateColor(ColorDTO dto) {
 		sessionTemplate.update("beaudam.updateColor",dto);

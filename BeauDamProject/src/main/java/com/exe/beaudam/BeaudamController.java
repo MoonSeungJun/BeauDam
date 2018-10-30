@@ -14,7 +14,7 @@ import com.dao.otherDAO.OtherServiceImpl;
 import com.dao.productDAO.*;
 import com.dao.saleDAO.*;
 import com.dao.viewDAO.ViewService;
-
+import com.table.memberDTO.*;
 import com.table.otherDTO.BasketDTO;
 import com.table.otherDTO.CouponDTO;
 import com.view.view.*;
@@ -94,6 +94,8 @@ public class BeaudamController {
 	@Resource(name="memberService")
 	private MemberServiceImpl memberService;
 	
+	@Resource(name="saleService")
+	private SaleServiceImpl saleService;
 	// ********************** Beaudam Page **********************
 
 	
@@ -280,4 +282,48 @@ public class BeaudamController {
 		
 	}
 		
+	@RequestMapping(value = "/payOK.action", method = { RequestMethod.POST })
+	public String payOK(HttpServletRequest req) {
+		
+		//sale insert
+		
+//		saleService.insertSaleDate(dto);
+//		saleService.insertSaleProduct(dto);
+//		saleService.insertSaleClient(dto);;
+		
+		
+		//product update
+		String code = req.getParameter("code");
+		int qty = Integer.parseInt(req.getParameter("qty"));
+			
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", code);
+		map.put("qty", qty);
+		productService.updateQty(map);	
+		
+		//basket delete
+		String id = req.getParameter("id");
+		otherService.deleteAllBasket(id);
+		
+		//member update
+		MemberView view = memberService.getOneMemberData(id);
+		Member_GradeDTO dto = new Member_GradeDTO();
+		dto.setId(id);
+		dto.setPay(Integer.parseInt(req.getParameter("payResult")));		
+		int point = (int) (dto.getPay()*0.1);
+		dto.setPoint(point);
+		
+		if(view.getPay() >= 10000) {
+			dto.setGrade("Silver");
+		}else if(view.getPay() >= 50000) {
+			dto.setGrade("Gold");
+		}else if(view.getPay() >= 0) {
+			dto.setGrade(view.getGrade());
+		}	
+		
+		//coupon update
+		
+		return "redirect:/main.action";
+	}
+	
 }

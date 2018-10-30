@@ -40,26 +40,16 @@
 			    msg += '상점 거래ID : ' + rsp.merchant_uid;
 			    msg += '결제 금액 : ' + rsp.paid_amount;
 			    msg += '카드 승인번호 : ' + rsp.apply_num;
-			    window.location.href = "/beaudam/main.action";
+			    alert(msg);
+			    window.location.href = "/beaudam/payOK.action";
 			} else {
 			    var msg = '결제에 실패하였습니다.';
 			    msg += '에러내용 : ' + rsp.error_msg;
-			    window.location.href = "/beaudam/main.action";
+			    alert(msg);
+			    window.location.href = "/beaudam/myBasket.action";
 			}
 		});
 	</script>
-	
-<%--  			pay_method : '${payType }', --%>
-<%--  			merchant_uid : '${lists }', --%>
-<!--  			name : '', -->
-<%--  			amount : '${payResult }', --%>
-<%--  			buyer_email : '${member.email }', --%>
-<%--  			buyer_name : '${member.name }', --%>
-<%--  			buyer_tel : '${member.cellphone }', --%>
-<%--  			buyer_addr : '${member.city } ${member.street }', --%>
-<%--  			buyer_postcode : '${member.zip }' --%>
-	
-	
 	
 </body>
 </html>

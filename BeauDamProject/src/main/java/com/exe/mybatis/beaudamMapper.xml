@@ -147,6 +147,9 @@
 				update color set color_code=#{color_Code},color_name=#{color_Name},qty=#{qty} where code = #{code}
 			</update>
 			
+			<update id="updateQty" parameterType="map">
+				update color set qty = #{qty} where code = #{code}
+			</update>
 			
 		<!-- Admin -->
 			
