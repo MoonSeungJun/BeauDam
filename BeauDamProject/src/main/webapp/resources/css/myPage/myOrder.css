@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.mypage_orderSateWrapper {
+	border: 1px solid #e4eaed;
+	margin-top: 20px;
+}
+
+.mypage_orderSateWrapper .mypage_orderSate td {
+	padding: 15px;
+	margin: 10px;
+	text-align: center;
+}

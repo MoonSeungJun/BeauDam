@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="./resources/css/myPage/myPage.css">
+<link rel="stylesheet" href="./resources/css/myPage/myOrder.css">
 </head>
 <body>
 <jsp:include page="../beaudam/mainTop.jsp" />
@@ -21,42 +22,44 @@
 				<hr style=" border: 0; height: 1px; background-color: gray;">
 			</div>
 		</div>
-		<div class="float_container">
+				<div class="float_container">
 			<div style="background-color: white; width: 260px; float: left" class="lnb_mypage">
 				<!-- 사용자 정보 -->
 				<div class="user_info">
 					<div style="float: left;">
-						<a href="<%=cp%>/myPage.action"><span style="font-size: 18px; color: black;">dohwi9406</span></a>
+						<span style="font-size: 18px;">dohwi9406</span>
 					</div>
 					<a href="<%=cp%>/myInfo.action" class="setting_btn"> 
 						<img src="/beaudam/resources/image/myPage/setting.jpg" height="30px" align="bottom">
 					</a>
 				</div>
 
-				<div class="user_benefit">
-					<div class="user_point">
+				<div class="user_benefit" style="overflow: hidden;">
+					<div class="user_point" style="float: left;">
 						<div class="title">
-							<h3 style="">뷰담 포인트</h3>
+							<h3 style="">포인트</h3>
 						</div>
 						<div>
-							<p class="point" style="font-size: 40px;">
+							<p class="point" style="font-size: 20px; color: black; font-weight: normal;">
 								0
 							</p>
 						</div>
-					</div>
-					<div class="benefit_result">
-						<dl>
-							<dt style="float: left;">쿠폰</dt>
-							<dd>	
-								<span style="float: right;" >0</span>
-							</dd>
-						</dl>
-						<dl>
-							<dt style="float: left;">등급</dt>
-							<dd>	
-								<span style="float: right;" >silver</span>
-							</dd>
-						</dl>
+						<div class="title">
+							<h3 style="">쿠폰</h3>
+						</div>
+						<div>
+							<p class="" style="font-size: 20px; font-weight: normal;" >
+								0
+							</p>
+						</div>
+						<div class="title">
+							<h3 style="">등급</h3>
+						</div>
+						<div>
+							<p class="" style="font-size: 20px; font-weight: normal;" >
+								Bronze
+							</p>
+						</div>
 					</div>
 				</div>
 
@@ -91,7 +94,7 @@
 							나의 주문 현황
 						</span>
 					</div>
-					<div class="infobox" style="height: 205px; padding: 0;">
+					<div class="infobox" style="height: 252px; padding: 0;">
 						<div class="filter">
 							<ul style="overflow: hidden;">
 								<li><input type="radio" name="date"><label>1주일</label></li>
@@ -101,12 +104,12 @@
 								<li>
 									<div class="calendar">
 										<div class="input_date">
-											<input type="text">
-											<button type="submit"><img src="/beaudam/resources/image/myPage/calendar.png"></button>
+											<input type="date" style="border: none; text-align: center; color: #9a9a9a">
+											<!-- <button type="submit"><img src="/beaudam/resources/image/myPage/calendar.png"></button> -->
 										</div>
 										<div class="input_date">
-											<input type="text">
-											<button type="submit"><img src="/beaudam/resources/image/myPage/calendar.png"></button>
+											<input type="date" style="border: none; text-align: center; color: #9a9a9a">
+											<!-- button type="submit"><img src="/beaudam/resources/image/myPage/calendar.png"></button> -->
 										</div>
 									</div>
 								</li>
@@ -154,16 +157,60 @@
 							</table>
 					</div>
 					</div>
-					<div class="mypage_index_conts">
+					<div class="mypage_orderSateWrapper" >
 						<div class="title_content" style="padding: 20px 18px;">
 							<!-- [나의 주문 내역 위에서] 선택한 1주일~6개월 혹은 선택한 기간을 표시  -->
 							<span style="display: block; font-size: 14pt; font-weight: bold">나의 주문 내역 </span>
 						</div>
 						<hr style="margin: 0; padding: 0;">
-						<div class="mypage_index_state">
-							<div class="mypageWrapper" style="width: 80%; margin: 30px auto 30px auto;">
-								<table class="orderInfo" style="border: 1px solid gray;">
-									<!-- 주문내역 표시(TheSaem 주문내역 참조) -->
+							<table class="mypage_orderSate"> 
+								<tr style="width: 100%;">
+									<td style="width: 500px;" colspan="2">주문정보</td>
+									<td>가격 (수량)</td>
+									<td>쿠폰/포인트 내역</td>
+									<td>결제 금액</td>
+									<td>배송 상태</td>
+								</tr>
+								<tr style="width: 100%;">
+									<td style="width: 100px;">
+										<img src="/beaudam/resources/image/myPage/hour.jpg" height="80px" width="80px;">
+									</td>
+									<td style="width: 300px;">
+										(결제완료) 2018.10.15 | 2018101533524<br/>(bk150624) 머엇진 마스카라
+									</td>
+									<td>16,000원 (3개)</td>
+									<td class="bbb">1,600</td>
+									<td>14,400 원</td>
+									<td>배송 중</td>
+								</tr>
+								<tr style="width: 100%;">
+									<td style="width: 100px;">
+										<img src="/beaudam/resources/image/myPage/hour.jpg" height="80px" width="80px;">
+									</td>
+									<td style="width: 300px;">
+										(결제완료) 2018.10.15 | 2018101533524<br/>(bk150624) 머엇진 마스카라
+									</td>
+									<td>16,000원 (3개)</td>
+									<td class="bbb">1,600</td>
+									<td>14,400 원</td>
+									<td>배송 중</td>
+								</tr>
+								<tr style="width: 100%;">
+									<td style="width: 100px;">
+										<img src="/beaudam/resources/image/myPage/hour.jpg" height="80px" width="80px;">
+									</td>
+									<td style="width: 300px;">
+										(결제완료) 2018.10.15 | 2018101533524<br/>(bk150624) 머엇진 마스카라
+									</td>
+									<td>16,000원 (3개)</td>
+									<td class="bbb">1,600</td>
+									<td>14,400 원</td>
+									<td>배송 중</td>
+								</tr>
+							</table>
+								
+								<!-- <table class="orderInfo" style="border: 1px solid gray;">
+									주문내역 표시(TheSaem 주문내역 참조)
 									<tr>			
 										<td colspan="2" style="text-align: center;">
 											주문정보
@@ -182,28 +229,7 @@
 										</td>
 									</tr>
 									
-									<!-- 반복문을 통해 출력 -->
-										<tr>			
-											<td>
-												<img src="/beaudam/resources/image/myPage/hour.jpg" style="width: 130px;">
-											</td>
-											<td>
-												(결제완료) 2018.10.15 | 2018101533524<br/>
-												(bk150624) 머엇진 마스카라 - bk257
-											</td>
-											<td>
-												16,000원 (3개)
-											</td>
-											<td>
-												1,600 Point
-											</td>
-											<td>
-												14,400 원
-											</td>
-											<td>
-												배송중
-											</td>
-										</tr>
+									반복문을 통해 출력
 										<tr>			
 											<td>
 												<img src="/beaudam/resources/image/myPage/hour.jpg" height="135px">
@@ -225,35 +251,11 @@
 												배송중
 											</td>
 										</tr>
-										<tr>			
-											<td>
-												<img src="/beaudam/resources/image/myPage/hour.jpg" height="135px">
-											</td>
-											<td>
-												(결제완료) 2018.10.15 | 2018101533524<br/>
-												(bk150624) 머엇진 마스카라 - bk257
-											</td>
-											<td>
-												16,000원 (3개)
-											</td>
-											<td>
-												1,600 Point
-											</td>
-											<td>
-												14,400 원
-											</td>
-											<td>
-												배송중
-											</td>
-										</tr>
-										
-								</table>
+								</table> -->
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-	</div>
 <jsp:include page="../beaudam/mainBottom.jsp" />
 </body>
 </html>
