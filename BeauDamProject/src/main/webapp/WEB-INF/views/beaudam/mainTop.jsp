@@ -3,7 +3,7 @@
 session="false" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	String cp = request.getContextPath();
+	String cp = request.getContextPath();	
 %>
 <!DOCTYPE html>
 <html>
@@ -89,6 +89,7 @@ session="false" pageEncoding="UTF-8"%>
 		                        	</ul>
 	                        	</div>
 	           				</li>
+	           				<!-- 제이쿼리 수정 중 -->
 	           				<%-- <li>
 	                        	<div id="slideshow">
 		                        	<ul>

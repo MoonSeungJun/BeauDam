@@ -20,9 +20,10 @@ public interface OtherService {
 	void updateNotification(NotificationDTO dto);
 
 //	delete
-	void deleteBasket(HashMap<String, Object> map);
+	void deleteBasket(Map<String, Object> map);
 	void deleteReview(int num);
 	void deleteNotification(int num);
+	void deleteAllBasket(String id);
 	
 //	select
 	int getCouponCount(String id);

@@ -5,23 +5,66 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.*;
+
+import javax.annotation.*;
+import javax.servlet.http.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+
+import com.dao.memberDAO.*;
+import com.dao.productDAO.*;
+import com.view.view.*;
 
 @Controller("IamPort")
 public class IamportController {
 
+	@Resource(name="memberService")
+	private MemberServiceImpl memberService;
+	
+	@Resource(name="productService")
+	private ProductServiceImpl productService;
+	
 	@RequestMapping(value = "/iampay.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView iampay() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("iamport/iampay");
-
-		auth();
-
-		return mav;
+	public String iampay(HttpServletRequest req) {
+		
+		System.out.println(req.getParameter("payResult"));
+		System.out.println(req.getParameter("id"));
+		System.out.println(req.getParameter("payType"));
+		System.out.println(req.getParameter("msg"));
+		
+		String id = req.getParameter("id");
+		int payResult = Integer.parseInt(req.getParameter("payResult"));
+		String payType = req.getParameter("payType");
+		String msg = req.getParameter("msg");
+		
+		String lists = req.getParameter("lists");
+		String[] list = lists.split(",");
+		
+		String codes = req.getParameter("code");
+		String[] code = codes.split(",");
+		
+		MemberView member = memberService.getOneMemberData(id);
+		
+		List<ProductView> productList = new ArrayList<ProductView>();
+		for(String str : code) {		
+			
+			ProductView pv = productService.getOneProductData(str);
+			 
+			productList.add(pv);			 
+			 
+		}
+		String str = productList.get(0).getProduct_Name() + "¿Ü " + (productList.size()-1) + "°Ç";
+		req.setAttribute("pName", str);
+		req.setAttribute("productList", productList);
+		req.setAttribute("member", member);
+		req.setAttribute("payResult", payResult);
+		req.setAttribute("payType", payType);
+		
+		
+		return "iamport/iampay";
 	}
 
 	public void auth() {

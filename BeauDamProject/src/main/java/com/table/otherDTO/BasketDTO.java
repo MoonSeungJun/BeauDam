@@ -19,7 +19,7 @@ public class BasketDTO {
 	private String thumb_Img;
 
 	private int product_Price;
-
+	
 	private int qty; // 사용자가 주문한 수량
 
 	private int qty_Max; // 재고수량

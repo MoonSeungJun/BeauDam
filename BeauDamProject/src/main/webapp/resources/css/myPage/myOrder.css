@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+.mypage_orderSateWrapper {
+	border: 1px solid #e4eaed;
+	margin-top: 20px;
+}
+
+.mypage_orderSateWrapper .mypage_orderSate td {
+	padding: 15px;
+	margin: 10px;
+	text-align: center;
+}
+
+.coupon_bottom {
+	margin-top: 30px;
+	background-color: #F9F9F9;
+}
+
+.leave_wrapper {
+	/* text-align: center; */
+	padding: 20px;
+}
+
+.leave_wrapper h4 {
+	font-weight: bold;
+}
+
+.leave1 {
+	padding: 20px;
+}
+
+.leave2 {
+	background-color: #F9F9F9;
+	padding: 20px;
+}
+
+.leave3 {
+	padding: 20px;
+}

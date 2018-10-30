@@ -3,7 +3,6 @@ session="false" pageEncoding="UTF-8"%>
 <%
 	String cp = request.getContextPath();
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -12,17 +11,72 @@ session="false" pageEncoding="UTF-8"%>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  		<script type="text/javascript">
   		
+  			function amountminus() {
+  				if($('#amount').val() == 0){
+  					alert("수량은 0개 이상이어야 합니다.");
+  					return;
+  				}
+  				$('#amount').val(parseInt($('#amount').val())-1);
+  				change();
+  				
+			}
+  			
+  			function amountplus() {
+  				var qty = ${dto.qty};
+				if(parseInt($('#amount').val()) >= qty){
+  					alert("재고가 부족합니다.");
+  					return;
+  				}
+  				$('#amount').val(parseInt($('#amount').val())+1);
+  				
+  				
+  				
+  				change();
+			}
   		
+  			
+  			function change() {
+				
+  				var amount = parseInt($('#amount').val());  				
+				var product_Price = ${dto.product_Price};
+  				$('#total_Price').html(amount * product_Price);  				
+  				
+			}
+  			
+  			function insertBasket(code) {
+  				var amount = parseInt($('#amount').val()); 				
+  				
+  				if(amount == 0){
+  					alert("갯수를 확인해 주세요");
+  					return;
+  				}  				
+  				
+  				$.ajax({
+  					
+  					type:'POST',
+  					url: 'insertBasket.action',
+  					data:{
+  						'amount':amount,
+  						'code':code
+  					},  			
+  					async:false,
+  					dataType: "text",
+  					complete: function() {
+						alert("장바구니에 담겼습니다.");
+					}
+  					
+  				});
+  				
+			}
+  			
   		
-  		
-  		
-  		
-  		
+  		</script>
     </head>
     <body>
     <jsp:include page="./mainTop.jsp" />
-        <form action="" name="productDetailForm">
         <div class="container">
             <div class="wrapper">
                 <div class="left">
@@ -43,14 +97,14 @@ session="false" pageEncoding="UTF-8"%>
                        	</dl>
                        	<dl>
                            	<dt>포인트</dt>
-                           	<dd><span id="point"></span> point</dd>
+                           	<dd>${point } point</dd>
                         </dl>
                     	<dl>
                        		<dt>수량 선택</dt>
                        		<dd>
-                       		<img alt="" src="<%=cp %>/resources/image/beaudam/productDetail/minus.gif" onclick="amountminus();"/>
-                           	<input type="text" name="amount" id="amountId" value="0" style="width: 40px; height: 20px; background-color: transparent; text-align: center; border: none;" onchange="change();"/>
-                           	<img alt="" src="<%=cp %>/resources/image/beaudam/productDetail/plus.gif" onclick="amountplus();"/>
+                       		<img alt="" src="<%=cp %>/resources/image/beaudam/productDetail/minus.gif" onclick="amountminus();">
+                           	<input type="text" name="amount" id="amount" value="0" style="width: 40px; height: 20px; background-color: transparent; text-align: center; border: none;" readonly="readonly"/>
+                           	<img alt="" src="<%=cp %>/resources/image/beaudam/productDetail/plus.gif" onclick="amountplus();">
                            	
                        		</dd>
                     	</dl>
@@ -58,30 +112,25 @@ session="false" pageEncoding="UTF-8"%>
                     <div class="result">
                         <dl>
                             <dt>금액 합계</dt>
-                            <dd class="gray"><span id="final_Price"></span>
-                            <a id="DeliveryFee""></a>
-                            <!-- <a id="freeDelivery"style="display: none;">(무료배송)</a> -->
-                            </dd>
+                            <dd class="gray" ><span id="total_Price">0</span>원</dd>
                         </dl>
                     </div>
-                    <div class="buy">
-                        <span><a href=""><img class="wish_button" src="<%=cp %>/resources/image/beaudam/productDetail/wish_2.png"></a></span> 
-                        <span><a href=""><img class="cart_button" src="<%=cp %>/resources/image/beaudam/productDetail/cart_2.png"></a></span>
+                    <div class="buy">                         
+                        <span><a href="javascript:void(0);" onclick="insertBasket('${dto.code}');"><img class="cart_button" src="<%=cp %>/resources/image/beaudam/productDetail/cart_2.png"></a></span>
                         <span><a href=""><img class="buy_button" src="<%=cp %>/resources/image/beaudam/productDetail/buy.png""></a></span>
                     </div>
                 </div>  
             </div>
         </div>
-        </form>
         <div class="detail">
         	<hr>
-
+<<<<<<< HEAD
         	<h4 style="font-weight: bold;">상세정보</h4>
         	<img class="detailimg" src="<%=cp %>/detailImg/${dto.detail_Img}">
-
+=======
         	<h4 style="font-weight: bold; margin-bottom: 20px;">상세정보</h4>
         	<img class="detailimg" src="<%=cp %>/resources/image/beaudam/productDetail/detail.jpg">
-
+>>>>>>> 김해나브랜치
         </div>
         <div class="review">
         	<hr>

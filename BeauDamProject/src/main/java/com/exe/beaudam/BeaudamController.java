@@ -225,12 +225,7 @@ public class BeaudamController {
 	    if(!param.equals("")) {
 	    	detailUrl = detailUrl+"&"+param;
 	    }
-	    
-	    
-	    
-	    
-	    
-	    
+	    	    
 	    
 		request.setAttribute("searchProductList", searchProductList);
 		request.setAttribute("count", count);

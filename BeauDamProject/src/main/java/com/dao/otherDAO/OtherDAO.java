@@ -16,6 +16,12 @@ public class OtherDAO {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
+	
+	public void deleteAllBasket(String id) {
+		sessionTemplate.delete("beaudam.deleteAllBasket",id);
+		
+	}
+	
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
 		this.sessionTemplate = sessionTemplate;
 	}
@@ -54,7 +60,7 @@ public class OtherDAO {
 		sessionTemplate.update("beaudam.updateNotification", dto);
 	}
 
-	public void deleteBasket(HashMap<String, Object> map) {
+	public void deleteBasket(Map<String, Object> map) {
 		sessionTemplate.delete("beaudam.deleteBasket", map);
 
 	}
