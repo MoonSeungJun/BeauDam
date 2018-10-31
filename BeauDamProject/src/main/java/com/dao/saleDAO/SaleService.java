@@ -17,7 +17,7 @@ public interface SaleService {
 	void updateSaleDate(SaleView dto);
 //	delete
 //	select
-
+	String getMaxSaleCode();
 	List<SaleView> getAllSaleData();
 	SaleView getOneSaleData(String sale_Code);
 	List<SaleView> getSearchSaleData(Map<String, Object> salesSearchKeyPack);

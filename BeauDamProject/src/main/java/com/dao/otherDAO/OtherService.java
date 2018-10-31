@@ -15,7 +15,7 @@ public interface OtherService {
 	void insertBasket(BasketDTO dto);
 	
 //	update
-	void updateCoupon(HashMap<String, Object> map);
+	void updateCoupon(int num);
 	void updateHitCount(int num);
 	void updateNotification(NotificationDTO dto);
 
@@ -38,7 +38,7 @@ public interface OtherService {
 	int getNotificationCount(String searchKey,String searchValue);
 	List<BasketDTO> getBasketData(String id);
 	BasketDTO getBasketOneData(Map<String, Object> hm);
-	
+	String selectCouponData(int couponNum);
 	List<SaleView> getBestItem();
 	
 	

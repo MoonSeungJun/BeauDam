@@ -1,10 +1,11 @@
 <%@page import="org.springframework.boot.web.servlet.server.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-session="false" pageEncoding="UTF-8"%>
+session="true" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String cp = request.getContextPath();	
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +51,7 @@ session="false" pageEncoding="UTF-8"%>
 	<form action="" method="post" name="mainSearchForm">
 	<div class="header">
 	    <div class="top">
-	        GRAND OPEN! 신규 회원 20% 즉시 할인 쿠폰 증정!
+	        GRAND OPEN! 신규 회원 10% 즉시 할인 쿠폰 증정!
 	        <img src="<%=cp%>/resources/image/beaudam/main/top.png" onclick="$('.top').slideUp(400);" style="cursor:pointer">
 	    </div>
 	    <!-- 로고 영역 -->

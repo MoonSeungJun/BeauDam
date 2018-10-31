@@ -45,7 +45,7 @@
 					totalPrice = Number(rmComma($("#totalPrice").text()))*0.2;
 					$("#discount").text(addComma(totalPrice));
 				}
-				
+		
 				$("#point").val(0);
 			} else {
 				$("#point").attr("readonly", false);
@@ -136,18 +136,21 @@
 		var payResult = Number(rmComma($("#totalPrice").text())) + Number(rmComma($("#shipping").text())) - Number(rmComma($("#discount").text()));
 		
 		var payType = $(":input:radio[name=payType]:checked").val();
+		var useCoupon = $('#coupon option:selected').val().substr(3);
+		
+		var point = $('#point').val();		
 		var id = '${member.id}';
 		var lists = new Array();		
 		<c:forEach items="${buyLists}" var="item">
 			lists.push("${item.basket_Num}");
 		</c:forEach>
 		var msg;
-// 		<option value="1" selected="selected">배송 전에 미리 연락바랍니다.</option>
-// 		<option value="2">부재시 경비실에 맡겨주세요.</option>
-// 		<option value="3">부재시 전화 주시거나 문자 남겨 주세요.</option>
-// 		<option value="4">직접입력</option>
-// 	</select>
-// 	<input type="text" id="val" value="">
+		
+		var qty = new Array();		
+		<c:forEach items="${buyLists}" var="item">
+			qty.push("${item.qty}");			
+		</c:forEach>
+		
 		if($('#msg').val() == 1){
 			msg = '배송 전에 미리 연락바랍니다.'
 		}else if($('#msg').val() ==2){
@@ -162,14 +165,13 @@
 		<c:forEach items="${buyLists}" var="item">
 			code.push("${item.code}");			
 		</c:forEach>
+	   	var params = {'payResult':payResult, 'payType':payType, 'id':id, 'lists':lists, 'msg':msg, 'code':code, 'coupon':useCoupon, 'point':point,'qty':qty};		
 		
-	   	var params = {'payResult':payResult, 'payType':payType, 'id':id, 'lists':lists, 'msg':msg, 'code':code};		
-
 	    var method = method || "post";	    
 	    var form = document.createElement("form");
 	    
 	    form.setAttribute("method", method);
-	    form.setAttribute("action", 'iampay.action');
+	    form.setAttribute("action", 'payOK.action');
 	    
 	    for(var key in params) {
 	        var hiddenField = document.createElement("input");

@@ -15,6 +15,12 @@ public class SaleServiceImpl implements SaleService {
 
 	@Resource(name="saleDAO")
 	private SaleDAO dao;
+
+	@Override
+	public String getMaxSaleCode() {
+		String str = dao.getMaxSaleCode();
+		return str;
+	}
 	
 	@Override
 	public void insertSaleDate(Sale_DateDTO dto) {

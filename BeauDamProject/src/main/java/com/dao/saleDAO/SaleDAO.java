@@ -16,10 +16,18 @@ public class SaleDAO {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
+	
+	
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
 		this.sessionTemplate = sessionTemplate;
 	}
 
+	
+	public String getMaxSaleCode() {
+		String str = sessionTemplate.selectOne("beaudam.getMaxSaleCode");
+		return str;
+	}
+	
 	public void insertSaleDate(Sale_DateDTO dto) {
 		sessionTemplate.insert("beaudam.insertSaleDate",dto);
 	}

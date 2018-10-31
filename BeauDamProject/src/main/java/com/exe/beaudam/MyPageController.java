@@ -76,8 +76,8 @@ public class MyPageController {
 	// ********************** My Page **********************
 
 	@RequestMapping(value = "/myPage.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPage(HttpSession session) {
-	
+	public String myPage() {
+		
 		// 마이페이지 이동
 		return "myPage/myPage";
 	}

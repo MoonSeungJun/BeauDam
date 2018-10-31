@@ -52,17 +52,17 @@
 				insert into sale_date 
 				(sale_code,payment_method,use_coupon,use_point,total_price)
 				values
-				(#{sale_code},#{payment_method},#{use_coupon},#{use_point},#{total_price})
+				(#{sale_Code},#{payment_Method},#{use_Coupon},#{use_Point},#{total_Price})
 			</insert>
 			
 			<insert id="insertSaleProduct" parameterType="com.table.saleDTO.Sale_ProductDTO">
 				insert into sale_product (sale_code,code,brand,product_name,product_price,color_code,qty) values
-				(#{sale_code},#{code},#{brand},#{product_name},#{product_price},#{color_code},#{qty})
+				(#{sale_Code},#{code},#{brand},#{product_Name},#{product_Price},#{color_Code},#{qty})
 			</insert>
 						
 			<insert id="insertSaleClient" parameterType="com.table.saleDTO.Sale_ClientDTO">
 				insert into sale_client (sale_code,id,name,tel,cellphone,addr,message) values
-				(#{sale_code},#{id},#{name},#{tel},#{cellphone},#{addr},#{message})
+				(#{sale_Code},#{id},#{name},#{tel},#{cellphone},#{addr},#{message})
 			</insert>	
 		
 			
@@ -107,6 +107,7 @@
 		
 	
 	<!-- Update -->
+	
 	
 	
 		<!-- Member -->
@@ -162,8 +163,8 @@
 			</update>					
 			
 		<!-- Coupon -->
-			<update id="updateCoupon" parameterType="map">
-				update coupon set usedate = #{usedate} where id = #{id}
+			<update id="updateCoupon" parameterType="int">
+				update coupon set usedate = sysdate where num = ${num}
 			</update>
 			
 		<!-- Notification -->
@@ -436,7 +437,9 @@
 			where id = #{id} and trunc(period-sysdate) <= 7	
 		]]>
 		</select>		
-		
+		<select id="selectCouponData" parameterType="int" resultType="String">
+			select coupon from coupon where num = #{num}
+		</select>
 		
 		<!-- Review -->
 		<select id="getReviewData" parameterType="String" resultType="com.table.otherDTO.ReviewDTO">
@@ -463,6 +466,9 @@
 				    id like '%' || #{searchId} || '%' and
 				    cellPhone like '%' || #{searchCellPhone} || '%'
 			order by sale_Code asc
+		</select>
+		<select id="getMaxSaleCode" resultType="String">
+			select max(sale_code) from saleview
 		</select>
 					
 </mapper>
