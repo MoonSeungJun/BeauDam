@@ -76,7 +76,7 @@ public class MyPageController {
 	// ********************** My Page **********************
 
 	@RequestMapping(value = "/myPage.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPage(HttpSession session) {
+	public String myPage() {
 	
 		// 마이페이지 이동
 		return "myPage/myPage";
@@ -116,7 +116,7 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value = "/myLeave.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myLeave(HttpSession session) {
+	public String myLeave() {
 
 		// 주문정보 (마이페이지) 페이지 이동
 

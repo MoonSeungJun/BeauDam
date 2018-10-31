@@ -152,7 +152,7 @@ button:hover {
 				<table style="width: 650px">
 					<tr>
 						<td width="150px" style="padding-left: 20px"><b>아이디</b></td>
-						<td>dohwi9406</td>
+						<td>${id }</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>이름</b></td>
