@@ -1,23 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	request.setCharacterEncoding("UTF-8"); 
+	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="./resources/css/customerCenter/customCenter.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 <style>
     .menu a{cursor:pointer;}
     .menu .hide{display:none;}
 </style>
-
 <script>
 	var jx = jQuery.noConflict();
     // html dom 이 다 로딩된 후 실행된다.
@@ -39,49 +37,76 @@
     function popupOpen(){
 
 	var popUrl = "inquire.action";	//팝업창에 출력될 페이지 URL
-
 	var popOption = "width=300, height=300, resizable=yes, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
 
 		window.open(popUrl,"",popOption);
-
 	}
     
 
-    function faqMove() {
-		
-    	$('answer1').css('diplay','');
-    	
+    function faqMove1() {
+    	$('#answer1').css('display','');
 	}
     
-function faqMove2() {
-		
-    	$('answer2').css('diplay','');
-    	
+	function faqMove2() {
+    	$('#answer2').css('display','');
+	}
+	
+	function faqMove3() {
+    	$('#answer3').css('display','');
 	}
     
-
+	//비로그인 시 , 로그인 필요 문구 출력
+	function tooltip() {
+		$(document).ready(function(){
+    		$('#[data-toggle="tooltip"]').tooltip();   
+		});
+	}
+	
 </script>
 </head>
 <body>
 <jsp:include page="../beaudam/mainTop.jsp" />
-<!-- 윗부분 -->
-<div>
-	<table border="0" align="center" style="width:25% " >
-		<tr align="center">
-			<td align="center">
-				HOME ><a href="notification.action">고객센터</a> > 자주묻는 질문
-			</td>
-		</tr>
-		
-		<tr align="center">
-			<td align="center">
-				자주묻는 질문<br>
-				Frequently Asked Questions
-			</td>
-		</tr>
-			
-	</table>
+<div class="wrapper">
+	<!-- 메뉴바 -->
+	<div class="menubar">
+		<div class="menu" style="width: 660px; margin: 50px auto;">
+			<ul class="menu_ul" style="overflow: hidden;">
+				<li style="border-left: 1px solid #ddd; background-image: url('/beaudam/resources/image/customerCenter/custom1.png');"><a href="<%=cp%>/notification.action">공지사항</a></li>
+				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom2.png');"><a href="<%=cp%>/faq.action">자주 묻는 질문</a></li>
+			<c:if test="${!empty id }">
+				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom3.png');"><a href="javascript:popupOpen();">1:1 상담 문의</a></li>
+			</c:if>
+			<c:if test="${empty id }"> 
+				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom3.png');"><a data-toggle="tooltip" title="로그인이 필요합니다">1:1 상담 문의</a></li>
+			</c:if>
+			</ul>
+		</div>
+	</div>
+	<!-- faq 구문 -->
+	<div style="border-top: 1px solid #e4eaed; border-bottom: 1px solid #e4eaed;" class="faq">
+		<ul>
+	        <li class="menu_q">
+	           <a href="javascript:void(0)" onclick="faqMove1();">환불 방법</a>
+	            <ul style="display: none;" id="answer1">
+	                <li class="menu_a"><a href="javascript:void(0)">결제했던 방법 혹은 뷰담포인트로 환불가능합니다.</a></li>   
+	            </ul>
+	        </li>
+		    <li class="menu_q">
+		    	<a href="javascript:void(0)" onclick="faqMove2();">뷰담 포인트 사용 방법</a>
+	            <ul style="display: none;" id="answer2">
+	                <li class="menu_a"><a href="javascript:void(0)">결제 시 결제창에서 사용하시면 됩니다.</a></li>
+	            </ul>
+	        </li>
+	        <li class="menu_q">
+		    	<a href="javascript:void(0)" onclick="faqMove3();">개명 시, 회원정보 변경은 어떻게 하나요?</a>
+	            <ul style="display: none;" id="answer3">
+	                <li class="menu_a"><a href="javascript:void(0)">1:1 상담 문의하기에 남겨주시면 소중한 고객님의 정보 확인 후 수정 완료 해드립니다.</a></li>
+	            </ul>
+	        </li>
+	 	</ul>
+	</div>
 </div>
+<<<<<<< HEAD
 <br><br>
 <!-- 왼쪽 사이드 메뉴바 -->
 
@@ -147,5 +172,8 @@ function faqMove2() {
  
 </div><br><br>
 
+=======
+<jsp:include page="../beaudam/mainBottom.jsp" />
+>>>>>>> 김해나브랜치
 </body>
 </html>

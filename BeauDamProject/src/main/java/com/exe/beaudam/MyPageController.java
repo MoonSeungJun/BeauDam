@@ -77,7 +77,11 @@ public class MyPageController {
 
 	@RequestMapping(value = "/myPage.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myPage() {
+<<<<<<< HEAD
 		
+=======
+	
+>>>>>>> ê¹€í•´ë‚˜ë¸Œëœì¹˜
 		// ¸¶ÀÌÆäÀÌÁö ÀÌµ¿
 		return "myPage/myPage";
 	}
@@ -116,7 +120,7 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value = "/myLeave.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myLeave(HttpSession session) {
+	public String myLeave() {
 
 		// ÁÖ¹®Á¤º¸ (¸¶ÀÌÆäÀÌÁö) ÆäÀÌÁö ÀÌµ¿
 

@@ -69,7 +69,10 @@ public class CustomCenterController {
 
 		HttpSession session= request.getSession();
 		
+<<<<<<< HEAD
 		
+=======
+>>>>>>> ê¹€í•´ë‚˜ë¸Œëžœì¹˜
 		request.setAttribute("id",session.getAttribute("id"));
 		
 		
@@ -255,9 +258,6 @@ public class CustomCenterController {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		otherService.deleteNotification(num);
-		
-		
-		
 		
 		// °øÁö»çÇ× »èÁ¦ ÀÌµ¿
 		return "redirect:/notification.action?pageNum="+pageNum;

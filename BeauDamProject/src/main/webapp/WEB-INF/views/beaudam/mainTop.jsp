@@ -55,19 +55,25 @@ session="true" pageEncoding="UTF-8"%>
 	        <img src="<%=cp%>/resources/image/beaudam/main/top.png" onclick="$('.top').slideUp(400);" style="cursor:pointer">
 	    </div>
 	    <!-- 로고 영역 -->
-	    <div class="header_wrapper">
+	    <div class="header_wrapper" style="height: 170px;">
 	        <div class="login">
+<<<<<<< HEAD
 	            <ul>
 	                <li><a href="<%=cp %>/notification.action">고객센터</a></li>
 	          		<c:if test="${!empty id}">
+=======
+	            <ul style="background-color: orange;">
+	                <li><a href="<%=cp%>/notification.action">고객센터</a></li>
+	          	<c:if test="${!empty id}">
+>>>>>>> 김해나브랜치
 	        		<li><a href="<%=cp%>/myPage.action">MY PAGE</a></li>
-	             <li><a href="<%=cp%>/logout.action">LOGOUT</a></li>
-	             <li>${id }님 환영합니다♥</li>
-	       			</c:if>         
-	       			<c:if test="${empty id }">
-	             <li><a href="<%=cp%>/newTerm.action">회원가입</a></li>
-	             <li><a href="<%=cp%>/login.action">LOGIN</a></li>
-	                </c:if>
+	            	 <li><a href="<%=cp%>/logout.action">LOGOUT</a></li>
+	             	<li><a>${id }님 환영합니다♥</a></li>
+	       		</c:if>         
+	       		<c:if test="${empty id }">
+	            	 <li><a href="<%=cp%>/newTerm.action">회원가입</a></li>
+	             	<li><a href="<%=cp%>/login.action">LOGIN</a></li>
+	            </c:if>
 	            </ul>
 	        </div>
 	        <div class="header_container">
@@ -143,7 +149,7 @@ session="true" pageEncoding="UTF-8"%>
 	</div>
 	</form>
 	<!-- 카테고리 -->
-	<div class="navbar_container sticky sticky_border">
+	<div class="navbar_container sticky sticky_border" style="height: 52px;">
 	<div class="navbar">
 	    <div class="dropdown" >
 	    <button class="dropbtn">CATERORY 

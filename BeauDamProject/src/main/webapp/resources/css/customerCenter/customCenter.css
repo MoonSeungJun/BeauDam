@@ -1,0 +1,113 @@
+@charset "UTF-8";
+@font-face { 
+	font-family: 'designhouseOTFLight00'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; }
+	
+@font-face { 
+	font-family: 'SeoulHangangM'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; }
+
+.title_style {
+    overflow: hidden;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.title_style h2 {
+    font-size: 40px;
+    line-height: 60px;
+    margin-top: 26px;
+    margin-bottom: 16px;
+    height: 60px;
+}
+
+.title_area {
+    margin: 0 auto;
+    width: 1200px;
+}	
+	
+.wrapper {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.menu_ul li {
+	float: left;
+    text-align: center;
+    font-size: 15px;
+    list-style-type: none;
+    width: 200px;
+    height: 150px;
+    line-height: 170px;
+    border: 1px solid #ddd;
+    border-left: 0px;
+    /* font-family: 'designhouseOTFLight00'; */
+    font-family: 'SeoulHangangM';
+    background-repeat: no-repeat;
+    background-position: center 40px;  
+}
+
+.menu_ul li:hover {
+	background-color: #F5F5DD;
+	color: white;
+}
+
+.menu_ul li:hover a {
+	color: black;
+	text-decoration: none;
+}
+
+.menu_ul a {
+	text-decoration: none;
+    color: gray;
+    text-align: center;
+    font-size: 15px;
+    width: 200px;
+    height: 150px;
+    line-height: 170px;
+}
+
+.board td {
+	border-bottom: 1px solid #e4eaed;
+	height: 50px;
+}
+
+.faq {
+	width: 80%;
+}
+
+.faq li {
+	padding: 30px;
+	border-bottom: 1px solid #e4eaed; 
+	width: 100%;
+	font-family: 'SeoulHangangM';
+	font-size: 20px;
+}
+
+.faq .menu_q {
+	background-image: url("/beaudam/resources/image/customerCenter/q.png");
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-position: 20px 30px; 
+}
+
+.faq li a {
+	margin-left: 23px;
+	text-decoration: none;
+}
+
+.faq li:last-child {
+	border-bottom: none;
+}
+
+.faq .menu_a {
+	background-image: url("/beaudam/resources/image/customerCenter/a.png");
+	background-repeat: no-repeat;
+	background-size: 30px;	
+	background-position: 20px 30px; 
+}
+
