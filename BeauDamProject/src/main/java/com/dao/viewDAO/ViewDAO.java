@@ -107,5 +107,12 @@ public class ViewDAO {
 		return result;
 	}
 	
+	public ProductView getProductDataRowNum(int selectRowNum){
+		
+		ProductView getProductDataRowNum = sessionTemplate.selectOne("beaudam.getProductDataRowNum",selectRowNum);
+		
+		return getProductDataRowNum;
+	
+	}
 	
 }

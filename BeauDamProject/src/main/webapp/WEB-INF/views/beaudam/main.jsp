@@ -175,21 +175,14 @@ $(document).ready(function() {
         
         <div class="new_item">
             <div class="new_item">
+            	<c:if test="${!empty newItemList }">
                 <h3>NEW ITEM</h3>
                 <ul class="new_item" style="width: 960px;">
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-                    <li><img src="<%=cp%>/resources/image/beaudam/main/bestitem_sample.jpg"></li>
-             	</ul>
+                	<c:forEach var="dto" items="${newItemList }">
+                    <li><a href="${detailUrl }?code=${dto.code}"><img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a></li>
+                    </c:forEach>
+                </ul>
+                </c:if>
             </div>
         </div>
         <jsp:include page="./mainBottom.jsp"/>

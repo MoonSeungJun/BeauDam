@@ -15,6 +15,13 @@ public class ProductServiceImpl implements ProductService {
 	@Resource(name="productDAO")
 	private ProductDAO dao;
 	
+	
+	@Override
+	public void updateQty(Map<String, Object> map) {
+		dao.updateQty(map);
+		
+	}
+	
 	@Override
 	public void insertProduct(ProductDTO dto) {
 		dao.insertProduct(dto);

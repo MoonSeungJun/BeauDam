@@ -147,6 +147,9 @@
 				update color set color_code=#{color_Code},color_name=#{color_Name},qty=#{qty} where code = #{code}
 			</update>
 			
+			<update id="updateQty" parameterType="map">
+				update color set qty = #{qty} where code = #{code}
+			</update>
 			
 		<!-- Admin -->
 			
@@ -294,7 +297,7 @@
 			
 			select *from (
 			select rownum rnum,data.*from (
-			select code,(product_Name||brand) as brand, product_Name,product_Price,type,thumb_Img from productView
+			select code,(product_Name||brand) as brand, product_Name,product_Price,type,category, thumb_Img from productView
 			where product_Name||brand like '%'||#{searchValue}||'%' and
 			      type like '%'||#{searchType}||'%'
 			order by code desc) data)
@@ -307,6 +310,16 @@
 			select nvl(count(*),0) from productView 
 			where  product_Name||brand like '%'||#{searchValue}||'%' and
 			      type like '%'||#{searchType}||'%'
+		</select>
+		
+		<select id="getProductDataRowNum" resultType="com.view.view.ProductView" parameterType="int">
+			select *from (
+			select rownum rnum,data.*from (
+			select code,thumb_Img from productView
+			order by code desc) data)
+			<![CDATA[
+			where rnum=#{selectRowNum}
+			]]>
 		</select>
 		
 		

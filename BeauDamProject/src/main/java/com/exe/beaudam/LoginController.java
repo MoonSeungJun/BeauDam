@@ -103,6 +103,7 @@ public class LoginController {
 		
 		MemberView dto = viewService.getOneMemberData(id);
 		
+		
 		if(dto == null) {
 			
 			String errormessage = "존재하지 않는 아이디입니다";
@@ -110,6 +111,17 @@ public class LoginController {
 			return new ModelAndView("beaudam/login", "message", errormessage);
 			
 		}
+		
+		int leave_ck = dto.getIsLeave();
+		
+		if(leave_ck ==1) {
+			String errormessage2 = "탈퇴한 회원입니다.";
+			
+			return new ModelAndView("beaudam/login", "message", errormessage2);
+		}
+		
+		
+		
 
 		String ck_pwd = dto.getPwd();
 		
@@ -126,6 +138,11 @@ public class LoginController {
 			return new ModelAndView("beaudam/login", "message", errormessage);
 		
 		}
+		
+		
+		
+		
+		
 	}
 	
 	@RequestMapping(value = "/callback.action", method = { RequestMethod.GET, RequestMethod.POST })

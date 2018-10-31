@@ -1,6 +1,7 @@
 package com.exe.beaudam;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -12,10 +13,13 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dao.memberDAO.MemberServiceImpl;
 import com.dao.otherDAO.OtherServiceImpl;
 import com.dao.productDAO.*;
+import com.dao.saleDAO.SaleServiceImpl;
 import com.dao.viewDAO.ViewService;
 import com.exe.util.MyUtil;
+import com.table.memberDTO.*;
 import com.table.otherDTO.BasketDTO;
 import com.table.otherDTO.CouponDTO;
 import com.view.view.*;
@@ -92,10 +96,16 @@ public class BeaudamController {
 	@Resource(name="productService")
 	private ProductServiceImpl productService;
 
+
 	@Autowired
 	MyUtil myUtil;
 	
+	@Resource(name="memberService")
+	private MemberServiceImpl memberService;
 	
+	@Resource(name="saleService")
+	private SaleServiceImpl saleService;
+
 	
 	// ********************** Beaudam Page **********************
 
@@ -121,16 +131,65 @@ public class BeaudamController {
 			productList.add(productVO);		
 			
 		}
+		//랜덤함수로 뉴아이템 
 		
+		HashMap<String, Object> searchPack = new HashMap<String, Object>();
+		
+		String searchValue = "";
+		String searchType = "";
+		
+		searchPack.put("searchValue", searchValue);
+		searchPack.put("searchType", searchType);
+		
+		
+		int count = viewService.getSearchDataCount(searchPack);	
+		int selectRowNum = 0;
+		
+		 	/*System.out.println("++++++++++++++++++++++++");
+	        System.out.println(count);
+	        System.out.println("++++++++++++++++++++++++");*/
+				
+		List<ProductView> newItemList = new ArrayList<ProductView>();
+		
+		   
+		HashSet<Integer> randomList = new HashSet<Integer>();		// 난수를 저장할 HashSet
+		Random rand = new Random();
+		List<Integer> numberList = new ArrayList<Integer>();	// 결과를 저장할 ArrayList
+		
+		while(randomList.size()<12){						// HashSet의 크기가 10보다 작을 동안 
+			int oldSize = randomList.size();				// 기존의 HashSet 크기
+			int temp = rand.nextInt(count)+1;					// 1 ~ 10 까지 난수 생성
+			randomList.add(temp);							// HashSet에 추가 => 중복 되면 값이 추가 되지 않음
+			if(randomList.size() > oldSize)					// 크기가 변하면 중복되지 않았다는 뜻
+				numberList.add(temp);	
+		
+		}
+	        
+	         Iterator<Integer> numIt = numberList.iterator();
+	            
+	            
+	        for(int i=0; i<numberList.size();i++) {
+	        	
+	        	selectRowNum = numIt.next();
+	        	
+	        	ProductView newitemVO = viewService.getProductDataRowNum(selectRowNum);
+	        	newItemList.add(newitemVO);
+	        }
+	        String cp = req.getContextPath();
+	        String detailUrl = cp+"/productDetail.action";
+	 	
 		
 		req.setAttribute("bestItem", bestItems);
 		req.setAttribute("productList", productList);
-		
-		
+		req.setAttribute("newItemList", newItemList);
+		req.setAttribute("detailUrl", detailUrl);
 		
 		// 메인 페이지 이동
 		return new ModelAndView("beaudam/main", "id", id);
 	}
+ 	
+   
+
 
 	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView productList(HttpSession session,HttpServletRequest request)throws Exception {
@@ -141,21 +200,12 @@ public class BeaudamController {
 		String pageNum = request.getParameter("pageNum");
 		String searchType = request.getParameter("searchType");
 		
-		System.out.println("********************");
-		System.out.println("********************");
-		System.out.println(searchType);
-		System.out.println("********************");
-		System.out.println("********************");
-		
-		
-		if(id==null||id.equals("")) {
-			
-			return new ModelAndView("beaudam/main");
-		}
-		
 		
 		if(searchValue==null||searchValue.equals("")) {
 			searchValue="";
+		}
+		if(searchValue!=null&&!searchValue.equals("")) {
+			searchType="";
 		}
 		
 		if(searchType==null||searchType.equals("")) {
@@ -163,9 +213,7 @@ public class BeaudamController {
 		}
 		if(searchType!=null&&!searchType.equals("")) {
 			searchValue="";
-		}
-		
-				
+		}				
 				
 		//검색값 사이 앞뒤 공백제거
 		searchValue = searchValue.trim();
@@ -225,16 +273,20 @@ public class BeaudamController {
 	    if(!param.equals("")) {
 	    	detailUrl = detailUrl+"&"+param;
 	    }
-	    	    
+	    System.out.println("^^^^^^^^^^^^^^^^^^^^^^");
+	    System.out.println(searchType);
+	    System.out.println(searchValue);
+	    System.out.println("^^^^^^^^^^^^^^^^^^^^^^");	    
 	    
 		request.setAttribute("searchProductList", searchProductList);
 		request.setAttribute("count", count);
 		request.setAttribute("detailUrl", detailUrl);
 		request.setAttribute("pageIndexList", pageIndexList);
-		
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("searchValue", searchValue);
 		return new ModelAndView("beaudam/productList", "id", (String) session.getAttribute("id"));
 		
-
+		
 	}
 
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
@@ -330,5 +382,100 @@ public class BeaudamController {
 		// 결제 페이지 이동
 		return mav;
 	}
+
+
+	@RequestMapping(value = "/insertBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public void insertBasket(HttpServletRequest req, HttpSession session) {
+		
+		String code = req.getParameter("code");
+		int amount = Integer.parseInt(req.getParameter("amount"));
+		String id = (String) session.getAttribute("id");
+		
+		ProductView pView = productService.getOneProductData(code);
+		MemberView mView = memberService.getOneMemberData(id);
+		
+		BasketDTO dto = new BasketDTO();
+		dto.setId(mView.getId());
+		dto.setCode(code);
+		dto.setBrand(pView.getBrand());
+		dto.setProduct_Name(pView.getProduct_Name());
+		dto.setColor_Code(pView.getColor_Code());
+		dto.setColor_Name(pView.getColor_Name());
+		dto.setThumb_Img(pView.getThumb_Img());
+		dto.setProduct_Price(pView.getProduct_Price());
+		dto.setQty(amount);		
+		
+		otherService.insertBasket(dto);	
+		
+	}
+
+	@RequestMapping(value = "/deleteBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public void deleteBasket(HttpServletRequest req, HttpSession session) {
+	
+		String basket_Num = req.getParameter("basket_Num");
+		String id = req.getParameter("id");
+		System.out.println(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("basket_Num", basket_Num);
+		map.put("id", id);
+		
+		otherService.deleteBasket(map);
+		
+		
+	}	
+	@RequestMapping(value = "/deleteAllBasket.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public void deleteAllBasket(HttpServletRequest req, HttpSession session) {
+	
+		String id = (String) session.getAttribute("id");
+		
+		otherService.deleteAllBasket(id);	
+		
+	}
+		
+	@RequestMapping(value = "/payOK.action", method = { RequestMethod.POST })
+	public String payOK(HttpServletRequest req) {
+		
+		//sale insert
+		
+//		saleService.insertSaleDate(dto);
+//		saleService.insertSaleProduct(dto);
+//		saleService.insertSaleClient(dto);;
+		
+		
+		//product update
+		String code = req.getParameter("code");
+		int qty = Integer.parseInt(req.getParameter("qty"));
+			
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", code);
+		map.put("qty", qty);
+		productService.updateQty(map);	
+		
+		//basket delete
+		String id = req.getParameter("id");
+		otherService.deleteAllBasket(id);
+		
+		//member update
+		MemberView view = memberService.getOneMemberData(id);
+		Member_GradeDTO dto = new Member_GradeDTO();
+		dto.setId(id);
+		dto.setPay(Integer.parseInt(req.getParameter("payResult")));		
+		int point = (int) (dto.getPay()*0.1);
+		dto.setPoint(point);
+		
+		if(view.getPay() >= 10000) {
+			dto.setGrade("Silver");
+		}else if(view.getPay() >= 50000) {
+			dto.setGrade("Gold");
+		}else if(view.getPay() >= 0) {
+			dto.setGrade(view.getGrade());
+		}	
+		
+		//coupon update
+		
+		return "redirect:/main.action";
+	}
+	
 
 }

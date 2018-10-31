@@ -20,4 +20,5 @@ public interface ViewService {
 	List<MemberView> getSearchMemberData(Member_InfoDTO dto);
 	List<ProductView> getSearchProductDataList(HashMap<String, Object> searchValuePack);
 	int getSearchDataCount(HashMap<String, Object> searchCountPack);
+	ProductView getProductDataRowNum(int selectRowNum);
 }

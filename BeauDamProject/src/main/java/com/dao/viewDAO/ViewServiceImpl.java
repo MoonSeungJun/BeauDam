@@ -95,6 +95,15 @@ public class ViewServiceImpl implements ViewService {
 		return result;
 	}
 
+	@Override
+	public ProductView getProductDataRowNum(int selectRowNum) {
+		
+		ProductView getProductDataRowNum = dao.getProductDataRowNum(selectRowNum);
+
+		return getProductDataRowNum;
+	}
+
+	
 
 	
 	
