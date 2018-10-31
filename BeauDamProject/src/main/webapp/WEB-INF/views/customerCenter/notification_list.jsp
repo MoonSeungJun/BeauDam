@@ -41,7 +41,7 @@
 	<div class="menubar">
 		<div class="menu" style="width: 660px; margin: 50px auto;">
 			<ul class="menu_ul" style="overflow: hidden;">
-				<li style="border-left: 1px solid gray; background-image: url('/beaudam/resources/image/customerCenter/custom1.png');"><a href="<%=cp%>/notification.action">공지사항</a></li>
+				<li style="border-left: 1px solid #ddd; background-image: url('/beaudam/resources/image/customerCenter/custom1.png');"><a href="<%=cp%>/notification.action">공지사항</a></li>
 				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom2.png');"><a href="<%=cp%>/faq.action">자주 묻는 질문</a></li>
 				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom3.png');"><a href="javascript:popupOpen();">1:1 상담 문의</a></li>
 			</ul>
@@ -120,5 +120,6 @@
 	</form>
 	</div>
 </div>
+<jsp:include page="../beaudam/mainBottom.jsp" />
 </body>
 </html>
