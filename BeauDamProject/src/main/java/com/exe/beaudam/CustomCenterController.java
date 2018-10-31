@@ -145,7 +145,7 @@ public class CustomCenterController {
 			request.setAttribute("pageIndexList",pageIndexList);
 			request.setAttribute("dataCount",dataCount);
 			request.setAttribute("articleUrl",articleUrl);
-			request.setAttribute("id", "admin");
+			request.setAttribute("id", session.getAttribute("id"));
 		
 		
 		// 공지사항 페이지 이동
