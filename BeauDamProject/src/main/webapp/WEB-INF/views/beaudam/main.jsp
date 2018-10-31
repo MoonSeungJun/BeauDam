@@ -93,7 +93,7 @@ $(document).ready(function() {
 </script>    
 </head>
 <body>
-	<jsp:include page="./mainTop.jsp"/>
+	<jsp:include page="mainTop.jsp"/>
         <!-- 슬라이드 이미지 -->
         <div class="container" style="width: 100%">  
             <div id="myCarousel" class="carousel slide" data-ride="carousel">

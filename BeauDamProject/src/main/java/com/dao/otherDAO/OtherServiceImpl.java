@@ -15,6 +15,13 @@ public class OtherServiceImpl implements OtherService {
 	@Resource(name="otherDAO")
 	private OtherDAO dao;
 	
+	
+	@Override
+	public String selectCouponData(int couponNum) {
+		String str = dao.selectCouponData(couponNum);
+		return str;
+	}
+	
 	@Override
 	public void deleteAllBasket(String id) {
 		dao.deleteAllBasket(id);
@@ -46,8 +53,8 @@ public class OtherServiceImpl implements OtherService {
 	}
 
 	@Override
-	public void updateCoupon(HashMap<String, Object> map) {
-		dao.updateCoupon(map);
+	public void updateCoupon(int num) {
+		dao.updateCoupon(num);
 		
 	}
 

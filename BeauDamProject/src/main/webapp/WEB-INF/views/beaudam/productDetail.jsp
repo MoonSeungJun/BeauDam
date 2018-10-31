@@ -72,6 +72,34 @@ session="false" pageEncoding="UTF-8"%>
   				
 			}
   			
+			function buyNow(code) {
+				
+				var amount = parseInt($('#amount').val()); 				
+  				
+  				if(amount == 0){
+  					alert("갯수를 확인해 주세요");
+  					return;
+  				}  			
+				$.ajax({
+  					
+  					type:'POST',
+  					url: 'insertBasket.action',
+  					data:{
+  						'amount':amount,
+  						'code':code
+  					},  			
+  					async:false,
+  					dataType: "text",
+  					complete: function() {
+  						window.location.href="/beaudam/myBasket.action";
+					}
+  					
+  				});
+					
+				
+				
+				
+			}
   		
   		</script>
     </head>
@@ -117,20 +145,17 @@ session="false" pageEncoding="UTF-8"%>
                     </div>
                     <div class="buy">                         
                         <span><a href="javascript:void(0);" onclick="insertBasket('${dto.code}');"><img class="cart_button" src="<%=cp %>/resources/image/beaudam/productDetail/cart_2.png"></a></span>
-                        <span><a href=""><img class="buy_button" src="<%=cp %>/resources/image/beaudam/productDetail/buy.png""></a></span>
+                        <span><a href="javascript:void(0);" onclick="buyNow('${dto.code}')"><img class="buy_button" src="<%=cp %>/resources/image/beaudam/productDetail/buy.png""></a></span>
                     </div>
                 </div>  
             </div>
         </div>
         <div class="detail">
         	<hr>
-<<<<<<< HEAD
+
         	<h4 style="font-weight: bold;">상세정보</h4>
         	<img class="detailimg" src="<%=cp %>/detailImg/${dto.detail_Img}">
-=======
-        	<h4 style="font-weight: bold; margin-bottom: 20px;">상세정보</h4>
-        	<img class="detailimg" src="<%=cp %>/resources/image/beaudam/productDetail/detail.jpg">
->>>>>>> 김해나브랜치
+
         </div>
         <div class="review">
         	<hr>

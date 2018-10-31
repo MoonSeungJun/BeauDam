@@ -21,6 +21,13 @@ public class OtherDAO {
 		sessionTemplate.delete("beaudam.deleteAllBasket",id);
 		
 	}
+
+	public String selectCouponData(int couponNum) {
+		String str = sessionTemplate.selectOne("beaudam.selectCouponData",couponNum);
+		return str;
+		
+	}
+	
 	
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
 		this.sessionTemplate = sessionTemplate;
@@ -46,8 +53,8 @@ public class OtherDAO {
 
 	}
 
-	public void updateCoupon(HashMap<String, Object> map) {
-		sessionTemplate.update("beaudam.updateCoupon", map);
+	public void updateCoupon(int num) {
+		sessionTemplate.update("beaudam.updateCoupon", num);
 
 	}
 

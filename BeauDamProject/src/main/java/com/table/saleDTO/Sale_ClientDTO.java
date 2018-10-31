@@ -17,11 +17,11 @@ public class Sale_ClientDTO {
     // 배송메세지
     private String message;
 
-    public String getSaleCode() {
+    public String getSale_Code() {
         return sale_Code;
     }
 
-    public void setSaleCode(String sale_Code) {
+    public void setSale_Code(String sale_Code) {
         this.sale_Code = sale_Code;
     }
 

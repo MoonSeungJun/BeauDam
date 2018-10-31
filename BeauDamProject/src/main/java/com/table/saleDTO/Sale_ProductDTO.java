@@ -16,11 +16,11 @@ public class Sale_ProductDTO {
 
     private int qty;
 
-    public String getSaleCode() {
+    public String getSale_Code() {
         return sale_Code;
     }
 
-    public void setSaleCode(String sale_Code) {
+    public void setSale_Code(String sale_Code) {
         this.sale_Code = sale_Code;
     }
 
@@ -40,27 +40,27 @@ public class Sale_ProductDTO {
         this.brand = brand;
     }
 
-    public String getProductName() {
+    public String getProduct_Name() {
         return product_Name;
     }
 
-    public void setProductName(String product_Name) {
+    public void setProduct_Name(String product_Name) {
         this.product_Name = product_Name;
     }
 
-    public int getProductPrice() {
+    public int getProduct_Price() {
         return product_Price;
     }
 
-    public void setProductPrice(int product_Price) {
+    public void setProduct_Price(int product_Price) {
         this.product_Price = product_Price;
     }
 
-    public String getColorCode() {
+    public String getColor_Code() {
         return color_Code;
     }
 
-    public void setColorCode(String color_Code) {
+    public void setColor_Code(String color_Code) {
         this.color_Code = color_Code;
     }
 

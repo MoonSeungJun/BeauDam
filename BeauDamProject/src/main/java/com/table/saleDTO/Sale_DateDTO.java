@@ -21,43 +21,43 @@ public class Sale_DateDTO {
 
     private int total_Price;
 
-    public String getSaleCode() {
+    public String getSale_Code() {
         return sale_Code;
     }
 
-    public void setSaleCode(String sale_Code) {
+    public void setSale_Code(String sale_Code) {
         this.sale_Code = sale_Code;
     }
 
-    public String getPaymentMethod() {
+    public String getPayment_Method() {
         return payment_Method;
     }
 
-    public void setPaymentMethod(String payment_Method) {
+    public void setPayment_Method(String payment_Method) {
         this.payment_Method = payment_Method;
     }
 
-    public String getPayStatus() {
+    public String getPay_Status() {
         return pay_Status;
     }
 
-    public void setPayStatus(String pay_Status) {
+    public void setPay_Status(String pay_Status) {
         this.pay_Status = pay_Status;
     }
 
-    public String getDeleveryStatus() {
+    public String getDelevery_Status() {
         return delevery_Status;
     }
 
-    public void setDeleveryStatus(String delevery_Status) {
+    public void setDelevery_Status(String delevery_Status) {
         this.delevery_Status = delevery_Status;
     }
 
-    public String getUseCoupon() {
+    public String getUse_Coupon() {
         return use_Coupon;
     }
 
-    public void setUseCoupon(String use_Coupon) {
+    public void setUse_Coupon(String use_Coupon) {
         this.use_Coupon = use_Coupon;
     }
 
@@ -69,11 +69,11 @@ public class Sale_DateDTO {
         this.saleDate = saleDate;
     }
 
-    public int getUsePoint() {
+    public int getUse_Point() {
         return use_Point;
     }
 
-    public void setUsePoint(int use_Point) {
+    public void setUse_Point(int use_Point) {
         this.use_Point = use_Point;
     }
 
