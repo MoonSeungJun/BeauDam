@@ -64,10 +64,50 @@
 .menu_ul a {
 	text-decoration: none;
     color: gray;
+    text-align: center;
+    font-size: 15px;
+    width: 200px;
+    height: 150px;
+    line-height: 170px;
 }
 
 .board td {
 	border-bottom: 1px solid #e4eaed;
 	height: 50px;
+}
+
+.faq {
+	width: 80%;
+}
+
+.faq li {
+	padding: 30px;
+	border-bottom: 1px solid #e4eaed; 
+	width: 100%;
+	font-family: 'SeoulHangangM';
+	font-size: 20px;
+}
+
+.faq .menu_q {
+	background-image: url("/beaudam/resources/image/customerCenter/q.png");
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-position: 20px 30px; 
+}
+
+.faq li a {
+	margin-left: 23px;
+	text-decoration: none;
+}
+
+.faq li:last-child {
+	border-bottom: none;
+}
+
+.faq .menu_a {
+	background-image: url("/beaudam/resources/image/customerCenter/a.png");
+	background-repeat: no-repeat;
+	background-size: 30px;	
+	background-position: 20px 30px; 
 }
 
