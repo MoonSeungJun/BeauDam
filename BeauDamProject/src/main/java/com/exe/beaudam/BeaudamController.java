@@ -130,6 +130,11 @@ public class BeaudamController {
 		// 메인 페이지 이동
 		return new ModelAndView("beaudam/main", "id", id);
 	}
+	
+	@RequestMapping(value = "/mainTop.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String mainTop(HttpSession session, HttpServletRequest req) {
+		return "beaudam/mainTop";
+	}
 
 	@RequestMapping(value = "/productList.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView productList(HttpSession session) {

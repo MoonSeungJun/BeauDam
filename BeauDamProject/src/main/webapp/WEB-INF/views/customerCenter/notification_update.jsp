@@ -35,17 +35,12 @@
 		f.action = "<%=cp%>/notification_update_ok.action"
 		f.submit();
 	}
-	
-	
-	
-
 </script>
 </head>
 <body>
 <jsp:include page="../beaudam/mainTop.jsp" />
-
 <form action="" name="notificationEditForm" method="post">
-	<table border="1" align="center">
+	<table border="1">
 
 	
 		<tr>

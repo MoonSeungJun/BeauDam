@@ -10,16 +10,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <script type="text/javascript">
-
 	function sendIt() {
 		
 		var f = document.notificationListForm;
 		
 		f.action="<%=cp%>/notification.action";
-		f.submit();
-				
+		f.submit();	
 	}
 
 	//1:1문의연결팝업
@@ -30,20 +27,16 @@
 	var popOption = "width=300, height=300, resizable=yes, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
 
 		window.open(popUrl,"",popOption);
-
 	}
-	
-
 </script>
-
-
-
 </head>
 <body>
-<!-- 윗부분 -->
 <jsp:include page="../beaudam/mainTop.jsp" />
-<div >
-	<table border="0" align="center" style="width:25% ">
+<!-- /notification.action 고객센터 메인 -->
+
+<!-- 윗부분 -->
+<div style="margin-top: ">
+	<table border="1">
 		<tr align="center">
 			<td align="center">
 				HOME ><a href="notification.action">고객센터</a> > 공지사항
@@ -53,7 +46,6 @@
 		<tr align="center">
 			<td align="center">
 				공지사항<br>
-
 			</td>
 		</tr>
 			
@@ -64,7 +56,7 @@
 <!-- 왼쪽 사이드 메뉴바 -->
 
 <div style="float: left;margin-left:260px; margin-right: 30px; height: auto; width: 260px;">
-	<table border="1" align="center" style="height: 100%; width: 100%;">
+	<table border="1" style="height: 100%; width: 100%; ">
 
 		<tr style="height: 55px;">
 
@@ -74,14 +66,14 @@
 								
 		</tr>		
 		
-
+<!-- 로그인값이 있어야 1:1 버튼 활성화 -->
 		<tr style="height: 55px;">
-		<c:if test="${!empty cusId }">
+		<c:if test="${!empty id }">
 			<td align="center">
 			 <a href="javascript:popupOpen();" > 1:1문의 </a>
 			 </td>
 		</c:if>
-		<c:if test="${empty cusId }"> 
+		<c:if test="${empty id }"> 
 			 <td align="center">
 			  1:1문의
 			 </td>		
@@ -104,7 +96,7 @@
 <div style="float: left; height:auto;width: 52%;">
 	<form action="" name="notificationListForm" method="post">
 
-	<table border="0"  style="height: 100%; width: 100%;" >  
+	<table style="height: 100%; width: 100%; border: 1" >  
 				
 		<tr style="height: 50px;">
 			
@@ -176,13 +168,13 @@
 		<tr style="height: 35px;">
 			<td colspan="2" align="right">
 			</td>
-			<c:if test="${cusId eq'Admin' }">
+			<c:if test="${id eq'admin' }">
 			<td align="center">
 				<input type="button" value="공지등록" 
 				onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
 			</td>
 			</c:if>	
-			<c:if test="${empty cusId }">
+			<c:if test="${empty id }">
 				<td>
 					&nbsp;
 				</td>
@@ -192,6 +184,6 @@
 	</table>
 </form>
 </div>
-</div>
+
 </body>
 </html>

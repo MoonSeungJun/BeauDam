@@ -96,14 +96,14 @@ function faqMove2() {
 								
 		</tr>		
 		
-
+<!-- 로그인값이 있어야 1:1 버튼 활성화 -->
 		<tr style="height: 55px;">
-		<c:if test="${!empty cusId }">
+		<c:if test="${!empty id }">
 			<td align="center">
 			 <a href="javascript:popupOpen();" > 1:1문의 </a>
 			 </td>
 		</c:if>
-		<c:if test="${empty cusId }"> 
+		<c:if test="${empty id }"> 
 			 <td align="center">
 			  1:1문의
 			 </td>		
@@ -125,26 +125,20 @@ function faqMove2() {
 
 <!-- faq 구문 -->
 <div style="float: left; height: 255px;width: 52%;">
-
+	<ul>
         <li class="menu">
             <a href="javascript:void(0);" onclick="faqMove();">Q.환불방법</a>
             <ul class="menu" style="display: none;" id="answer1">
-
-                <li>결제하셨던 방법 혹은 뷰담포인트로 환불가능합니다.</li>
-                
+                <li>결제하셨던 방법 혹은 뷰담포인트로 환불가능합니다.</li>   
             </ul>
-             
         </li>
-        
         <li class="menu">
-          
             <a href="javascript:void(0);" onclick="faqMove2();">Q.뷰담포인트사용방법</a>
             <ul class="menu" style="display: none;" id="answer2">
-
                 <li>결제시에 사용하세요.</li>
             </ul>
         </li>
- 
+ 	</ul>
 </div><br><br>
 
 </body>
