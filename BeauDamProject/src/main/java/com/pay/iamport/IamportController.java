@@ -1,10 +1,5 @@
 package com.pay.iamport;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.*;
 
 import javax.annotation.*;
@@ -19,6 +14,7 @@ import com.dao.otherDAO.*;
 import com.dao.productDAO.*;
 import com.dao.saleDAO.*;
 import com.table.memberDTO.*;
+import com.table.otherDTO.*;
 import com.table.saleDTO.*;
 import com.view.view.*;
 
@@ -46,7 +42,18 @@ public class IamportController {
 		String lists = req.getParameter("lists");//basket_Num 들어있다
 		String msg = req.getParameter("msg");
 		String codes = req.getParameter("code");
-		int couponNum = Integer.parseInt(req.getParameter("coupon"));		
+		
+		String couponNumstr = req.getParameter("coupon");
+		int couponNum = 0;
+		
+		if(couponNumstr != null && !couponNumstr.equals("")) {
+			couponNum = Integer.parseInt(req.getParameter("coupon"));
+		}else {
+			couponNum = 1;
+		}
+		
+		
+		
 		int point = Integer.parseInt(req.getParameter("point"));
 		String qtys = req.getParameter("qty");
 		
@@ -77,39 +84,12 @@ public class IamportController {
 		
 		
 		return "iamport/iampay";
+
 	}
 
-	/*public void auth() {
-		String data = "{\"imp_key\" : \"8304328758939014\",\"imp_secret\" : \"bEzquPEmbFRvWHduwaOse0R5XMUSYDgaiQBMFf9QU1mRIzleKaGYay38kY1jBhtU84HNjQEeS05AArPk\"}";
-		
-		try {
-	        URL url = new URL("https://api.iamport.kr/users/getToken");
-	        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-	        connection.setDoInput(true);
-	        connection.setDoOutput(true);
-	        connection.setRequestMethod("POST");
-	        connection.setRequestProperty("Accept", "application/json");
-	        connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-	        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
-	        writer.write(data);
-	        writer.close();
-	        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-	        StringBuffer jsonString = new StringBuffer();
-	        String line;
-	        while ((line = br.readLine()) != null) {
-	                jsonString.append(line);
-	        }
-//	        System.out.println(jsonString);
-	        br.close();
-	        connection.disconnect();
-	    } catch (Exception e) {
-	            throw new RuntimeException(e.getMessage());
-	    }
-	}*/
 	
 	
-	@RequestMapping(value = "/payOK.action", method = {RequestMethod.GET,	 RequestMethod.POST })
+	@RequestMapping(value = "/payOK.action", method = {RequestMethod.GET,RequestMethod.POST })
 	public String payOK(HttpServletRequest req) {
 
 //		넘어온 값 받아서 정리		
@@ -123,27 +103,42 @@ public class IamportController {
 		String lists = req.getParameter("lists"); //배열
 		String qtysstr = req.getParameter("qty"); //배열
 		
-		
+		System.out.println(payType);
+		System.out.println(id);
+		System.out.println(msg);
+		System.out.println(codes);
+		System.out.println(payResultstr);
+		System.out.println(couponNumstr); //1
+		System.out.println(pointstr);
+		System.out.println(lists);
+		System.out.println(qtysstr);
+
 		String[] code = codes.split(",");
 		String[] basketNumstr = lists.split(",");
-		String[] qtystr = qtysstr.split(",");
+		String[] qtystr = qtysstr.split(",");		
 		
+		System.out.println(qtystr[0]);
 		int payResult = Integer.parseInt(payResultstr);
-		int couponNum = Integer.parseInt(couponNumstr);
+		int couponNum = 0;
+		
+		if(couponNumstr == null || couponNumstr.equals("")) {
+			couponNum = 1;
+		}else {
+			couponNum = Integer.parseInt(couponNumstr);
+		}
+		
 		int point = Integer.parseInt(pointstr);
 		int[] basketNum = new int[basketNumstr.length];
 		int[] qty = new int[qtystr.length];		
 		
-		if(couponNum == 1) {					
-			point = 0;
-		}
 		
 		for(int i=0;i<basketNumstr.length;i++) {			
-			basketNum[i] = Integer.parseInt(basketNumstr[i]);
+			basketNum[i] = Integer.parseInt(basketNumstr[i]);			
 		}
 		
-		for(int i=0;i>qtystr.length;i++) {
-			qty[i] = Integer.parseInt(qtystr[i]);
+		
+		for(int i=0;i<qtystr.length;i++) {
+			qty[i] = Integer.parseInt(qtystr[i]);		
 		}
 
 		//sale insert
@@ -156,8 +151,9 @@ public class IamportController {
 			if(saleCode == null || saleCode.equals("")) {				
 				saleCode = "0";				
 			}
-			saleCode = Integer.toString((Integer.parseInt(saleCode)+1));	
-			
+			int sale_Code = Integer.parseInt(saleCode)+1;
+			saleCode = Integer.toString(sale_Code);		
+			System.out.println(saleCode);
 			dateDTO.setSale_Code(saleCode);
 			dateDTO.setPayment_Method(payType);
 			
@@ -166,8 +162,8 @@ public class IamportController {
 				dateDTO.setUse_Coupon(couponName);
 			}else {
 				dateDTO.setUse_Coupon("-");
-			}		
-			
+				
+			}					
 			dateDTO.setUse_Point(point);
 			dateDTO.setTotal_Price(payResult);
 		
@@ -197,7 +193,7 @@ public class IamportController {
 		}
 		
 		
-		System.out.println("OK2");
+		
 		
 		
 		
@@ -216,15 +212,23 @@ public class IamportController {
 		}		
 		
 		
-		System.out.println("OK3");
+	System.out.println(point);
 		
 		
 		//basket delete		
 		//장바구니 초기화
-		otherService.deleteAllBasket(id);
+		
+		for(int i=0;i<basketNum.length;i++) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("basket_Num", basketNum[i]);
+			map.put("id", id);
+			otherService.deleteBasket(map);
+		}
 		
 		
-		System.out.println("OK4");
+		
+		System.out.println(point);
+	
 		
 		
 		//member update
@@ -232,6 +236,11 @@ public class IamportController {
 		Member_GradeDTO dto = new Member_GradeDTO();
 		dto.setId(id);
 		dto.setPay(view.getPay()+payResult);
+		
+		
+		System.out.println(point);
+		
+		
 		
 		if(point == 0) {
 			int getPoint = (int) (payResult*0.1);
@@ -242,26 +251,80 @@ public class IamportController {
 		
 		
 		
-		if(dto.getPay() >= 10000) {
+		if(dto.getPay() >= 100000 && dto.getPay() <= 500000) {
 			dto.setGrade("Silver");
-		}else if(dto.getPay() >= 50000) {
+		}else if(dto.getPay() >= 500000) {
 			dto.setGrade("Gold");
-		}else if(dto.getPay() >= 0) {
+		}else if(dto.getPay() <= 100000) {
 			dto.setGrade(view.getGrade());
 		}	
 		
+		if(dto.getPay()%50000 == 0) {
+			CouponDTO coupon = new CouponDTO();
+			coupon.setId(id);
+			coupon.setCoupon("20%");
+			otherService.insertCoupon(coupon);
+		}
 		
-		System.out.println("OK5");
+		memberService.updateMemberGrade(dto);
+		
+	
 		
 		
 		//coupon update
-		if(couponNum != 1) {	
-			
-			otherService.updateCoupon(couponNum);
-			
+		if(couponNum != 1) {				
+			otherService.updateCoupon(couponNum);			
 			
 		}
 		return "redirect:/main.action";
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*public void auth() {
+	String data = "{\"imp_key\" : \"8304328758939014\",\"imp_secret\" : \"bEzquPEmbFRvWHduwaOse0R5XMUSYDgaiQBMFf9QU1mRIzleKaGYay38kY1jBhtU84HNjQEeS05AArPk\"}";
+	
+	try {
+        URL url = new URL("https://api.iamport.kr/users/getToken");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        connection.setDoInput(true);
+        connection.setDoOutput(true);
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Accept", "application/json");
+        connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
+        writer.write(data);
+        writer.close();
+        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        StringBuffer jsonString = new StringBuffer();
+        String line;
+        while ((line = br.readLine()) != null) {
+                jsonString.append(line);
+        }
+//        System.out.println(jsonString);
+        br.close();
+        connection.disconnect();
+    } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+    }
+}*/
