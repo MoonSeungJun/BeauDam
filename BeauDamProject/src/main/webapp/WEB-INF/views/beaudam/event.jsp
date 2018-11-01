@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-session="false" pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%
+	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./mainTop.jsp"/>
 <!DOCTYPE HTML>
     <html>

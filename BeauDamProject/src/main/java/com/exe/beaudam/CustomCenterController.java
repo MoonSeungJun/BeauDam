@@ -68,8 +68,7 @@ public class CustomCenterController {
 	public String faq(HttpServletRequest request) {
 
 		HttpSession session= request.getSession();
-		
-		
+
 		request.setAttribute("id",session.getAttribute("id"));
 		
 		
@@ -255,9 +254,6 @@ public class CustomCenterController {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		otherService.deleteNotification(num);
-		
-		
-		
 		
 		// 공지사항 삭제 이동
 		return "redirect:/notification.action?pageNum="+pageNum;
