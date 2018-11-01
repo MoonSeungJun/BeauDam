@@ -61,7 +61,6 @@
 
 </script>
 </head>
-</head>
 <body>
 
 <jsp:include page="adminHeader.jsp"/>

@@ -1,8 +1,6 @@
 package com.dao.viewDAO;
 
 import java.util.*;
-
-import javax.annotation.*;import org.apache.commons.logging.impl.SLF4JLocationAwareLog;
 import org.springframework.stereotype.*;
 
 import com.table.memberDTO.*;

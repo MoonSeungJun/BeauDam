@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>BeauDam Admin</title>
-<link rel="stylesheet" href="<%=cp%>/resources/css/admin/admin.css">
+<link rel="stylesheet" href="<%=cp %>/resources/css/admin/admin.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
