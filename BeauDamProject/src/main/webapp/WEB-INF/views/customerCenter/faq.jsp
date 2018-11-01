@@ -82,6 +82,7 @@ function faqMove2() {
 			
 	</table>
 </div>
+
 <br><br>
 <!-- 왼쪽 사이드 메뉴바 -->
 
@@ -147,5 +148,6 @@ function faqMove2() {
  
 </div><br><br>
 
+<jsp:include page="../beaudam/mainBottom.jsp" />
 </body>
 </html>
