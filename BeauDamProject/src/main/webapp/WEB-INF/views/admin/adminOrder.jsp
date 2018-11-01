@@ -191,9 +191,9 @@ function orderUpdate(code) {
   					<c:when test="${dto.pay_Status=='pay_ready'}">
      					입금대기
   						</c:when>
-  					<c:when test="${dto.pay_Status=='pay_compl'}">
+  					<c:when test="${dto.pay_Status=='pay_compl' || dto.pay_Status=='결제완료'}">
     					 결제완료
-  						</c:when>
+  					</c:when>
   					
   					<c:when test="${dto.pay_Status=='change'}">
      					교환
@@ -212,9 +212,9 @@ function orderUpdate(code) {
 				
 				<td>
 				<c:choose>
-  					<c:when test="${dto.delivery_Status=='ready'}">
+  					<c:when test="${dto.delivery_Status=='ready' || dto.delivery_Status=='상품 준비중'}">
      					상품 준비중
-  						</c:when>
+  					</c:when>
   					<c:when test="${dto.delivery_Status=='ing'}">
     					 배송중
   						</c:when>  					 					

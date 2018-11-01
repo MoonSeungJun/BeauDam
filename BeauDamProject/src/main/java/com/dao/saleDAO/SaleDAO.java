@@ -22,6 +22,12 @@ public class SaleDAO {
 		this.sessionTemplate = sessionTemplate;
 	}
 
+	public List<SaleView> getPersonalSaleData(String id) {
+		List<SaleView> view = sessionTemplate.selectList("beaudam.getPersonalSaleData", id);
+		return view;
+	}
+	
+	
 	
 	public String getMaxSaleCode() {
 		String str = sessionTemplate.selectOne("beaudam.getMaxSaleCode");

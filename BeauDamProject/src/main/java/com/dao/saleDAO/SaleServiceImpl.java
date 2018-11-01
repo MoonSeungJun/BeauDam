@@ -17,6 +17,12 @@ public class SaleServiceImpl implements SaleService {
 	private SaleDAO dao;
 
 	@Override
+	public List<SaleView> getPersonalSaleData(String id) {
+		List<SaleView> view = dao.getPersonalSaleData(id);
+		return view;
+	}
+	
+	@Override
 	public String getMaxSaleCode() {
 		String str = dao.getMaxSaleCode();
 		return str;

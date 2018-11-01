@@ -156,30 +156,30 @@ button:hover {
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>이름</b></td>
-						<td><input type="text" value="허도휘" disabled="disabled"/></td>
+						<td><input type="text" value="${id }" disabled="disabled"/></td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>닉네임</b></td>
-						<td><input type="text" value="도비"/></td>
+						<td><input type="text" value="${dto.nickName }"/></td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>성별</b></td>
 						<td>
-							<input type="radio">남
-							<input type="radio" checked="checked">여
+							<input type="radio" checked="checked">남
+							<input type="radio">여
 						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>생년월일</b></td>
 						<td>
 							<select>
-								<option>1994년</option>								
+								<option>${y }</option>								
 							</select>
 							<select>
-								<option>06월</option>								
+								<option>${m }</option>								
 							</select>
 							<select>
-								<option>11일</option>								
+								<option>${d }</option>								
 							</select>
 							<input type="radio" checked="checked">양력
 							<input type="radio">음력
@@ -196,15 +196,15 @@ button:hover {
 					<tr>
 						<td rowspan="2" style="padding-left: 20px"><b>주소</b></td>
 						<td>
-							<input type="text" readonly="readonly" id="sample4_postcode" placeholder="우편번호" value="02259"/>
+							<input type="text" readonly="readonly" id="sample4_postcode" placeholder="우편번호" value="${dto.zip }"/>
 							<button type="button" onclick="sample4_execDaumPostcode()">우편번호 찾기</button><br/>
 							<span id="guide" style="color:#999"></span>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="text" readonly="readonly" id="sample4_roadAddress" placeholder="도로명주소" value="서울시 용마산로 60가길 11"/>
-							<input type="text" placeholder="상세주소" value="A동 401호"/>
+							<input type="text" readonly="readonly" id="sample4_roadAddress" placeholder="도로명주소" value="${dto.city }"/>
+							<input type="text" placeholder="상세주소" value="${dto.street }"/>
 						</td>
 					</tr>
 					<tr>
@@ -218,8 +218,8 @@ button:hover {
 								<option value="019">019</option>
 								<option value="011">011</option>
 							</select>
-							<input type="text" value="6720"/>
-							<input type="text" value="3060"/>
+							<input type="text" value="${ct }"/>
+							<input type="text" value="${et }"/>
 						</td>
 					</tr>
 					<tr>
@@ -254,9 +254,9 @@ button:hover {
 					<tr>
 						<td style="padding-left: 20px"><b>이메일주소</b></td>
 						<td>
-							<input type="text" value="dohwi9406"/>
+							<input type="text" value="${fm }"/>
 							@
-							<input type="text" value="naver.com">
+							<input type="text" value="${lm }">
 							<select style="width:120px;">
                               <option value="">직접입력</option>
                               <option value="dreamwiz.com">dreamwiz.com</option>
@@ -303,7 +303,7 @@ button:hover {
 			<div align="center" style="margin: 0 auto">
 				<button type="button" onclick=
 				"javascript:location.href='<%=cp %>/myPage.action'" style="width: 60px">취소</button>
-				<button type="button" style="width: 60px">수정</button>
+				<button type="button" style="width: 60px" onclick="javascript:location.href='<%=cp%>/memberUpdate.action'">수정</button>
 			</div>
 	</div>
 </body>
