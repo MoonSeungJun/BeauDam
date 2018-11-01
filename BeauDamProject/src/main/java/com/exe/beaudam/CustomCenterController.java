@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.map.ser.CustomSerializerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -68,8 +67,7 @@ public class CustomCenterController {
 	public String faq(HttpServletRequest request) {
 
 		HttpSession session= request.getSession();
-		
-		
+
 		request.setAttribute("id",session.getAttribute("id"));
 		
 		
@@ -255,9 +253,6 @@ public class CustomCenterController {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		otherService.deleteNotification(num);
-		
-		
-		
 		
 		// 공지사항 삭제 이동
 		return "redirect:/notification.action?pageNum="+pageNum;

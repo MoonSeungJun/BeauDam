@@ -164,7 +164,7 @@
 			
 		<!-- Coupon -->
 			<update id="updateCoupon" parameterType="int">
-				update coupon set usedate = sysdate where num = ${num}
+				update coupon set usedate = sysdate where num = #{num}
 			</update>
 			
 		<!-- Notification -->
@@ -417,28 +417,28 @@
 		
 		<!-- Coupon -->
 		<select id="getCouponCount" resultType="int" parameterType="String">
-			select count(*) from coupon where id = #{id} and period > sysdate
+			select count(*) from coupon where id = #{id} and period > sysdate and not usedate like '%/%'
 		</select>
 		<select id="getCouponData" resultType="com.table.otherDTO.CouponDTO" parameterType="String">
 			select num, id, coupon, to_char(period, 'yyyy-mm-dd') period from coupon
-			where id = #{id} and period > sysdate
+			where id = #{id} and period > sysdate and not usedate like '%/%'
 		</select>		
 		
 		<select id="getWeekCouponCount" parameterType="String" resultType="int">
 		<![CDATA[
 			select count(*) from coupon
-			where id = #{id} and trunc(period-sysdate) <= 7
+			where id = #{id} and trunc(period-sysdate) <= 7 and not usedate like '%/%'
 		]]>
 		</select>
 		
 		<select id="getWeekCouponData" parameterType="String" resultType="com.table.otherDTO.CouponDTO">
 		<![CDATA[
 			select id,coupon,period,usedate from coupon
-			where id = #{id} and trunc(period-sysdate) <= 7	
+			where id = #{id} and trunc(period-sysdate) <= 7	and not usedate like '%/%'
 		]]>
 		</select>		
 		<select id="selectCouponData" parameterType="int" resultType="String">
-			select coupon from coupon where num = #{num}
+			select coupon from coupon where num = #{num} and not usedate like '%/%'
 		</select>
 		
 		<!-- Review -->
@@ -468,7 +468,7 @@
 			order by sale_Code asc
 		</select>
 		<select id="getMaxSaleCode" resultType="String">
-			select max(sale_code) from saleview
+			select max(to_number(sale_code)) from saleview
 		</select>
 					
 </mapper>

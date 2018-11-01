@@ -3,7 +3,6 @@ package com.dao.saleDAO;
 
 import java.util.*;
 import com.table.saleDTO.*;
-import com.view.view.*;
 import com.view.view.SaleView;
 
 

@@ -220,7 +220,7 @@
 		<div style="width: 1200px; margin: 0 auto">
 			<h3 style="float: left">장바구니 내역</h3>
 			<hr style="width: 1200px">
-			<button type="button" onclick="allDeleteChk();">삭제</button>
+			<button type="button" onclick="allDeleteChk();">전체삭제</button>
 		</div>
 		
 		<br/>

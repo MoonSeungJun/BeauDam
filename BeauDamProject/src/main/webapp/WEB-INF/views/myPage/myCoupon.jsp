@@ -29,7 +29,7 @@
 				<div class="user_info">
 					<div style="float: left;">
 						<a href="<%=cp%>/myPage.action">
-							<span style="font-size: 18px; color: black; text-decoration: none;">dohwi9406</span>
+							<span style="font-size: 18px; color: black; text-decoration: none;">${id }</span>
 						</a>
 					</div>
 					<a href="<%=cp%>/myInfo.action" class="setting_btn"> 

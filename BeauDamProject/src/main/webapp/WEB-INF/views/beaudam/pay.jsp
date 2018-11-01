@@ -14,7 +14,7 @@
 
 	$(document).ready(function(){
 		$("#val").hide();
-		
+		$("#point").val(0);
 		$("#msg").change(function(){
 			if($("#msg").val()==4){
 				$("#val").show();
@@ -58,7 +58,16 @@
 		
 		$("#point").change(function(){
 			var point = Number($("#point").val());
+			var payResult = Number(rmComma($("#totalPrice").text())) + Number(rmComma($("#shipping").text()))
 			$("#coupon").prop("disabled", true);
+
+			if(point > payResult){				
+				point = payResult; 				
+				$("#point").val(addComma(point));
+				$("#discount").text(addComma(point));								
+					
+			}
+			
 			
 			if(point != 0){
 				if(${member.point}==0){
@@ -68,15 +77,24 @@
 				} else if(point>0 && point<=${member.point}) {
 					$("#point").val(addComma(point));
 					$("#discount").text(addComma(point));
-				} else {
+				}else if(point > payResult){
+					point = payResult;
+					$("#point").val(addComma(point));
+					$("#discount").text(addComma(point));
+				}else {
 					point=${member.point};
 					$("#point").val(addComma(point));
 					$("#discount").text(addComma(point));
-				}
+				}	
+				
+				
+				
+				
 			} else {
 				$("#coupon").prop("disabled", false);
 				$("#discount").text("0");
 			}
+			
 			
 			setTotalPrice();
 			setPayResult();
@@ -108,12 +126,12 @@
 		}
 	}
 	
-	function setPayResult(){
+	function setPayResult(){	
 		
 		var pay = Number(rmComma($("#totalPrice").text())) + Number(rmComma($("#shipping").text())) - Number(rmComma($("#discount").text()));
 		$("#payResult").val(addComma(pay));
 		
-// 		setShippingPrice();
+		setShippingPrice();
 	}
 	
 	function addComma(num) {
@@ -136,9 +154,11 @@
 		var payResult = Number(rmComma($("#totalPrice").text())) + Number(rmComma($("#shipping").text())) - Number(rmComma($("#discount").text()));
 		
 		var payType = $(":input:radio[name=payType]:checked").val();
-		var useCoupon = $('#coupon option:selected').val().substr(3);
+		var useCoupon = $('#coupon option:selected').val().substr(3);		
+// 		alert(useCoupon);
+		var p = $("#point").val();
+		var point = Number(rmComma(p));
 		
-		var point = $('#point').val();		
 		var id = '${member.id}';
 		var lists = new Array();		
 		<c:forEach items="${buyLists}" var="item">
@@ -171,14 +191,15 @@
 	    var form = document.createElement("form");
 	    
 	    form.setAttribute("method", method);
-	    form.setAttribute("action", 'payOK.action');
-	    
+	    form.setAttribute("action", 'iampay.action');
+
 	    for(var key in params) {
 	        var hiddenField = document.createElement("input");
 	        hiddenField.setAttribute("type", "hidden");
 	        hiddenField.setAttribute("name", key);
 	        hiddenField.setAttribute("value", params[key]);
 	        form.appendChild(hiddenField);
+// 	        alert(params[key]);
 	    }
 	    document.body.appendChild(form);
 	    form.submit();
@@ -286,7 +307,7 @@
 			<td>포인트</td>
 			
 			<td>
-				<input type="text" value="0" id="point" style="width: 70px"> Point 
+				<input type="text" value="" id="point" style="width: 70px"> Point 
 				(사용가능 포인트 : 
 					<span id="usepoint" >
 					<script type="text/javascript">

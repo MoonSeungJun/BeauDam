@@ -1,7 +1,7 @@
 package com.exe.beaudam;
 
-import java.io.*;
-import java.lang.reflect.Array;
+
+
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -19,7 +19,7 @@ import com.dao.productDAO.*;
 import com.dao.saleDAO.SaleServiceImpl;
 import com.dao.viewDAO.ViewService;
 import com.exe.util.MyUtil;
-import com.table.memberDTO.*;
+
 import com.table.otherDTO.BasketDTO;
 import com.table.otherDTO.CouponDTO;
 import com.view.view.*;
@@ -294,9 +294,10 @@ public class BeaudamController {
 			
 		ProductView detailData = productService.getOneProductData(req.getParameter("code"));
 		
+		int point = (int) ((int) detailData.getProduct_Price()*0.1);
 		
 		req.setAttribute("dto", detailData);
-		
+		req.setAttribute("point", point);
 
 		// 상품상세 페이지 이동
 		return new ModelAndView("beaudam/productDetail", "id", (String) session.getAttribute("id"));
@@ -356,7 +357,7 @@ public class BeaudamController {
 		// HttpSession session = request.getSession();
 		// String id = (String) session.getAttribute("id");
 
-		String id = "esteban"; // test Data
+		String id = (String) request.getSession().getAttribute("id");
 		hm.put("id", id);
 
 		MemberView member = viewService.getOneMemberData(id);
@@ -366,7 +367,7 @@ public class BeaudamController {
 		for (String selectedProduct : check) {
 			amount = Integer.parseInt(request.getParameter("amount" + selectedProduct));
 			hm.put("basket_Num", selectedProduct);
-			BasketDTO dto = otherService.getBasketOneData(hm);
+			BasketDTO dto = otherService.getBasketOneData(hm);			
 			dto.setQty(amount);
 			buyLists.add(dto);
 		}

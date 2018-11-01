@@ -91,7 +91,7 @@ button:hover {
 				<table style="width: 100%">
 					<tr>
 						<td style="padding-left: 20px"><h4>아이디</h4></td>
-						<td><h4>dohwi9406</h4></td>
+						<td><h4>${id }</h4></td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><h4>비밀번호</h4></td>

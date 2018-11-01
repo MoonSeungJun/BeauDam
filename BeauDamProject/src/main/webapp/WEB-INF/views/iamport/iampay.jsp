@@ -36,8 +36,8 @@
 			buyer_postcode : '${member.zip }'
 			}, function(rsp) {
 			if ( rsp.success ) {
-				params = "${payType},' ',${id},' ',${msg},' ',${code}";	
-				basket = "${payResult},' ',${coupon},' ',${point},' ',${lists},' ',${qty}";		
+				var params = {'payType':'${payType}','id':'${id}', 'msg':'${msg}','code':'${code}'};	
+				var basket = {'payResult':'${payResult}','coupon':'${coupon}','point':'${point}','lists':'${lists}','qty':'${qty}'};		
 				
 			    var msg = '결제가 완료되었습니다.';
 			    msg += '고유ID : ' + rsp.imp_uid;
@@ -58,6 +58,7 @@
 			        hiddenField.setAttribute("name", key);
 			        hiddenField.setAttribute("value", params[key]);
 			        form.appendChild(hiddenField);
+			        
 			    }
 			    for(var key in basket) {
 			        var hiddenField = document.createElement("input");
@@ -65,18 +66,50 @@
 			        hiddenField.setAttribute("name", key);
 			        hiddenField.setAttribute("value", basket[key]);
 			        form.appendChild(hiddenField);
+			        
 			    }
 			    document.body.appendChild(form);
-			    form.submit();
-			    
-// 			    window.location.href = "/beaudam/payOK.action?params="+params+"bask="+basket;
+			    form.submit();			    
+
 			} else {
-				params = "${payType},' ',${id},' ',${msg},' ',${code}";	
-				basket = "${payResult},' ',${coupon},' ',${point},' ',${lists},' ',${qty}";
-				alert(params + ' ' +basket);
+// 				var params = {'payType':'${payType}','id':'${id}', 'msg':'${msg}','code':'${code}'};	
+// 				var basket = {'payResult':'${payResult}','coupon':'${coupon}','point':'${point}','lists':'${lists}','qty':'${qty}'};				
+
+// 			    var msg = '결제가 완료되었습니다.';
+// 			    msg += '고유ID : ' + rsp.imp_uid;
+// 			    msg += '상점 거래ID : ' + rsp.merchant_uid;
+// 			    msg += '결제 금액 : ' + rsp.paid_amount;
+// 			    msg += '카드 승인번호 : ' + rsp.apply_num;
+// 			    alert(msg);
+			    
+// 				var method = method || "post";	    
+// 			    var form = document.createElement("form");
+			    
+// 			    form.setAttribute("method", method);
+// 			    form.setAttribute("action", 'payOK.action');
+			    
+// 			    for(var key in params) {
+// 			        var hiddenField = document.createElement("input");
+// 			        hiddenField.setAttribute("type", "hidden");
+// 			        hiddenField.setAttribute("name", key);
+// 			        hiddenField.setAttribute("value", params[key]);
+// 			        form.appendChild(hiddenField);
+			        
+// 			    }
+// 			    for(var key in basket) {
+// 			        var hiddenField = document.createElement("input");
+// 			        hiddenField.setAttribute("type", "hidden");
+// 			        hiddenField.setAttribute("name", key);
+// 			        hiddenField.setAttribute("value", basket[key]);
+// 			        form.appendChild(hiddenField);
+			        
+// 			    }
+// 			    document.body.appendChild(form);
+// 			    form.submit();		
 			    var msg = '결제에 실패하였습니다.';
 			    msg += '에러내용 : ' + rsp.error_msg;
 			    alert(msg);
+			
 			    window.location.href = "/beaudam/myBasket.action";
 			}
 		});
