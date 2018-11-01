@@ -27,7 +27,7 @@
 				<!-- 사용자 정보 -->
 				<div class="user_info">
 					<div style="float: left;">
-						<a href="<%=cp%>/myPage.action"><span style="font-size: 18px; color: black; text-decoration: none;">dohwi9406</span></a>
+						<a href="<%=cp%>/myPage.action"><span style="font-size: 18px; color: black; text-decoration: none;">${id }</span></a>
 					</div>
 					<a href="<%=cp%>/myInfo.action" class="setting_btn"> 
 						<img src="/beaudam/resources/image/myPage/setting.jpg" height="30px" align="bottom">
