@@ -170,7 +170,7 @@ html {
 	        <a href="./event.action">EVENT</a>
 	        <a href="#">LOOKS</a>
 	        <a href="#">뷰담 PICK'S</a>
-	        <a href="#">SALE</a>
+	        <a href="./sale.action">SALE</a>
 	    </div>
 	    </div>
 	   
