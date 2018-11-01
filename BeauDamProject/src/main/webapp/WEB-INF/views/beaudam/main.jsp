@@ -173,7 +173,8 @@ $(document).ready(function() {
         
         <img  style="width: 100%" src="<%=cp%>/resources/image/beaudam/main/content_main04.jpg" >
         
-        <div class="new_item">
+        <!-- new item -->
+        <div class="new_item" id="newItem">
             <div class="new_item">
             	<c:if test="${!empty newItemList }">
                 <h3>NEW ITEM</h3>
@@ -185,7 +186,7 @@ $(document).ready(function() {
                 </c:if>
             </div>
         </div>
+        
         <jsp:include page="./mainBottom.jsp"/>
-
     </body>
 </html>

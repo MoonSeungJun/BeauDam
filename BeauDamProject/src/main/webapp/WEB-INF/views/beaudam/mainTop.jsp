@@ -161,12 +161,12 @@ session="true" pageEncoding="UTF-8"%>
 	            </div>
 	        </div>
 	    </div> 
-	        <a href="#home">BEST ITEM</a>
-	        <a href="#news">NEW ITEM</a>
+	        <a href="#">BEST ITEM</a>
+	        <a href="#newItem">NEW ITEM</a>
 	        <a href="./event.action">EVENT</a>
-	        <a href="#news">LOOKS</a>
-	        <a href="#news">뷰담 PICK'S</a>
-	        <a href="#news">SALE</a>
+	        <a href="#">LOOKS</a>
+	        <a href="#">뷰담 PICK'S</a>
+	        <a href="#">SALE</a>
 	    </div>
 	    </div>
 	   

@@ -52,7 +52,7 @@
 				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom3.png');"><a href="javascript:popupOpen();">1:1 상담 문의</a></li>
 			</c:if>
 			<c:if test="${empty id }"> 
-				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom3.png');"><a data-toggle="tooltip" title="로그인이 필요합니다">1:1 상담 문의</a></li>
+				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom3.png'); cursor: default;"><a data-toggle="tooltip" title="로그인이 필요합니다">1:1 상담 문의</a></li>
 			</c:if>
 			</ul>
 		</div>
