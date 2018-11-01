@@ -229,7 +229,7 @@ public class BeaudamController {
 				
 		int count = viewService.getSearchDataCount(searchPack);			
 			
-		int numPerPage = 8;
+		int numPerPage = 12;
 		int totalPage = myUtil.getPageCount(numPerPage, count);
 		int currentPage = 1;
 	

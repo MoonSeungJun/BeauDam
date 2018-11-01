@@ -63,7 +63,7 @@ text-align: center;
 			<h1 style="margin-bottom: 20px; font-family: 'designhouseOTFLight00'; text-align: center;">뷰티를 담다 뷰ː담</h1>
 			<h2 style="font-family: 'designhouseOTFLight00'; text-align: center; margin-bottom: 5px;">1:1 상담 문의</h2>
 			<h3 style="font-family: 'designhouseOTFLight00'; text-align: center; margin-bottom: 30px; color: #DC4C46;">고객님의 소중한 의견을 적극 반영하겠습니다 ♥</h3>
-			<div style="border: 2px dashed #ddd; padding: 20px; width: 500px;">
+			<div style="border: 2px dashed #ddd; padding: 20px; width: 500px; margin: 0 auto;">
 				<table class="mail">
 					<tr>
 						<td>제목</td>

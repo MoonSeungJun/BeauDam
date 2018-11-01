@@ -34,15 +34,18 @@ html {
 	    <div class="header_wrapper" style="height: 170px;">
 	        <div class="login">
 	            <ul>
+	            <c:if test="${id eq 'Admin' }">
+	            	<li><a href="<%=cp %>/adminProduct.action">관리자페이지</a></li>
+	            </c:if>
 	                <li><a href="<%=cp %>/notification.action">고객센터</a></li>
-	          		<c:if test="${!empty id}">
+	          	<c:if test="${!empty id}">
 	        		<li><a href="<%=cp%>/myPage.action">MY PAGE</a></li>
-	            	 <li><a href="<%=cp%>/logout.action">LOGOUT</a></li>
+	            	<li><a href="<%=cp%>/logout.action">LOGOUT</a></li>
 	             	<li><a>${id }님 환영합니다♥</a></li>
-	       			</c:if>         
+	       		</c:if>         
 	       		<c:if test="${empty id }">
-	            	 <li><a href="<%=cp%>/newTerm.action">회원가입</a></li>
-	             	<li><a href="<%=cp%>/login.action">LOGIN</a></li>
+	            	<li><a href="<%=cp%>/newTerm.action">회원가입</a></li>
+	            	<li><a href="<%=cp%>/login.action">LOGIN</a></li>
 	            </c:if>
 	            </ul>
 	        </div>
