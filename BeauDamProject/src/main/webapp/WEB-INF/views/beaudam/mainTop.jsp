@@ -1,9 +1,9 @@
-<%@page import="org.springframework.boot.web.servlet.server.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-session="true" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8" session="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String cp = request.getContextPath();	
+	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +17,11 @@ session="true" pageEncoding="UTF-8"%>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<style type="text/css">
+html {
+  scroll-behavior: smooth;
+}
+</style>
 </head>
 <body>
 	<!-- 상단 시작 -->
@@ -28,17 +33,19 @@ session="true" pageEncoding="UTF-8"%>
 	    <!-- 로고 영역 -->
 	    <div class="header_wrapper" style="height: 170px;">
 	        <div class="login">
-
 	            <ul>
+	            <c:if test="${id eq 'Admin' }">
+	            	<li><a href="<%=cp %>/adminProduct.action">관리자페이지</a></li>
+	            </c:if>
 	                <li><a href="<%=cp %>/notification.action">고객센터</a></li>
-	          		<c:if test="${!empty id}">
+	          	<c:if test="${!empty id}">
 	        		<li><a href="<%=cp%>/myPage.action">MY PAGE</a></li>
-	            	 <li><a href="<%=cp%>/logout.action">LOGOUT</a></li>
+	            	<li><a href="<%=cp%>/logout.action">LOGOUT</a></li>
 	             	<li><a>${id }님 환영합니다♥</a></li>
-	       			</c:if>         
+	       		</c:if>         
 	       		<c:if test="${empty id }">
-	            	 <li><a href="<%=cp%>/newTerm.action">회원가입</a></li>
-	             	<li><a href="<%=cp%>/login.action">LOGIN</a></li>
+	            	<li><a href="<%=cp%>/newTerm.action">회원가입</a></li>
+	            	<li><a href="<%=cp%>/login.action">LOGIN</a></li>
 	            </c:if>
 	            </ul>
 	        </div>
@@ -161,12 +168,12 @@ session="true" pageEncoding="UTF-8"%>
 	            </div>
 	        </div>
 	    </div> 
-	        <a href="#home">BEST ITEM</a>
-	        <a href="#news">NEW ITEM</a>
+	        <a href="#">BEST ITEM</a>
+	        <a href="#newItem">NEW ITEM</a>
 	        <a href="./event.action">EVENT</a>
-	        <a href="#news">LOOKS</a>
-	        <a href="#news">뷰담 PICK'S</a>
-	        <a href="#news">SALE</a>
+	        <a href="#">LOOKS</a>
+	        <a href="#">뷰담 PICK'S</a>
+	        <a href="./sale.action">SALE</a>
 	    </div>
 	    </div>
 	   

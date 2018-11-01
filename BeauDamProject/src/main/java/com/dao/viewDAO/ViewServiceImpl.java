@@ -1,13 +1,24 @@
 package com.dao.viewDAO;
 
+<<<<<<< HEAD
 import java.util.*;
 
 import javax.annotation.*;
 
 import org.springframework.stereotype.*;
+=======
+import java.util.HashMap;
+import java.util.List;
+>>>>>>> 김해나브랜치
 
-import com.table.memberDTO.*;
-import com.view.view.*;
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.table.memberDTO.Member_InfoDTO;
+import com.view.view.MemberView;
+import com.view.view.ProductView;
+import com.view.view.SaleView;
 
 @Service("viewService")
 public class ViewServiceImpl implements ViewService {

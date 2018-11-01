@@ -229,7 +229,7 @@ public class BeaudamController {
 				
 		int count = viewService.getSearchDataCount(searchPack);			
 			
-		int numPerPage = 8;
+		int numPerPage = 12;
 		int totalPage = myUtil.getPageCount(numPerPage, count);
 		int currentPage = 1;
 	
@@ -333,6 +333,13 @@ public class BeaudamController {
 
 		// 이벤트3 페이지 이동
 		return new ModelAndView("beaudam/event3", "id", (String) session.getAttribute("id"));
+	}
+	
+	@RequestMapping(value = "/sale.action", method = RequestMethod.GET)
+	public String sale(HttpSession session) {
+
+		// 세일 페이지 이동
+		return "beaudam/sale";
 	}
 
 	// msj
