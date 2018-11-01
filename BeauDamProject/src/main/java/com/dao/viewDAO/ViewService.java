@@ -21,4 +21,6 @@ public interface ViewService {
 	List<ProductView> getSearchProductDataList(HashMap<String, Object> searchValuePack);
 	int getSearchDataCount(HashMap<String, Object> searchCountPack);
 	ProductView getProductDataRowNum(int selectRowNum);
+	public int getBrandSearchProductDataCount(HashMap<String, Object> searchPack);
+	public List<ProductView> getBrandSearchProductData(HashMap<String, Object> searchPack);
 }

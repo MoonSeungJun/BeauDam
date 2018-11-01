@@ -298,8 +298,8 @@
 			
 			select *from (
 			select rownum rnum,data.*from (
-			select code,(product_Name||brand) as brand, product_Name,product_Price,type,category, thumb_Img from productView
-			where product_Name||brand like '%'||#{searchValue}||'%' and
+			select code, brand, product_Name,product_Price,type,category, thumb_Img from productView
+			where product_Name like '%'||#{searchValue}||'%' and
 			      type like '%'||#{searchType}||'%'
 			order by code desc) data)
 			<![CDATA[
@@ -322,6 +322,35 @@
 			where rnum=#{selectRowNum}
 			]]>
 		</select>
+		
+		<select id="getBrandSearchProductData" resultType="com.view.view.ProductView" parameterType="map">
+			select *from (
+			select rownum rnum,data.*from (
+			select code, brand, product_Name,product_Price,type,category, thumb_Img from productView
+			where product_Name like '%'||#{searchValue}||'%' and
+			      type like '%'||#{searchType}||'%' and( 
+			       brand like '%'||'#{searcvBrand1}'||'%' or
+			       brand like '%'||'#{searcvBrand2}'||'%' or
+			       brand like '%'||'#{searcvBrand3}'||'%' or
+			       brand like '%'||'#{searcvBrand4}'||'%' or
+			       brand like '%'||'#{searcvBrand5}'||'%' 			      
+			order by code desc) data)
+			<![CDATA[
+			where rnum>=#{start} and rnum <=#{end}
+			]]>	
+		</select>
+		
+		<select id="getBrandSearchProductDataCount" resultType="int" parameterType="map">
+			select nvl(count(*),0) from productView 
+			where product_Name like '%'||#{searchValue}||'%' and
+			      brand in
+		 		<foreach collection="searchBrand" item="brand" index="index" open="(" close=")" separator=",">
+            	#{brand.[index]}
+       			 </foreach>
+			      and
+			      type like '%'||#{searchType}||'%'
+		</select>
+		
 		
 		
 		<!-- Admin -->
@@ -470,5 +499,7 @@
 		<select id="getMaxSaleCode" resultType="String">
 			select max(to_number(sale_code)) from saleview
 		</select>
+				
+					
 					
 </mapper>

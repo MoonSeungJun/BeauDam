@@ -115,4 +115,20 @@ public class ViewDAO {
 	
 	}
 	
+	
+	public int getBrandSearchProductDataCount(HashMap<String, Object> searchPack) {
+		
+		int result = sessionTemplate.selectOne("beaudam.getBrandSearchProductDataCount",searchPack);
+		
+		return result;
+	}
+	
+	
+	public List<ProductView> getBrandSearchProductData(HashMap<String, Object> searchPack){
+		
+		List<ProductView> getBrandSearchProductData = sessionTemplate.selectList("beaudam.getBrandSearchProductData",searchPack);
+		
+		return getBrandSearchProductData;
+	}
+	
 }

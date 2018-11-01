@@ -195,11 +195,119 @@ public class BeaudamController {
 	public ModelAndView productList(HttpSession session,HttpServletRequest request)throws Exception {
 		
 		String searchValue = request.getParameter("searchValue");
-		String id  = (String)session.getAttribute("id");
+		/*String id  = (String)session.getAttribute("id");*/
 		String cp = request.getContextPath();
 		String pageNum = request.getParameter("pageNum");
 		String searchType = request.getParameter("searchType");
+		String sBrand = Arrays.toString(request.getParameterValues("arrayBrand"));
+				
 		
+		System.out.println("#!@#@!#!@#@!#@!#!@#@!@!#@!");
+		System.out.println(sBrand);
+		System.out.println("#!@#@!#!@#@!#@!#!@#@!@!#@!");
+		
+		String searchBrand = sBrand.substring(1, sBrand.length() - 1);
+		
+		
+		System.out.println("DADASDASDASDASDASSSSSSSSDSAASDSADSADSADSDA");
+		System.out.println(sBrand.length());
+		System.out.println("DADASDASDASDASDASSSSSSSSDSAASDSADSADSADSDA");
+		
+		
+		String test1[] = searchBrand.split(",");
+		
+		if(test1.length==1) {
+			String searchBrand1 = test1[0];
+			
+			
+			System.out.println("★");
+			System.out.println(searchBrand1);
+			System.out.println("★");
+		
+		}		
+		
+		
+		/*String searchBrand1 = searchBrand.split(",")[0];
+		String searchBrand2 = searchBrand.split(",")[1];
+		String searchBrand3 = searchBrand.split(",")[2];
+		String searchBrand4 = searchBrand.split(",")[3];
+		String searchBrand5 = searchBrand.split(",")[4];
+		
+				
+		System.out.println("dadadasdasdasdasdasasadsda");
+		System.out.println(searchBrand1);
+		System.out.println(searchBrand2);
+		System.out.println(searchBrand3);
+		System.out.println(searchBrand4);
+		System.out.println(searchBrand5);
+		System.out.println("#!@#@!#!@#@!#@!#!@#@!@!#@!");*/
+		
+		
+			
+		/*			
+		if(searchBrand!=null&&!searchBrand.equals("")) {
+					
+			System.out.println("#########################");
+			System.out.println("여기까지는 진입성공!!!!!!!!!!!!!!!");
+			System.out.println("#########################");
+		
+			HashMap<String, Object> searchPack = new HashMap<String, Object>();
+			
+			if(searchBrand1==null||searchBrand1.equals("")) {
+				searchBrand1="nodata";
+			}
+			
+			if(searchBrand2==null||searchBrand2.equals("")) {
+				searchBrand2="nodata";
+			}
+			
+			if(searchBrand3==null||searchBrand3.equals("")) {
+				searchBrand3="nodata";
+			}
+			
+			if(searchBrand4==null||searchBrand4.equals("")) {
+				searchBrand4="nodata";
+			}
+			
+			if(searchBrand5==null||searchBrand5.equals("")) {
+				searchBrand5="nodata";
+			}		
+			
+			
+			
+				if(searchValue==null||searchValue.equals("")) {
+					searchValue="";
+				}
+				if(searchValue!=null&&!searchValue.equals("")) {
+					searchType="";
+				}
+				
+				if(searchType==null||searchType.equals("")) {
+					searchType="";
+				}
+				if(searchType!=null&&!searchType.equals("")) {
+					searchValue="";
+				}				
+							
+				searchPack.put("searchValue", searchValue);
+				searchPack.put("searchType", searchType);
+				searchPack.put("searchBrand", searchBrand);
+				
+				
+				List<ProductView> brandSearchData = viewService.getBrandSearchProductData(searchPack);
+				
+				
+				
+				
+				request.setAttribute("brandSearchData", brandSearchData);
+				request.setAttribute("searchType", searchType);
+				request.setAttribute("searchValue", searchValue);
+				return new ModelAndView("beaudam/productList", "id", (String) session.getAttribute("id"));
+				
+				
+			
+		}*/
+							
 		
 		if(searchValue==null||searchValue.equals("")) {
 			searchValue="";
@@ -229,7 +337,7 @@ public class BeaudamController {
 				
 		int count = viewService.getSearchDataCount(searchPack);			
 			
-		int numPerPage = 8;
+		int numPerPage = 12;
 		int totalPage = myUtil.getPageCount(numPerPage, count);
 		int currentPage = 1;
 	
@@ -291,10 +399,10 @@ public class BeaudamController {
 
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView productDetail(HttpSession session, HttpServletRequest req) {
-			
+		
 		ProductView detailData = productService.getOneProductData(req.getParameter("code"));
 		
-		int point = (int) ((int) detailData.getProduct_Price()*0.1);
+		int point = (int) ((int) detailData.getProduct_Price()*0.1);	
 		
 		req.setAttribute("dto", detailData);
 		req.setAttribute("point", point);
