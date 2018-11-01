@@ -58,12 +58,13 @@
 	</div>
 	<h3 style="width: 90%; margin: 10px auto 0 auto;">공지사항</h3>
 	<div style="width: 90%; margin: 30px auto;">
-		<form action="" name="notificationListForm" method="post">
+		<form action="" name="notificationEditForm" method="post">
 		<!-- 공지사항 게시물 -->
 		<table style="width: 80%; margin: 0 auto; border: 1px solid balck;" class="board">  
 			<tr align="center" style="background-color: #F5F5DD;">
 				<td style="width: 100%;" colspan="2">
-				 	<input type="text" name="subject" style="width: 95%; background-color: #F5F5DD;" value="${dto.subject }"/> 			 	
+				 	<input type="text"  
+				 	id="subject" name="subject" style="width: 95%; background-color: #F5F5DD;" value="${dto.subject }"/> 			 	
 				</td>
 			</tr>
 			<tr>
