@@ -9,11 +9,12 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dao.memberDAO.*;
 import com.dao.otherDAO.OtherServiceImpl;
 import com.dao.productDAO.*;
-import com.table.otherDTO.BasketDTO;
 import com.view.view.*;
 import com.dao.viewDAO.ViewServiceImpl;
+import com.table.otherDTO.*;
 
 
 
@@ -65,13 +66,28 @@ public class MyPageController {
 	@Resource(name="productService")
 	private ProductServiceImpl productService;
 	
+	@Resource(name="memberService")
+	private MemberServiceImpl memberService;
+	
+	
 	// ********************** My Page **********************
 
-	@RequestMapping(value = "/myPage.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPage() {
+//	@RequestMapping(value = "/myPage.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String myPage(HttpServletRequest req) {
 	
+		String id = (String) req.getSession().getAttribute("id");
+		System.out.println(id);
+		MemberView dto = memberService.getOneMemberData(id);
+		
+		req.setAttribute("dto", dto);
+		
+		int couponCount = OtherService.getCouponCount(id);
+		
+		req.setAttribute("couponCount", couponCount);
+		
 		// 마이페이지 이동
 		return "myPage/myPage";
+
 	}
 
 	@RequestMapping(value = "/myInfo.action", method = RequestMethod.GET)
