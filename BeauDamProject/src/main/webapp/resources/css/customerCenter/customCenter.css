@@ -76,6 +76,10 @@
 	height: 40px;
 }
 
+.baord td:last-child {
+	border-bottom: none;
+}
+
 .faq {
 	width: 80%;
 }
@@ -109,5 +113,9 @@
 	background-repeat: no-repeat;
 	background-size: 30px;	
 	background-position: 20px 30px; 
+}
+
+.article_button button {
+	border: none;
 }
 

@@ -61,7 +61,7 @@
 	<div style="width: 90%; margin: 30px auto;">
 		<form action="" name="notificationListForm" method="post">
 		<!-- 공지사항 게시판 검색창 -->
-		<table style="margin: 10px; align-content: right;">
+		<table style="margin: 10px 0 10px 10px; align-content: right;">
 			<tr>
 				<td>
 					<select  name="searchKey" style="width: 90px;height: 24px;">
@@ -77,11 +77,19 @@
 		</table>
 		<!-- 공지사항 게시판 -->
 		<table style="width: 100%; margin: 0 auto;" class="board">  
+			<tr>
+			<c:if test="${id eq'Admin' }">
+				<td align="right" colspan="3">
+					<input type="button" value="공지등록" onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
+				</td>
+			</c:if>	
+			<c:if test="${empty id }">&nbsp;</c:if>
+			</tr>
 			<tr align="center" style="background-color: #F5F5DD;">
 				<td style="width: 10%;">
 				 	번호 			 	
 				</td>
-				<td style="width: 60%;">
+				<td style="width: 60%; text-align: left;">
 					제목
 				</td>
 				<td style="width: 30%;">
@@ -93,8 +101,8 @@
 				<td>
 					${dto.num }
 				</td>
-				<td>
-					<a href="${articleUrl}&num=${dto.num}">${dto.subject }</a></td>
+				<td style="text-align: left;">
+					<a href="${articleUrl}&num=${dto.num}" style="text-decoration: none; color: black;">${dto.subject }</a></td>
 				<td>
 					${dto.created }
 				</td>		
@@ -109,14 +117,6 @@
 						등록된 공지가 없습니다.
 					</c:if>
 				</td>
-			</tr>
-			<tr>
-			<c:if test="${id eq'Admin' }">
-				<td align="center">
-					<input type="button" value="공지등록" onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
-				</td>
-			</c:if>	
-			<c:if test="${empty id }">&nbsp;</c:if>
 			</tr>
 		</table>
 		</form>
