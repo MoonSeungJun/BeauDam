@@ -1,9 +1,9 @@
-<%@page import="org.springframework.boot.web.servlet.server.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-session="true" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8" session="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String cp = request.getContextPath();	
+	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +17,11 @@ session="true" pageEncoding="UTF-8"%>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<style type="text/css">
+html {
+  scroll-behavior: smooth;
+}
+</style>
 </head>
 <body>
 	<!-- 상단 시작 -->
@@ -28,7 +33,6 @@ session="true" pageEncoding="UTF-8"%>
 	    <!-- 로고 영역 -->
 	    <div class="header_wrapper" style="height: 170px;">
 	        <div class="login">
-
 	            <ul>
 	                <li><a href="<%=cp %>/notification.action">고객센터</a></li>
 	          		<c:if test="${!empty id}">

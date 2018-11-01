@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" session="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,6 +54,10 @@
 	function faqMove3() {
     	$('#answer3').css('display','');
 	}
+	
+	function faqMove4() {
+    	$('#answer4').css('display','');
+	}
     
 	//비로그인 시 , 로그인 필요 문구 출력
 	function tooltip() {
@@ -101,6 +105,12 @@
 		    	<a href="javascript:void(0)" onclick="faqMove3();">개명 시, 회원정보 변경은 어떻게 하나요?</a>
 	            <ul style="display: none;" id="answer3">
 	                <li class="menu_a"><a href="javascript:void(0)">1:1 상담 문의하기에 남겨주시면 소중한 고객님의 정보 확인 후 수정 완료 해드립니다.</a></li>
+	            </ul>
+	        </li>
+	           <li class="menu_q">
+		    	<a href="javascript:void(0)" onclick="faqMove4();">등급이 올라가려면 어떻게 하나요?</a>
+	            <ul style="display: none;" id="answer4">
+	                <li class="menu_a"><a href="javascript:void(0)">등급은 결제금액을 기준으로 매월 초 자동 조정 됩니다.</a></li>
 	            </ul>
 	        </li>
 	 	</ul>
