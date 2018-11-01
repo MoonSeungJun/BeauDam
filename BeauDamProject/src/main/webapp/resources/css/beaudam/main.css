@@ -57,7 +57,7 @@ a {
 .header .login ul {
 	ovtierflow: hidden;
 	margin: 0;
-
+	display: inline-block;
 }
 
 .header .login li {
