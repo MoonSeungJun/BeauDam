@@ -1,16 +1,13 @@
 package com.dao.viewDAO;
 
-<<<<<<< HEAD
 import java.util.*;
 
 import javax.annotation.*;
 
 import org.springframework.stereotype.*;
-=======
+
 import java.util.HashMap;
 import java.util.List;
->>>>>>> 김해나브랜치
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
