@@ -12,31 +12,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-
-	function goMain() {
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
-	
-	
-
-
-</script>
 <title>Insert title here</title>
 </head>
 <body>
     <div class="header_wrapper">
             <div class="logo">
                 <ul class="top">
-                    <li><input type="button" value="로그아웃" style="text-align: right;" onclick="goMain();"></li>
+<!--                     <li><input type="button" value="로그아웃" style="text-align: right;" onclick="goMain();"></li> -->
                     <li>admin님이 로그인중입니다.</li>
                 </ul>
                 <a style="text-decoration: none; color: black;" href="main.action" >뷰티를 담다 뷰ː담</a>

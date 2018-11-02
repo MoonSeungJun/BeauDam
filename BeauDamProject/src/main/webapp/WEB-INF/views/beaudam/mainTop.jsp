@@ -34,7 +34,7 @@ html {
 	    <div class="header_wrapper" style="height: 170px;">
 	        <div class="login">
 	            <ul>
-	            <c:if test="${id eq 'Admin' }">
+	            <c:if test="${id eq 'admin' }">
 	            	<li><a href="<%=cp %>/adminProduct.action">관리자페이지</a></li>
 	            </c:if>
 	                <li><a href="<%=cp %>/notification.action">고객센터</a></li>
@@ -105,9 +105,9 @@ html {
 	                        <li><input type="text" class="form-control" id="usr" placeholder="에뛰드 틴트" ></li>
 	                    </ul>
 	                    <ul class="search_icon">
-	                        <li><img src="<%=cp%>/resources/image/beaudam/main/icon_blog1.gif"></li>
-	                        <li><a href="<%=cp %>/myPage.action"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog2.gif"></a></li>
-	                        <li><a href="<%=cp %>/adminProduct.action"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog3.gif"></a></li>
+	                        <li><a href="https://www.facebook.com/"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog1.gif"></a></li>
+	                        <li><a href="https://twitter.com/"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog2.gif"></a></li>
+	                        <li><a href="https://www.instagram.com/under_the_sound/"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog3.gif"></a></li>
 	                    </ul>
 	                </div>
 	            </div>
