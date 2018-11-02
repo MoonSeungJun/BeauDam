@@ -306,10 +306,15 @@ a {
 }
 
 .rolling_panel img, .new_item img {
-	width: 220px;
+	width: 250px;
 	height: 265px;
 	margin: 10px;
 	border-radius: 30px;
+}
+
+.new_item img:hover {
+	webkit-transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .footer {

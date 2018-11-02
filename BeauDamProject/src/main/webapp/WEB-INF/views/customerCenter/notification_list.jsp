@@ -27,7 +27,11 @@
 
 	var popUrl = "inquire.action";	//팝업창에 출력될 페이지 URL
 
+<<<<<<< HEAD
 	var popOption = "width=600, height=490, resizable=no, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
+=======
+	var popOption = "width=600, height=490, resizable=yes, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
+>>>>>>> 김해나브랜치
 
 		window.open(popUrl,"",popOption);
 
@@ -42,7 +46,7 @@
 <!-- /notification.action 고객센터 메인 -->
 
 <div class="wrapper">
-	<!-- 메뉴바 -->
+	<!-- 메뉴바 김해나 -->
 	<div class="menubar">
 		<div class="menu" style="width: 660px; margin: 50px auto;">
 			<ul class="menu_ul" style="overflow: hidden;">
@@ -60,7 +64,7 @@
 	<h3 style="width: 90%; margin: 10px auto 0 auto;">공지사항</h3>
 	<div style="width: 90%; margin: 30px auto;">
 		<form action="" name="notificationListForm" method="post">
-		<!-- 공지사항 게시판 검색창 -->
+		<!-- 공지사항 게시판 검색창 김해나 -->
 		<table style="margin: 10px 0 10px 10px; align-content: right;">
 			<tr>
 				<td>
@@ -76,7 +80,7 @@
 				
 			</tr>
 		</table>
-		<!-- 공지사항 게시판 -->
+		<!-- 공지사항 게시판 김해나 -->
 		<table style="width: 100%; margin: 0 auto;" class="board">  
 			<tr>			
 			
