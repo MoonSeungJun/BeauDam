@@ -129,6 +129,9 @@ session="true" pageEncoding="UTF-8"%>
 	</div>		
 	</c:if>
 </c:if>
+	<div class="type">
+		<h3>${searchType}</h3>
+	</div>	
 	<div class="brand">
 		<form action="" method="post" name="productListForm">
 	    <table class="brandname">
@@ -189,7 +192,6 @@ session="true" pageEncoding="UTF-8"%>
 					<a href="${detailUrl }&code=${dto.code}"><img alt="" src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
 
 					<p style="color: gray;">${dto.brand }</p>
-					<%-- <p>${dto.category }</p> --%>
 					<p>${dto.product_Name }</p>
 					<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">${dto.product_Price }원</p>
 				</div>

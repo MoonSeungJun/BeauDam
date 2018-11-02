@@ -95,9 +95,6 @@ session="true" pageEncoding="UTF-8"%>
 					}
   					
   				});
-					
-				
-				
 				
 			}
   		

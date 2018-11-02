@@ -25,6 +25,18 @@ html, body, ul, ol, li, h1, h2 {
     font-size: 30px;	  
 }
 
+.type {
+	width: 600px;
+	margin: 30px auto;
+    padding: 20px; 
+}
+
+.type h3 {
+	text-align: center;
+	letter-spacing: 0.1em;
+	
+}
+
 .brand {
     border-right: 2px solid gray;
     border-left: 2px solid gray;
