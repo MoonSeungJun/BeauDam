@@ -412,6 +412,13 @@ public class BeaudamController {
 		// 이벤트3 페이지 이동
 		return new ModelAndView("beaudam/event3", "id", (String) session.getAttribute("id"));
 	}
+	
+	@RequestMapping(value = "/sale.action", method = RequestMethod.GET)
+	public String sale(HttpSession session) {
+
+		// 세일 페이지 이동
+		return "beaudam/sale";
+	}
 
 	// msj
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.POST })

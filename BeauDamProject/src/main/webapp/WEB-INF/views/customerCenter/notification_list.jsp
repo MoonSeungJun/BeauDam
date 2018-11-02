@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" href="./resources/css/customerCenter/customCenter.css">
 <script type="text/javascript">
 
 	function sendIt() {
@@ -35,97 +35,10 @@
 	
 
 </script>
-
-
-
 </head>
 <body>
-<div style="float: left; height:auto;width: 52%;">
-	<form action="" name="notificationListForm" method="post">
+<jsp:include page="../beaudam/mainTop.jsp" />
 
-	<table border="0"  style="height: 100%; width: 100%;" >  
-				
-		<tr style="height: 50px;">
-			
-			<td colspan="2" align="right"valign="middle">
-				<select  name="searchKey" style="width: 90px;height: 24px;">
-
-					<option value="subject">제목</option>
-					<option value="content">내용</option>
-								
-				</select>
-				&nbsp;&nbsp;			
-				<input style="width: 250px;" type="text" name="searchValue"/>
-				&nbsp;
-			</td>
-			
-			<td align="center" style="width: 96px;">
-				<input style="width: 80px;" type="button" value="검색" onclick="sendIt();">
-			</td>
-			
-			
-		</tr>
-		<tr align="center" style="height: 50px; background-color: #F5F5DD;">
-			<td>
-			 	번호 			 	
-			</td>
-			<td>
-				제목
-			</td>
-			<td>
-				작성일
-			</td>
-		</tr>
-		
-		
-		<c:forEach var="dto" items="${lists }">
-
-		<tr align="center">
-
-		<tr align="center" style="height: 50px;">
-
-			<td>
-				${dto.num }
-			</td>
-			
-			<td>
-			<a href="${articleUrl}&num=${dto.num}">
-				${dto.subject }</a></td>
-			
-			<td>
-				${dto.created }
-			</td>		
-		</tr>
-		</c:forEach>
-		<tr>
-			<td colspan="3">
-				&nbsp;
-			</td>
-		</tr>
-		<tr align="center">
-			<td colspan="3" align="center">
-				<c:if test="${dataCount!=0 }">
-					${pageIndexList }
-				</c:if>
-				<c:if test="${dataCount==0 }">
-					등록된 공지가 없습니다.
-				</c:if>
-			</td>
-		</tr>
-		<tr style="height: 35px;">
-			<td colspan="2" align="right">
-			</td>
-			<c:if test="${id eq'Admin' }">
-			<td align="center">
-				<input type="button" value="공지등록" 
-				onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
-			</td>
-			</c:if>	
-			<c:if test="${empty id }"></c:if>
-		</tr>
-	</table>
-</form>
-</div>
 <!-- /notification.action 고객센터 메인 -->
 
 <div class="wrapper">
@@ -139,7 +52,7 @@
 				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom3.png');"><a href="javascript:popupOpen();">1:1 상담 문의</a></li>
 			</c:if>
 			<c:if test="${empty id }"> 
-				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom3.png');"><a data-toggle="tooltip" title="로그인이 필요합니다">1:1 상담 문의</a></li>
+				<li style="background-image: url('/beaudam/resources/image/customerCenter/custom3.png'); cursor: default;"><a data-toggle="tooltip" title="로그인이 필요합니다">1:1 상담 문의</a></li>
 			</c:if>
 			</ul>
 		</div>
@@ -148,7 +61,7 @@
 	<div style="width: 90%; margin: 30px auto;">
 		<form action="" name="notificationListForm" method="post">
 		<!-- 공지사항 게시판 검색창 -->
-		<table style="margin: 10px; align-content: right;">
+		<table style="margin: 10px 0 10px 10px; align-content: right;">
 			<tr>
 				<td>
 					<select  name="searchKey" style="width: 90px;height: 24px;">
@@ -158,13 +71,57 @@
 					<input type="text" name="searchValue">		
 				</td>
 				<td>
-					&nbsp;
+					&nbsp;<input style="width: 80px;" type="button" value="검색" onclick="sendIt();">
 				</td>
-			
-		</tr>
-	</table>
-</form>
+			</tr>
+		</table>
+		<!-- 공지사항 게시판 -->
+		<table style="width: 100%; margin: 0 auto;" class="board">  
+			<tr>
+			<c:if test="${id eq'Admin' }">
+				<td align="right" colspan="3">
+					<input type="button" value="공지등록" onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
+				</td>
+			</c:if>	
+			<c:if test="${empty id }">&nbsp;</c:if>
+			</tr>
+			<tr align="center" style="background-color: #F5F5DD;">
+				<td style="width: 10%;">
+				 	번호 			 	
+				</td>
+				<td style="width: 60%; text-align: left;">
+					제목
+				</td>
+				<td style="width: 30%;">
+					작성일
+				</td>
+			</tr>
+		<c:forEach var="dto" items="${lists }">
+			<tr align="center" style="height: 50px;">
+				<td>
+					${dto.num }
+				</td>
+				<td style="text-align: left;">
+					<a href="${articleUrl}&num=${dto.num}" style="text-decoration: none; color: black;">${dto.subject }</a></td>
+				<td>
+					${dto.created }
+				</td>		
+			</tr>
+		</c:forEach>
+			<tr align="center">
+				<td colspan="3" align="center">
+					<c:if test="${dataCount!=0 }">
+						${pageIndexList }
+					</c:if>
+					<c:if test="${dataCount==0 }">
+						등록된 공지가 없습니다.
+					</c:if>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</div>
 </div>
-</div>
+<jsp:include page="../beaudam/mainBottom.jsp" />
 </body>
 </html>

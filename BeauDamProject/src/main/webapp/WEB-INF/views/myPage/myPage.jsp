@@ -61,7 +61,7 @@
 						</div>
 						<div>
 							<p class="" style="font-size: 20px; font-weight: normal;" >
-								Bronze
+								${dto.grade }
 							</p>
 						</div>
 					</div>
@@ -130,11 +130,11 @@
 									<td>배송완료</td>
 								</tr>
 								<tr>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
+									<td>${payReady }</td>
+									<td>${payCompl }</td>
+									<td>${deliReady }</td>
+									<td>${deliIng }</td>
+									<td>${deliCompl }</td>
 								</tr>
 						</table>
 					</div>
@@ -148,15 +148,15 @@
 							<div class="mypageWrapper" style="width: 80%; margin: 30px auto 30px auto;">
 								<dl>
 									<dt>포인트</dt>
-									<dd class="point">0</dd>
+									<dd class="point">${dto.point }</dd>
 								</dl>
 								<dl>
 									<dt>쿠폰</dt>
-									<dd>0</dd>
+									<dd>${couponCount }</dd>
 								</dl>
 								<dl>
 									<dt>등급</dt>
-									<dd>Bronze</dd>
+									<dd>${dto.grade }</dd>
 								</dl>
 							</div>
 						</div>
@@ -175,7 +175,7 @@
 										<p>가입 시 등록한 내용에서 변경된 내용이 있으신가요?</p>
 									</div>
 									<div>
-										<a href="<%=cp%>/myEdit.action">회원정보수정</a>
+										<a href="<%=cp%>/myInfo.action">회원정보수정</a>
 									</div>
 								</dd>
 							</dl>

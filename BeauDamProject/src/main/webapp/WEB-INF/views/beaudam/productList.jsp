@@ -186,8 +186,9 @@ session="true" pageEncoding="UTF-8"%>
 			<li>
 				<div class="listitem" id="${dto.brand }"style="display: block;">
 					<a href="${detailUrl }&code=${dto.code}"><img alt="" src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
+
 					<p>${dto.brand }</p>
-					<p>${dto.category }</p>
+				<%-- <p>${dto.category }</p> --%>
 					<p>${dto.product_Name }</p>
 					<p>${dto.product_Price }원</p>
 				</div>

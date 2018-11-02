@@ -95,6 +95,11 @@ html, body, ul, ol, li, h1, h2 {
 	margin: 10px;
 }
 
+.listitem {
+	width: 220px;
+	height: 360px;
+}
+
 .listitem img {
 	width: 220px;
 	height: 264px;

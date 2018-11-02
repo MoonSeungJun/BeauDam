@@ -499,7 +499,10 @@
 		<select id="getMaxSaleCode" resultType="String">
 			select max(to_number(sale_code)) from saleview
 		</select>
-				
-					
-					
+		
+		<select id="getPersonalSaleData" parameterType="String" resultType="com.view.view.SaleView">
+			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
+			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saledate from saleView where id = #{id}
+		</select>
+
 </mapper>
