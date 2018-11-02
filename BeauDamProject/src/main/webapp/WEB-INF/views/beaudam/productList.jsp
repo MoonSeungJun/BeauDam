@@ -54,7 +54,7 @@ session="true" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
 
-	function filter() {
+	function searchBrand() {
 		
 		var f= document.productListForm;
 		
@@ -125,6 +125,7 @@ session="true" pageEncoding="UTF-8"%>
 	<c:if test="${searchType== 'Perfume'}">
 	<div class="head" style="background-image: url('<%=cp%>/resources/image/beaudam/productList/background_perfume.jpg');">
 	    <p>PERFUME</p>
+	    
 	</div>		
 	</c:if>
 </c:if> 
@@ -134,10 +135,11 @@ session="true" pageEncoding="UTF-8"%>
 	    	<tr>
 	    		<th style="font-size: 20px; padding: 10px;">BRAND</th>
 	            <td colspan="2" style="text-align: right; marg">
-	            	<input type="button" value="조회" onclick="filter();" style="margin-right: 30px; border: none; padding: 5px;">
+	            	<input type="button" value="조회" onclick="searchBrand();" style="margin-right: 30px; border: none; padding: 5px;">
 	            </td>
 	        </tr>                
 	        <tr>
+	        	
 	            <td><input type="checkbox" name="brand" value="Nature Republic"> NATURE REPUBLIC</td>
 	            <td><input type="checkbox" name="brand" value="The Face Shop"> THE FACE SHOP</td>
 	            <td><input type="checkbox" name="brand" value="Apieu"> A'PIUE</td>
@@ -202,6 +204,7 @@ session="true" pageEncoding="UTF-8"%>
 			<c:if test="${empty pageIndexList }">
 				다른 상품을 검색해 주세요
 			</c:if>
+			
 		</ol>
 		<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/next.gif"></a>
 	</div>

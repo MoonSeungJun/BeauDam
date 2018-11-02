@@ -200,114 +200,68 @@ public class BeaudamController {
 		String pageNum = request.getParameter("pageNum");
 		String searchType = request.getParameter("searchType");
 		String sBrand = Arrays.toString(request.getParameterValues("arrayBrand"));
-				
 		
-		System.out.println("#!@#@!#!@#@!#@!#!@#@!@!#@!");
-		System.out.println(sBrand);
-		System.out.println("#!@#@!#!@#@!#@!#!@#@!@!#@!");
 		
 		String searchBrand = sBrand.substring(1, sBrand.length() - 1);
 		
-		
-		System.out.println("DADASDASDASDASDASSSSSSSSDSAASDSADSADSADSDA");
-		System.out.println(sBrand.length());
-		System.out.println("DADASDASDASDASDASSSSSSSSDSAASDSADSADSADSDA");
-		
-		
-		String test1[] = searchBrand.split(",");
-		
-		if(test1.length==1) {
-			String searchBrand1 = test1[0];
-			
-			
-			System.out.println("★");
-			System.out.println(searchBrand1);
-			System.out.println("★");
-		
-		}		
-		
-		
-		/*String searchBrand1 = searchBrand.split(",")[0];
-		String searchBrand2 = searchBrand.split(",")[1];
-		String searchBrand3 = searchBrand.split(",")[2];
-		String searchBrand4 = searchBrand.split(",")[3];
-		String searchBrand5 = searchBrand.split(",")[4];
-		
 				
-		System.out.println("dadadasdasdasdasdasasadsda");
-		System.out.println(searchBrand1);
-		System.out.println(searchBrand2);
-		System.out.println(searchBrand3);
-		System.out.println(searchBrand4);
-		System.out.println(searchBrand5);
-		System.out.println("#!@#@!#!@#@!#@!#!@#@!@!#@!");*/
+		/*String searchBradnArray[] = searchBrand.split(",");
 		
 		
-			
-		/*			
-		if(searchBrand!=null&&!searchBrand.equals("")) {
-					
-			System.out.println("#########################");
-			System.out.println("여기까지는 진입성공!!!!!!!!!!!!!!!");
-			System.out.println("#########################");
+		if(searchBradnArray==null||searchBradnArray.equals("")) {
+			String searchBrand1 = "nodata";
+			String searchBrand2 = "nodata";
+			String searchBrand3 = "nodata";
+			String searchBrand4 = "nodata";
+			String searchBrand5 = "nodata";
+		}
 		
-			HashMap<String, Object> searchPack = new HashMap<String, Object>();
+		
+		if(searchBradnArray.length==1) {
+			String searchBrand1 = searchBradnArray[0];
+			String searchBrand2 = "nodata";
+			String searchBrand3 = "nodata";
+			String searchBrand4 = "nodata";
+			String searchBrand5 = "nodata";
 			
-			if(searchBrand1==null||searchBrand1.equals("")) {
-				searchBrand1="nodata";
-			}
-			
-			if(searchBrand2==null||searchBrand2.equals("")) {
-				searchBrand2="nodata";
-			}
-			
-			if(searchBrand3==null||searchBrand3.equals("")) {
-				searchBrand3="nodata";
-			}
-			
-			if(searchBrand4==null||searchBrand4.equals("")) {
-				searchBrand4="nodata";
-			}
-			
-			if(searchBrand5==null||searchBrand5.equals("")) {
-				searchBrand5="nodata";
-			}		
+		}	
+		
+		if(searchBradnArray.length==2) {
+			String searchBrand1 = searchBradnArray[0];
+			String searchBrand2 = searchBradnArray[1];
+			String searchBrand3 = "nodata";
+			String searchBrand4 = "nodata";
+			String searchBrand5 = "nodata";
 			
 			
+		}
+		
+		if(searchBradnArray.length==3) {
+			String searchBrand1 = searchBradnArray[0];
+			String searchBrand2 = searchBradnArray[1];
+			String searchBrand3 = searchBradnArray[2];
+			String searchBrand4 = "nodata";
+			String searchBrand5 = "nodata";
 			
-				if(searchValue==null||searchValue.equals("")) {
-					searchValue="";
-				}
-				if(searchValue!=null&&!searchValue.equals("")) {
-					searchType="";
-				}
-				
-				if(searchType==null||searchType.equals("")) {
-					searchType="";
-				}
-				if(searchType!=null&&!searchType.equals("")) {
-					searchValue="";
-				}				
-							
-				searchPack.put("searchValue", searchValue);
-				searchPack.put("searchType", searchType);
-				searchPack.put("searchBrand", searchBrand);
-				
-				
-				List<ProductView> brandSearchData = viewService.getBrandSearchProductData(searchPack);
-				
-				
-				
-				
-				request.setAttribute("brandSearchData", brandSearchData);
-				request.setAttribute("searchType", searchType);
-				request.setAttribute("searchValue", searchValue);
-				return new ModelAndView("beaudam/productList", "id", (String) session.getAttribute("id"));
-				
-				
+		}
+		
+		if(searchBradnArray.length==4) {
+			String searchBrand1 = searchBradnArray[0];
+			String searchBrand2 = searchBradnArray[1];
+			String searchBrand3 = searchBradnArray[2];
+			String searchBrand4 = searchBradnArray[3];
+			String searchBrand5 = "nodata";
 			
-		}*/
-							
+		}
+		
+		if(searchBradnArray.length==5) {
+			String searchBrand1 = searchBradnArray[0];
+			String searchBrand2 = searchBradnArray[1];
+			String searchBrand3 = searchBradnArray[2];
+			String searchBrand4 = searchBradnArray[3];
+			String searchBrand5 = searchBradnArray[4];
+			
+		}		*/
 		
 		if(searchValue==null||searchValue.equals("")) {
 			searchValue="";
@@ -344,8 +298,6 @@ public class BeaudamController {
 		if(pageNum != null)
 			currentPage = Integer.parseInt(pageNum);
 		
-		
-		
 	    if(currentPage > totalPage) {
 	    	currentPage = totalPage;
 	    }
@@ -356,36 +308,54 @@ public class BeaudamController {
 	    HashMap<String, Object> searchValuePack = new HashMap<String, Object>();
 	    
 	    searchValuePack.put("searchValue", searchValue);
+	    searchValuePack.put("searchType", searchType);
 	    searchValuePack.put("start", start);
 	    searchValuePack.put("end", end);
-	    searchValuePack.put("searchType", searchType);
+	    
 		
 	    List<ProductView> searchProductList = viewService.getSearchProductDataList(searchValuePack);
-		
+		    
+	    System.out.println("^@%^@@#$@!$!@$@!@!$@$!@$!$@!@$!");
+	    System.out.println(searchType+"searchType");
+	    System.out.println(searchValue+"searchValue");	    
+	    System.out.println("^@%^@@#$@!$!@$@!@!$@$!@$!$@!@$!");
+	    
 	    String param = "";
-	    if(!searchValue.equals("")) {
-	    	param = "searchValue="+URLEncoder.encode(searchValue, "utf-8");
-	    	
-	    }
+		String listUrl = cp+"/productList.action";
 	    
-	    String listUrl = cp+"/productList.action";
-	    if(!param.equals("")) {
-	    	listUrl = listUrl+"?"+param;
-	    }
-	    
-	    String pageIndexList =
-	    		myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		if (searchValue != null&&!searchValue.equals("")) {
+			 param = "";
+			 listUrl = cp+"/productList.action";
+			if (!searchValue.equals("")) {
+
+				param = "searchValue=" + URLEncoder.encode(searchValue, "utf-8");
+
+			}
+
+			if (!param.equals("")) {
+				listUrl = listUrl + "?" + param;
+			}
+		}
 		
-	    String detailUrl = cp+"/productDetail.action?pageNum="+currentPage;
-	    
-	    if(!param.equals("")) {
-	    	detailUrl = detailUrl+"&"+param;
-	    }
-	    System.out.println("^^^^^^^^^^^^^^^^^^^^^^");
-	    System.out.println(searchType);
-	    System.out.println(searchValue);
-	    System.out.println("^^^^^^^^^^^^^^^^^^^^^^");	    
-	    
+		if (searchType != null&&!searchType.equals("")) {
+			 param = "";
+			 listUrl = cp+"/productList.action";
+			param = "searchType=" + URLEncoder.encode(searchType, "utf-8");
+
+
+			if (!param.equals("")) {
+				listUrl = listUrl + "?" + param;
+			}
+
+		}
+		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+
+		String detailUrl = cp + "/productDetail.action?pageNum=" + currentPage;
+
+		if (!param.equals("")) {
+			detailUrl = detailUrl + "&" + param;
+		}
+		
 		request.setAttribute("searchProductList", searchProductList);
 		request.setAttribute("count", count);
 		request.setAttribute("detailUrl", detailUrl);

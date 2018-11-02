@@ -132,11 +132,12 @@ session="true" pageEncoding="UTF-8"%>
 	                </div>
 	               
 	                <div class="header_search"> 
-	                     <form action="" method="post" name="mainSearchForm"> -->
+	                     <form action="" method="post" name="mainSearchForm">
 	                    <!-- 수정부분 -->
 	                    <ul class="search_icon">
 	                        <li><input type="button" value="GO!" onclick="searchIt();"></li>
 	                        <li><input type="text" class="form-control" id="usr" placeholder="에뛰드 틴트" name="searchValue"></li>
+	                    	
 	                    </ul>
 	                    <ul class="search_icon">
 	                        <li><img src="<%=cp%>/resources/image/beaudam/main/icon_blog1.gif"></li>
@@ -152,13 +153,14 @@ session="true" pageEncoding="UTF-8"%>
 	</div>
 	
 	<!-- 카테고리 -->
-	<div class="navbar_container sticky sticky_border" style="height: 52px;">
+	<div class="navbar_c?searchType=ontainer sticky sticky_border" style="height: 52px;">
 	<div class="navbar">
 	    <div class="dropdown" >
 	    <button class="dropbtn">CATERORY 
 	        <i class="fa fa-caret-down"></i>
 	    </button>
 	        <div class="dropdown-content" style="width: 950px;  border-top: 1px solid gray; padding-top: 15px;">  
+	            <form action="" name="mainTopTypeForm" method="post">
 	            <div class="column">
 	            <h3>SKIN</h3>
 	                <a href="javascript:void(0);" onclick="typeSearch('Foundation');">파운데이션</a>
@@ -207,6 +209,7 @@ session="true" pageEncoding="UTF-8"%>
 	                <a href="javascript:void(0);" onclick="typeSearch('Pads');">화장솜</a>
 	                <a href="javascript:void(0);" onclick="typeSearch('Swab');">면봉</a>
 	            </div>
+	       	</form>
 	        </div>
 	    </div> 
 	        <a href="#home">BEST ITEM</a>
