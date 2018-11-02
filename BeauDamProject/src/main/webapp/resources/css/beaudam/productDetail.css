@@ -1,8 +1,4 @@
-@charset "UTF-8";
 @font-face { font-family: 'YiSunShinDotumM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff'); font-weight: normal; font-style: normal; }
-
-@font-face { font-family: 'KHNPHD'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); font-weight: normal; font-style: normal; }
-
 h2, dl {
     margin: 0;
     padding: 0;
@@ -43,15 +39,17 @@ a {
     float: left;
     display: inline-block;
     margin-left: 30px;
+    width: 430px;
 }
 
 .right_header {
-    font-family: 'KHNPHD';
+   font-family: 'YiSunShinDotumM';
 }
 
 .right_header h2 {
 	margin-bottom: 30px;
 	font-size: 25px;
+	letter-spacing: 0.1em;
 }
 
 
@@ -60,7 +58,8 @@ a {
     border-top: 2px solid black;
     border-bottom: 1px solid gray;
     /*overflow: hidden;*/
-    
+    font-family: 'YiSunShinDotumM';
+    font-size: 18px;
 }
 
 .right_content img {
@@ -93,6 +92,8 @@ dd {
 
 .result {
 	padding: 10px;
+	font-family: 'YiSunShinDotumM';
+	font-size: 18px;
 }
 .result dd {
     color: orangered;
@@ -147,9 +148,10 @@ dd {
 
 .review_container {
 	/* background-color: yellow; */
-	margin: 0 auto;	
+	margin: 30px auto 0 auto;	
 	overflow: hidden;
 	width: 1200px;
+	border-top: 2px solid black;
 }
 
 .review_button {

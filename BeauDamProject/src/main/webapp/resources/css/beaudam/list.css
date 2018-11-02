@@ -1,8 +1,7 @@
 @charset "UTF-8";
 @font-face { font-family: 'designhouseOTFLight00'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'WONBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONBatang.woff') format('woff'); font-weight: normal; font-style: normal; }
-@font-face { font-family: 'Binggrae-Bold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae-Bold.woff') format('woff'); font-weight: normal; font-style: normal; }
-
+@font-face { font-family: 'YiSunShinDotumM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff'); font-weight: normal; font-style: normal; }
 html, body, ul, ol, li, h1, h2 {
     padding: 0px;
     margin: 0px;
@@ -82,7 +81,7 @@ html, body, ul, ol, li, h1, h2 {
 }
 
 .list {
-	width: 960px;
+	width: 1100px;
 	margin: 0 auto;
 }
 
@@ -96,12 +95,12 @@ html, body, ul, ol, li, h1, h2 {
 }
 
 .listitem {
-	width: 220px;
-	height: 360px;
+	width: 250px;
+	height: 400px;
 }
 
 .listitem img {
-	width: 220px;
+	width: 250px;
 	height: 264px;
 	margin-bottom: 13px;
 	border-radius: 30px;
