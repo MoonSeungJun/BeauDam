@@ -27,7 +27,7 @@
 
 	var popUrl = "inquire.action";	//팝업창에 출력될 페이지 URL
 
-	var popOption = "width=300, height=300, resizable=yes, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
+	var popOption = "width=600, height=490, resizable=no, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
 
 		window.open(popUrl,"",popOption);
 
@@ -73,16 +73,18 @@
 				<td>
 					&nbsp;<input style="width: 80px;" type="button" value="검색" onclick="sendIt();">
 				</td>
+				
 			</tr>
 		</table>
 		<!-- 공지사항 게시판 -->
 		<table style="width: 100%; margin: 0 auto;" class="board">  
-			<tr>
-			<c:if test="${id eq'Admin' }">
-				<td align="right" colspan="3">
-					<input type="button" value="공지등록" onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
-				</td>
-			</c:if>	
+			<tr>			
+			
+<%-- 			<c:if test="${id ne 'admin' }"> --%>
+<!-- 				<td align="right" colspan="3"> -->
+<!-- 					&nbsp; -->
+<!-- 				</td> -->
+<%-- 			</c:if> --%>
 			<c:if test="${empty id }">&nbsp;</c:if>
 			</tr>
 			<tr align="center" style="background-color: #F5F5DD;">
@@ -95,6 +97,9 @@
 				<td style="width: 30%;">
 					작성일
 				</td>
+				<td>
+					&nbsp;
+				</td>
 			</tr>
 		<c:forEach var="dto" items="${lists }">
 			<tr align="center" style="height: 50px;">
@@ -105,18 +110,32 @@
 					<a href="${articleUrl}&num=${dto.num}" style="text-decoration: none; color: black;">${dto.subject }</a></td>
 				<td>
 					${dto.created }
-				</td>		
+				</td>
+				<td>
+					&nbsp;
+				</td>				
 			</tr>
 		</c:forEach>
 			<tr align="center">
 				<td colspan="3" align="center">
 					<c:if test="${dataCount!=0 }">
 						${pageIndexList }
+						<c:if test="${id eq'admin' }">
+							<td align="right" colspan="3">
+								<input type="button" value="공지등록" onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
+							</td>
+						</c:if>
 					</c:if>
 					<c:if test="${dataCount==0 }">
 						등록된 공지가 없습니다.
+						<c:if test="${id eq'admin' }">
+							<td align="right" colspan="3">
+								<input type="button" value="공지등록" onclick="javascript:location.href='<%=cp%>/notification_create.action';"/>
+							</td>
+						</c:if>						
 					</c:if>
 				</td>
+			
 			</tr>
 		</table>
 		</form>

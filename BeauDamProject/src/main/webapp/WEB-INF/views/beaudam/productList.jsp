@@ -112,7 +112,7 @@ session="true" pageEncoding="UTF-8"%>
 	    <p>ACCESSORY</p>
 	</div>
 	</c:if>
-	<c:if test="${searchType== 'Cleansing'||searchType== 'Water/Oil/Cream'||searchType== 'Peeling/Scrub' }">
+	<c:if test="${searchType== 'Cleansing'||searchType== 'Water'||searchType== 'Peeling' }">
 	<div class="head" style="background-image: url('<%=cp%>/resources/image/beaudam/productList/background_cleansing.jpg');">
 	    <p>CLEANSING</p>
 	</div>	

@@ -90,8 +90,6 @@ public class CustomCenterController {
 		int currentPage = 1;
 		HttpSession session = request.getSession();
 		
-		
-		
 		if(pageNum != null)
 			currentPage = Integer.parseInt(pageNum);
 		
@@ -155,16 +153,13 @@ public class CustomCenterController {
 	@RequestMapping(value = "/notification_article.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String notification_article(HttpServletRequest request) throws Exception {
 
-		String cp = request.getContextPath();
-		HttpSession session = request.getSession();
-		
+		HttpSession session = request.getSession();		
 		
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 		
 		String searchKey = request.getParameter("searchKey");
-		String searchValue = request.getParameter("searchValue");
-				
+		String searchValue = request.getParameter("searchValue");				
 		
 		if(searchKey != null)
 			searchValue = URLDecoder.decode(searchValue, "UTF-8");
@@ -179,8 +174,7 @@ public class CustomCenterController {
 		if(searchKey!=null) {
 			detail += "&searchKey=" + searchKey;
 			detail += "&searchValue=" 
-					+ URLEncoder.encode(searchValue, "UTF-8");
-			
+					+ URLEncoder.encode(searchValue, "UTF-8");			
 		}
 		
 		request.setAttribute("dto", dto);
@@ -206,7 +200,11 @@ public class CustomCenterController {
 
 		int maxNum = otherService.getNotificationMaxNum();
 		
-		dto.setNum(maxNum+1);
+		if(maxNum ==1) {
+			dto.setNum(maxNum);
+		}else {
+			dto.setNum(maxNum+1);
+		}		
 		
 		otherService.insertNotification(dto);
 				

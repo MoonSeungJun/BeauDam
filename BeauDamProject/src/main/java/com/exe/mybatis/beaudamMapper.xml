@@ -68,7 +68,7 @@
 			
 		<!-- Notification -->
 			<insert id="insertNotification" parameterType="com.table.otherDTO.NotificationDTO">
-				insert into notification (subject,content) values (#{subject},#{content})
+				insert into notification (num,subject,content) values (#{num},#{subject},#{content})
 			</insert>
 		
 		
@@ -419,7 +419,12 @@
 			select nvl(max(num),0) from notification
 			
 		</select>
+		
+		<select id="getNotificationRowNum" resultType="int">
+			select max(rownum) rnum from notification
 			
+		</select>
+		
 		<select id="getNotificationAllData" parameterType="map" resultType="com.table.otherDTO.NotificationDTO">
 			
 			select *from (
