@@ -195,11 +195,73 @@ public class BeaudamController {
 	public ModelAndView productList(HttpSession session,HttpServletRequest request)throws Exception {
 		
 		String searchValue = request.getParameter("searchValue");
-		String id  = (String)session.getAttribute("id");
+		/*String id  = (String)session.getAttribute("id");*/
 		String cp = request.getContextPath();
 		String pageNum = request.getParameter("pageNum");
 		String searchType = request.getParameter("searchType");
+		String sBrand = Arrays.toString(request.getParameterValues("arrayBrand"));
 		
+		
+		String searchBrand = sBrand.substring(1, sBrand.length() - 1);
+		
+				
+		/*String searchBradnArray[] = searchBrand.split(",");
+		
+		
+		if(searchBradnArray==null||searchBradnArray.equals("")) {
+			String searchBrand1 = "nodata";
+			String searchBrand2 = "nodata";
+			String searchBrand3 = "nodata";
+			String searchBrand4 = "nodata";
+			String searchBrand5 = "nodata";
+		}
+		
+		
+		if(searchBradnArray.length==1) {
+			String searchBrand1 = searchBradnArray[0];
+			String searchBrand2 = "nodata";
+			String searchBrand3 = "nodata";
+			String searchBrand4 = "nodata";
+			String searchBrand5 = "nodata";
+			
+		}	
+		
+		if(searchBradnArray.length==2) {
+			String searchBrand1 = searchBradnArray[0];
+			String searchBrand2 = searchBradnArray[1];
+			String searchBrand3 = "nodata";
+			String searchBrand4 = "nodata";
+			String searchBrand5 = "nodata";
+			
+			
+		}
+		
+		if(searchBradnArray.length==3) {
+			String searchBrand1 = searchBradnArray[0];
+			String searchBrand2 = searchBradnArray[1];
+			String searchBrand3 = searchBradnArray[2];
+			String searchBrand4 = "nodata";
+			String searchBrand5 = "nodata";
+			
+		}
+		
+		if(searchBradnArray.length==4) {
+			String searchBrand1 = searchBradnArray[0];
+			String searchBrand2 = searchBradnArray[1];
+			String searchBrand3 = searchBradnArray[2];
+			String searchBrand4 = searchBradnArray[3];
+			String searchBrand5 = "nodata";
+			
+		}
+		
+		if(searchBradnArray.length==5) {
+			String searchBrand1 = searchBradnArray[0];
+			String searchBrand2 = searchBradnArray[1];
+			String searchBrand3 = searchBradnArray[2];
+			String searchBrand4 = searchBradnArray[3];
+			String searchBrand5 = searchBradnArray[4];
+			
+		}		*/
 		
 		if(searchValue==null||searchValue.equals("")) {
 			searchValue="";
@@ -236,8 +298,6 @@ public class BeaudamController {
 		if(pageNum != null)
 			currentPage = Integer.parseInt(pageNum);
 		
-		
-		
 	    if(currentPage > totalPage) {
 	    	currentPage = totalPage;
 	    }
@@ -248,36 +308,54 @@ public class BeaudamController {
 	    HashMap<String, Object> searchValuePack = new HashMap<String, Object>();
 	    
 	    searchValuePack.put("searchValue", searchValue);
+	    searchValuePack.put("searchType", searchType);
 	    searchValuePack.put("start", start);
 	    searchValuePack.put("end", end);
-	    searchValuePack.put("searchType", searchType);
+	    
 		
 	    List<ProductView> searchProductList = viewService.getSearchProductDataList(searchValuePack);
-		
+		    
+	    System.out.println("^@%^@@#$@!$!@$@!@!$@$!@$!$@!@$!");
+	    System.out.println(searchType+"searchType");
+	    System.out.println(searchValue+"searchValue");	    
+	    System.out.println("^@%^@@#$@!$!@$@!@!$@$!@$!$@!@$!");
+	    
 	    String param = "";
-	    if(!searchValue.equals("")) {
-	    	param = "searchValue="+URLEncoder.encode(searchValue, "utf-8");
-	    	
-	    }
+		String listUrl = cp+"/productList.action";
 	    
-	    String listUrl = cp+"/productList.action";
-	    if(!param.equals("")) {
-	    	listUrl = listUrl+"?"+param;
-	    }
-	    
-	    String pageIndexList =
-	    		myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		if (searchValue != null&&!searchValue.equals("")) {
+			 param = "";
+			 listUrl = cp+"/productList.action";
+			if (!searchValue.equals("")) {
+
+				param = "searchValue=" + URLEncoder.encode(searchValue, "utf-8");
+
+			}
+
+			if (!param.equals("")) {
+				listUrl = listUrl + "?" + param;
+			}
+		}
 		
-	    String detailUrl = cp+"/productDetail.action?pageNum="+currentPage;
-	    
-	    if(!param.equals("")) {
-	    	detailUrl = detailUrl+"&"+param;
-	    }
-	    System.out.println("^^^^^^^^^^^^^^^^^^^^^^");
-	    System.out.println(searchType);
-	    System.out.println(searchValue);
-	    System.out.println("^^^^^^^^^^^^^^^^^^^^^^");	    
-	    
+		if (searchType != null&&!searchType.equals("")) {
+			 param = "";
+			 listUrl = cp+"/productList.action";
+			param = "searchType=" + URLEncoder.encode(searchType, "utf-8");
+
+
+			if (!param.equals("")) {
+				listUrl = listUrl + "?" + param;
+			}
+
+		}
+		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+
+		String detailUrl = cp + "/productDetail.action?pageNum=" + currentPage;
+
+		if (!param.equals("")) {
+			detailUrl = detailUrl + "&" + param;
+		}
+		
 		request.setAttribute("searchProductList", searchProductList);
 		request.setAttribute("count", count);
 		request.setAttribute("detailUrl", detailUrl);
@@ -291,10 +369,10 @@ public class BeaudamController {
 
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView productDetail(HttpSession session, HttpServletRequest req) {
-			
+		
 		ProductView detailData = productService.getOneProductData(req.getParameter("code"));
 		
-		int point = (int) ((int) detailData.getProduct_Price()*0.1);
+		int point = (int) ((int) detailData.getProduct_Price()*0.1);	
 		
 		req.setAttribute("dto", detailData);
 		req.setAttribute("point", point);

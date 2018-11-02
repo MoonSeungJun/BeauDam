@@ -17,11 +17,52 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+
+
+<script type="text/javascript">
+
+	function searchIt() {
+		
+		f = document.mainSearchForm;
+		
+		var check = f.searchValue.value;
+		
+		check = check.trim();
+		
+		if(!check){
+			alert("검색어를 입력해주세요")
+			f.searchValue.focus();			
+			return;
+		}		
+			
+		f.action = "<%=cp%>/productList.action";
+		f.submit();
+		
+	}
+	
+	function typeSearch(type) {
+		
+		f = document.mainTopTypeForm;
+		
+		var searchType = type;
+		
+		f.action = "<%=cp%>/productList.action?searchType="+searchType;
+		f.submit();	
+		
+		
+	}
+
+
+
+</script>
+
+
 <style type="text/css">
 html {
   scroll-behavior: smooth;
 }
 </style>
+
 </head>
 <body>
 	<!-- 상단 시작 -->
@@ -98,74 +139,86 @@ html {
 	                <div class="header_logo">
 	                    <a href="<%=cp %>/main.action"><img alt="" src="<%=cp%>/resources/image/beaudam/main/logo.png"></a>
 	                </div>
+	               
 	                <div class="header_search"> 
+	                     <form action="" method="post" name="mainSearchForm">
 	                    <!-- 수정부분 -->
 	                    <ul class="search_icon">
-	                        <li><input type="button" value="GO!"></li>
-	                        <li><input type="text" class="form-control" id="usr" placeholder="에뛰드 틴트" ></li>
+	                        <li><input type="button" value="GO!" onclick="searchIt();"></li>
+	                        <li><input type="text" class="form-control" id="usr" placeholder="에뛰드 틴트" name="searchValue"></li>
+	                    	
 	                    </ul>
 	                    <ul class="search_icon">
 	                        <li><a href="https://www.facebook.com/"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog1.gif"></a></li>
 	                        <li><a href="https://twitter.com/"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog2.gif"></a></li>
 	                        <li><a href="https://www.instagram.com/under_the_sound/"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog3.gif"></a></li>
 	                    </ul>
+	                	</form>
 	                </div>
+	                
 	            </div>
 	        </div>
 	    </div>
 	</div>
 	
 	<!-- 카테고리 -->
-	<div class="navbar_container sticky sticky_border" style="height: 52px;">
+	<div class="navbar_c?searchType=ontainer sticky sticky_border" style="height: 52px;">
 	<div class="navbar">
 	    <div class="dropdown" >
 	    <button class="dropbtn">CATERORY 
 	        <i class="fa fa-caret-down"></i>
 	    </button>
 	        <div class="dropdown-content" style="width: 950px;  border-top: 1px solid gray; padding-top: 15px;">  
+	            <form action="" name="mainTopTypeForm" method="post">
 	            <div class="column">
 	            <h3>SKIN</h3>
-	                <a href="<%=cp %>/productList.action">파운데이션</a>
-	                <a href="<%=cp %>/productList.action">베이스</a>
-	                <a href="#">쿠션</a>
-	                <a href="#">파우더/팩트</a>
-	                <a href="#">프라이머</a>
-	                <a href="#">컨투어링 / <br>하이라이터</a>
-	                <a href="#">블러셔</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Foundation');">파운데이션</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Base');">베이스</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Cushion');">쿠션</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Pact');">파우더/팩트</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Primer');">프라이머</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Contouring/Highlighter');">컨투어링 / <br>하이라이터</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Blush');">블러셔</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('BB');">BB</a>
 	            </div>
 	            <div class="column">
 	            <h3>EYE</h3>
-	                <a href="#">쉐도우</a>
-	                <a href="#">마스카라</a>
-	                <a href="#">아이라이너</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Shadow');">쉐도우</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Mascara');">마스카라</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Liner');">아이라이너</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Eyelashes');">아이래쉬스</a>
 	            </div>
 	            <div class="column">
 	            <h3>LIP</h3>
-	                <a href="#">립스틱</a>
-	                <a href="#">틴트</a>
-	                <a href="#">립밤</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Stick');">립스틱</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Tint');">틴트</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Balm');">립밤</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Gloss');">립글로스</a>
 	            </div>
 	            <div class="column">
 	            <h3>PACK</h3>
-	                <a href="#">워시오프팩</a>
-	                <a href="#">시트팩</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Wash');">워시오프팩</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Sheet');">시트팩</a>
 	            </div>
 	            <div class="column">
 	            <h3>CEALSING</h3>
-	                <a href="#">클렌징폼</a>
-	                <a href="#">워터/오일</a>
-	                <a href="#">필링/스크럽</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Cleansing');">클렌징폼</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Water');">워터/오일</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Peeling');">필링/스크럽</a>
 	            </div>
 	            <div class="column">
 	            <h3>PERFUME</h3>
-	                <a href="#">향수</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Perfume');">향수</a>
 	            </div>
 	            <div class="column">
 	            <h3>ACC</h3>
-	                <a href="#">브러쉬</a>
-	                <a href="#">뷰러</a>
-	                <a href="#">퍼프</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Brush');">브러쉬</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Curler');">뷰러</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Puff');">퍼프</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Pads');">화장솜</a>
+	                <a href="javascript:void(0);" onclick="typeSearch('Swab');">면봉</a>
 	            </div>
+	       	</form>
 	        </div>
 	    </div> 
 	        <a href="#">BEST ITEM</a>

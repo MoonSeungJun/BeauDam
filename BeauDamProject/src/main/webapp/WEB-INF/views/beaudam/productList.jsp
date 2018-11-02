@@ -19,25 +19,20 @@ session="true" pageEncoding="UTF-8"%>
 	width: 960px;
 	text-align: center;
 }
-
 .page ol {
 	overflow: hidden;
 }
-
 .page li {
 	width: 34px;
 	height: 34px;
 	border: 1px solid gray;
 	float: left;
 }
-
 .pageing {
 	padding: 30px;
 	text-align: center;
 	margin-top: 30px;
-
 }
-
 .pageing ol {
 	overflow: hidden; 
 	display: inline-block; 
@@ -45,7 +40,6 @@ session="true" pageEncoding="UTF-8"%>
 	margin: 0;
 	
 }
-
 .pageing li {
 	width: 34px;
 	height: 34px;
@@ -53,11 +47,38 @@ session="true" pageEncoding="UTF-8"%>
 	float: left;
 	border: 1px solid #d7d5d5;
 }
-
 .pageing li:hover {
        background-color: rgba( 237, 237, 237, 0.5 ); 
 }
 </style>
+
+<script type="text/javascript">
+
+	function searchBrand() {
+		
+		var f= document.productListForm;
+		
+		var arrayBrand = new Array();
+		
+
+		//each로 loop를 돌면서 checkbox의 check된 값을 가져와 담아준다.
+
+		$("input:checkbox[name=brand]:checked").each(function(){
+
+			arrayBrand.push($(this).val());
+
+		});
+	
+		f.action="<%=cp%>/productList.action?arrayBrand="+arrayBrand;
+		f.submit();
+
+		
+	}
+
+
+</script>
+
+
 </head>
 <body>
 <jsp:include page="./mainTop.jsp" />
@@ -104,28 +125,31 @@ session="true" pageEncoding="UTF-8"%>
 	<c:if test="${searchType== 'Perfume'}">
 	<div class="head" style="background-image: url('<%=cp%>/resources/image/beaudam/productList/background_perfume.jpg');">
 	    <p>PERFUME</p>
+	    
 	</div>		
 	</c:if>
 </c:if> 
 	<div class="brand">
+		<form action="" method="post" name="productListForm">
 	    <table class="brandname">
 	    	<tr>
 	    		<th style="font-size: 20px; padding: 10px;">BRAND</th>
 	            <td colspan="2" style="text-align: right; marg">
-	            	<input type="button" value="조회" onclick="" style="margin-right: 30px; border: none; padding: 5px;">
+	            	<input type="button" value="조회" onclick="searchBrand();" style="margin-right: 30px; border: none; padding: 5px;">
 	            </td>
 	        </tr>                
 	        <tr>
-	            <td><input type="checkbox" name="brand"> NATURE REPUBLIC</td>
-	            <td><input type="checkbox" name="brand"> THE FACE SHOP</td>
-	            <td><input type="checkbox" name="brand"> A'PIUE</td>
+	        	
+	            <td><input type="checkbox" name="brand" value="Nature Republic"> NATURE REPUBLIC</td>
+	            <td><input type="checkbox" name="brand" value="The Face Shop"> THE FACE SHOP</td>
+	            <td><input type="checkbox" name="brand" value="Apieu"> A'PIUE</td>
 	        </tr>
 	        <tr>
-	            <td><input type="checkbox" name="brand"> ETUDE HOUSE</td>
-	            <td><input type="checkbox" name="brand"> INNISFREE</td>	           
-	        </tr>
-	
+	            <td><input type="checkbox" name="brand" value="Etude"> ETUDE HOUSE</td>
+	            <td><input type="checkbox" name="brand" value="Innisfree"> INNISFREE</td>	           
+	        </tr>	
 	    </table>
+	    </form>
 	</div>
 	<div class="bestlist">
 		<ul>
@@ -155,14 +179,16 @@ session="true" pageEncoding="UTF-8"%>
 	      	</li>
 		</ul>
 	</div> 
-	<div class="list">
+	<div class="list"> 
 	총 <font style="color: #ff4d4d">${count }개</font>의 상품이 있습니다.
 		<ul>
 			<c:forEach var="dto" items="${searchProductList }">
 			<li>
-				<div class="listitem">
+				<div class="listitem" id="${dto.brand }"style="display: block;">
 					<a href="${detailUrl }&code=${dto.code}"><img alt="" src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
-					<%-- <p>${dto.category }</p> --%>
+
+					<p>${dto.brand }</p>
+				<%-- <p>${dto.category }</p> --%>
 					<p>${dto.product_Name }</p>
 					<p>${dto.product_Price }원</p>
 				</div>
@@ -179,6 +205,7 @@ session="true" pageEncoding="UTF-8"%>
 			<c:if test="${empty pageIndexList }">
 				다른 상품을 검색해 주세요
 			</c:if>
+			
 		</ol>
 		<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/next.gif"></a>
 	</div>
