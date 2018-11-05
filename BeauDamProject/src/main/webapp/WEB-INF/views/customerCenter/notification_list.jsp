@@ -30,10 +30,7 @@
 
 	var popOption = "width=600, height=490, resizable=no, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
 
-	var popOption = "width=600, height=490, resizable=yes, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
-
-
-		window.open(popUrl,"",popOption);
+	window.open(popUrl,"",popOption);
 
 	}
 	
