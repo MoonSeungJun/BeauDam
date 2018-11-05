@@ -163,5 +163,11 @@ public class OtherServiceImpl implements OtherService {
 		return lists;
 	}
 	
+	@Override
+	public int getNotificationRowNum() {
+		int num = dao.getNotificationRowNum();
+		return num;
+	}
+	
 	
 }

@@ -103,21 +103,21 @@ public class IamportController {
 		String lists = req.getParameter("lists"); //배열
 		String qtysstr = req.getParameter("qty"); //배열
 		
-		System.out.println(payType);
-		System.out.println(id);
-		System.out.println(msg);
-		System.out.println(codes);
-		System.out.println(payResultstr);
-		System.out.println(couponNumstr); //1
-		System.out.println(pointstr);
-		System.out.println(lists);
-		System.out.println(qtysstr);
+//		System.out.println(payType);
+//		System.out.println(id);
+//		System.out.println(msg);
+//		System.out.println(codes);
+//		System.out.println(payResultstr);
+//		System.out.println(couponNumstr); //1
+//		System.out.println(pointstr);
+//		System.out.println(lists);
+//		System.out.println(qtysstr);
 
 		String[] code = codes.split(",");
 		String[] basketNumstr = lists.split(",");
 		String[] qtystr = qtysstr.split(",");		
 		
-		System.out.println(qtystr[0]);
+//		System.out.println(qtystr[0]);
 		int payResult = Integer.parseInt(payResultstr);
 		int couponNum = 0;
 		
@@ -153,7 +153,7 @@ public class IamportController {
 			}
 			int sale_Code = Integer.parseInt(saleCode)+1;
 			saleCode = Integer.toString(sale_Code);		
-			System.out.println(saleCode);
+//			System.out.println(saleCode);
 			dateDTO.setSale_Code(saleCode);
 			dateDTO.setPayment_Method(payType);
 			

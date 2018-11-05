@@ -103,7 +103,7 @@ session="true" pageEncoding="UTF-8"%>
 	</div>
 	</c:if>
 	<c:if test="${searchType== 'Balm'||searchType== 'Gloss'||searchType== 'Stick'||searchType== 'Tint' }">
-	<div class="head" style="background-image: url('<%=cp%>/resources/image/beaudam/productList/background_eye.jpg');">
+	<div class="head" style="background-image: url('<%=cp%>/resources/image/beaudam/productList/background_lip.png');">
 	    <p>LIP MAKEUP</p>
 	</div>	
 	</c:if>
@@ -112,7 +112,7 @@ session="true" pageEncoding="UTF-8"%>
 	    <p>ACCESSORY</p>
 	</div>
 	</c:if>
-	<c:if test="${searchType== 'Cleansing'||searchType== 'Water/Oil/Cream'||searchType== 'Peeling/Scrub' }">
+	<c:if test="${searchType== 'Cleansing'||searchType== 'Water'||searchType== 'Peeling' }">
 	<div class="head" style="background-image: url('<%=cp%>/resources/image/beaudam/productList/background_cleansing.jpg');">
 	    <p>CLEANSING</p>
 	</div>	
@@ -128,7 +128,10 @@ session="true" pageEncoding="UTF-8"%>
 	    
 	</div>		
 	</c:if>
-</c:if> 
+</c:if>
+	<div class="type">
+		<h3>${searchType}</h3>
+	</div>	
 	<div class="brand">
 		<form action="" method="post" name="productListForm">
 	    <table class="brandname">
@@ -156,41 +159,40 @@ session="true" pageEncoding="UTF-8"%>
 			<li>
 				<div>
 					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></a>
-					<p style="font-size: 20px; color: #ff4d4d">BEST 01</p>
+					<p style="font-size: 20px; color: #ff4d4d; font-family: 'YiSunShinDotumM';">BEST 01</p>
 					솔솔 말린 솔방울
-					<p>5,000원</p>
+					<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">5,000원</p>
 				</div>
 			</li>
 			<li>
 				<div>
 					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample2.jpg"></a>
-					<p style="font-size: 20px; color: #ff4d4d">BEST 02</p>
+					<p style="font-size: 20px; color: #ff4d4d; font-family: 'YiSunShinDotumM';">BEST 02</p>
 					솔솔 말린 솔방울
-					<p>5,000원</p>
+					<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">5,000원</p>
 				</div>
 			</li>
 			<li>
 				<div>
 					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample3.jpg"></a>
-					<p style="font-size: 20px; color: #ff4d4d">BEST 03</p>
+					<p style="font-size: 20px; color: #ff4d4d; font-family: 'YiSunShinDotumM';">BEST 03</p>
 	      				솔솔 말린 솔방울
-	      			<p>5,000원</p>
+	      			<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">5,000원</p>
 	      		</div>
 	      	</li>
 		</ul>
 	</div> 
 	<div class="list"> 
+	
 	총 <font style="color: #ff4d4d">${count }개</font>의 상품이 있습니다.
 		<ul>
 			<c:forEach var="dto" items="${searchProductList }">
 			<li>
 				<div class="listitem" id="${dto.brand }"style="display: block;">
 					<a href="${detailUrl }&code=${dto.code}"><img alt="" src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
-
-					<p>${dto.brand }</p>
-				<%-- <p>${dto.category }</p> --%>
+					<p style="color: gray;">${dto.brand }</p>
 					<p>${dto.product_Name }</p>
-					<p>${dto.product_Price }원</p>
+					<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">${dto.product_Price }원</p>
 				</div>
 			</li>			
 			</c:forEach>
