@@ -137,32 +137,16 @@ public class BeaudamController {
 		
 		String searchValue = "";
 		String searchType = "";
-		String searchBrand1 = "";
-		String searchBrand2 = "";
-		String searchBrand3 = "";
-		String searchBrand4 = "";
-		String searchBrand5 = "";
-		
-		System.out.println("ERROOOOOOOOOOOOR1");
-		
+			
 		
 		searchPack.put("searchValue", searchValue);
 		searchPack.put("searchType", searchType);
-		searchPack.put("searchBrandValue1", searchBrand1);
-		searchPack.put("searchBrandValue2", searchBrand2);
-		searchPack.put("searchBrandValue3", searchBrand3);
-		searchPack.put("searchBrandValue4", searchBrand4);
-		searchPack.put("searchBrandValue5", searchBrand5);
 		
-		System.out.println("ERROOOOOOOOOOOOR2");
+		
 		int count = viewService.getSearchDataCount(searchPack);	
 		int selectRowNum = 0;
 		
-		System.out.println("ERROOOOOOOOOOOOR3");
-		 	System.out.println("++++++++++++++++++++++++");
-	        System.out.println(count);
-	        System.out.println("++++++++++++++++++++++++");
-				
+						
 		List<ProductView> newItemList = new ArrayList<ProductView>();
 		
 		   
