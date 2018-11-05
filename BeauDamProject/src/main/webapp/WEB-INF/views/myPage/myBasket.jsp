@@ -135,6 +135,12 @@
 		f.submit();		
 	}
 	
+	function goMypage() {
+		
+		var f = document.myBasketForm;
+		f.action = "<%=cp%>/myPage.action";
+		f.submit();		
+	}
 
 	function deleteProduct(basketNum,id) {
 		
@@ -212,6 +218,8 @@
 	<div id="container">
 		<div class="title_style">
 			<div class="title_area">
+			<a href="<%=cp%>/main.action"
+					style="text-decoration: none; color: black; font-family: 'designhouseOTFLight00';"><h3>뷰티를 담다 뷰ː담</h3></a>
 				<h2 style="font-family: designhouseOTFLight00">뷰담바구니</h2>
 				<p style="font-family: Black Han Sans">My Cart</p>
 			</div>
@@ -304,9 +312,9 @@
 			<br/><br/>
 			<div style="text-align: center; display: block;">
 				<button type="button" style="width: 100px" onclick="buy();">선택주문</button>
-				
 				<button type="button" style="width: 100px" onclick="allBuy();">전체주문</button><br/><br/>
 				<button type="button" style="float: right; display: block;" onclick="keepShopping();">쇼핑 계속하기</button>
+				<button type="button" style="float: right; display: block; margin-right: 10px;" onclick="goMypage();">마이페이지</button>
 			</div>
 		</div>
 	</div>

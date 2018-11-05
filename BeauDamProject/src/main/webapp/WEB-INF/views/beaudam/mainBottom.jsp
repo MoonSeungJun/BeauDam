@@ -50,8 +50,7 @@
      <div class="side">
          <a href="./event1.action"><img src="<%=cp%>/resources/image/beaudam/main/side.png"></a> 
      </div>
-     <div class="basket_order" style="position: fixed; bottom: 300px; right: 10px; 
-     		background-color: #F5F5DC; padding: 15px; border-radius: 30px;">
+     <div class="basket_order">
          <img class="goTop"  src="<%=cp%>/resources/image/beaudam/main/goTop.png" style="width: 34px;">
          <p class="goTop">TOP</p>
          <a href="<%=cp%>/myBasket.action" style="text-decoration: none;">

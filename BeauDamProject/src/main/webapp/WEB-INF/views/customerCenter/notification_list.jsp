@@ -27,8 +27,14 @@
 
 	var popUrl = "inquire.action";	//팝업창에 출력될 페이지 URL
 
+<<<<<<< HEAD
 	var popOption = "width=600, height=490, resizable=no, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
 	
+=======
+	var popOption = "width=600, height=490, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+
+>>>>>>> 김해나브랜치
 		window.open(popUrl,"",popOption);
 
 	}
@@ -79,26 +85,20 @@
 		<!-- 공지사항 게시판 김해나 -->
 		<table style="width: 100%; margin: 0 auto;" class="board">  
 			<tr>			
-			
-<%-- 			<c:if test="${id ne 'admin' }"> --%>
-<!-- 				<td align="right" colspan="3"> -->
-<!-- 					&nbsp; -->
-<!-- 				</td> -->
-<%-- 			</c:if> --%>
 			<c:if test="${empty id }">&nbsp;</c:if>
 			</tr>
 			<tr align="center" style="background-color: #F5F5DD;">
 				<td style="width: 10%;">
 				 	번호 			 	
 				</td>
-				<td style="width: 60%; text-align: left;">
+				<td style="width: 70%; text-align: left;">
 					제목
 				</td>
-				<td style="width: 30%;">
+				<td style="width: 10%;">
 					작성일
 				</td>
-				<td>
-					&nbsp;
+				<td style="width: 0%; margin-left: 10px; ">
+					작성자
 				</td>
 			</tr>
 		<c:forEach var="dto" items="${lists }">
@@ -108,11 +108,11 @@
 				</td>
 				<td style="text-align: left;">
 					<a href="${articleUrl}&num=${dto.num}" style="text-decoration: none; color: black;">${dto.subject }</a></td>
-				<td>
+				<td style="width: 10%; text-align: right;">
 					${dto.created }
 				</td>
-				<td>
-					&nbsp;
+				<td style="width: 10%; margin-left: 10px;">
+					뷰담
 				</td>				
 			</tr>
 		</c:forEach>
