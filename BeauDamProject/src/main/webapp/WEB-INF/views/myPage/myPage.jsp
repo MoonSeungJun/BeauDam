@@ -108,7 +108,7 @@
 									<td>
 										<img style="width: 60px"src="/beaudam/resources/image/myPage/pay.jpg" />
 									</td>
-									<td rowspan="3" style="border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;</td>
+									<td rowspan="3" style="border-right: 1px solid #77797a;">&nbsp;&nbsp;&nbsp;</td>
 									<td>
 										<img style="width: 40px" src="/beaudam/resources/image/myPage/box.jpg" />
 									</td>
