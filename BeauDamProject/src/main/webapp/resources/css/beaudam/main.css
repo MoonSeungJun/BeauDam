@@ -304,7 +304,6 @@ a {
 .best_wrapper ul, .new_item ul {
 	text-align: center;
 	overflow: hidden;
-	width: 1200px;
 	margin: 0 auto;
 }
 
@@ -328,6 +327,10 @@ a {
 .rolling_panel li a:hover {
 	text-decoration: none;
 	color: black;
+}
+
+.new_item ul li:last-child {
+	border-right: none;
 }
 
 .new_item img:hover {

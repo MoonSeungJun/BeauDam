@@ -134,11 +134,11 @@ $(document).ready(function() {
         <!-- 베스트 상품 -->
         <div class="best_wrapper rolling_wrapper">
         <h3>BEST ITEM</h3>
-        	<div class="rolling_panel ">
+        	<div class="rolling_panel" style="width: 100%;">
 				<ul class="rolling_panel" style="width: 1400px;">
 				<c:forEach var="dto" items="${productList }">					
-					<li><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}" ></a>
-						<div><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 18px;">${dto.product_Name }</p></div>
+					<li style="width: 280px;"><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}" ></a>
+						<div><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 17px;">${dto.product_Name }</p></div>
 					</li>
 				</c:forEach>
 				</ul>
@@ -176,21 +176,18 @@ $(document).ready(function() {
         <img  style="width: 100%" src="<%=cp%>/resources/image/beaudam/main/content_main04.jpg" >
         
         <!-- new item -->
-        <div class="new_item" id="newItem">
-            <div class="new_item" style="  width: 1100px; margin: 0 auto;">
+        <div class="new_item">
+            <div class="new_item" style="margin: 50px auto;">
             	<c:if test="${!empty newItemList }">
                 <h3>NEW ITEM </h3>
-                <ul class="new_item" style="width: 1200px;">
+                <ul class="new_item" style="width: 1266px;">
                 	<c:forEach var="dto" items="${newItemList }">
-                    <li>
-                    	<div>
-                    		<a href="${detailUrl }?code=${dto.code}">
-                    		<img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
-                    		<div>
-						    	<h4><b>${dto.brand }</b></h4>
-						    	<p>${dto.product_Name }</p>
-						    </div>
-                    	</div>
+                    <li style="border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+                    	<div style="width: 420px;">
+	                  		<a href="${detailUrl }?code=${dto.code}">
+	                  		<img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
+					    	<div style="width: 400px; margin: 0 auto;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 17px;">${dto.product_Name }</p></div>   
+                    	</div >
                     </li>
                     </c:forEach>
                 </ul>
