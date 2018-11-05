@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
 	String cp = request.getContextPath();
@@ -170,7 +171,21 @@
 								</tr>
 								
 								<!-- 반복문으로 출력 -->
+								<c:forEach var="dto" items="${sLists }">
 								<tr style="width: 100%;">
+									<td style="width: 100px;">
+										<img src="/beaudam/resources/image/myPage/hour.jpg" height="80px" width="80px;">
+									</td>
+									<td style="width: 300px;">
+										(${dto.pay_Status }) ${dto.saleDate } | ${dto.sale_Code }<br/>(${dto.color_Code }) ${dto.product_Name }
+									</td>
+									<td>16,000 원 (${dto.qty }개)</td>
+									<td class="bbb">1,600</td>
+									<td>14,400 원</td>
+									<td>${dto.delivery_Status }</td>
+								</tr>
+								</c:forEach>
+<!-- 								<tr style="width: 100%;">
 									<td style="width: 100px;">
 										<img src="/beaudam/resources/image/myPage/hour.jpg" height="80px" width="80px;">
 									</td>
@@ -181,19 +196,7 @@
 									<td class="bbb">1,600</td>
 									<td>14,400 원</td>
 									<td>배송 중</td>
-								</tr>
-								<tr style="width: 100%;">
-									<td style="width: 100px;">
-										<img src="/beaudam/resources/image/myPage/hour.jpg" height="80px" width="80px;">
-									</td>
-									<td style="width: 300px;">
-										(결제완료) 2018.10.15 | 2018101533524<br/>(bk150624) 머엇진 마스카라
-									</td>
-									<td>16,000원 (3개)</td>
-									<td class="bbb">1,600</td>
-									<td>14,400 원</td>
-									<td>배송 중</td>
-								</tr>
+								</tr> -->
 							</table>
 						</div>
 					</div>

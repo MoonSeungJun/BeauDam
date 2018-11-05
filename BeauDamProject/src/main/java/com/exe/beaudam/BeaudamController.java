@@ -437,7 +437,7 @@ public class BeaudamController {
 		dto.setColor_Name(pView.getColor_Name());
 		dto.setThumb_Img(pView.getThumb_Img());
 		dto.setProduct_Price(pView.getProduct_Price());
-		dto.setQty(amount);		
+		dto.setQty(amount);
 		
 		otherService.insertBasket(dto);	
 		
@@ -466,8 +466,5 @@ public class BeaudamController {
 		otherService.deleteAllBasket(id);	
 		
 	}
-		
-
-	
 
 }

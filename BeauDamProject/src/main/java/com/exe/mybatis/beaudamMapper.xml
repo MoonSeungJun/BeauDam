@@ -118,7 +118,12 @@
 			
 			<update id="updateMemberInfo" parameterType="com.table.memberDTO.Member_InfoDTO">
 				update member_Info set birth = #{birth}, zip = #{zip}, city = #{city}, street = #{street},
-				tel = #{tel}, cellPhone = #{cellPhone}, email = #{email}, gender = #{gender} where id = #{id}
+				tel = #{tel}, cellphone = #{cellphone}, email = #{email}, gender = #{gender} where id = #{id}
+			</update>
+			
+			<update id="updateMemberInfoEX" parameterType="com.table.memberDTO.Member_InfoDTO">
+				update member_Info set birth = #{birth}, zip = #{zip}, city = #{city}, street = #{street},
+				cellphone = #{cellphone}, email = #{email}, gender = #{gender} where id = #{id}
 			</update>
 			
 			<!-- 탈퇴처리 -->			
@@ -423,7 +428,7 @@
 			select count(*) from coupon where id = #{id} and period > sysdate and not usedate like '%/%'
 		</select>
 		<select id="getCouponData" resultType="com.table.otherDTO.CouponDTO" parameterType="String">
-			select num, id, coupon, to_char(period, 'yyyy-mm-dd') period from coupon
+			select num, id, coupon, to_char(period, 'yyyy-mm-dd') period, to_char(add_months(period, -1),'yyyy-mm-dd') begin from coupon
 			where id = #{id} and period > sysdate and not usedate like '%/%'
 		</select>		
 		
@@ -476,7 +481,7 @@
 		
 		<select id="getPersonalSaleData" parameterType="String" resultType="com.view.view.SaleView">
 			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
-			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saledate from saleView where id = #{id}
+			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saleDate from saleView where id = #{id}
 		</select>
 
 </mapper>

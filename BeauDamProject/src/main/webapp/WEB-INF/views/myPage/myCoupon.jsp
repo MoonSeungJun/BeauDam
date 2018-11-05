@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
 	String cp = request.getContextPath();
 %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>쿠폰 조회</title>
 <link rel="stylesheet" href="./resources/css/myPage/myPage.css">
 <link rel="stylesheet" href="./resources/css/myPage/myOrder.css">
 
@@ -109,7 +112,7 @@
 								</td>
 								<td width="30%" style="padding: 10px;">
 									사용가능 쿠폰<br/>
-									<b style="font-size: 30pt; color: red;">2</b>장
+									<b style="font-size: 30pt; color: red;">${couponCount }</b>장
 								</td>
 								
 								<td width="20%">
@@ -117,7 +120,7 @@
 								</td>
 								<td width="30%" style="padding: 10px;">
 									7일 이내 소멸 쿠폰 쿠폰<br/>
-									<b style="font-size: 30pt; color: red;">1</b>장
+									<b style="font-size: 30pt; color: red;">${couponWeekCount }</b>장
 								</td>
 							</tr>
 							<tr>
@@ -135,22 +138,15 @@
 										</tr>
 										
 										<!-- 반복문으로 출력 -->
+										<c:forEach var="dto" items="${cLists }">
 										<tr>
-											<td>2018.10.15</td>
+											<td>${dto.begin }</td>
 											<td>사용가능</td>
 											<td>가입환영쿠폰</td>
-											<td>2018.10.15~2018.10.29</td>
-											<td>10%</td>
+											<td>${dto.begin } ~ ${dto.period }</td>
+											<td>${dto.coupon }</td>
 										</tr>
-										
-										<tr>
-											<td>2018.10.20</td>
-											<td>사용가능</td>
-											<td>회원감사쿠폰</td>
-											<td>2018.10.20~2018.10.27</td>
-											<td>20%</td>
-										</tr>
-										<!-- 출력 -->
+										</c:forEach>
 									</table>
 								</td>
 							</tr>

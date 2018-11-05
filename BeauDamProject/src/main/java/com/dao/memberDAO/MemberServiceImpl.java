@@ -92,6 +92,12 @@ public class MemberServiceImpl implements MemberService {
 		MemberView view = dao.getOneMemberData(id);
 		return view;
 	}
+
+	@Override
+	public void updateMemberInfoEX(Member_InfoDTO dto) {
+		dao.updateMemberInfoEX(dto);
+		
+	}
 	
 	
 }

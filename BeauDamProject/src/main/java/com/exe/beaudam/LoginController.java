@@ -120,8 +120,6 @@ public class LoginController {
 		}
 		
 		
-		
-
 		String ck_pwd = dto.getPwd();
 		
 		if(pwd.equals(ck_pwd)) {
@@ -311,7 +309,7 @@ public class LoginController {
 		
 		mIdto.setEmail(email);
 		
-		cDto.setCoupon("10%");
+		cDto.setCoupon("20%");
 		
 		String phone1 = request.getParameter("phone1");
 		
