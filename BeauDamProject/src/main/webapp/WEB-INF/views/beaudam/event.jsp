@@ -12,12 +12,11 @@
         	<meta charset="UTF-8">
             <title>event</title>
             <link rel="stylesheet" href="./resources/css/beaudam/event.css">
-            <link rel="stylesheet" href="./resources/css/beaudam/main.css">
             </head>
         <body>
             <div class="event_title">
                 <h2 style="text-align: center; font-weight: normal;">이벤트</h2>
-                <hr style=" border: 0; height: 2px; background-color: gray;">
+                <!-- <hr style=" border: 0; height: 2px; background-color: gray;"> -->
             </div>
             <div class="event_content">
                 <div class="event_grid">
