@@ -49,6 +49,12 @@ session="true" pageEncoding="UTF-8"%>
   			function insertBasket(code) {
   				var amount = parseInt($('#amount').val()); 				
   				
+  				var id = '${id}';
+				if(id == ''){
+  					alert("로그인 하세요");
+  					return;
+  				}
+  				
   				if(amount == 0){
   					alert("갯수를 확인해 주세요");
   					return;
@@ -65,7 +71,11 @@ session="true" pageEncoding="UTF-8"%>
   					async:false,
   					dataType: "text",
   					complete: function() {
-						alert("장바구니에 담겼습니다.");
+						if(confirm('장바구니에 추가되었습니다. 장바구니로 이동 할까요?')==true){
+							window.location.href = "/beaudam/myBasket.action";
+						}else{
+							return;
+						}
 					}
   					
   				});
@@ -73,6 +83,12 @@ session="true" pageEncoding="UTF-8"%>
 			}
   			
 			function buyNow(code) {
+				
+				var id = '${id}';
+				if(id == ''){
+  					alert("로그인 하세요");
+  					return;
+  				}
 				
 				var amount = parseInt($('#amount').val()); 				
   				
