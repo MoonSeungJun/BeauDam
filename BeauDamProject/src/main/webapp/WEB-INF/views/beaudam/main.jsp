@@ -198,7 +198,7 @@ $(document).ready(function() {
         </div>
         
         <!-- new item -->
-        <div class="new_item">
+        <div class="new_item" id="newItem">
             <div class="new_item" style="margin: 50px auto;">
             	<c:if test="${!empty newItemList }">
                 <h3>NEW ITEM </h3>

@@ -27,7 +27,7 @@
 
 	var popUrl = "inquire.action";	//팝업창에 출력될 페이지 URL
 
-	var popOption = "width=600, height=490, resizable=yes, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
+	var popOption = "width=600, height=490, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
 
 
 		window.open(popUrl,"",popOption);

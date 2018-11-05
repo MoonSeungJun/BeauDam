@@ -10,8 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=cp%>/resources/css/beaudam/look.css">
 </head>
 <body>
-
+<jsp:include page="mainTop.jsp"/>
+<jsp:include page="mainBottom.jsp"/>
 </body>
 </html>
