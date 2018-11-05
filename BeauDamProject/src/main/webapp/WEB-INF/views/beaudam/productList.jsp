@@ -12,46 +12,6 @@ session="true" pageEncoding="UTF-8"%>
 <title>list</title>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/beaudam/list.css">
-<style type="text/css">
-/* .page {
-	background-color: fuchsia; 
-	margin: 30px auto 0 auto; 
-	width: 960px;
-	text-align: center;
-}
-.page ol {
-	overflow: hidden;
-}
-.page li {
-	width: 34px;
-	height: 34px;
-	border: 1px solid gray;
-	float: left;
-}
-.pageing {
-	padding: 30px;
-	text-align: center;
-	margin-top: 30px;
-}
-.pageing ol {
-	overflow: hidden; 
-	display: inline-block; 
-	padding: 0;
-	margin: 0;
-	
-}
-.pageing li {
-	width: 34px;
-	height: 34px;
-	line-height: 34px;
-	float: left;
-	border: 1px solid #d7d5d5;
-}
-.pageing li:hover {
-       background-color: rgba( 237, 237, 237, 0.5 ); 
-} */
-</style>
-
 <script type="text/javascript">
 
 	function searchBrand() {
@@ -77,8 +37,6 @@ session="true" pageEncoding="UTF-8"%>
 
 
 </script>
-
-
 </head>
 <body>
 <jsp:include page="./mainTop.jsp" />
@@ -157,7 +115,14 @@ session="true" pageEncoding="UTF-8"%>
 
 	<div class="list"> 
 	
-	총 <font style="color: #ff4d4d">${count }개</font>의 상품이 있습니다.
+	${searchType}에 총 <font style="color: #ff4d4d">${count }개</font>의 상품이 있습니다.
+	<div class="filter" style=" height: 50px; border-bottom: 3px solid #ddd; border-top: 3px solid #ddd; margin: 20px 0;">
+		<ul style="margin-left: 50px;">
+			<li><a href="" >높은 가격순</a></li>
+			<li><a href="" >낮은 가격순</a></li>
+			<li><a href="" >이름순</a></li>
+		</ul>
+	</div>
 		<ul>
 			<c:forEach var="dto" items="${searchProductList }">
 			<li>

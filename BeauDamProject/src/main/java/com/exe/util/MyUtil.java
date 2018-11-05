@@ -50,7 +50,7 @@ public class MyUtil {
 		//◀이전
 		if(totalPage > numPerBlock && currentPageSetup > 0){
 						
-			sb.append("<a style=\"color: black; font-family: 'YiSunShinDotumM';  href=\"" + listUrl + "pageNum=" 
+			sb.append("<a style=\"color: black; font-family: 'YiSunShinDotumM';\"  href=\"" + listUrl + "pageNum=" 
 					+ currentPageSetup + "\">◀이전</a>&nbsp;");
 			
 		}
@@ -66,7 +66,7 @@ public class MyUtil {
 			
 			}else{
 				
-				sb.append("<a style=\"color: black; font-family: 'YiSunShinDotumM'; href=\"" + listUrl + "pageNum=" + page + "\">"
+				sb.append("<a style=\"color: black; font-family: 'YiSunShinDotumM';\" href=\"" + listUrl + "pageNum=" + page + "\">"
 		                  + page + "</a>&nbsp;");
 				
 			}
@@ -78,7 +78,7 @@ public class MyUtil {
 		//다음▶
 		if(totalPage - currentPageSetup > numPerBlock){
 						
-			sb.append("<a style=\"color: black; font-family: 'YiSunShinDotumM'; href=\"" + listUrl + "pageNum=" + page + "\">다음▶</a>&nbsp;");
+			sb.append("<a style=\"color: black; font-family: 'YiSunShinDotumM';\" href=\"" + listUrl + "pageNum=" + page + "\">다음▶</a>&nbsp;");
 			
 		}
 		
