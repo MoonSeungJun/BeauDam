@@ -179,19 +179,19 @@ $(document).ready(function() {
         	</h2>
         	<h3 style="text-align: center; font-family: 'YiSunShinDotumM'; color: gray;">뷰담에서 더 쉽고 빠르게 쇼핑하자</h3>
         	<div class="brand_grid" style="overflow: hidden; margin: 20px auto;">
-        		<div class="brand">
+        		<div class="brandimg">
         			<img alt="" src="<%=cp%>/resources/image/beaudam/main/apieu2.jpg">
         		</div>
-        		<div class="brand">
+        		<div class="brandimg">
         			<img alt="" src="<%=cp%>/resources/image/beaudam/main/etude.jpg">
         		</div>
-        		<div class="brand">
+        		<div class="brandimg">
         			<img alt="" src="<%=cp%>/resources/image/beaudam/main/face2.jpg">
         		</div>
-        		<div class="brand">
+        		<div class="brandimg">
         			<img alt="" src="<%=cp%>/resources/image/beaudam/main/innisfree2.jpg">
         		</div>
-        		<div class="brand">
+        		<div class="brandimg">
         			<img alt="" src="<%=cp%>/resources/image/beaudam/main/nature.gif">
         		</div>
         	</div>

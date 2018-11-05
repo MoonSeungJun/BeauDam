@@ -344,13 +344,13 @@ a {
 	width: 1212px;
 }
 
-.brand {
+.brandimg {
 	float: left;
 	margin: 20px;
 	
 }
 
-.brand img {
+.brandimg img {
 	width: 200px;
 	border-radius: 50%;
 	padding: 5px;
