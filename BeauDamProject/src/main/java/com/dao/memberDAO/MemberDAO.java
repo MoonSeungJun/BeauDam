@@ -43,6 +43,10 @@ public class MemberDAO {
 		sessionTemplate.update("beaudam.updateMemberInfo",dto);
 	}
 	
+	public void updateMemberInfoEX(Member_InfoDTO dto) {
+		sessionTemplate.update("beaudam.updateMemberInfoEX",dto);
+	}	
+	
 	public void updateMemberGrade(Member_GradeDTO dto) {
 		sessionTemplate.update("beaudam.updateMemberGrade", dto);
 	}

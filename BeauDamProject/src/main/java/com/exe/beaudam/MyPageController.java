@@ -1,9 +1,11 @@
 package com.exe.beaudam;
 
+import java.io.PrintWriter;
 import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,10 @@ import com.dao.otherDAO.OtherServiceImpl;
 import com.dao.productDAO.*;
 import com.dao.saleDAO.*;
 import com.view.view.*;
+
 import com.dao.viewDAO.ViewServiceImpl;
+import com.table.memberDTO.MemberDTO;
+import com.table.memberDTO.Member_InfoDTO;
 import com.table.otherDTO.*;
 
 
@@ -73,6 +78,9 @@ public class MyPageController {
 	
 	@Resource(name="saleService")
 	private SaleServiceImpl saleService;
+	
+	@Resource(name="otherService")
+	private OtherServiceImpl otherService;
 	
 	
 	// ********************** My Page **********************
@@ -137,6 +145,41 @@ public class MyPageController {
 		// 마이페이지 비밀번호확인 페이지 이동
 		return "myPage/myInfo";
 	}
+	
+	@RequestMapping(value="/myInfo.action", method=RequestMethod.POST)
+	public void myInfo_ok(HttpSession session,
+			HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		String id = (String)session.getAttribute("id");
+		String chkPwd = request.getParameter("chkPwd");
+		
+		MemberView dto = viewService.getOneMemberData(id);
+		
+		String pwd = dto.getPwd();
+		
+		if(pwd.equals(chkPwd)) {
+
+			out.println("<script type='text/javascript'>");
+			out.println("location.href='/beaudam/myEdit.action';");
+			out.println("</script>");
+			out.flush();
+			
+		}else {
+		
+			out.println("<script type='text/javascript'>");
+			out.println("alert('잘못된 비밀번호입니다!');");
+			out.println("location.href='/beaudam/myInfo.action';");
+			out.println("</script>");
+			out.flush();
+			
+		}		
+		
+	}
 
 	@RequestMapping(value = "/myEdit.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myEdit(HttpServletRequest req) {
@@ -184,29 +227,100 @@ public class MyPageController {
 
 	}
 	
-	@RequestMapping(value = "/memberUpdate.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String memberUpdate() {
+	@RequestMapping(value="/changePwd.action", method = RequestMethod.GET)
+	public ModelAndView changePwd() {
+		
+		return new ModelAndView("myPage/changePwd");
+		
+	}
+	
+	
+	@RequestMapping(value = "/memberUpdate.action", method = RequestMethod.POST)
+	public ModelAndView memberUpdate(HttpServletRequest request,
+			MemberDTO mDto, 
+			Member_InfoDTO mIdto) {
+		
+		mDto.setNickname(request.getParameter("nickName"));
+		
+		memberService.updateMember(mDto);
+		
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
+		String day = request.getParameter("day");
+		
+		String birth = year + "-" + month + "-" + day;
+		
+		mIdto.setBirth(birth);
+		
+		String hp1 = request.getParameter("hp1");
+		String hp2 = request.getParameter("hp2");
+		String hp3 = request.getParameter("hp3");
+		
+		String cellphone = hp1 + "-" + hp2 + "-" + hp3;
+		
+		mIdto.setCellphone(cellphone);
+		
+		String email1 = request.getParameter("email1");
+		String email2 = request.getParameter("email2");
+		
+		String email = email1 + "@" + email2;
+		
+		mIdto.setEmail(email);
 		
 		
-		return "myPage/myPage";
+		String phone1 = request.getParameter("phone1");
+		
+		if(!phone1.equals("0")) {
+
+			String phone2 = request.getParameter("phone2");
+			String phone3 = request.getParameter("phone3");
+			
+			String tel = phone1 + "-" + phone2 + "-" + phone3;
+		
+			mIdto.setTel(tel);
+			
+			memberService.updateMemberInfo(mIdto);
+			
+		}else {
+
+			memberService.updateMemberInfoEX(mIdto);
+			
+		}
+		
+		return new ModelAndView("redirect:/myPage.action");
+		
 	}
 
 	// msj
-	@RequestMapping(value = "/myCoupon.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myCoupon() {
+	@RequestMapping(value = "/myCoupon.action", method = RequestMethod.GET)
+	public String myCoupon(HttpSession session,
+			HttpServletRequest request) {
 
+		String id = (String)session.getAttribute("id");
+		List<CouponDTO> cLists = otherService.getCouponData(id);
+		
 		// 보유쿠폰(마이페이지) 페이지 이동
-
+		int couponCount = otherService.getCouponCount(id);
+		int couponWeekCount = otherService.getWeekCouponCount(id);
+		
+		request.setAttribute("couponCount", couponCount);
+		request.setAttribute("couponWeekCount", couponWeekCount);
+		request.setAttribute("cLists", cLists);
+		
 		return "myPage/myCoupon";
 	}
 
 	// msj
 	@RequestMapping(value = "/myOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myOrder() {
+	public ModelAndView myOrder(HttpSession session) {
+		
+		String id = (String)session.getAttribute("id");
+		
+		List<SaleView> sLists = saleService.getPersonalSaleData(id);
 
 		// 주문정보 (마이페이지) 페이지 이동
 
-		return "myPage/myOrder";
+		return new ModelAndView("myPage/myOrder","sLists",sLists) ;
 	}
 	
 	@RequestMapping(value = "/myLeave.action", method = { RequestMethod.GET, RequestMethod.POST })

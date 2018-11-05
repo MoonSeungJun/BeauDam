@@ -14,6 +14,7 @@ public interface MemberService {
 //	update
 	void updateMember(MemberDTO dto);
 	void updateMemberInfo(Member_InfoDTO dto);
+	void updateMemberInfoEX(Member_InfoDTO dto);
 	void updateMemberGrade(Member_GradeDTO dto);
 	void updateIsLeave(String id);
 	

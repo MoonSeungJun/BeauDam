@@ -10,6 +10,7 @@ public class CouponDTO {
 
 	// 사용기간
 	private String period;
+	private String begin;
 
 	// 사용날짜
 	private String useDate;
@@ -52,6 +53,14 @@ public class CouponDTO {
 
 	public void setPeriod(String period) {
 		this.period = period;
+	}
+
+	public String getBegin() {
+		return begin;
+	}
+
+	public void setBegin(String begin) {
+		this.begin = begin;
 	}
 
 }

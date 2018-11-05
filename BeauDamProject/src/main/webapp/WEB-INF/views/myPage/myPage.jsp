@@ -80,7 +80,7 @@
 							<li><a href="" style="margin-bottom: 15px;">나의 정보</a>
 								<ul class="sub_lnb">
 									<li><a href="<%=cp%>/myCoupon.action" style="color: #9a9a9;">쿠폰조회</a></li>
-									<li><a href="<%=cp%>/myEdit.action">개인정보수정</a></li>
+									<li><a href="<%=cp%>/myInfo.action">개인정보수정</a></li>
 									<li><a href="<%=cp%>/myLeave.action">회원탈퇴</a></li>
 								</ul>
 							</li>

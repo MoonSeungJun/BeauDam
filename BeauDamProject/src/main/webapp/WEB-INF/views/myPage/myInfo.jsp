@@ -65,6 +65,26 @@ button:hover {
 }
 </style>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript">
+
+function checkPwd(){
+	
+	var f = document.CheckForm;
+	
+	if(!f.chkPwd.value){
+		
+		alert("\n비밀번호를 입력해주세요!");
+		f.chkPwd.focus();
+		return;
+		
+	}
+	
+	f.action = "<%=cp%>/myInfo.action";
+	f.submit();
+	
+}
+
+</script>
 </head>
 <body style="font-family: SeoulHangangM">
 
@@ -88,21 +108,22 @@ button:hover {
 				<br/><br/>
 				<hr/>
 				
-				<table style="width: 100%">
-					<tr>
-						<td style="padding-left: 20px"><h4>아이디</h4></td>
-						<td><h4>${id }</h4></td>
-					</tr>
-					<tr>
-						<td style="padding-left: 20px"><h4>비밀번호</h4></td>
-						<td><input type="password" style="width: 200ox; height: 28px"></td>
-					</tr>				
-				
-				</table>
-				<br/>
-				<button type="button" onclick="javascript:location.href='<%=cp%>/myEdit.action'" 
-				style="float: right; height: 40px; border-style: none;">회원정보수정</button>
-
+				<form name="CheckForm" method="post">
+					<table style="width: 100%">
+						<tr>
+							<td style="padding-left: 20px"><h4>아이디</h4></td>
+							<td><h4>${id }</h4></td>
+						</tr>
+						<tr>
+							<td style="padding-left: 20px"><h4>비밀번호</h4></td>
+							<td><input type="password" name="chkPwd" style="width: 200ox; height: 28px"></td>
+						</tr>				
+					
+					</table>
+					<br/>
+					<button type="button" onclick="checkPwd();" 
+					style="float: right; height: 40px; border-style: none;">회원정보수정</button>
+				</form>
 			</div>
 			
 	</div>

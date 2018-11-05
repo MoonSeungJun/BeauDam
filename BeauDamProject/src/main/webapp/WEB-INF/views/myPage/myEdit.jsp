@@ -1,16 +1,19 @@
 <!-- 제작자 : 허도휘 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String cp = request.getContextPath();
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
-<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400"
+	rel="stylesheet">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -62,39 +65,87 @@
             }
         }).open();
     }
+    
+    
+    function changePwd(){
+    	
+    	var popupX = (window.screen.width/2)-(400/2);
+		var popupY= (window.screen.height/2)-200;
+		
+		window.open("<%=cp%>/changePwd.action",
+				'비밀번호 변경',
+				'width=400, height=200, toolbar=no, menubar=no, scrollbars=no, resizable=no, left='
+				+ popupX 
+				+ ', top=' + popupY 
+				+ ', screenX=' + popupX 
+				+ ', screenY= '+ popupY);
+    	
+    }
+    
+    function selectEmail(){
+    	
+    	var f = document.editForm;
+    	
+    	if(f.email3.value==0){
+    		f.email2.value="";
+    		f.email2.readOnly=false;
+    		f.email2.style.background="white";
+    		f.email2.focus();
+    	}else{
+    		f.email2.value = f.email3.value;
+    		f.email2.readOnly=true;
+    		f.email2.style.background="#BDBDBD";
+    	}
+    	
+    }
+    
+    function updateInfo(){
+    	
+    	var f = document.editForm;
+    	
+    	f.action = "<%=cp%>/memberUpdate.action";
+    	f.submit();   	
+    	
+    }
 </script>
 
 <style type="text/css">
-@font-face { 
-	font-family: 'designhouseOTFLight00'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff') format('woff'); 
-	font-weight: normal; 
-	font-style: normal; }
-	
-@font-face { 
-	font-family: 'SeoulHangangM'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff') format('woff'); 
-	font-weight: normal; 
-	font-style: normal; }
-		
+@font-face {
+	font-family: 'designhouseOTFLight00';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SeoulHangangM';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 #container {
-    padding-bottom: 80px;
+	padding-bottom: 80px;
 }
 
 .title_style {
-    overflow: hidden;
-    text-align: center;
-    height: 200px;
+	overflow: hidden;
+	text-align: center;
+	height: 200px;
 }
 
 .title_style h2 {
-    font-size: 60px;
-    font-weight: 100;
-    letter-spacing: -3px;
-    line-height: 60px;
-    margin-top: 26px;
-    margin-bottom: 16px;
-    height: 60px;
+	font-size: 60px;
+	font-weight: 100;
+	letter-spacing: -3px;
+	line-height: 60px;
+	margin-top: 26px;
+	margin-bottom: 16px;
+	height: 60px;
 }
 
 input {
@@ -127,90 +178,103 @@ button:hover {
 	color: white;
 	cursor: pointer;
 }
-
-
 </style>
 </head>
 <body style="font-family: SeoulHangangM">
 
 	<div id="container">
-			<div class="title_style">
-				<div>
-					<a href="<%=cp %>/main.action" style="text-decoration: none; color: black; font-family: 'designhouseOTFLight00';"><h3>뷰티를 담다 뷰ː담</h3></a> 
-					<h2 style="font-family: designhouseOTFLight00">회원정보수정</h2>
-					<p style="font-family: Black Han Sans">Edit Information</p>
-				</div>
+		<div class="title_style">
+			<div>
+				<a href="<%=cp%>/main.action"
+					style="text-decoration: none; color: black; font-family: 'designhouseOTFLight00';"><h3>뷰티를 담다 뷰ː담</h3></a>
+				<h2 style="font-family: designhouseOTFLight00">회원정보수정</h2>
+				<p style="font-family: Black Han Sans">Edit Information</p>
 			</div>
-			
-			<div style="width: 800px; margin: 0 auto">				
-				<div style="box-sizing: border-box; padding: 23px 30px 25px 28px; background-color: #f4f7f8; border: 1px solid #e4eaed">
-					<p>· 개명을 하신 회원님은 <b>고객센터</b>를 통해서 문의해주시기 바랍니다.</p>
+		</div>
+		<form name="editForm" method="post">
+			<div style="width: 800px; margin: 0 auto">
+				<div
+					style="box-sizing: border-box; padding: 23px 30px 25px 28px; background-color: #f4f7f8; border: 1px solid #e4eaed">
+					<p>
+						· 개명을 하신 회원님은 <b>고객센터</b>를 통해서 문의해주시기 바랍니다.
+					</p>
 				</div>
 				<h3 style="float: left">정보수정</h3>
-				<p style="color: red; float: right;"> * 필수입력사항</p>
+				<p style="color: red; float: right;">* 필수입력사항</p>
 				<hr style="width: 800px">
+
 				<table style="width: 650px">
 					<tr>
 						<td width="150px" style="padding-left: 20px"><b>아이디</b></td>
-						<td>${id }</td>
+						<td><input type="hidden" name="id" value="${id }"/> ${id }</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>이름</b></td>
-						<td><input type="text" value="${id }" disabled="disabled"/></td>
+						<td><input type="text" name="name" value="${dto.name }" readonly="readonly" style="background: #BDBDBD;"/></td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>닉네임</b></td>
-						<td><input type="text" value="${dto.nickName }"/></td>
+						<td>
+							<input type="text" name="nickName" value="${dto.nickName }" />
+						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>성별</b></td>
 						<td>
-							<input type="radio" checked="checked">남
-							<input type="radio">여
+							<c:if test="${dto.gender == 'M' }">
+								<input type="radio" name="gender" checked="checked" value="M">남
+								<input type="radio" name="gender" value="F">여
+							</c:if>
+							<c:if test="${dto.gender == 'F' }">
+								<input type="radio" name="gender" value="M">남
+								<input type="radio" name="gender" checked="checked" value="F">여
+							</c:if>
 						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>생년월일</b></td>
 						<td>
-							<select>
-								<option>${y }</option>								
+							<select name="year">
+								<option value="${y }">${y }</option>
 							</select>
-							<select>
-								<option>${m }</option>								
+							<select name="month">
+								<option value="${m }">${m }</option>
 							</select>
-							<select>
-								<option>${d }</option>								
+							<select name="day">
+								<option value="${d }">${d }</option>
 							</select>
-							<input type="radio" checked="checked">양력
-							<input type="radio">음력
+							
+							<input type="radio" checked="checked"/>양력
+							<input type="radio" disabled="disabled"/>음력
 						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>비밀번호</b></td>
 						<td>
-							<button type="button">비밀번호 변경</button>
-							<!-- 비밀번호 변경 버튼을 누르면 모달로 현재 비밀번호,
-							새 비밀번호, 새 비밀번호 입력을 받을꺼에욤!!! -->
+							<button type="button" onclick="changePwd();">비밀번호 변경</button>
+							<input type="hidden" name="pwd" value="${dto.pwd }"/>
 						</td>
 					</tr>
 					<tr>
 						<td rowspan="2" style="padding-left: 20px"><b>주소</b></td>
 						<td>
-							<input type="text" readonly="readonly" id="sample4_postcode" placeholder="우편번호" value="${dto.zip }"/>
-							<button type="button" onclick="sample4_execDaumPostcode()">우편번호 찾기</button><br/>
-							<span id="guide" style="color:#999"></span>
+							<input type="text" readonly="readonly" name="zip"
+								id="sample4_postcode" placeholder="우편번호" value="${dto.zip }" />
+							<button type="button" onclick="sample4_execDaumPostcode()">우편번호 찾기</button> <br/>
+							<span id="guide" style="color: #999"></span>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="text" readonly="readonly" id="sample4_roadAddress" placeholder="도로명주소" value="${dto.city }"/>
-							<input type="text" placeholder="상세주소" value="${dto.street }"/>
+							<input type="text" readonly="readonly"
+							id="sample4_roadAddress" name="city" placeholder="도로명주소" value="${dto.city }" />
+							<input type="text" name="street" placeholder="상세주소" value="${dto.street }" />
 						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>휴대폰번호</b></td>
 						<td>
-							<select>
+							<select name="hp1">
 								<option value="010">010</option>
 								<option value="016">016</option>
 								<option value="017">017</option>
@@ -218,93 +282,96 @@ button:hover {
 								<option value="019">019</option>
 								<option value="011">011</option>
 							</select>
-							<input type="text" value="${ct }"/>
-							<input type="text" value="${et }"/>
+							<input type="text" name="hp2" value="${ct }" />
+							<input type="text" name="hp3" value="${et }" />
 						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>전화번호</b></td>
 						<td>
-							<select>
-	                            <option value="">(선택)</option>
-	                            <option value="02">02</option>
-	                            <option value="031">031</option>
-	                            <option value="032">032</option>
-	                            <option value="033">033</option>
-	                            <option value="041">041</option>
-	                            <option value="042">042</option>
-	                            <option value="043">043</option>
-	                            <option value="044">044</option>
-	                            <option value="049">049</option>
-	                            <option value="051">051</option>
-	                            <option value="052">052</option>
-	                            <option value="053">053</option>
-	                            <option value="054">054</option>
-	                            <option value="055">055</option>
-	                            <option value="061">061</option>
-	                            <option value="062">062</option>
-	                            <option value="063">063</option>
-	                            <option value="064">064</option>
-	                            <option value="070">070</option>
-                            </select>
-							<input type="text">
-							<input type="text">
+							<select name="phone1">
+								<option value=0>(선택)</option>
+								<option value="02">02</option>
+								<option value="031">031</option>
+								<option value="032">032</option>
+								<option value="033">033</option>
+								<option value="041">041</option>
+								<option value="042">042</option>
+								<option value="043">043</option>
+								<option value="044">044</option>
+								<option value="049">049</option>
+								<option value="051">051</option>
+								<option value="052">052</option>
+								<option value="053">053</option>
+								<option value="054">054</option>
+								<option value="055">055</option>
+								<option value="061">061</option>
+								<option value="062">062</option>
+								<option value="063">063</option>
+								<option value="064">064</option>
+								<option value="070">070</option>
+							</select>
+							<input type="text" name="phone2"/>
+							<input type="text" name="phone3"/>
 						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px"><b>이메일주소</b></td>
 						<td>
-							<input type="text" value="${fm }"/>
-							@
-							<input type="text" value="${lm }">
-							<select style="width:120px;">
-                              <option value="">직접입력</option>
-                              <option value="dreamwiz.com">dreamwiz.com</option>
-                              <option value="hanmail.net">hanmail.net</option>
-                              <option value="hotmail.com">hotmail.com</option>
-                              <option value="korea.com">korea.com</option>
-                              <option value="gmail.com">gmail.com</option>
-                              <option value="nate.com">nate.com</option>
-                              <option value="naver.com">naver.com</option>
-                              <option value="yahoo.co.kr">yahoo.co.kr</option>
-                            </select>
+							<input type="text" name="email1" value="${fm }" /> @ 
+							<input type="text" name="email2" value="${lm }"/>
+							<select name="email3" style="width: 120px;"
+							onchange="selectEmail();">
+								<option value="">직접입력</option>
+								<option value="dreamwiz.com">dreamwiz.com</option>
+								<option value="hanmail.net">hanmail.net</option>
+								<option value="hotmail.com">hotmail.com</option>
+								<option value="korea.com">korea.com</option>
+								<option value="gmail.com">gmail.com</option>
+								<option value="nate.com">nate.com</option>
+								<option value="naver.com">naver.com</option>
+								<option value="yahoo.co.kr">yahoo.co.kr</option>
+							</select>
 						</td>
 					</tr>
 				</table>
-				
-				
+
 				<h3 style="float: left">부가정보 입력</h3>
 				<hr style="width: 800px">
 				<table>
 					<tr>
-						<td rowspan="2" width="150px" style="padding-left: 20px"><b>SMS 수신동의</b></td>
+						<td rowspan="2" width="150px" style="padding-left: 20px">
+							<b>SMS수신동의</b>
+						</td>
 						<td>SMS를 통해 이벤트 등 각종 소식을 받으시겠습니까?</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="radio" checked="checked" >동의
+							<input type="radio" checked="checked"/>동의
 							<input type="radio">동의하지 않음
 						</td>
 					</tr>
 					<tr>
-						<td rowspan="2" style="padding-left: 20px"><b>이메일 수신동의</b></td>
+						<td rowspan="2" style="padding-left: 20px">
+							<b>이메일 수신동의</b>
+						</td>
 						<td>뷰담에서 제공하는 각종 소식을 이메일로 받으시겠습니까?</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="radio" checked="checked" >동의
+							<input type="radio" checked="checked">동의
 							<input type="radio">동의하지 않음
 						</td>
 					</tr>
 				</table>
 			</div>
-			
 			<br/>
 			<div align="center" style="margin: 0 auto">
-				<button type="button" onclick=
-				"javascript:location.href='<%=cp %>/myPage.action'" style="width: 60px">취소</button>
-				<button type="button" style="width: 60px" onclick="javascript:location.href='<%=cp%>/memberUpdate.action'">수정</button>
+				<button type="button" onclick="javascript:location.href='<%=cp %>/myPage.action'" style="width: 60px">취소</button>
+				<button type="button" style="width: 60px"
+					onclick="updateInfo();">수정</button>
 			</div>
+		</form>
 	</div>
 </body>
 </html>
