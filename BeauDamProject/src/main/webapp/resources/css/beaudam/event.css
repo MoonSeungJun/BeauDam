@@ -8,13 +8,9 @@
 }
 .event_title h2 {
 	font-size: 40px;
-    font-weight: 100;
-    letter-spacing: -3px;
-    line-height: 60px;
-    margin-top: 26px;
-    margin-bottom: 16px;
-    height: 60px;
+    letter-spacing: 0.1em;
     font-family: 'designhouseOTFLight00';
+    font-weight: bold;
 }
 
 .event_title span {

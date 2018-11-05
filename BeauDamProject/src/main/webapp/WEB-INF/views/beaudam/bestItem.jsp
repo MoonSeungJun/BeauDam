@@ -26,7 +26,7 @@
 			<div class="product">
 				<p class="rank">BEST 1</p>
 				<div>
-					<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
+					<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg"></a>
 					<p class="rankBand">ETUDE HOUSE</p>
 					<p class="rankName">제품명 제품명</p>
 					<p class="price">100,000원</p>
@@ -34,14 +34,14 @@
 			</div>
 			<div class="product">
 				<p class="rank">BEST 2</p>
-				<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
+				<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg"></a>
 				<p class="rankBand">ETUDE HOUSE</p>
 				<p class="rankName">제품명 제품명</p>
 				<p class="price">100,000원</p>
 			</div>
 			<div class="product">
 				<p class="rank">BEST 3</p>
-				<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
+				<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg"></a>
 				<p class="rankBand">ETUDE HOUSE</p>
 				<p class="rankName">제품명 제품명</p>
 				<p class="price">100,000원</p>
@@ -51,7 +51,9 @@
 	<hr>
 	<!-- 여기까지 반복 -->
 	
-	<!-- 브랜드별 이미지 주소 샘플 -->
+	
+	
+	<!-- 브랜드별 로고 (class=name) 이미지 주소 샘플 -->
 	<div class="best">
 		<div class="name">
 			<p><img alt="" src="<%=cp%>/resources/image/beaudam/main/apieu2.jpg"></p>

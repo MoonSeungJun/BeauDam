@@ -15,7 +15,7 @@
             </head>
         <body>
             <div class="event_title">
-                <h2 style="text-align: center; font-weight: normal;">이벤트</h2>
+                <h2 style="text-align: center;">EVENT</h2>
                 <!-- <hr style=" border: 0; height: 2px; background-color: gray;"> -->
             </div>
             <div class="event_content">
