@@ -148,6 +148,7 @@ a {
 
 .search_icon li {
 	float: right;
+	margin: 3px;
 }
 
 .navbar_container {
@@ -265,6 +266,7 @@ a {
 .content_layout {
 	margin-top: 50px;
 	background-color: #F9F9F9;
+	padding: 30px;
 }
 
 .content_grid {
@@ -378,10 +380,12 @@ a {
 
 .basket_order {
 	position: fixed;
-	bottom: 400px;
-	right: 10px;
+	bottom: 300px;
+	right: 0;
 	cursor: pointer;
-}
+	background-color: #F5F5DC; 
+	padding: 15px;
+}	
 
 .sticky {
 	position: sticky;
