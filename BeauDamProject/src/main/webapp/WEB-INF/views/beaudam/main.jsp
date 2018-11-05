@@ -131,6 +131,7 @@ $(document).ready(function() {
         </div>
         <!-- 슬라이드 이미지 끝 -->
         
+
         <!-- 베스트 상품 -->
         <div class="best_wrapper rolling_wrapper">
         <h3>BEST ITEM</h3>
@@ -138,7 +139,7 @@ $(document).ready(function() {
 				<ul class="rolling_panel" style="width: 1400px;">
 				<c:forEach var="dto" items="${productList }">					
 					<li style="width: 280px;"><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}" ></a>
-						<div><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 17px;">${dto.product_Name }</p></div>
+						<div style="width: 270px;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>
 					</li>
 				</c:forEach>
 				</ul>
@@ -171,9 +172,30 @@ $(document).ready(function() {
         </div>
         <!-- 이미지 레이아웃 끝 -->
         
-        
-       	<font style="color: #ee782f; font-family: 'YiSunShinDotumM'"></font>
-        <img  style="width: 100%" src="<%=cp%>/resources/image/beaudam/main/content_main04.jpg" >
+         <!-- 브랜드 소개 -->
+        <div class="brandwrapper" style="padding: 30px;">
+        	<h2 style="padding: 30px 30px 10px 30px; text-align: center; font-family: 'YiSunShinDotumM'; ">
+        		브랜드 모아, 모아! 잘나가는건 <span style="font-family: 'designhouseOTFLight00'; font-size: 35px;">뷰담</span>에 다있다!
+        	</h2>
+        	<h3 style="text-align: center; font-family: 'YiSunShinDotumM'; color: gray;">뷰담에서 더 쉽고 빠르게 쇼핑하자</h3>
+        	<div class="brand_grid" style="overflow: hidden; margin: 20px auto;">
+        		<div class="brand">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/apieu2.jpg">
+        		</div>
+        		<div class="brand">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/etude.jpg">
+        		</div>
+        		<div class="brand">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/face2.jpg">
+        		</div>
+        		<div class="brand">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/innisfree2.jpg">
+        		</div>
+        		<div class="brand">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/nature.gif">
+        		</div>
+        	</div>
+        </div>
         
         <!-- new item -->
         <div class="new_item">
@@ -186,7 +208,7 @@ $(document).ready(function() {
                     	<div style="width: 420px;">
 	                  		<a href="${detailUrl }?code=${dto.code}">
 	                  		<img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
-					    	<div style="width: 400px; margin: 0 auto;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 17px;">${dto.product_Name }</p></div>   
+					    	<div style="width: 400px; margin: 0 auto;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>   
                     	</div >
                     </li>
                     </c:forEach>

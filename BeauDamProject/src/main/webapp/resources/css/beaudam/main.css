@@ -338,6 +338,23 @@ a {
 	transform: scale(1.1);
 }
 
+.brand_grid {
+	width: 1212px;
+}
+
+.brand {
+	float: left;
+	margin: 20px;
+	
+}
+
+.brand img {
+	width: 200px;
+	border-radius: 50%;
+	padding: 5px;
+	background-color: #ededed;
+}
+
 .footer {
 	background-color: #F9F9F9;
 	height: 350px;
