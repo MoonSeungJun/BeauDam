@@ -21,7 +21,7 @@ function leave() {
 	
 	if(result) {
 		alert("탈퇴 되었습니다.");
-		f.action = "<%=cp%>/main.action";
+		f.action = "<%=cp%>/iamLeave.action";
 	}
 	else {
 		alert("탈퇴 취소되었습니다.");	

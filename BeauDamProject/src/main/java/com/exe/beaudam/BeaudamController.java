@@ -518,5 +518,19 @@ public class BeaudamController {
 		otherService.deleteAllBasket(id);	
 		
 	}
-
+	
+	@RequestMapping(value = "/iamLeave.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String iamLeave(HttpServletRequest req) {
+		
+		
+		String id = (String) req.getSession().getAttribute("id");
+		
+		
+		memberService.updateIsLeave(id);
+		
+		req.getSession().removeAttribute("id");		
+		
+		
+		return "redirect:/main.action";
+	}
 }
