@@ -222,11 +222,11 @@ html {
 	       	</form>
 	        </div>
 	    </div> 
-	        <a href="#">BEST ITEM</a>
+	        <a href="./bestItem.action">BEST ITEM</a>
 	        <a href="#newItem">NEW ITEM</a>
 	        <a href="./event.action">EVENT</a>
-	        <a href="#">LOOKS</a>
-	        <a href="#">뷰담 PICK'S</a>
+	        <a href="./look.action">LOOKS</a>
+	        <a href="./pick.action">뷰담 PICK'S</a>
 	        <a href="./sale.action">SALE</a>
 	    </div>
 	    </div>

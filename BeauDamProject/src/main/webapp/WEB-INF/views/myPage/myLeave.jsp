@@ -41,7 +41,7 @@ function leave() {
 		<div class="title_style">
 			<div class="title_area">
 				<h2 style="font-family: 'designhouseOTFLight00'; font-weight: normal;">회원 탈퇴</h2>
-				<hr style=" border: 0; height: 1px; background-color: gray;">
+				
 			</div>
 		</div>
 				<div class="float_container">

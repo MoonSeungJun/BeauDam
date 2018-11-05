@@ -381,6 +381,13 @@ public class BeaudamController {
 		return new ModelAndView("beaudam/productDetail", "id", (String) session.getAttribute("id"));
 
 	}
+	
+	@RequestMapping(value = "/bestItem.action", method = RequestMethod.GET)
+	public String bestItem(HttpSession session) {
+
+		// 세일 페이지 이동
+		return "beaudam/bestItem";
+	}
 
 	@RequestMapping(value = "/event.action", method = RequestMethod.GET)
 	public ModelAndView event(HttpSession session) {
@@ -413,12 +420,27 @@ public class BeaudamController {
 		return new ModelAndView("beaudam/event3", "id", (String) session.getAttribute("id"));
 	}
 	
+	@RequestMapping(value = "/look.action", method = RequestMethod.GET)
+	public String look(HttpSession session) {
+
+		// 세일 페이지 이동
+		return "beaudam/look";
+	}
+	
+	@RequestMapping(value = "/pick.action", method = RequestMethod.GET)
+	public String pick(HttpSession session) {
+
+		// 세일 페이지 이동
+		return "beaudam/pick";
+	}
+	
 	@RequestMapping(value = "/sale.action", method = RequestMethod.GET)
 	public String sale(HttpSession session) {
 
 		// 세일 페이지 이동
 		return "beaudam/sale";
 	}
+	
 
 	// msj
 	@RequestMapping(value = "/pay.action", method = { RequestMethod.POST })
