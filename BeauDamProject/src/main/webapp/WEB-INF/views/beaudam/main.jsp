@@ -13,6 +13,7 @@
 <title>BeauDam</title>
 <link rel="stylesheet" href="<%=cp%>/resources/css/beaudam/main.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
@@ -133,14 +134,14 @@ $(document).ready(function() {
         <!-- 베스트 상품 -->
         <div class="best_wrapper rolling_wrapper">
         <h3>BEST ITEM</h3>
-        	<div class="rolling_panel">
-				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_l.png"></a></div>-->
-				<ul class="rolling_panel">
+        	<div class="rolling_panel ">
+				<ul class="rolling_panel" style="width: 1400px;">
 				<c:forEach var="dto" items="${productList }">					
-					<li><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}"></a></li>
+					<li><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}" ></a>
+						<div><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 18px;">${dto.product_Name }</p></div>
+					</li>
 				</c:forEach>
 				</ul>
-				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_r.png"></a></div>-->
 			</div>
         </div>
         <!-- 베스트 상품 끝 -->
@@ -176,13 +177,20 @@ $(document).ready(function() {
         
         <!-- new item -->
         <div class="new_item" id="newItem">
-            <div class="new_item" style="  width: 1200px; margin: 0 auto;">
+            <div class="new_item" style="  width: 1100px; margin: 0 auto;">
             	<c:if test="${!empty newItemList }">
                 <h3>NEW ITEM </h3>
                 <ul class="new_item" style="width: 1200px;">
                 	<c:forEach var="dto" items="${newItemList }">
-                    <li><a href="${detailUrl }?code=${dto.code}">
-                    	<img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
+                    <li>
+                    	<div>
+                    		<a href="${detailUrl }?code=${dto.code}">
+                    		<img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
+                    		<div>
+						    	<h4><b>${dto.brand }</b></h4>
+						    	<p>${dto.product_Name }</p>
+						    </div>
+                    	</div>
                     </li>
                     </c:forEach>
                 </ul>
