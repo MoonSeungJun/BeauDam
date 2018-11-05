@@ -170,6 +170,8 @@ $(document).ready(function() {
         </div>
         <!-- 이미지 레이아웃 끝 -->
         
+        
+       	<font style="color: #ee782f; font-family: 'YiSunShinDotumM'"></font>
         <img  style="width: 100%" src="<%=cp%>/resources/image/beaudam/main/content_main04.jpg" >
         
         <!-- new item -->

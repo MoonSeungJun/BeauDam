@@ -13,7 +13,7 @@ session="true" pageEncoding="UTF-8"%>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/beaudam/list.css">
 <style type="text/css">
-.page {
+/* .page {
 	background-color: fuchsia; 
 	margin: 30px auto 0 auto; 
 	width: 960px;
@@ -49,7 +49,7 @@ session="true" pageEncoding="UTF-8"%>
 }
 .pageing li:hover {
        background-color: rgba( 237, 237, 237, 0.5 ); 
-}
+} */
 </style>
 
 <script type="text/javascript">
@@ -154,34 +154,7 @@ session="true" pageEncoding="UTF-8"%>
 	    </table>
 	    </form>
 	</div>
-	<div class="bestlist">
-		<ul>
-			<li>
-				<div>
-					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></a>
-					<p style="font-size: 20px; color: #ff4d4d; font-family: 'YiSunShinDotumM';">BEST 01</p>
-					솔솔 말린 솔방울
-					<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">5,000원</p>
-				</div>
-			</li>
-			<li>
-				<div>
-					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample2.jpg"></a>
-					<p style="font-size: 20px; color: #ff4d4d; font-family: 'YiSunShinDotumM';">BEST 02</p>
-					솔솔 말린 솔방울
-					<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">5,000원</p>
-				</div>
-			</li>
-			<li>
-				<div>
-					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample3.jpg"></a>
-					<p style="font-size: 20px; color: #ff4d4d; font-family: 'YiSunShinDotumM';">BEST 03</p>
-	      				솔솔 말린 솔방울
-	      			<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">5,000원</p>
-	      		</div>
-	      	</li>
-		</ul>
-	</div> 
+
 	<div class="list"> 
 	
 	총 <font style="color: #ff4d4d">${count }개</font>의 상품이 있습니다.
@@ -198,8 +171,7 @@ session="true" pageEncoding="UTF-8"%>
 			</c:forEach>
 		</ul>
 	</div>
-	<div class="pageing">
-		<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/pre.gif"></a>
+	<div class="pageing" style="text-align: center;">
 		<ol>
 			<c:if test="${!empty pageIndexList }">
 				${pageIndexList }
@@ -207,9 +179,7 @@ session="true" pageEncoding="UTF-8"%>
 			<c:if test="${empty pageIndexList }">
 				다른 상품을 검색해 주세요
 			</c:if>
-			
 		</ol>
-		<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/next.gif"></a>
 	</div>
 	<jsp:include page="./mainBottom.jsp" />
 	</body>
