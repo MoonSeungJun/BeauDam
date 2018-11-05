@@ -40,6 +40,6 @@ public interface OtherService {
 	BasketDTO getBasketOneData(Map<String, Object> hm);
 	String selectCouponData(int couponNum);
 	List<SaleView> getBestItem();
-	
+	int getNotificationRowNum();
 	
 }

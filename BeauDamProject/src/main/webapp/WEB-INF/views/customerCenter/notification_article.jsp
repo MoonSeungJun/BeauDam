@@ -55,7 +55,7 @@
 			</tr>
 		</table>
 		<div style="margin: 10px auto ; width: 100%; text-align: center;" class="article_button">
-			<c:if test="${id eq'Admin' }">
+			<c:if test="${id eq'admin' }">
 				<input type="button" value="수정" onclick="javascript:location.href='<%=cp%>/notification_update.action?num=${dto.num}&pageNum=${pageNum}'" style="border: none;"/>
 				<input type="button" value="삭제" onclick="javascript:location.href='<%=cp%>/notification_delete.action?num=${dto.num}&pageNum=${pageNum}'" style="border: none;"/>
 			</c:if>

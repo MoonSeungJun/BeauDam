@@ -22,6 +22,12 @@ public class OtherDAO {
 		
 	}
 
+	
+	public int getNotificationRowNum() {
+		int num = sessionTemplate.selectOne("beaudam.getNotificationRowNum");
+		return num;
+	}
+	
 	public String selectCouponData(int couponNum) {
 		String str = sessionTemplate.selectOne("beaudam.selectCouponData",couponNum);
 		return str;

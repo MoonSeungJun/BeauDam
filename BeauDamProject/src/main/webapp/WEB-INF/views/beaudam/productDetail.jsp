@@ -95,9 +95,6 @@ session="true" pageEncoding="UTF-8"%>
 					}
   					
   				});
-					
-				
-				
 				
 			}
   		
@@ -111,7 +108,8 @@ session="true" pageEncoding="UTF-8"%>
                     <img src="<%=cp %>/thumbImg/${dto.thumb_Img}">
                 </div>
                 <div class="right">
-                    <div class="right_header">
+        			<div class="right_header">
+        				<h3 style="color: gray; margin-bottom: 5px;">${dto.brand }</h3>
                         <h2>${dto.product_Name }</h2>
                     </div>
                     <div class="right_content">
@@ -140,7 +138,7 @@ session="true" pageEncoding="UTF-8"%>
                     <div class="result">
                         <dl>
                             <dt>금액 합계</dt>
-                            <dd class="gray" ><span id="total_Price">0</span>원</dd>
+                            <dd class="gray" ><span id="total_Price" style="margin-left: 10px;">0</span>원</dd>
                         </dl>
                     </div>
                     <div class="buy">                         
@@ -152,15 +150,14 @@ session="true" pageEncoding="UTF-8"%>
         </div>
         <div class="detail">
         	<hr>
-
-        	<h4 style="font-weight: bold;">상세정보</h4>
+        	<h4 style="font-weight: bold; margin-bottom: 20px;">상세정보</h4>
         	<img class="detailimg" src="<%=cp %>/detailImg/${dto.detail_Img}">
 
         </div>
+        <!-- 리뷰 댓글 -->
         <div class="review">
-        	<hr>
         	<div class="review_container">
-        		<div class="review_button" >
+        		<div class="review_button" style="margin-top: 20px;">
 		        	<p>뷰담 고객 리뷰</p>
 		        	<div class="container">
 					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="border: none; float: right; background-color: #f0ad4e; width: 80px; padding: 5px; font-size: 13px; " >리뷰쓰기</button>

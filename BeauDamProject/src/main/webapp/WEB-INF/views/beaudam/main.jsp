@@ -174,12 +174,14 @@ $(document).ready(function() {
         
         <!-- new item -->
         <div class="new_item" id="newItem">
-            <div class="new_item">
+            <div class="new_item" style="  width: 1200px; margin: 0 auto;">
             	<c:if test="${!empty newItemList }">
-                <h3>NEW ITEM</h3>
-                <ul class="new_item" style="width: 960px;">
+                <h3>NEW ITEM </h3>
+                <ul class="new_item" style="width: 1200px;">
                 	<c:forEach var="dto" items="${newItemList }">
-                    <li><a href="${detailUrl }?code=${dto.code}"><img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a></li>
+                    <li><a href="${detailUrl }?code=${dto.code}">
+                    	<img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
+                    </li>
                     </c:forEach>
                 </ul>
                 </c:if>
