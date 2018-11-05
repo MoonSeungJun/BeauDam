@@ -295,24 +295,23 @@
 		</select>
 		
 		<select id="getSearchProductDataList" resultType="com.view.view.ProductView" parameterType="map">
-			
 			select *from (
 			select rownum rnum,data.*from (
 			select code, brand, product_Name,product_Price,type,category, thumb_Img from productView
-			where product_Name like '%'||#{searchValue}||'%' and
-			      type like '%'||#{searchType}||'%'
+			where  product_Name like '%'||#{searchValue}||'%' and
+			       type like '%'||#{searchType}||'%'
 			order by code desc) data)
 			<![CDATA[
-			where rnum>=#{start} and rnum <=#{end}
-			]]>	
+	 			where rnum>=#{start} and rnum <=#{end} 
+			]]>	 
 		
 		</select>
 		<select id="getSearchDataCount" resultType="int" parameterType="map">
 			select nvl(count(*),0) from productView 
-			where  product_Name||brand like '%'||#{searchValue}||'%' and
-			      type like '%'||#{searchType}||'%'
+			where  product_Name like '%'||#{searchValue}||'%' and
+			       type like '%'||#{searchType}||'%'		
 		</select>
-		
+
 		<select id="getProductDataRowNum" resultType="com.view.view.ProductView" parameterType="int">
 			select *from (
 			select rownum rnum,data.*from (
@@ -322,37 +321,7 @@
 			where rnum=#{selectRowNum}
 			]]>
 		</select>
-		
-		<select id="getBrandSearchProductData" resultType="com.view.view.ProductView" parameterType="map">
-			select *from (
-			select rownum rnum,data.*from (
-			select code, brand, product_Name,product_Price,type,category, thumb_Img from productView
-			where product_Name like '%'||#{searchValue}||'%' and
-			      type like '%'||#{searchType}||'%' and( 
-			       brand like '%'||'#{searcvBrand1}'||'%' or
-			       brand like '%'||'#{searcvBrand2}'||'%' or
-			       brand like '%'||'#{searcvBrand3}'||'%' or
-			       brand like '%'||'#{searcvBrand4}'||'%' or
-			       brand like '%'||'#{searcvBrand5}'||'%' 			      
-			order by code desc) data)
-			<![CDATA[
-			where rnum>=#{start} and rnum <=#{end}
-			]]>	
-		</select>
-		
-		<select id="getBrandSearchProductDataCount" resultType="int" parameterType="map">
-			select nvl(count(*),0) from productView 
-			where product_Name like '%'||#{searchValue}||'%' and
-			      brand in
-		 		<foreach collection="searchBrand" item="brand" index="index" open="(" close=")" separator=",">
-            	#{brand.[index]}
-       			 </foreach>
-			      and
-			      type like '%'||#{searchType}||'%'
-		</select>
-		
-		
-		
+				
 		<!-- Admin -->
 		<select id="getAdminBrand" resultType="com.table.adminDTO.Admin_BrandDTO">
 			select brand from admin_brand

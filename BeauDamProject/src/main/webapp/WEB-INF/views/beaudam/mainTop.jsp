@@ -145,7 +145,7 @@ html {
 	                    <!-- 수정부분 -->
 	                    <ul class="search_icon">
 	                        <li><input type="button" value="GO!" onclick="searchIt();"></li>
-	                        <li><input type="text" class="form-control" id="usr" placeholder="에뛰드 틴트" name="searchValue"></li>
+	                        <li><input type="text" class="form-control" id="usr" placeholder="에뛰드 틴트" name="searchValue" onkeypress="if(event.keyCode == 13) searchIt();"></li>
 	                    	
 	                    </ul>
 	                    <ul class="search_icon">

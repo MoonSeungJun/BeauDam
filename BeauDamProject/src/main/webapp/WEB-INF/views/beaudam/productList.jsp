@@ -12,6 +12,7 @@ session="true" pageEncoding="UTF-8"%>
 <title>list</title>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/beaudam/list.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 .page {
 	background-color: fuchsia; 
@@ -54,26 +55,88 @@ session="true" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
 
-	function searchBrand() {
-		
-		var f= document.productListForm;
-		
-		var arrayBrand = new Array();
-		
-
-		//each로 loop를 돌면서 checkbox의 check된 값을 가져와 담아준다.
-
-		$("input:checkbox[name=brand]:checked").each(function(){
-
-			arrayBrand.push($(this).val());
-
-		});
+// 	function searchBrand() {		
+// 		var f= document.productListForm;		
+// 		var arrayBrand = new Array();
+// 		//each로 loop를 돌면서 checkbox의 check된 값을 가져와 담아준다.
+// 		$("input:checkbox[name=brand]:checked").each(function(){
+// 			arrayBrand.push($(this).val());
+// 		});		
+// 		if (arrayBrand==""){
+// 			alert("브랜드를 선택해주세요.")
+// 			return;
+// 		}
+<%-- 		f.action= "<%=cp%>/productList.action?arrayBrand="+arrayBrand; --%>
+// 		f.submit();	
+// 	}
 	
-		f.action="<%=cp%>/productList.action?arrayBrand="+arrayBrand;
-		f.submit();
+	
+	function searchBrand() {	
+		var brand = new Array();
+		var value = $('#value').val();
+		var type = $('#type').val();		
+		var f= document.productListForm;	
+		
+		if(!value){
+		 	value = '';
+		}
+		if(!type){
+			type = '';
+		}				
+		var params = {'brand':brand, 'value':value,'type':type};
+		
+		$("input:checkbox[name=brand]:checked").each(function(){
+			brand.push($(this).val());			
+		});		
+		if (brand==""){
+			alert("브랜드를 선택해주세요.")
+			return;
+		}		
+		f.action= "<%=cp%>/searchProductList.action";
+		f.submit();	
+		
+// 		$.ajax({	
+// 			type:'post',
+// 			url:'brandSearchAjax.action',
+// 			data: {'params':params},
+// 			dataType: 'json',
+// 			async:false,
+// 			success: function() {
+// 				alert("ok");
+// 			},
+// 			error: function() {
+// 				alert("no");
+				
+// 			}			
+			
+// 		});	
+// 		 var method = method || "post";	    
+// 		    var form = document.createElement("form");
+		    
+// 		    form.setAttribute("method", method);
+// 		    form.setAttribute("action", 'brandSearchAjax.action');
 
+// 		    for(var key in params) {
+// 		        var hiddenField = document.createElement("input");
+// 		        hiddenField.setAttribute("type", "hidden");
+// 		        hiddenField.setAttribute("name", key);
+// 		        hiddenField.setAttribute("value", params[key]);
+// 		        form.appendChild(hiddenField);
+// //	 	        alert(params[key]);
+// 		    }
+// 		    document.body.appendChild(form);
+// 		    form.submit();
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 </script>
@@ -136,6 +199,8 @@ session="true" pageEncoding="UTF-8"%>
 	    		<th style="font-size: 20px; padding: 10px;">BRAND</th>
 	            <td colspan="2" style="text-align: right; marg">
 	            	<input type="button" value="조회" onclick="searchBrand();" style="margin-right: 30px; border: none; padding: 5px;">
+	            	<input type="hidden" id="value" name="searchValue" value="${searchValue }">
+	            	<input type="hidden" id="type" name="searchType" value="${searchType }">
 	            </td>
 	        </tr>                
 	        <tr>
