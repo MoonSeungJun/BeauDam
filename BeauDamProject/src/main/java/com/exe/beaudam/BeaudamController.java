@@ -203,9 +203,7 @@ public class BeaudamController {
 			value = " ";
 		}else if(type == null || type.equals("")) {
 			type = " ";
-		}		
-<<<<<<< HEAD
-		
+		}				
 		for(String str : brands) {			
 			list.add(str);			
 		}		
@@ -256,57 +254,7 @@ public class BeaudamController {
 
 		}		
 		
-=======
-		
-		for(String str : brands) {			
-			list.add(str);			
-			System.out.println(str);
-			System.out.println(list);
-			System.out.println();
-		}		
-		
-		map.put("list", list);
-		map.put("searchValue", value);
-		map.put("searchType", type);		
-		
-		int dataCount = viewService.getSearchDataCount(map);
-		
-		int numPerPage = 12;
-		int totalPage = util.getPageCount(numPerPage, dataCount);
-		int currentPage = 1;
 
-		if(pageNum != null && !pageNum.equals(""))
-			currentPage = Integer.parseInt(pageNum);	
-		
-		if(currentPage > totalPage) {
-			currentPage = totalPage;
-		}
-
-		int start = (currentPage-1)*numPerPage+1;
-		int end = currentPage*numPerPage;
-		
-		map.put("start", start);
-		map.put("end", end);
-
-		List<ProductView> view = viewService.getSearchProductList(map);		
-
-		String param = "?";		
-		
-		String listUrl = cp+"/searchProductList.action";
-
-		if (!value.equals(" ")) {			
-			param += "value=" + value;		
-			listUrl = listUrl + param;				
-			
-		}
-		
-		if (!type.equals(" ")) {			
-			param += "type=" + type;
-			listUrl = listUrl + param;		
-
-		}		
-		
->>>>>>> 김해나브랜치
 		String pageIndexList = util.pageIndexList(currentPage, totalPage, listUrl);
 
 		String detailUrl = cp + "/productDetail.action?pageNum="+pageNum;
@@ -315,10 +263,8 @@ public class BeaudamController {
 			detailUrl = detailUrl + "&" + param;
 		}			
 		
-<<<<<<< HEAD
+
 		request.setAttribute("sortList", sortList);
-=======
->>>>>>> 김해나브랜치
 		request.setAttribute("searchProductList", view);
 		request.setAttribute("count", dataCount);
 		request.setAttribute("detailUrl", detailUrl);

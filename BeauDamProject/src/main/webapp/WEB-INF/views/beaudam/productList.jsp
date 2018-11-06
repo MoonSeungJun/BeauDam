@@ -53,7 +53,7 @@ session="true" pageEncoding="UTF-8"%>
 }
 </style>
 
-<<<<<<< HEAD
+
 <script type="text/javascript">
 
 	function maxSorting() {
@@ -160,9 +160,7 @@ session="true" pageEncoding="UTF-8"%>
 	}
 </script>
 
-=======
 
->>>>>>> 김해나브랜치
 <script type="text/javascript">	
 function replaceAll(str, searchStr, replaceStr) {
     return str.split(searchStr).join(replaceStr);
@@ -175,7 +173,6 @@ window.onload = function() {
 	brand = replaceAll(brand,"]","");
 	var arr = new Array();	
 	arr = brand.split(",");	
-<<<<<<< HEAD
 	
 	var temp = "";
 	var val = "";
@@ -212,49 +209,7 @@ window.onload = function() {
 		
 		
 	}
-=======
->>>>>>> 김해나브랜치
-	
-	var temp = "";
-	var val = "";
 
-	for(var i=0;i<arr.length;i++){	
-		temp = arr[i].replace(",","");
-		temp = temp.trim();
-		
-		$('input:checkbox[name=brand]').each(function() {			
-			val = this.value;
-			if(val.toString() === temp.toString()){
-// 				alert(temp);
-	            this.checked = true; //checked 처리
-	            
-			}				     
-		 });
-	}	
-}
-	
-<<<<<<< HEAD
-=======
-	
-	function submit(listUrl,page) {
-		
-		var pageNum = page;
-		var listUrl = listUrl;
-		var brand = new Array();
-		var f= document.productListForm;	
-		$("input:checkbox[name=brand]:checked").each(function(){
-			brand.push($(this).val());
-			
-		});
-		
-		f.action= listUrl+"pageNum="+pageNum;	
-		f.submit();
-		
-		
-	}
-	
-	
->>>>>>> 김해나브랜치
 	function searchBrand() {
 		var pageNum = '1';
 		var brand = new Array();

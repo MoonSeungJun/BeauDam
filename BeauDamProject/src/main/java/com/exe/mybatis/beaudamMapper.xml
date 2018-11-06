@@ -331,8 +331,6 @@
 			]]>	
 			
 		</select>
-<<<<<<< HEAD
-=======
 		
 		<select id="getSearchProductList" resultType="com.view.view.ProductView" parameterType="map">
 			select *from (
@@ -352,7 +350,6 @@
 			]]>	
 			
 		</select>
->>>>>>> 김해나브랜치
 		<select id="getSearchDataCount" resultType="int" parameterType="Map">
 			select nvl(count(*),0) from productView 
 			where  product_Name like '%'||#{searchValue}||'%' and
