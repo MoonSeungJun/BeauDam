@@ -205,8 +205,11 @@ public class BeaudamController {
 			type = " ";
 		}		
 		
-		for(String str : brands) {		
-			list.add(str);						
+		for(String str : brands) {			
+			list.add(str);			
+			System.out.println(str);
+			System.out.println(list);
+			System.out.println();
 		}		
 		
 		map.put("list", list);
@@ -248,7 +251,7 @@ public class BeaudamController {
 			param += "type=" + type;
 			listUrl = listUrl + param;		
 
-		}	
+		}		
 		
 		String pageIndexList = util.pageIndexList(currentPage, totalPage, listUrl);
 
@@ -257,7 +260,7 @@ public class BeaudamController {
 		if (!param.equals("")) {
 			detailUrl = detailUrl + "&" + param;
 		}			
-
+		
 		request.setAttribute("searchProductList", view);
 		request.setAttribute("count", dataCount);
 		request.setAttribute("detailUrl", detailUrl);

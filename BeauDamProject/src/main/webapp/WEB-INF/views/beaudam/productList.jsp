@@ -54,32 +54,16 @@ session="true" pageEncoding="UTF-8"%>
 </style>
 
 <script type="text/javascript">	
-// $(document).ready(function(){
-// 	var brand = '${brand}';		
-// 	brand = brand.replace("[","");
-// 	brand = brand.replace("]","");
-// 	var arr = new Array();	
-// 	arr = brand.split(",");	
-	
-// 	var temp = "";
-// 	var val = "";
+function replaceAll(str, searchStr, replaceStr) {
+    return str.split(searchStr).join(replaceStr);
+}
 
-// 	for(var i=0;i<arr.length;i++){	
-// 		temp = arr[i];
-// 		temp = temp.trim();
-		
-// 		$('input:checkbox[name=brand]').each(function() {			
-// 			val = this.value;	
-// 			if(val.toString() === temp.toString()){
-// 	            this.checked = true; //checked 처리
-// 			}				     
-// 		 });
-// 	}	
-// });
+
+
 window.onload = function() {
 	var brand = '${brand}';		
-	brand = brand.replace("[","");
-	brand = brand.replace("]","");
+	brand = replaceAll(brand,"[","");
+	brand = replaceAll(brand,"]","");
 	var arr = new Array();	
 	arr = brand.split(",");	
 	
@@ -87,13 +71,15 @@ window.onload = function() {
 	var val = "";
 
 	for(var i=0;i<arr.length;i++){	
-		temp = arr[i];
+		temp = arr[i].replace(",","");
 		temp = temp.trim();
 		
 		$('input:checkbox[name=brand]').each(function() {			
-			val = this.value;	
+			val = this.value;
 			if(val.toString() === temp.toString()){
+// 				alert(temp);
 	            this.checked = true; //checked 처리
+	            
 			}				     
 		 });
 	}	
@@ -103,11 +89,14 @@ window.onload = function() {
 	function submit(listUrl,page) {
 		
 		var pageNum = page;
-		var listUrl = listUrl;			
+		var listUrl = listUrl;
+		var brand = new Array();
 		var f= document.productListForm;	
 		$("input:checkbox[name=brand]:checked").each(function(){
-			brand.push($(this).val()+",");			
-		});		
+			brand.push($(this).val());
+			
+		});
+		
 		f.action= listUrl+"pageNum="+pageNum;	
 		f.submit();
 		
@@ -120,7 +109,7 @@ window.onload = function() {
 		var brand = new Array();
 		var value = $('#value').val();
 		var type = $('#type').val();		
-		var f= document.productListForm;	
+		var f= document.productListForm;		
 		
 		if(!value){
 		 	value = '';
@@ -129,24 +118,27 @@ window.onload = function() {
 			type = '';
 		}				
 		
+		if(value == ' '){
+			value = '';
+		}
+		if(type == ' '){
+			type='';
+		}		
 		
 		$("input:checkbox[name=brand]:checked").each(function(){
-			brand.push($(this).val()+",");			
+			brand.push($(this).val()+",");		
 		});		
 		if (brand==""){
 			alert("브랜드를 선택해주세요.");
 			return;
 		}		
 		
-		if(type != ""){
-			
+		if(type != ""){			
 			f.action= "<%=cp%>/searchProductList.action?type="+type+"&pageNum=1";				
 		}
 		
-		if(value != ""){
-			
-			f.action= "<%=cp%>/searchProductList.action?value="+value+"&pageNum=1";	
-			
+		if(value != ""){			
+			f.action= "<%=cp%>/searchProductList.action?value="+value+"&pageNum=1";				
 		}		
 		
 		f.submit();	
