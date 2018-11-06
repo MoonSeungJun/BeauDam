@@ -12,7 +12,6 @@ session="true" pageEncoding="UTF-8"%>
 <title>list</title>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/beaudam/list.css">
-<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 .page {
