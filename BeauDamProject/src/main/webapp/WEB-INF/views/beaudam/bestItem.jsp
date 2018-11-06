@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>beaudam > BEST ITEM</title>
 <link rel="stylesheet" href="<%=cp%>/resources/css/beaudam/bestItem.css">
 </head>
 <body>

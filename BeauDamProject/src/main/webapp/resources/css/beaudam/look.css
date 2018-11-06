@@ -23,3 +23,64 @@
 	font-weight: normal; 
 	font-style: normal; 
 }
+
+.menu {
+	margin: 50px auto;
+}
+
+.menu p {
+	font-family: 'YiSunShinDotumM';
+	font-size: 30px;
+	margin-bottom: 25px;
+}
+
+.menu a {
+	text-decoration: none;
+	font-family: 'YiSunShinDotumM';
+	font-size: 25px;
+	margin: 30px;
+	color: black;
+	background-color: white;
+	border: 1px solid #599cc9;
+	padding: 5px;
+}
+
+.menu a:hover {
+	text-decoration: none;
+}
+
+.video {
+	padding: 30px; 
+	text-align: center;
+}
+
+.video .videoName {
+	font-size: 25px;
+	font-family: 'YiSunShinDotumM';
+	margin-bottom: 30px;
+	margin-top: 30px;
+	border-bottom: 3px solid orangered;
+	display: inline-block;
+}
+
+.videoComment {
+	font-size: 18px;
+	font-weight: normal;	
+}
+
+.video .itemTitle {
+	margin-top: 30px;
+	font-size: 20px;
+	font-family: 'WONBatang';
+}
+
+.video .videoItem img {
+	border-radius: 50%;
+	background-color: white;
+	margin: 30px;
+	width: 250px;
+	padding: 20px;
+}
+
+
+
