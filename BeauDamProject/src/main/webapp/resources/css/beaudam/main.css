@@ -18,6 +18,13 @@
 	font-style: normal;
 }
 
+@font-face { 
+	font-family: 'YiSunShinDotumM'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
 html, body, ul, li, h2, h3 {
 	padding: 0;
 	margin: 0;
@@ -141,6 +148,7 @@ a {
 
 .search_icon li {
 	float: right;
+	margin: 3px;
 }
 
 .navbar_container {
@@ -258,6 +266,7 @@ a {
 .content_layout {
 	margin-top: 50px;
 	background-color: #F9F9F9;
+	padding: 30px;
 }
 
 .content_grid {
@@ -282,6 +291,7 @@ a {
 
 .best_wrapper {
 	padding-bottom: 50px;
+	padding-top: 50px;
 }
 
 .best_wrapper h3, .new_item h3 {
@@ -296,7 +306,6 @@ a {
 .best_wrapper ul, .new_item ul {
 	text-align: center;
 	overflow: hidden;
-	width: 1200px;
 	margin: 0 auto;
 }
 
@@ -312,9 +321,40 @@ a {
 	border-radius: 30px;
 }
 
+.rolling_panel li a {
+	color: black;
+	text-decoration: none;
+}
+
+.rolling_panel li a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+.new_item ul li:last-child {
+	border-right: none;
+}
+
 .new_item img:hover {
 	webkit-transform: scale(1.1);
 	transform: scale(1.1);
+}
+
+.brand_grid {
+	width: 1212px;
+}
+
+.brandimg {
+	float: left;
+	margin: 20px;
+	
+}
+
+.brandimg img {
+	width: 200px;
+	border-radius: 50%;
+	padding: 5px;
+	background-color: #ededed;
 }
 
 .footer {
@@ -340,10 +380,12 @@ a {
 
 .basket_order {
 	position: fixed;
-	bottom: 400px;
-	right: 10px;
+	bottom: 300px;
+	right: 0;
 	cursor: pointer;
-}
+	background-color: #F5F5DC; 
+	padding: 15px;
+}	
 
 .sticky {
 	position: sticky;

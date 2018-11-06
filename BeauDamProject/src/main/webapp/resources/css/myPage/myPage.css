@@ -148,11 +148,9 @@ p, label, span, strong, i, em, a, textarea, input, select {
 	color: #9a9a9;
 }
 
- a:link { color: gray; text-decoration: none;}
- a:visited { color: gray; text-decoration: none;}
- a:hover { color: gray; text-decoration: none;}
-
-
+.float_container .lnb_menu a:link { color: gray; text-decoration: none;}
+.float_container .lnb_menua:visited { color: gray; text-decoration: none;}
+.float_container .lnb_menu a:hover { color: gray; text-decoration: none;}
 
 p, label, span, strong, i, em, a, textarea, input, select {
     color: inherit;
@@ -167,6 +165,11 @@ p, label, span, strong, i, em, a, textarea, input, select {
     position: relative;
     display: block;
     color: #000;
+    text-decoration: none;
+}
+
+.lnb_menu nav>ul>li>a:hover {
+	text-decoration: none;
 }
 
 a {

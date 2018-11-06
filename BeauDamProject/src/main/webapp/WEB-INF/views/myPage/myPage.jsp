@@ -22,7 +22,6 @@
 		<div class="title_style">
 			<div class="title_area">
 				<h2 style="font-family: 'designhouseOTFLight00'; font-weight: normal;">마이뷰담</h2>
-				<hr style=" border: 0; height: 1px; background-color: gray;">
 			</div>
 		</div>
 		
@@ -77,11 +76,11 @@
 							<li>
 								<a href="<%=cp %>/myOrder.action">나의 주문 현황</a>
 							</li>
-							<li><a href="" style="margin-bottom: 15px;">나의 정보</a>
+							<li><a href="" style="margin-bottom: 5px;">나의 정보</a>
 								<ul class="sub_lnb">
-									<li><a href="<%=cp%>/myCoupon.action" style="color: #9a9a9;">쿠폰조회</a></li>
-									<li><a href="<%=cp%>/myInfo.action">개인정보수정</a></li>
-									<li><a href="<%=cp%>/myLeave.action">회원탈퇴</a></li>
+									<li><a href="<%=cp%>/myCoupon.action" style="color: gray;">쿠폰조회</a></li>
+									<li><a href="<%=cp%>/myInfo.action" style="color: gray;">개인정보수정</a></li>
+									<li><a href="<%=cp%>/myLeave.action" style="color: gray;">회원탈퇴</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -109,7 +108,7 @@
 									<td>
 										<img style="width: 60px"src="/beaudam/resources/image/myPage/pay.jpg" />
 									</td>
-									<td rowspan="3">▶</td>
+									<td rowspan="3" style="border-right: 1px solid #77797a;">&nbsp;&nbsp;&nbsp;</td>
 									<td>
 										<img style="width: 40px" src="/beaudam/resources/image/myPage/box.jpg" />
 									</td>

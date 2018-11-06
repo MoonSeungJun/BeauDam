@@ -1,0 +1,25 @@
+@charset "UTF-8";
+@font-face {
+	font-family: 'designhouseOTFLight00';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'WONBatang';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONBatang.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face { 
+	font-family: 'YiSunShinDotumM'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}

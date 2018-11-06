@@ -345,7 +345,7 @@
 		<select id="getProductDataRowNum" resultType="com.view.view.ProductView" parameterType="int">
 			select *from (
 			select rownum rnum,data.*from (
-			select code,thumb_Img from productView
+			select code,thumb_Img, product_Name, brand from productView
 			order by code desc) data)
 			<![CDATA[
 			where rnum=#{selectRowNum}

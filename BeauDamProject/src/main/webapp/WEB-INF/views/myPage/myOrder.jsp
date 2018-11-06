@@ -20,7 +20,7 @@
 		<div class="title_style">
 			<div class="title_area">
 				<h2 style="font-family: 'designhouseOTFLight00'; font-weight: normal;">나의 주문 현황</h2>
-				<hr style=" border: 0; height: 1px; background-color: gray;">
+				
 			</div>
 		</div>
 				<div class="float_container">
@@ -125,7 +125,7 @@
 									<td>
 										<img style="width: 60px"src="/beaudam/resources/image/myPage/pay.jpg" />
 									</td>
-									<td rowspan="3">▶</td>
+									<td rowspan="3" style="border-right: 1px solid #77797a;">&nbsp;&nbsp;&nbsp;</td>
 									<td>
 										<img style="width: 40px" src="/beaudam/resources/image/myPage/box.jpg" />
 									</td>
