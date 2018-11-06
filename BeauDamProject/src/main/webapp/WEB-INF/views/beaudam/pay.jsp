@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="./resources/css/beaudam/pay.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 
@@ -64,8 +65,7 @@
 			if(point > payResult){				
 				point = payResult; 				
 				$("#point").val(addComma(point));
-				$("#discount").text(addComma(point));								
-					
+				$("#discount").text(addComma(point));
 			}
 			
 			
@@ -214,31 +214,29 @@
 
 
 <body>
-	
-	<br><br>
+	<div class="title_style">
+		<div>
+			<a href="<%=cp %>/main.action" style="text-decoration: none; color: black;"><h3>뷰티를 담다 뷰ː담</h3></a> 
+			<h2 style="font-family: designhouseOTFLight00">구매목록</h2>
+			<p style="font-family: Black Han Sans">Purchase List</p>
+		</div>
+	</div>
+	<form action="iampay.action" method="post" name="payForm">
 	<table align="center" style="width: 1200px;">
 		<tr>
-			<td style="border-bottom-width: 2px; border-bottom-style: solid;border-bottom-color: black; ">
-				구매목록
+			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #ddd; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 20px;">
+				구매 목록
 			</td>
-		</tr>	
+		</tr>
 	</table>
-	
-	<form action="iampay.action" method="post" name="payForm">
-	
-	<table align="center" cellspacing="0" style="width: 1200px; height:auto;" border="1" class="mytable">
+	<table cellpadding="5" cellspacing="0" align="center" border="1" class="mytable">
 		<tr align="center">
 			<td>이미지</td>
-		
 			<td>브랜드</td>
-			
-			<td>제품이름</td>
-			
+			<td>제품명</td>
 			<td>가격</td>
-			
-			<td>갯수</td>
-			
-			<td>총가격</td>
+			<td>수량</td>
+			<td>총 가격</td>
 		</tr>
 		
 		<c:forEach var="dto" items="${buyLists }">
@@ -270,62 +268,59 @@
 				</td>
 			</tr>
 		</c:forEach>
-		
-
 	</table>
 	
 	<br><br>
 	
 	<table align="center" style="width: 1200px;">
 		<tr>
-			<td style="border-bottom-width: 2px; border-bottom-style: solid;border-bottom-color: black; ">
+			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #ddd; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 20px;">
 				할인 및 포인트
 			</td>
 		</tr>
 	</table>
 	
-	<table align="center" style="width: 1200px;">
+	<table align="center" style="width: 1200px; margin-top: 10px;">
 		<tr>
 			<td>쿠폰</td>
-			
 			<td>
 				<div>
-			 		<select id="coupon" style="width: 15%">
+			 		<select id="coupon" style="width: 15%; padding: 3px;">
 			 			<option value="1" selected="selected">선택</option>
-			 			
 			 			<!-- jstl로 쿠폰 나열 -->
 			 			<c:forEach var="dto" items="${couponLists }">
 			 				<option value="${dto.coupon }${dto.num}">${dto.coupon } 할인</option>
 			 			</c:forEach>
-			 		</select> (사용가능 쿠폰 : ${couponCount }장)
+			 		</select> <font style="font-weight: bold; font-family: 'YiSunShinDotumM';">(사용가능 쿠폰 : ${couponCount }장)</font>
 			 		<input type="hidden" id="couponNum" name="couponNum" value="">
 		 		</div>
 			</td>
 		</tr>
-		
 		<tr>
 			<td>포인트</td>
-			
 			<td>
 				<input type="text" value="" id="point" style="width: 70px"> Point 
-				(사용가능 포인트 : 
+				<font style="font-weight: bold; font-family: 'YiSunShinDotumM';">(사용가능 포인트 : 
 					<span id="usepoint" >
 					<script type="text/javascript">
 						$("#usepoint").html(addComma(${member.point}));
 					</script>
 					</span> 
-				Point)
+				Point)</font>
 			</td>
 		</tr>
 	</table>
 	
 	<br><br>
 	
-	<table style="width: 1200px;" cellspacing="0" align="center" border="1" class="mytable">
+	<table align="center" style="width: 1200px;">
 		<tr>
-			<td colspan="2">배송정보</td>
+			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #ddd; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 20px;">
+				배송 정보
+			</td>
 		</tr>
-		
+	</table>
+	<table cellpadding="5" cellspacing="0" align="center" border="1" class="mytable">
 		<tr>	
 			<td>받는사람</td>
 				
@@ -348,7 +343,7 @@
 			<td>배송메시지</td>
 			
 			<td>
-				<select id="msg" style="width: 48%;">
+				<select id="msg" style="width: 48%; padding: 3px;">
 					<option value="1" selected="selected">배송 전에 미리 연락바랍니다.</option>
 					<option value="2">부재시 경비실에 맡겨주세요.</option>
 					<option value="3">부재시 전화 주시거나 문자 남겨 주세요.</option>
@@ -362,6 +357,13 @@
 	
 	<br><br>
 	
+	<table align="center" style="width: 1200px;">
+		<tr>
+			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #ddd; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 20px;">
+				결제 
+			</td>
+		</tr>
+	</table>
 	<table cellspacing="0" style="width: 1200px;" height="350px;" align="center" border="1" class="mytable">
 		<tr style="height: 50px" align="center">
 			<td style="width: 75%;">결제정보</td>
@@ -376,17 +378,14 @@
 				<input type="radio" name="payType" value="trans">실시간 계좌이체
 			</td>
 			
-			<td rowspan="2" valign="top">
+			<td valign="top">
 				<table width="80%" style="font-size: 9pt; margin-top: 10px; margin-left: 10px; margin-right: 10px;">
 					<tr>
-						<td colspan="2">
-							<input type="text" id="payResult" value="" style="width: 80%; text-align: center; font-size: 27pt; border: none;" readonly="readonly">
-							<span style="font-size: 20pt;">원</span>
+						<td colspan="2" style="border-bottom: 2px solid black;">
+							<input type="text" id="payResult" value="" style="width: 80%; text-align: center; font-size: 27pt; border: none; color: #ee782f; font-family: 'YiSunShinDotumM'; " readonly="readonly">
+							<span style="font-size: 20pt; font-family: 'YiSunShinDotumM';">원</span>
 						</td>
 					</tr>
-					
-					<tr height="0.1px" style="background-color: black;"><td colspan="2"></td></tr>
-					
 					<tr>
 						<td width="50%">총 상품금액</td>
 						<td width="50%" style="text-align: right;"><span id="totalPrice">
@@ -418,7 +417,7 @@
 		</tr>
 		
 		<tr>
-			<td style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
+			<td style="padding: 10px;">
 				<font size="2px">
 				<b>전자상거래 등에서의 소비자보호에 관한 법률에 따른 구매안전 서비스 이용안내</b><br><br>
 				옥션의 모든 판매자는 안전거래를 위해 구매금액, 결제수단에 상관없이
@@ -428,16 +427,13 @@
 				"업무자료>인허가업무안내>전자금융업등록현황"에서 확인하실 수 있습니다.
 				</font>
 			</td>
-		</tr>
-		
-		<tr height="70px">
-			<td colspan="2" align="center">				
-				<input type="button" value="결제하기" onclick="buying();" style="width: 30%; height: 30px;">
+			<td style="text-align: center;">
+				<input type="button" value="결제하기" onclick="buying();"
+						style="color: #ee782f; font-family: 'YiSunShinDotumM';
+						padding: 10px; text-align: center; background-color: #ddd; border: 1px solid #ddd; width: 200px; font-size: 20px;">
 			</td>
 		</tr>
-		
-	</table>
-	
+	</table>		
 	</form>
 	
 </body>
