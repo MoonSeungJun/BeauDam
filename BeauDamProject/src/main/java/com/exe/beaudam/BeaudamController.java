@@ -207,9 +207,6 @@ public class BeaudamController {
 		
 		for(String str : brands) {			
 			list.add(str);			
-			System.out.println(str);
-			System.out.println(list);
-			System.out.println();
 		}		
 		
 		map.put("list", list);
@@ -237,6 +234,11 @@ public class BeaudamController {
 
 		List<ProductView> view = viewService.getSearchProductList(map);		
 
+		map.clear();
+		map.put("searchValue", value);
+		map.put("searchType", type);
+		List<ProductView> sortList = viewService.getSearchProductDataList(map);
+		
 		String param = "?";		
 		
 		String listUrl = cp+"/searchProductList.action";
@@ -261,6 +263,7 @@ public class BeaudamController {
 			detailUrl = detailUrl + "&" + param;
 		}			
 		
+		request.setAttribute("sortList", sortList);
 		request.setAttribute("searchProductList", view);
 		request.setAttribute("count", dataCount);
 		request.setAttribute("detailUrl", detailUrl);
@@ -331,7 +334,12 @@ public class BeaudamController {
 
 
 		List<ProductView> searchProductList = viewService.getSearchProductDataList(ProductDataMap);
-
+		
+		ProductDataMap.clear();
+		ProductDataMap.put("searchValue", searchValue);
+		ProductDataMap.put("searchType", searchType);
+		List<ProductView> sortList = viewService.getSearchProductDataList(ProductDataMap);
+		
 		String param = "?";
 		String listUrl = cp+"/productList.action";
 
@@ -368,12 +376,15 @@ public class BeaudamController {
 		if (!param.equals("")) {
 			detailUrl = detailUrl + "&" + param;
 		}
+		
+		
 		request.setAttribute("searchProductList", searchProductList);
 		request.setAttribute("count", count);
 		request.setAttribute("detailUrl", detailUrl);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("searchType", searchType);
 		request.setAttribute("searchValue", searchValue);
+		request.setAttribute("sortList", sortList);
 
 		return new ModelAndView("beaudam/productList", "id", (String) session.getAttribute("id"));
 		
