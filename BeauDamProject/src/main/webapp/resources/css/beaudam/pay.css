@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+
+@font-face {
+	font-family: 'designhouseOTFLight00';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'WONBatang';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONBatang.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face { 
+	font-family: 'YiSunShinDotumM'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+body {
+	font-size: 17px;
+	margin-bottom: 150px;	
+}
+
+.title_style {
+    text-align: center;
+}
+
+.title_style h3 {
+	font-family: 'designhouseOTFLight00';
+}
+
+.title_style h2 {
+    font-size: 60px;
+    font-weight: 100;
+    letter-spacing: -3px;
+    line-height: 60px;
+    margin-top: 26px;
+    margin-bottom: 16px;
+    height: 60px;
+}
+
+.title_area {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.mytable {
+	margin-top: 10px;
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+	width: 1200px;
+}
+
+/* .mytable tr, td {
+	padding: 5px;
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+} */
+
+/* .mytable tr {
+	border-bottom: 1px solid #ddd;
+} */
+
+/* .mytable td {
+	border-bottom: 1px solid #ddd;
+	padding: 5px;
+	border-right: 1px solid #ddd;
+	border-collapse: collapse;
+} */
+
+/* .mytable td:last-child {
+	border-right: none;
+}
+
+.mytable tr:last-child {
+	border-bottom: none;
+}
+ */
+
+
+
+
+
+
+
