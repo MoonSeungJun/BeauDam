@@ -224,7 +224,7 @@
 	<form action="iampay.action" method="post" name="payForm">
 	<table align="center" style="width: 1200px;">
 		<tr>
-			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #ddd; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 20px;">
+			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: gray; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 22px;">
 				구매 목록
 			</td>
 		</tr>
@@ -274,7 +274,7 @@
 	
 	<table align="center" style="width: 1200px;">
 		<tr>
-			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #ddd; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 20px;">
+			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: gray; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 22px;">
 				할인 및 포인트
 			</td>
 		</tr>
@@ -315,7 +315,7 @@
 	
 	<table align="center" style="width: 1200px;">
 		<tr>
-			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #ddd; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 20px;">
+			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: gray; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 22px;">
 				배송 정보
 			</td>
 		</tr>
@@ -359,7 +359,7 @@
 	
 	<table align="center" style="width: 1200px;">
 		<tr>
-			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #ddd; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 20px;">
+			<td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: gray; padding: 5px; font-family: 'YiSunShinDotumM'; font-weight: bold; font-size: 22px;">
 				결제 
 			</td>
 		</tr>
@@ -433,8 +433,11 @@
 						padding: 10px; text-align: center; background-color: #ddd; border: 1px solid #ddd; width: 200px; font-size: 20px;">
 			</td>
 		</tr>
-	</table>		
+	</table>
+	<div class="button">
+		<a href="<%=cp%>/myBasket.action">뒤로가기</a>
+	</div>		
 	</form>
-	
+
 </body>
 </html>

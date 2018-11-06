@@ -9,11 +9,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>beaudam > PICK'S</title>
 <link rel="stylesheet" href="<%=cp%>/resources/css/beaudam/pick.css">
 </head>
 <body>
 <jsp:include page="mainTop.jsp"/>
+<div>
+	<div class="title">
+		<h2 style=" letter-spacing: 0.1em;">PICK'S</h2>       
+	</div>
+</div>
 <jsp:include page="mainBottom.jsp"/>
 </body>
 </html>

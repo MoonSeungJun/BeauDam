@@ -241,7 +241,7 @@ window.onload = function() {
 				<div class="listitem" id="${dto.brand }"style="display: block;">
 					<a href="${detailUrl }&code=${dto.code}"><img alt="" src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
 					<p style="color: gray;">${dto.brand }</p>
-					<p>${dto.product_Name }</p>
+					<p style="height: 40px;">${dto.product_Name }</p>
 					<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">${dto.product_Price }원</p>
 				</div>
 			</li>			
