@@ -15,13 +15,28 @@
 <body>
 <jsp:include page="mainTop.jsp"/>
 <div>
-	<div class="video" style="background-color: #ffe2c9;" id="daily">
-		<div class="menu">
+	<div class="video" style="background-color: #c9765a; " id="autoumn">
+	<div class="menu">
 			<p>내게 맞는 MAKEUP LOOK을 찾아봐!💕</p>
 			<a href="#daily"><span>#데일리 메이크업</span></a>
 			<a href="#date"><span>#데이트 메이크업</span></a>
 			<a href="#autoumn"><span>#가을 메이크업</span></a>
 		</div>
+		<video src="<%=cp%>/resources/video/look/LOOK_1.mp4" controls="controls" style="display: block; margin: 100px auto 30px auto;" autoplay="autoplay" ></video>
+		<p class="videoName">AUTOUMN CHILLI MOOD MAKEUP</p>
+		<p class="videoComment">올 가을 은은한 붉은빛으로 물들여보자!<Br>
+		#이니스프리 #가을메이크업 #칠리무드 #뷰담 </p>
+		<div style="border: 2px solid #ddd; width: 960px; margin: 30px auto;">
+			<p class="itemTitle">사용한 제품 알아보기!</p>
+			<div class="videoItem">
+				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Primer&code=is7002"><img alt="" src="<%=cp%>/resources/image/beaudam/look/look11.png"></a>
+				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Shadow&code=ie2002"><img alt="" src="<%=cp%>/resources/image/beaudam/look/look12.png"></a>
+				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Stick&code=il3003"> <img alt="" src="<%=cp%>/resources/image/beaudam/look/look13.png"></a>
+			</div>
+		</div>
+	</div>
+	<div class="video" style="background-color: #ffe2c9;" id="daily">
+		
 		<video src="<%=cp%>/resources/video/look/LOOK_2.mp4" controls="controls" style="display: block; margin: 100px auto 30px auto;"autoplay="autoplay" ></video>
 		<p class="videoName">DAILY PEACH MAKEUP</p>
 		<p class="videoComment">새내기들이 하기 좋은 데일리 메이크업<Br>
@@ -52,20 +67,7 @@
 		</div>
 	</div>
 	
-	<div class="video" style="background-color: #c9765a; " id="autoumn">
-		<video src="<%=cp%>/resources/video/look/LOOK_1.mp4" controls="controls" style="display: block; margin: 100px auto 30px auto;" autoplay="autoplay" ></video>
-		<p class="videoName">AUTOUMN CHILLI MOOD MAKEUP</p>
-		<p class="videoComment">올 가을 은은한 붉은빛으로 물들여보자!<Br>
-		#이니스프리 #가을메이크업 #칠리무드 #뷰담 </p>
-		<div style="border: 2px solid #ddd; width: 960px; margin: 30px auto;">
-			<p class="itemTitle">사용한 제품 알아보기!</p>
-			<div class="videoItem">
-				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Primer&code=is7002"><img alt="" src="<%=cp%>/resources/image/beaudam/look/look11.png"></a>
-				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Shadow&code=ie2002"><img alt="" src="<%=cp%>/resources/image/beaudam/look/look12.png"></a>
-				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Stick&code=il3003"> <img alt="" src="<%=cp%>/resources/image/beaudam/look/look13.png"></a>
-			</div>
-		</div>
-	</div>
+
 </div>
 <jsp:include page="mainBottom.jsp"/>
 </body>
