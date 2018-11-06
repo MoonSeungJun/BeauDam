@@ -186,13 +186,15 @@ session="true" pageEncoding="UTF-8"%>
 				                    	<button type="button" class="close" data-dismiss="modal">&times;</button>
 				                    	<span class="modal-title" style="font-weight: bold">리뷰쓰기</span>
 	                				</div>
-		                			<div class="modal-body">
-		                    			<textarea style="width: 100%;" placeholder="리뷰를 작성해 주세요! 사랑합니다 고객님♡ "></textarea>
-		                			</div>
-	                				<div class="modal-footer">
-			                    		<button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f0ad4e; color: white; font-weight: bold; border: none;">등록하기</button>
-			                    		<button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; ">취소하기</button>
-	                				</div>
+	                				<form name="reviewForm" method="post">
+			                			<div class="modal-body">
+			                    			<textarea style="width: 100%;" name="review" placeholder="리뷰를 작성해 주세요! 사랑합니다 고객님♡ "></textarea>
+			                			</div>
+		                				<div class="modal-footer">
+				                    		<button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f0ad4e; color: white; font-weight: bold; border: none;">등록하기</button>
+				                    		<button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; ">취소하기</button>
+		                				</div>
+	                				</form>
 	            				</div>
 	       					</div>
 	    				</div>
