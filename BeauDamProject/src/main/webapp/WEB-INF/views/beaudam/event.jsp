@@ -10,7 +10,7 @@
     <html>
         <head>
         	<meta charset="UTF-8">
-            <title>event</title>
+            <title>beaudam > EVENT</title>
             <link rel="stylesheet" href="./resources/css/beaudam/event.css">
             </head>
         <body>

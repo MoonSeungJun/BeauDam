@@ -61,32 +61,13 @@ body {
 	width: 1200px;
 }
 
-/* .mytable tr, td {
-	padding: 5px;
-	border: 1px solid #ddd;
-	border-collapse: collapse;
-} */
-
-/* .mytable tr {
-	border-bottom: 1px solid #ddd;
-} */
-
-/* .mytable td {
-	border-bottom: 1px solid #ddd;
-	padding: 5px;
-	border-right: 1px solid #ddd;
-	border-collapse: collapse;
-} */
-
-/* .mytable td:last-child {
-	border-right: none;
+.button a {
+	text-decoration: none;
 }
 
-.mytable tr:last-child {
-	border-bottom: none;
+.button a:hover {
+	text-decoration: none;
 }
- */
-
 
 
 

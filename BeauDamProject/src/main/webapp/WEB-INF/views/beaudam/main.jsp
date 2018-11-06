@@ -204,11 +204,11 @@ $(document).ready(function() {
                 <h3>NEW ITEM </h3>
                 <ul class="new_item" style="width: 1266px;">
                 	<c:forEach var="dto" items="${newItemList }">
-                    <li style="border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+                    <li>
                     	<div style="width: 420px;">
 	                  		<a href="${detailUrl }?code=${dto.code}">
 	                  		<img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
-					    	<div style="width: 400px; margin: 0 auto;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>   
+					    	<div style="width: 400px; height: 86px; margin: 0 auto;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>   
                     	</div >
                     </li>
                     </c:forEach>

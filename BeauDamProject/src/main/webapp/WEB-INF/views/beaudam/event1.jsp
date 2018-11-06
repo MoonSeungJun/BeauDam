@@ -6,7 +6,7 @@ session="true" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
     <head>
-		<title>event1</title>
+		<title>beaudam > EVENT</title>
 		<link rel="stylesheet" href="./resources/css/beaudam/event.css">
     </head>
     <boby>

@@ -227,7 +227,6 @@ html {
 	        <a href="./event.action">EVENT</a>
 	        <a href="./look.action">LOOKS</a>
 	        <a href="./pick.action">뷰담 PICK'S</a>
-	        <a href="./sale.action">SALE</a>
 	    </div>
 	    </div>
 	   
