@@ -47,7 +47,7 @@
 						</div>
 						<div>
 							<p class="point" style="font-size: 20px; color: black; font-weight: normal;">
-								0
+								${dto.point }
 							</p>
 						</div>
 						<div class="title">
@@ -55,7 +55,7 @@
 						</div>
 						<div>
 							<p class="" style="font-size: 20px; font-weight: normal;" >
-								0
+								${couponCount }
 							</p>
 						</div>
 						<div class="title">
@@ -63,7 +63,7 @@
 						</div>
 						<div>
 							<p class="" style="font-size: 20px; font-weight: normal;" >
-								Bronze
+								${dto.grade }
 							</p>
 						</div>
 					</div>

@@ -297,6 +297,11 @@ public class MyPageController {
 			HttpServletRequest request) {
 
 		String id = (String)session.getAttribute("id");
+		
+		
+		MemberView dto = memberService.getOneMemberData(id);		
+		request.setAttribute("dto", dto);
+				
 		List<CouponDTO> cLists = otherService.getCouponData(id);
 		
 		// 보유쿠폰(마이페이지) 페이지 이동
@@ -311,15 +316,138 @@ public class MyPageController {
 	}
 
 	// msj
+	
 	@RequestMapping(value = "/myOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView myOrder(HttpSession session) {
+	public ModelAndView myOrder(HttpSession session,HttpServletRequest req) {
 		
 		String id = (String)session.getAttribute("id");
+		String wterm = req.getParameter("weekTerm");
+		String mterm = req.getParameter("monthTerm");
+		String startDate = req.getParameter("startDate");
+		String endDate = req.getParameter("endDate");
+		List<SaleView> sLists = new ArrayList<SaleView>();
+				
+		MemberView dto = memberService.getOneMemberData(id);		
+		req.setAttribute("dto", dto);
 		
-		List<SaleView> sLists = saleService.getPersonalSaleData(id);
+		int couponCount = OtherService.getCouponCount(id);		
+		req.setAttribute("couponCount", couponCount);		
+		
+		List<SaleView> view = saleService.getPersonalSaleData(id);
+		
+		Iterator<SaleView> it = view.iterator();
+		
+		int payready = 0;
+		int payCompl = 0;
+		int deliReady = 0;
+		int deliIng = 0;
+		int deliCompl = 0;
+		
+		while(it.hasNext()) {
+			
+			SaleView vo = it.next();
+			
+			if(vo.getPay_Status().equals("입금대기")) {
+				payready++;
+			}else {
+				payCompl++;
+			}
+			if(vo.getDelivery_Status().equals("상품 준비중") || vo.getDelivery_Status().equals("ready")) {
+				deliReady++;
+			}else if (vo.getDelivery_Status().equals("ing")) {
+				deliIng++;
+			}else {
+				deliCompl++;
+			}
+		}		
+		
+		req.setAttribute("payReady", payready);
+		req.setAttribute("payCompl", payCompl);
+		req.setAttribute("deliReady", deliReady);
+		req.setAttribute("deliIng", deliIng);
+		req.setAttribute("deliCompl", deliCompl);
+			
+		/*if(wterm.equals("")||wterm==null) {
+			if(mterm.equals("")||mterm==null) {
+			sLists = saleService.getPersonalSaleData(id);
+			}
+		}*/
+		
+		if(wterm==null&&mterm==null&&startDate==null) {
+			System.out.println("!@$@!$@!@!$@!@!널값일때$@!$!@$!@$@!@!@!$@!$@!$");
+			
+			req.setAttribute("alldate", "all");
+			sLists = saleService.getPersonalSaleData(id);
+			
+		}
+		
+		//1주일 단위가 검색값일때
+		if(wterm!=null&&!wterm.equals("")) {
+		
+			System.out.println("!@$@!$@!@!$@!@!일주일$@!$!@$!@$@!@!@!$@!$@!$");
 
+			req.setAttribute("weekSearch", wterm);
+			
+			sLists = saleService.getWeekPersonalSaleData(id);
+		}
+		
+		//1,3,6개월 단위가 검색 값일때
+		String monthValue = "";	
+		
+		if(mterm!=null&&!mterm.equals("")) {
+			System.out.println("!@$@!$@!@!$@!@!개월데이터$@!$!@$!@$@!@!@!$@!$@!$");
+			if(mterm.equals("1")) {
+			
+				monthValue ="-1";
+			}
+		
+			if(mterm.equals("3")) {
+			
+				monthValue ="-3";
+			}
+		
+			if(mterm.equals("6")) {
+			
+				monthValue ="-6";
+			}
+		
+		HashMap<String, Object> monthRange = new HashMap<String, Object>();
+		
+		monthRange.put("id", id);
+		monthRange.put("monthValue", monthValue);		
+		
+		req.setAttribute("monthSearch", mterm);
+		sLists = saleService.getMonthPersonalSaleData(monthRange);
+		
+		}
+		
+		//인풋데이트
+		
+		if(startDate!=null&&!startDate.equals("")) {
+			
+			System.out.println("!@$@!$@!@!$@!@!인풋데이터$@!$!@$!@$@!@!@!$@!$@!$");
+			
+		HashMap<String, Object> inputDateRange = new HashMap<String, Object>();
+		
+		inputDateRange.put("id", id);
+		inputDateRange.put("startDate", startDate);
+		inputDateRange.put("endDate", endDate);
+		
+		System.out.println("^^^^^^^^^^^^^^^^^^");
+		System.out.println(startDate+22);
+		System.out.println("^^^^^^^^^^^^^^^^^^");
+		
+		
+			req.setAttribute("startd", startDate);
+			req.setAttribute("endd", endDate);
+			sLists =saleService.getInputDatePersonalSaleData(inputDateRange);
+		
+		}
+		
+				
 		// 주문정보 (마이페이지) 페이지 이동
-
+		
+		
 		return new ModelAndView("myPage/myOrder","sLists",sLists) ;
 	}
 	

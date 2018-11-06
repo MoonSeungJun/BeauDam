@@ -130,5 +130,11 @@ public class ViewDAO {
 		
 		return getBrandSearchProductData;
 	}
+	public SaleView	getBrandBestItems(String brand) {
+		SaleView getBrandBestItems = sessionTemplate.selectOne("beaudam.getBrandBestItems",brand);
+		return getBrandBestItems;
+	}
+	
+	
 	
 }

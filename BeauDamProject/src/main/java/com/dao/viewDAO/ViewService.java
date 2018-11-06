@@ -23,4 +23,5 @@ public interface ViewService {
 	ProductView getProductDataRowNum(int selectRowNum);
 	public int getBrandSearchProductDataCount(HashMap<String, Object> searchPack);
 	public List<ProductView> getBrandSearchProductData(HashMap<String, Object> searchPack);
+	SaleView	getBrandBestItems(String brand);
 }

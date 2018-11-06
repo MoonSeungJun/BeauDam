@@ -264,6 +264,11 @@ public class BeaudamController {
 
 		List<ProductView> searchProductList = viewService.getSearchProductDataList(ProductDataMap);
 
+		
+		
+		
+		
+		
 		String param = "?";
 		String listUrl = cp+"/productList.action";
 
@@ -312,6 +317,28 @@ public class BeaudamController {
 		
 	}
 	
+	@RequestMapping(value = "/bestItem.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView bestItem(HttpSession session,HttpServletRequest request)throws Exception {
+		
+		String ap = "Ap";
+		String etude = "Etu";
+		String innis= "Innis";
+		String nature = "Nature";
+		String face = "Face";
+		
+		
+//		List<SaleView> apList = viewService.get
+		
+		
+		
+		
+		
+		
+		
+		
+		return new ModelAndView("beaudam/bestItem","id",(String) session.getAttribute("id"));
+		
+	}
 	
 	
 
@@ -481,4 +508,19 @@ public class BeaudamController {
 		
 		return "redirect:/main.action";
 	}
+	
+	
+	/*static class ComparePriceAsc implements Comparator<ProductView>{
+		오름차순
+		@Override
+		public int compare(ProductView o1, ProductView o2) {
+			// TODO Auto-generated method stub
+			
+			return o1.getProduct_Price().compareTo(o2.getProduct_Price());
+		}
+		
+	}
+	*/
+	
+	
 }

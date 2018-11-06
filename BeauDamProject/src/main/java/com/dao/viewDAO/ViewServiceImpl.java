@@ -121,5 +121,11 @@ public class ViewServiceImpl implements ViewService {
 		return lists;
 	}
 
+	@Override
+	public SaleView getBrandBestItems(String brand) {
+		SaleView getBrandBestItem = dao.getBrandBestItems(brand);
+		
+		return getBrandBestItem;
+	}
 	
 }

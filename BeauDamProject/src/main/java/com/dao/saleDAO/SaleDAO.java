@@ -2,6 +2,8 @@ package com.dao.saleDAO;
 
 
 import java.util.*;
+
+import org.apache.commons.logging.impl.SLF4JLocationAwareLog;
 import org.mybatis.spring.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -92,6 +94,20 @@ public class SaleDAO {
 		return lists;
 	}
 	
+	public List<SaleView> getWeekPersonalSaleData(String id){
+		List<SaleView> view = sessionTemplate.selectList("beaudam.getWeekPersonalSaleData", id);
+		return view;	
+	}
 	
+	public List<SaleView> getMonthPersonalSaleData(HashMap<String, Object> monthRange){
+		List<SaleView> view = sessionTemplate.selectList("beaudam.getMonthPersonalSaleData", monthRange);
+		return view;	
+	}
+	
+	public List<SaleView> getInputDatePersonalSaleData(HashMap<String, Object> inputDateRange){
+		List<SaleView> view = sessionTemplate.selectList("beaudam.getInputDatePersonalSaleData", inputDateRange);
+		return view;	
+	}
 
+	
 }

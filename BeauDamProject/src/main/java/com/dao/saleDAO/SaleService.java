@@ -25,4 +25,9 @@ public interface SaleService {
     List<Sale_DateDTO> getAdminYearSales();
     List<Sale_DateDTO> getSalesYears();
     List<SaleView> getPersonalSaleData(String id);
+    List<SaleView> getWeekPersonalSaleData(String id);
+    List<SaleView> getMonthPersonalSaleData(HashMap<String, Object> monthRange);
+    List<SaleView> getInputDatePersonalSaleData(HashMap<String, Object> inputDateRange);
+   
+    
 }

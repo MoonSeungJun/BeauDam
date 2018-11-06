@@ -9,9 +9,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>My Beaudam</title>
 <link rel="stylesheet" href="./resources/css/myPage/myPage.css">
 <link rel="stylesheet" href="./resources/css/myPage/myOrder.css">
+
+<script type="text/javascript">
+
+	function sendIt() {
+		
+		var f = document.myOrderFrom;
+		
+		var startdate = f.startDate.value;
+		var enddate = f.endDate.value;
+		
+		startdate = startdate.trim();
+		enddate = enddate.trim();
+		
+		if(!startdate||!enddate){
+			alert("날짜를 입력해주세요");
+			f.startDate.focus();
+			return;
+		}else if(startdate.length>10||enddate.length>10){
+			alert("날짜를 확인하세요");
+			return;
+		}else{
+			f.action = "<%=cp%>/myOrder.action" ;
+			f.submit();
+		}
+	}
+
+</script>
+
 </head>
 <body>
 <jsp:include page="../beaudam/mainTop.jsp" />
@@ -42,7 +70,7 @@
 						</div>
 						<div>
 							<p class="point" style="font-size: 20px; color: black; font-weight: normal;">
-								0
+								${dto.point }
 							</p>
 						</div>
 						<div class="title">
@@ -50,7 +78,7 @@
 						</div>
 						<div>
 							<p class="" style="font-size: 20px; font-weight: normal;" >
-								0
+								${couponCount }
 							</p>
 						</div>
 						<div class="title">
@@ -58,7 +86,7 @@
 						</div>
 						<div>
 							<p class="" style="font-size: 20px; font-weight: normal;" >
-								Bronze
+								${dto.grade }
 							</p>
 						</div>
 					</div>
@@ -77,7 +105,7 @@
 							<li><a style="margin-bottom: 15px;">나의 정보</a>
 								<ul class="sub_lnb">
 									<li><a href="<%=cp%>/myCoupon.action" style="color: #9a9a9;">쿠폰조회</a></li>
-									<li><a href="<%=cp%>/myEdit.action">개인정보수정</a></li>
+									<li><a href="<%=cp%>/myInfo.action">개인정보수정</a></li>
 									<li><a href="<%=cp%>/myLeave.action">회원탈퇴</a></li>
 								</ul>
 							</li>
@@ -91,30 +119,32 @@
 					<!-- 마이페이지 INDEX -->
 					<div class="float_title" style="height: 65px;">
 						<span style=" font-size: 14pt; font-weight: bold; ">
-							나의 주문 현황
+							나의 주문 현황						
 						</span>
 					</div>
 					<div class="infobox" style="height: 252px; padding: 0;">
 						<div class="filter">
+							<form action="" method="post" name="myOrderFrom">
 							<ul style="overflow: hidden;">
-								<li><input type="radio" name="date"><label>1주일</label></li>
-								<li><input type="radio" name="date"><label>1개월</label></li>
-								<li><input type="radio" name="date"><label>3개월</label></li>
-								<li><input type="radio" name="date"><label>6개월</label></li>
+								<li><input type="radio" name="date" onclick="window.location.href='<%=cp%>/myOrder.action?weekTerm=1';"><label>1주일</label></li>
+								<li><input type="radio" name="date" onclick="window.location.href='<%=cp%>/myOrder.action?monthTerm=1';"><label>1개월</label></li>
+								<li><input type="radio" name="date" onclick="window.location.href='<%=cp%>/myOrder.action?monthTerm=3';"><label>3개월</label></li>
+								<li><input type="radio" name="date" onclick="window.location.href='<%=cp%>/myOrder.action?monthTerm=6';"><label>6개월</label></li>
 								<li>
 									<div class="calendar">
 										<div class="input_date">
-											<input type="date" style="border: none; text-align: center; color: #9a9a9a">
+											<input type="date" style="border: none; text-align: center; color: #9a9a9a" name="startDate">
 										</div>
 										<div class="input_date">
-											<input type="date" style="border: none; text-align: center; color: #9a9a9a">
+											<input type="date" style="border: none; text-align: center; color: #9a9a9a" name="endDate">
 										</div>
 									</div>
 								</li>
 								<li>
-									<button style="height: 32px; padding: 10px; width: 65px;">검색</button>
+									<button type="button" style="height: 32px; padding: 10px; width: 65px;" onclick="sendIt();">검색</button>
 								</li>
 							</ul>
+							</form>
 						</div>
 						<table style="width: 100%; height: 100px; margin-top: 10px;">
 								<tr>
@@ -146,11 +176,11 @@
 									<td>배송완료</td>
 								</tr>
 								<tr>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
+									<td>${payReady }</td>
+									<td>${payCompl }</td>
+									<td>${deliReady }</td>
+									<td>${deliIng }</td>
+									<td>${deliCompl }</td>
 								</tr>
 							</table>
 					</div>
@@ -158,7 +188,11 @@
 					<div class="mypage_orderSateWrapper" >
 						<div class="title_content" style="padding: 20px 18px;">
 							<!-- [나의 주문 내역 위에서] 선택한 1주일~6개월 혹은 선택한 기간을 표시  -->
-							<span style="display: block; font-size: 14pt; font-weight: bold">나의 주문 내역 </span>
+							<span style="display: block; font-size: 14pt; font-weight: bold">
+							<c:if test="${!empty alldate }">나의 주문 현황</c:if>
+							<c:if test="${!empty weekSearch }">지난1주일간 나의 주문 현황</c:if>
+							<c:if test="${!empty monthSearch }">지난${monthSearch}개월간 나의 주문 현황</c:if>
+							<c:if test="${!empty startd }">${startd }~${endd }사이의 나의 주문 현황</c:if> </span>
 						</div>
 						<hr style="margin: 0; padding: 0;">
 							<table class="mypage_orderSate"> 

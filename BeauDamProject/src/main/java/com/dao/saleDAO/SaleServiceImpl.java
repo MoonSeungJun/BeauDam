@@ -94,6 +94,25 @@ public class SaleServiceImpl implements SaleService {
 		List<Sale_DateDTO> lists = dao.getSalesYears();
 		return lists;
 	}
+
+	@Override
+	public List<SaleView> getWeekPersonalSaleData(String id) {
+		List<SaleView> view = dao.getWeekPersonalSaleData(id);
+		return view;
+	}
+
+	@Override
+	public List<SaleView> getMonthPersonalSaleData(HashMap<String, Object> monthRange) {
+		List<SaleView> view = dao.getMonthPersonalSaleData(monthRange);
+		return view;
+	}
+
+	@Override
+	public List<SaleView> getInputDatePersonalSaleData(HashMap<String, Object> inputDateRange) {
+		List<SaleView> view = dao.getInputDatePersonalSaleData(inputDateRange);
+		return view;
+	}
+
 	
 	
 
