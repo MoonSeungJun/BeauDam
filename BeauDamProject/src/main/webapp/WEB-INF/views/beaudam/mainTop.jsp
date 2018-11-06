@@ -68,14 +68,13 @@ html {
 	<!-- 상단 시작 -->
 	<div class="header">
 	    <div class="top">
-	        GRAND OPEN! 신규 회원 20% 즉시 할인 쿠폰 증정!
+	       	GRAND OPEN! 신규 회원 20% 즉시 할인 쿠폰 증정!
 	        <img src="<%=cp%>/resources/image/beaudam/main/top.png" onclick="$('.top').slideUp(400);" style="cursor:pointer">
 	    </div>
 	    <!-- 로고 영역 -->
 	    <div class="header_wrapper" style="height: 170px;">
 	        <div class="login">
 	            <ul>
-	            
 	                <li><a href="<%=cp %>/notification.action">고객센터</a></li>
 	          	<c:if test="${!empty id && id ne 'admin'}">
 	        		<li><a href="<%=cp%>/myPage.action">MY PAGE</a></li>
@@ -148,8 +147,7 @@ html {
 	                    <!-- 수정부분 -->
 	                    <ul class="search_icon">
 	                        <li><input type="button" value="GO!" onclick="searchIt();"></li>
-	                        <li><input type="text" class="form-control" id="usr" placeholder="에뛰드 틴트" name="searchValue" onkeypress="if(event.keyCode == 13) searchIt();"></li>
-	                    	
+	                        <li><input type="text" placeholder="에뛰드 틴트" name="searchValue" onkeypress="if(event.keyCode == 13) searchIt();" style="padding: 5px;"></li>
 	                    </ul>
 	                    <ul class="search_icon">
 	                        <li><a href="https://www.facebook.com/"><img src="<%=cp%>/resources/image/beaudam/main/icon_blog1.gif"></a></li>
@@ -224,11 +222,11 @@ html {
 	       	</form>
 	        </div>
 	    </div> 
-	        <a href="#">BEST ITEM</a>
+	        <a href="./bestItem.action">BEST ITEM</a>
 	        <a href="#newItem">NEW ITEM</a>
 	        <a href="./event.action">EVENT</a>
-	        <a href="#">LOOKS</a>
-	        <a href="#">뷰담 PICK'S</a>
+	        <a href="./look.action">LOOKS</a>
+	        <a href="./pick.action">뷰담 PICK'S</a>
 	        <a href="./sale.action">SALE</a>
 	    </div>
 	    </div>

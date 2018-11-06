@@ -12,6 +12,7 @@ session="true" pageEncoding="UTF-8"%>
 <title>list</title>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/beaudam/list.css">
+<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 .page {
@@ -53,6 +54,8 @@ session="true" pageEncoding="UTF-8"%>
 }
 </style>
 
+=======
+>>>>>>> 김해나브랜치
 <script type="text/javascript">
 
 // 	function searchBrand() {		
@@ -140,8 +143,6 @@ session="true" pageEncoding="UTF-8"%>
 
 
 </script>
-
-
 </head>
 <body>
 <jsp:include page="./mainTop.jsp" />
@@ -219,37 +220,17 @@ session="true" pageEncoding="UTF-8"%>
 	    </table>
 	    </form>
 	</div>
-	<div class="bestlist">
-		<ul>
-			<li>
-				<div>
-					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample1.jpg"></a>
-					<p style="font-size: 20px; color: #ff4d4d; font-family: 'YiSunShinDotumM';">BEST 01</p>
-					솔솔 말린 솔방울
-					<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">5,000원</p>
-				</div>
-			</li>
-			<li>
-				<div>
-					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample2.jpg"></a>
-					<p style="font-size: 20px; color: #ff4d4d; font-family: 'YiSunShinDotumM';">BEST 02</p>
-					솔솔 말린 솔방울
-					<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">5,000원</p>
-				</div>
-			</li>
-			<li>
-				<div>
-					<a href="<%=cp %>/productDetail.action"><img class="bestlist_img" alt="" src="<%=cp%>/resources/image/beaudam/main/sample3.jpg"></a>
-					<p style="font-size: 20px; color: #ff4d4d; font-family: 'YiSunShinDotumM';">BEST 03</p>
-	      				솔솔 말린 솔방울
-	      			<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">5,000원</p>
-	      		</div>
-	      	</li>
-		</ul>
-	</div> 
+
 	<div class="list"> 
 	
-	총 <font style="color: #ff4d4d">${count }개</font>의 상품이 있습니다.
+	${searchType}에 총 <font style="color: #ff4d4d">${count }개</font>의 상품이 있습니다.
+	<div class="filter" style=" height: 50px; border-bottom: 3px solid #ddd; border-top: 3px solid #ddd; margin: 20px 0;">
+		<ul style="margin-left: 50px;">
+			<li><a href="" >높은 가격순</a></li>
+			<li><a href="" >낮은 가격순</a></li>
+			<li><a href="" >이름순</a></li>
+		</ul>
+	</div>
 		<ul>
 			<c:forEach var="dto" items="${searchProductList }">
 			<li>
@@ -263,8 +244,7 @@ session="true" pageEncoding="UTF-8"%>
 			</c:forEach>
 		</ul>
 	</div>
-	<div class="pageing">
-		<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/pre.gif"></a>
+	<div class="pageing" style="text-align: center;">
 		<ol>
 			<c:if test="${!empty pageIndexList }">
 				${pageIndexList }
@@ -272,9 +252,7 @@ session="true" pageEncoding="UTF-8"%>
 			<c:if test="${empty pageIndexList }">
 				다른 상품을 검색해 주세요
 			</c:if>
-			
 		</ol>
-		<a><img alt="" src="<%=cp%>/resources/image/beaudam/productList/next.gif"></a>
 	</div>
 	<jsp:include page="./mainBottom.jsp" />
 	</body>

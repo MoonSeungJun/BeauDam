@@ -1,0 +1,114 @@
+@charset "UTF-8";
+@font-face {
+	font-family: 'designhouseOTFLight00';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/designhouseOTFLight00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'WONBatang';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONBatang.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face { 
+	font-family: 'YiSunShinDotumM'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+.title {
+	font-family: 'designhouseOTFLight00';
+	text-align: center;
+	font-weight: normal;
+	width: 1200px;
+    margin: 50px auto 0 auto;
+    letter-spacing: 0.1em;
+}
+
+.title h2 {
+	font-size: 40px;
+}
+
+.content {
+	margin: 50px auto;
+	width: 1380px;
+}
+
+.best {	
+	overflow: hidden;
+}
+
+.name {
+	text-align: center;
+	float: left;
+	margin: 20px;
+	width: 300px;
+	padding: 30px;
+	text-align: center;
+	height: 427px;
+}
+
+.name p {
+	font-family: 'YiSunShinDotumM';
+	font-size: 20px;
+	height: 380px;
+	line-height: 380px;	
+}
+
+.name img {
+	width: 100px;
+	/* border-radius: 50%; */
+}
+
+.product {
+	float: left;
+	margin: 20px;
+	width: 300px;
+	text-align: center;
+}
+
+.product img {
+	width: 250px;
+}
+
+.product p {
+	text-align: center;
+}
+
+.product .rank {
+	font-size: 20px;
+	margin-bottom: 5px;
+	color: #ee782f;
+	font-family: 'YiSunShinDotumM';
+	width: 82px;
+	height: 82px;
+	line-height: 82px;
+	border-radius: 50%;
+	border: 3px solid #ee782f;
+}
+
+.product .rankBand {
+	font-family: 'YiSunShinDotumM';
+}
+
+.product .rankName {
+	font-family: 'YiSunShinDotumM';
+	font-size: 23px;
+}
+
+.product .price {
+	font-family: 'YiSunShinDotumM';
+	color: #ee782f;
+	font-size: 20px;
+}
+
+
+

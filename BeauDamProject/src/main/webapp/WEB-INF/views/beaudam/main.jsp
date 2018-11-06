@@ -13,6 +13,7 @@
 <title>BeauDam</title>
 <link rel="stylesheet" href="<%=cp%>/resources/css/beaudam/main.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
@@ -130,17 +131,18 @@ $(document).ready(function() {
         </div>
         <!-- 슬라이드 이미지 끝 -->
         
+
         <!-- 베스트 상품 -->
         <div class="best_wrapper rolling_wrapper">
         <h3>BEST ITEM</h3>
-        	<div class="rolling_panel">
-				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_l.png"></a></div>-->
-				<ul class="rolling_panel">
+        	<div class="rolling_panel" style="width: 100%;">
+				<ul class="rolling_panel" style="width: 1400px;">
 				<c:forEach var="dto" items="${productList }">					
-					<li><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}"></a></li>
+					<li style="width: 280px;"><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}" ></a>
+						<div style="width: 270px;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>
+					</li>
 				</c:forEach>
 				</ul>
-				<!-- <div class="rolling_icon"><a href="javascript:void(0)" id="prev"><img src="image/header_event_r.png"></a></div>-->
 			</div>
         </div>
         <!-- 베스트 상품 끝 -->
@@ -170,17 +172,44 @@ $(document).ready(function() {
         </div>
         <!-- 이미지 레이아웃 끝 -->
         
-        <img  style="width: 100%" src="<%=cp%>/resources/image/beaudam/main/content_main04.jpg" >
+         <!-- 브랜드 소개 -->
+        <div class="brandwrapper" style="padding: 30px;">
+        	<h2 style="padding: 30px 30px 10px 30px; text-align: center; font-family: 'YiSunShinDotumM'; ">
+        		브랜드 모아, 모아! 잘나가는건 <span style="font-family: 'designhouseOTFLight00'; font-size: 35px;">뷰담</span>에 다있다!
+        	</h2>
+        	<h3 style="text-align: center; font-family: 'YiSunShinDotumM'; color: gray;">뷰담에서 더 쉽고 빠르게 쇼핑하자</h3>
+        	<div class="brand_grid" style="overflow: hidden; margin: 20px auto;">
+        		<div class="brandimg">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/apieu2.jpg">
+        		</div>
+        		<div class="brandimg">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/etude.jpg">
+        		</div>
+        		<div class="brandimg">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/face2.jpg">
+        		</div>
+        		<div class="brandimg">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/innisfree2.jpg">
+        		</div>
+        		<div class="brandimg">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/nature.gif">
+        		</div>
+        	</div>
+        </div>
         
         <!-- new item -->
         <div class="new_item" id="newItem">
-            <div class="new_item" style="  width: 1200px; margin: 0 auto;">
+            <div class="new_item" style="margin: 50px auto;">
             	<c:if test="${!empty newItemList }">
                 <h3>NEW ITEM </h3>
-                <ul class="new_item" style="width: 1200px;">
+                <ul class="new_item" style="width: 1266px;">
                 	<c:forEach var="dto" items="${newItemList }">
-                    <li><a href="${detailUrl }?code=${dto.code}">
-                    	<img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
+                    <li style="border-right: 1px solid #ddd; border-left: 1px solid #ddd;">
+                    	<div style="width: 420px;">
+	                  		<a href="${detailUrl }?code=${dto.code}">
+	                  		<img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
+					    	<div style="width: 400px; margin: 0 auto;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>   
+                    	</div >
                     </li>
                     </c:forEach>
                 </ul>
