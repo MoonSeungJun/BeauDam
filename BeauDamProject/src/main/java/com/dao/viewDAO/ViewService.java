@@ -19,6 +19,8 @@ public interface ViewService {
 	SaleView getOneSaleView(String sale_Code);
 	List<MemberView> getSearchMemberData(Member_InfoDTO dto);
 	List<ProductView> getSearchProductDataList(HashMap<String, Object> searchValuePack);
+	List<ProductView> getSearchProductList(HashMap map);
+	
 	int getSearchDataCount(HashMap<String, Object> searchCountPack);
 	ProductView getProductDataRowNum(int selectRowNum);
 	public int getBrandSearchProductDataCount(HashMap<String, Object> searchPack);

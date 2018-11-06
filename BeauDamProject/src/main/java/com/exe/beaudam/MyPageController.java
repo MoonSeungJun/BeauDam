@@ -356,27 +356,30 @@ public class MyPageController {
 	public ModelAndView myBasket(HttpServletRequest req) {
 
 		// 장바구니(마이페이지) 페이지 이동
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("id");
+		ModelAndView mav = new ModelAndView(); 
+		if(id == null || id.equals("")) {
+			mav.setViewName("beaudam/main");
+			return mav;
+		}	
 
-		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myPage/myBasket");
 
-		 HttpSession session = req.getSession();
-		 String id = (String) session.getAttribute("id");	
-
 		List<BasketDTO> lists = OtherService.getBasketData(id);
-		
+
 		Iterator<BasketDTO> it = lists.iterator();
 		List<BasketDTO> bList = new ArrayList<BasketDTO>();
-		
+
 		while(it.hasNext()) {
 			BasketDTO dto = it.next();			
-			
+
 			ProductView pView = productService.getOneProductData(dto.getCode());
-			
+
 			dto.setThumb_Img(pView.getThumb_Img());
 			bList.add(dto);
 		}	
-		
+
 		mav.addObject("bList", bList);
 
 		return mav;

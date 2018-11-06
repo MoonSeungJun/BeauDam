@@ -19,6 +19,12 @@ public class ViewDAO {
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) throws Exception {
 		this.sessionTemplate = sessionTemplate;		
 	}
+
+	
+	public List<ProductView> getSearchProductList(HashMap map) {
+		List<ProductView> view = sessionTemplate.selectList("beaudam.getSearchProductList", map);
+		return view;
+	}
 	
 	
 	public List<MemberView> getAllMemberData() {
