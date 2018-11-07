@@ -3,8 +3,7 @@ package com.dao.viewDAO;
 import java.util.*;
 import javax.annotation.*;
 import org.springframework.stereotype.*;
-import java.util.HashMap;
-import java.util.List;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.table.memberDTO.Member_InfoDTO;
@@ -18,6 +17,13 @@ public class ViewServiceImpl implements ViewService {
 
 	@Resource(name="viewDAO")
 	private ViewDAO dao;
+	
+
+	@Override
+	public List<ProductView> getSearchProductList(HashMap map) {
+		List<ProductView> view = dao.getSearchProductList(map);
+		return view;
+	}
 	
 	@Override
 	public List<MemberView> getAllMemberData() {

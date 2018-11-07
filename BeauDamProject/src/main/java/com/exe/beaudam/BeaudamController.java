@@ -19,10 +19,10 @@ import com.dao.otherDAO.OtherServiceImpl;
 import com.dao.productDAO.*;
 import com.dao.saleDAO.SaleServiceImpl;
 import com.dao.viewDAO.ViewService;
-import com.exe.util.MyUtil;
-
+import com.exe.util.*;
 import com.table.otherDTO.BasketDTO;
 import com.table.otherDTO.CouponDTO;
+import com.table.otherDTO.ReviewDTO;
 import com.view.view.*;
 
 /*
@@ -189,19 +189,94 @@ public class BeaudamController {
  	
    
 	@RequestMapping(value = "/searchProductList.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String brandSearchAjax(HttpServletRequest request) {
+	public String searchProductList(HttpServletRequest request) throws Exception {
 				
 		
-		String brand = request.getParameter("brand");
-		String value = request.getParameter("value");
-		String type = request.getParameter("type");
+		String[] brands = request.getParameterValues("brand");
+		String value = request.getParameter("searchValue");
+		String type = request.getParameter("searchType");
+		String pageNum = request.getParameter("pageNum");
+		String sort = request.getParameter("sort");
+		String cp = request.getContextPath();
+		MyUtil2 util = new MyUtil2();
+		List<String> list = new ArrayList<String>();		
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		String f = request.getParameter("params");		
+		if(value == null || value.equals("")) {
+			value = " ";
+		}else if(type == null || type.equals("")) {
+			type = " ";
+		}		
 		
-		System.out.println(brand + " " + value + "  " + type);
+		for(String str : brands) {			
+			list.add(str);			
+			System.out.println();
+			System.out.println(str);
+			System.out.println();
+		}		
 		
-		System.out.println(f);
+		map.put("list", list);
+		map.put("searchValue", value);
+		map.put("searchType", type);		
 		
+		int dataCount = viewService.getSearchDataCount(map);
+		
+		int numPerPage = 12;
+		int totalPage = util.getPageCount(numPerPage, dataCount);
+		int currentPage = 1;
+
+		if(pageNum != null && !pageNum.equals(""))
+			currentPage = Integer.parseInt(pageNum);	
+		
+		if(currentPage > totalPage) {
+			currentPage = totalPage;
+		}
+
+		int start = (currentPage-1)*numPerPage+1;
+		int end = currentPage*numPerPage;				
+		
+		if(sort==null||sort.equals("")) {
+			sort = "desc";
+		}
+		
+		map.put("start", start);
+		map.put("end", end);	
+		map.put("sort", sort);
+		
+		List<ProductView> sortList = viewService.getSearchProductDataList(map);	
+		
+		String param = "?";		
+		
+		String listUrl = cp+"/searchProductList.action";
+
+		if (!value.equals(" ")) {			
+			param += "value=" + value;		
+			listUrl = listUrl + param;				
+			
+		}
+		
+		if (!type.equals(" ")) {			
+			param += "type=" + type;
+			listUrl = listUrl + param;		
+
+		}		
+		
+		String pageIndexList = util.pageIndexList(currentPage, totalPage, listUrl);
+
+		String detailUrl = cp + "/productDetail.action?pageNum="+pageNum;
+
+		if (!param.equals("")) {
+			detailUrl = detailUrl + "&" + param;
+		}		
+		
+		request.setAttribute("searchProductList", sortList);
+		request.setAttribute("count", dataCount);
+		request.setAttribute("detailUrl", detailUrl);
+		request.setAttribute("pageIndexList", pageIndexList);
+		request.setAttribute("searchValue", value);
+		request.setAttribute("searchType", type);
+		request.setAttribute("brand", list);
+		request.setAttribute("pageNum", pageNum);
 		
 		return "beaudam/productList";
 		
@@ -217,7 +292,7 @@ public class BeaudamController {
 		String pageNum = request.getParameter("pageNum");
 		String searchType = request.getParameter("searchType");
 		String searchValue = request.getParameter("searchValue");				
-			
+		String sort = request.getParameter("sort");
 		HashMap<String, Object> DataCountMap = new HashMap<String, Object>();
 		HashMap<String, Object> ProductDataMap = new HashMap<String, Object>();
 		
@@ -254,21 +329,20 @@ public class BeaudamController {
 		}
 
 		int start = (currentPage-1)*numPerPage+1;
-		int end = currentPage*numPerPage;	    
-
-
-		ProductDataMap.put("searchValue", searchValue);
-		ProductDataMap.put("searchType", searchType);		   
+		int end = currentPage*numPerPage;	   	
+		
+		if(sort==null||sort.equals("")) {
+			sort = "desc";
+		}
+		
+		ProductDataMap.put("searchType", searchType);
+		ProductDataMap.put("searchValue", searchValue);	
 		ProductDataMap.put("start", start);
-		ProductDataMap.put("end", end);
+		ProductDataMap.put("end", end);	
+		ProductDataMap.put("sort", sort);
+		
+		List<ProductView> sortList = viewService.getSearchProductDataList(ProductDataMap);	
 
-
-		List<ProductView> searchProductList = viewService.getSearchProductDataList(ProductDataMap);
-
-		
-		
-		
-		
 		
 		String param = "?";
 		String listUrl = cp+"/productList.action";
@@ -305,16 +379,16 @@ public class BeaudamController {
 
 		if (!param.equals("")) {
 			detailUrl = detailUrl + "&" + param;
-		}
-		request.setAttribute("searchProductList", searchProductList);
+		}	
+		
+		request.setAttribute("searchProductList", sortList);
 		request.setAttribute("count", count);
 		request.setAttribute("detailUrl", detailUrl);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("searchType", searchType);
-		request.setAttribute("searchValue", searchValue);
+		request.setAttribute("searchValue", searchValue);		
 
-		return new ModelAndView("beaudam/productList", "id", (String) session.getAttribute("id"));
-		
+		return new ModelAndView("beaudam/productList", "id", (String) session.getAttribute("id"));		
 		
 	}
 	
@@ -405,16 +479,52 @@ public class BeaudamController {
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView productDetail(HttpSession session, HttpServletRequest req) {
 		
+		String id = (String)session.getAttribute("id");
+		String saleCode = "";
+		
 		ProductView detailData = productService.getOneProductData(req.getParameter("code"));
 		
 		int point = (int) ((int) detailData.getProduct_Price()*0.1);	
 		
 		req.setAttribute("dto", detailData);
+		req.setAttribute("saleCode", saleCode);
 		req.setAttribute("point", point);
 
-		// 상품상세 페이지 이동
-		return new ModelAndView("beaudam/productDetail", "id", (String) session.getAttribute("id"));
+		if(id!=null&&id.equals("")) {
+			
+			List<SaleView> saleData = saleService.getPersonalSaleData(id);
+			
+			
+			Iterator<SaleView> it = saleData.iterator();
+			
+			while(it.hasNext()) {
+				
+				SaleView sale = it.next();
+				
+				if(sale.getCode().equals(detailData.getCode())) {
+					
+					saleCode = sale.getSale_Code();
+					
+				}
+				
+			}
 
+		}
+		
+		return new ModelAndView("beaudam/productDetail", "id", id);
+		
+	}
+	
+	@RequestMapping(value = "/review.action", method = RequestMethod.POST)
+	public ModelAndView review(HttpServletRequest request,
+			ReviewDTO dto) {
+
+		dto.setSaleCode(request.getParameter("sale_Code"));
+		
+		otherService.insertReview(dto);		
+		
+		return new ModelAndView("beaudam/main");
+		
 	}
 	
 	/*@RequestMapping(value = "/bestItem.action", method = RequestMethod.GET)
@@ -557,7 +667,7 @@ public class BeaudamController {
 	
 		String basket_Num = req.getParameter("basket_Num");
 		String id = req.getParameter("id");
-		System.out.println(id);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("basket_Num", basket_Num);

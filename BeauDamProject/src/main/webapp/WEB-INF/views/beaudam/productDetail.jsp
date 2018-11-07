@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 session="true" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String cp = request.getContextPath();
 %>
@@ -11,8 +12,30 @@ session="true" pageEncoding="UTF-8"%>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  		<script type="text/javascript">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="<%=cp %>/resources/js/jquery-1.11.3.min.js"></script>
+<style>
+.star-input>.input,
+.star-input>.input>label:hover,
+.star-input>.input>input:focus+label,
+.star-input>.input>input:checked+label{display: inline-block;vertical-align:middle;background:url('<%=cp%>/resources/image/beaudam/productDetail/grade_img.png')no-repeat;}
+.star-input{display:inline-block; white-space:nowrap;width:225px;height:40px;line-height:30px;}
+.star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
+.star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
+star-input>.input.focus{outline:1px dotted #ddd;}
+.star-input>.input>label{width:30px;height:0;padding:28px 0 0 0;overflow: hidden;float:left;cursor: pointer;position: absolute;top: 0;left: 0;}
+.star-input>.input>label:hover,
+.star-input>.input>input:focus+label,
+.star-input>.input>input:checked+label{background-size: 150px;background-position: 0 bottom;}
+.star-input>.input>label:hover~label{background-image: none;}
+.star-input>.input>label[for="p1"]{width:30px;z-index:5;}
+.star-input>.input>label[for="p2"]{width:60px;z-index:4;}
+.star-input>.input>label[for="p3"]{width:90px;z-index:3;}
+.star-input>.input>label[for="p4"]{width:120px;z-index:2;}
+.star-input>.input>label[for="p5"]{width:150px;z-index:1;}
+.star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
+</style>
+		<script type="text/javascript">
   		
   			function amountminus() {
   				if($('#amount').val() == 0){
@@ -32,8 +55,7 @@ session="true" pageEncoding="UTF-8"%>
   				}
   				$('#amount').val(parseInt($('#amount').val())+1);
   				
-  				
-  				
+
   				change();
 			}
   		
@@ -48,6 +70,12 @@ session="true" pageEncoding="UTF-8"%>
   			
   			function insertBasket(code) {
   				var amount = parseInt($('#amount').val()); 				
+  				
+  				var id = '${id}';
+				if(id == ''){
+  					alert("로그인 하세요");
+  					return;
+  				}
   				
   				if(amount == 0){
   					alert("갯수를 확인해 주세요");
@@ -65,7 +93,11 @@ session="true" pageEncoding="UTF-8"%>
   					async:false,
   					dataType: "text",
   					complete: function() {
-						alert("장바구니에 담겼습니다.");
+						if(confirm('장바구니에 추가되었습니다. 장바구니로 이동 할까요?')==true){
+							window.location.href = "/beaudam/myBasket.action";
+						}else{
+							return;
+						}
 					}
   					
   				});
@@ -73,6 +105,12 @@ session="true" pageEncoding="UTF-8"%>
 			}
   			
 			function buyNow(code) {
+				
+				var id = '${id}';
+				if(id == ''){
+  					alert("로그인 하세요");
+  					return;
+  				}
 				
 				var amount = parseInt($('#amount').val()); 				
   				
@@ -97,8 +135,27 @@ session="true" pageEncoding="UTF-8"%>
   				});
 				
 			}
+			
+
+			function sendReview(){
+				
+				var f = document.reviewForm;
+				
+				f.action = "<%=cp%>/review.action";
+				f.submit();				
+				
+			}
+			
+			function clickStar(){
+				
+				var f = document.reviewForm;
+				
+				f.score.value = $("input[type='radio'][name='star']:checked").val();
+				
+			}
   		
   		</script>
+  		
     </head>
     <body>
     <jsp:include page="./mainTop.jsp" />
@@ -167,22 +224,42 @@ session="true" pageEncoding="UTF-8"%>
 	     					<!-- Modal content-->
 	            				<div class="modal-content" style="width: 500px;">
 	                				<div class="modal-header">
-				                    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+				                    	<button type="button" class="close" data-dismiss="modal" onclick="checkLogin();">&times;</button>
 				                    	<span class="modal-title" style="font-weight: bold">리뷰쓰기</span>
 	                				</div>
-		                			<div class="modal-body">
-		                    			<textarea style="width: 100%;" placeholder="리뷰를 작성해 주세요! 사랑합니다 고객님♡ "></textarea>
-		                			</div>
-	                				<div class="modal-footer">
-			                    		<button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f0ad4e; color: white; font-weight: bold; border: none;">등록하기</button>
-			                    		<button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; ">취소하기</button>
-	                				</div>
+	                				<form name="reviewForm" method="post">
+			                			<div class="modal-body">
+											<span class="star-input">
+												<span class="input" onchange="clickStar();">
+											    	<input type="radio" name="star" value="1" id="p1">
+											    	<label for="p1">1</label>
+											    	<input type="radio" name="star" value="2" id="p2">
+											    	<label for="p2">2</label>
+											    	<input type="radio" name="star" value="3" id="p3">
+											    	<label for="p3">3</label>
+											    	<input type="radio" name="star" value="4" id="p4">
+											    	<label for="p4">4</label>
+											    	<input type="radio" name="star" value="5" id="p5">
+											    	<label for="p5">5</label>
+											  	</span>
+											  	<input type="hidden" name="score"/>
+											</span>
+
+			                				<input type="text" name="sale_Code" value="${saleCode }"/>
+			                    			<textarea style="width: 100%;" name="review" placeholder="리뷰를 작성해 주세요! 사랑합니다 고객님♡ "></textarea>
+			                			</div>
+		                				<div class="modal-footer">
+				                    		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="sendReview();" style="background-color: #f0ad4e; color: white; font-weight: bold; border: none;">등록하기</button>
+				                    		<button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; ">취소하기</button>
+		                				</div>
+	                				</form>
 	            				</div>
 	       					</div>
 	    				</div>
 					</div>
         		</div>
         		<ul>
+        			<c:forEach var="dto" items="${lists }">
         			<li>
         				<div class="review_wrapper">
 	        				<div class="review_info">
@@ -196,19 +273,7 @@ session="true" pageEncoding="UTF-8"%>
         				</div>
         			</li>
         			<hr>
-        			<li>
-        				<div class="review_wrapper">
-	        				<div class="review_info">
-	        					<span>♥♥♥♥♡</span>
-	        					<span>kimhn93</span>
-	        					<span style="color: gray">2018.10.19</span>
-	        				</div>
-	        				<div class="review_data">
-	        					 열일하거라 기능팀 
-	        				</div>
-        				</div>
-        			</li>
-        			<hr>
+        			</c:forEach>
         		</ul>
         	</div>
         </div>

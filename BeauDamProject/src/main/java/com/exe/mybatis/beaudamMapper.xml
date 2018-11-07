@@ -74,7 +74,7 @@
 		
 		<!-- Review -->
 			<insert id="insertReview" parameterType="com.table.otherDTO.ReviewDTO">
-				insert into review (sale_code, score, review) values (#{sale_code}, #{score}, #{review})
+				insert into review (sale_Code, score, review) values (#{sale_Code}, #{score}, #{review})
 			</insert>
 			
 			
@@ -311,20 +311,64 @@
 		
 		<select id="getSearchProductDataList" resultType="com.view.view.ProductView" parameterType="map">
 			select *from (
-			select rownum rnum,data.*from (
-			select code, brand, product_Name,product_Price,type,category, thumb_Img from productView
-			where  product_Name like '%'||#{searchValue}||'%' and
-			       type like '%'||#{searchType}||'%'
-			order by code desc) data)
+				select rownum rnum,data.*from (
+					select code, brand, product_Name,product_Price,type,category, thumb_Img from productView
+					where  product_Name like '%'||#{searchValue}||'%' and
+			       	type like '%'||#{searchType}||'%'
+			       	<if test="list != null">
+			       	and brand in
+			       		<foreach item="list" index="index" collection="list" open="(" close=")" separator=",">
+			      			#{list}
+			      	 	</foreach>	
+			       </if>		       
+					order by 
+					<if test='sort.equals("desc")'>
+						product_Price desc
+					</if>
+					<if test='sort.equals("asc")'>
+						product_Price asc
+					</if>
+					<if test='sort.equals("product_Name")'>
+						product_Name asc
+					</if>			
+					)
+				data
+			)
+			<if test="start != null">
 			<![CDATA[
 	 			where rnum>=#{start} and rnum <=#{end} 
 			]]>	 
-		
+			</if>
 		</select>
-		<select id="getSearchDataCount" resultType="int" parameterType="map">
+		
+		<select id="getSearchProductList" resultType="com.view.view.ProductView" parameterType="map">
+			select *from (
+			select rownum rnum,data.*from (
+			select code, brand, product_Name,product_Price,type,category, thumb_Img from productView
+			where  product_Name like '%'||#{searchValue}||'%' and
+			       type like '%'||#{searchType}||'%'			       
+			        <if test="list != null">
+			       	and brand in
+			       		<foreach item="list" index="index" collection="list" open="(" close=")" separator=",">
+			      			#{list}
+			      	 	</foreach>	
+			       </if>
+			order by code desc) data)
+			<![CDATA[
+ 			where rnum>=#{start} and rnum <=#{end}
+			]]>	
+			
+		</select>
+		<select id="getSearchDataCount" resultType="int" parameterType="Map">
 			select nvl(count(*),0) from productView 
 			where  product_Name like '%'||#{searchValue}||'%' and
-			       type like '%'||#{searchType}||'%'		
+			       type like '%'||#{searchType}||'%'
+			       <if test="list != null">
+			       and brand in
+			       		<foreach item="list" index="index" collection="list" open="(" close=")" separator=",">
+			      			#{list}
+			      	 	</foreach>	
+			       </if>	       	
 		</select>
 
 		<select id="getProductDataRowNum" resultType="com.view.view.ProductView" parameterType="int">

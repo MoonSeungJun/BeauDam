@@ -2,7 +2,6 @@
 session="true" pageEncoding="UTF-8"%>
 <%
 	String cp = request.getContextPath();
-
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -15,6 +14,7 @@ session="true" pageEncoding="UTF-8"%>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
+
 .page {
 	background-color: fuchsia; 
 	margin: 30px auto 0 auto; 
@@ -57,27 +57,94 @@ session="true" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
 
-// 	function searchBrand() {		
-// 		var f= document.productListForm;		
-// 		var arrayBrand = new Array();
-// 		//each로 loop를 돌면서 checkbox의 check된 값을 가져와 담아준다.
-// 		$("input:checkbox[name=brand]:checked").each(function(){
-// 			arrayBrand.push($(this).val());
-// 		});		
-// 		if (arrayBrand==""){
-// 			alert("브랜드를 선택해주세요.")
-// 			return;
-// 		}
-<%-- 		f.action= "<%=cp%>/productList.action?arrayBrand="+arrayBrand; --%>
-// 		f.submit();	
-// 	}
+	function sort(sort) {
+		
+// 		var listUrl = "productList.action?";
+		var listUrl = window.location.pathname+"?";
+		alert(listUrl);
+		var sort = sort;
+		var page = $('#pageNum').val()+"&";
+		submit(listUrl,page,sort);
+	}
+
+
+</script>
+
+
+<script type="text/javascript">	
+function replaceAll(str, searchStr, replaceStr) {
+    return str.split(searchStr).join(replaceStr);
+}
+
+window.onload = function() {
+	var brand = '${brand}';		
+	brand = replaceAll(brand,"[","");
+	brand = replaceAll(brand,"]","");
+	var arr = new Array();	
+	arr = brand.split(",");	
+	
+	var temp = "";
+	var val = "";
+
+	for(var i=0;i<arr.length;i++){	
+		temp = arr[i].replace(",","");
+		temp = temp.trim();
+		
+		$('input:checkbox[name=brand]').each(function() {			
+			val = this.value;
+			if(val.toString() === temp.toString()){
+// 				alert(temp);
+	            this.checked = true; //checked 처리
+	            
+			}				     
+		 });
+	}	
+}
 	
 	
-	function searchBrand() {	
+	function submit(listUrl,page,sort) {
+		
+		var pageNum = page;
+		var listUrl = listUrl;
+		var sort = sort;
+		var value = $('#value').val();
+		var type = $('#type').val();		
+		if(pageNum == '&'){
+			pageNum = '1';
+		}
+		
+		if(!sort){
+			sort = '';
+		}		
+		var brand = new Array();
+		var f= document.productListForm;	
+		$("input:checkbox[name=brand]:checked").each(function(){
+			brand.push($(this).val());
+			
+		});
+		alert(type + value);
+		
+		if(type != ""){			
+			f.action= listUrl+"pageNum="+pageNum+"&sort="+sort+"&searchType="+type;						
+		}
+		
+		if(value != ""){			
+			f.action= listUrl+"pageNum="+pageNum+"&sort="+sort+"&searchValue="+value;				
+		}		
+		
+		
+		
+		f.submit();
+		
+		
+	}
+
+	function searchBrand() {
+		var pageNum = '1';
 		var brand = new Array();
 		var value = $('#value').val();
 		var type = $('#type').val();		
-		var f= document.productListForm;	
+		var f= document.productListForm;		
 		
 		if(!value){
 		 	value = '';
@@ -85,62 +152,33 @@ session="true" pageEncoding="UTF-8"%>
 		if(!type){
 			type = '';
 		}				
-		var params = {'brand':brand, 'value':value,'type':type};
+		
+		if(value == ' '){
+			value = '';
+		}
+		if(type == ' '){
+			type='';
+		}		
 		
 		$("input:checkbox[name=brand]:checked").each(function(){
-			brand.push($(this).val());			
+			brand.push($(this).val()+",");		
 		});		
 		if (brand==""){
-			alert("브랜드를 선택해주세요.")
+			alert("브랜드를 선택해주세요.");
 			return;
 		}		
-		f.action= "<%=cp%>/searchProductList.action";
+		
+		if(type != ""){			
+			f.action= "<%=cp%>/searchProductList.action?type="+type+"&pageNum=1";				
+		}
+		
+		if(value != ""){			
+			f.action= "<%=cp%>/searchProductList.action?value="+value+"&pageNum=1";				
+		}		
+		
 		f.submit();	
 		
-// 		$.ajax({	
-// 			type:'post',
-// 			url:'brandSearchAjax.action',
-// 			data: {'params':params},
-// 			dataType: 'json',
-// 			async:false,
-// 			success: function() {
-// 				alert("ok");
-// 			},
-// 			error: function() {
-// 				alert("no");
-				
-// 			}			
-			
-// 		});	
-// 		 var method = method || "post";	    
-// 		    var form = document.createElement("form");
-		    
-// 		    form.setAttribute("method", method);
-// 		    form.setAttribute("action", 'brandSearchAjax.action');
-
-// 		    for(var key in params) {
-// 		        var hiddenField = document.createElement("input");
-// 		        hiddenField.setAttribute("type", "hidden");
-// 		        hiddenField.setAttribute("name", key);
-// 		        hiddenField.setAttribute("value", params[key]);
-// 		        form.appendChild(hiddenField);
-// //	 	        alert(params[key]);
-// 		    }
-// 		    document.body.appendChild(form);
-// 		    form.submit();
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
 </script>
 </head>
 <body>
@@ -204,17 +242,19 @@ session="true" pageEncoding="UTF-8"%>
 	            	<input type="button" value="조회" onclick="searchBrand();" style="margin-right: 30px; border: none; padding: 5px;">
 	            	<input type="hidden" id="value" name="searchValue" value="${searchValue }">
 	            	<input type="hidden" id="type" name="searchType" value="${searchType }">
+	            	<input type="hidden" id="brand" name="brand" value="${brand }">
+	            	<input type="hidden" id="pageNum" name="pageNum" value="${pageNum }">
 	            </td>
 	        </tr>                
 	        <tr>
 	        	
-	            <td><input type="checkbox" name="brand" value="Nature Republic"> NATURE REPUBLIC</td>
-	            <td><input type="checkbox" name="brand" value="The Face Shop"> THE FACE SHOP</td>
-	            <td><input type="checkbox" name="brand" value="Apieu"> A'PIUE</td>
+	            <td><input type="checkbox" name="brand" id="Nature Republic" value="Nature Republic"> NATURE REPUBLIC</td>
+	            <td><input type="checkbox" name="brand" id="The Face Shop" value="The Face Shop"> THE FACE SHOP</td>
+	            <td><input type="checkbox" name="brand" id="Apieu" value="Apieu"> A'PIUE</td>
 	        </tr>
 	        <tr>
-	            <td><input type="checkbox" name="brand" value="Etude"> ETUDE HOUSE</td>
-	            <td><input type="checkbox" name="brand" value="Innisfree"> INNISFREE</td>	           
+	            <td><input type="checkbox" name="brand" value="Etude" id="Etude"> ETUDE HOUSE</td>
+	            <td><input type="checkbox" name="brand" value="Innisfree" id="Innisfree"> INNISFREE</td>	           
 	        </tr>	
 	    </table>
 	    </form>
@@ -225,18 +265,18 @@ session="true" pageEncoding="UTF-8"%>
 	${searchType}에 총 <font style="color: #ff4d4d">${count }개</font>의 상품이 있습니다.
 	<div class="filter" style=" height: 50px; border-bottom: 3px solid #ddd; border-top: 3px solid #ddd; margin: 20px 0;">
 		<ul style="margin-left: 50px;">
-			<li><a href="" >높은 가격순</a></li>
-			<li><a href="" >낮은 가격순</a></li>
-			<li><a href="" >이름순</a></li>
+			<li><a href="javascript:void(0);" onclick="sort('asc');">낮은 가격순</a></li>
+			<li><a href="javascript:void(0);" onclick="sort('desc');">높은 가격순</a></li>			
+			<li><a href="javascript:void(0);" onclick="sort('product_Name');" >이름순</a></li>
 		</ul>
 	</div>
-		<ul>
+		<ul id="listProduct">
 			<c:forEach var="dto" items="${searchProductList }">
 			<li>
 				<div class="listitem" id="${dto.brand }"style="display: block;">
 					<a href="${detailUrl }&code=${dto.code}"><img alt="" src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
 					<p style="color: gray;">${dto.brand }</p>
-					<p>${dto.product_Name }</p>
+					<p style="height: 40px;">${dto.product_Name }</p>
 					<p style="color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';">${dto.product_Price }원</p>
 				</div>
 			</li>			
