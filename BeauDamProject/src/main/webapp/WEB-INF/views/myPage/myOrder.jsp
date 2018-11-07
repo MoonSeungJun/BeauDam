@@ -217,7 +217,7 @@
 									<td>${dto.product_Price } (${dto.qty }개)</td>
 									<td class="bbb"><fmt:formatNumber value="${(dto.product_Price*dto.qty)*0.1 }" type="number"></fmt:formatNumber></td>
 <%-- 									<td class="bbb">${(dto.product_Price*dto.qty)*0.1 }</td> --%>
-									<td>${dto.product_Price*dto.qty }</td>
+									<td><fmt:formatNumber value="${dto.product_Price*dto.qty }" type="number"></fmt:formatNumber>원</td>
 									<td>${dto.delivery_Status }</td>
 								</tr>
 								</c:forEach>
