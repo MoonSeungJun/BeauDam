@@ -194,6 +194,7 @@ public class BeaudamController {
 		String value = request.getParameter("value");
 		String type = request.getParameter("type");
 		String pageNum = request.getParameter("pageNum");
+		String sort = request.getParameter("sort");
 		String cp = request.getContextPath();
 		MyUtil2 util = new MyUtil2();
 		List<String> list = new ArrayList<String>();		
@@ -203,7 +204,8 @@ public class BeaudamController {
 			value = " ";
 		}else if(type == null || type.equals("")) {
 			type = " ";
-		}				
+		}		
+		
 		for(String str : brands) {			
 			list.add(str);			
 		}		
@@ -226,17 +228,17 @@ public class BeaudamController {
 		}
 
 		int start = (currentPage-1)*numPerPage+1;
-		int end = currentPage*numPerPage;
+		int end = currentPage*numPerPage;				
+		
+		if(sort==null||sort.equals("")) {
+			sort = "desc";
+		}
 		
 		map.put("start", start);
-		map.put("end", end);
-
-		List<ProductView> view = viewService.getSearchProductList(map);		
-
-		map.clear();
-		map.put("searchValue", value);
-		map.put("searchType", type);
-		List<ProductView> sortList = viewService.getSearchProductDataList(map);
+		map.put("end", end);	
+		map.put("sort", sort);
+		
+		List<ProductView> sortList = viewService.getSearchProductDataList(map);	
 		
 		String param = "?";		
 		
@@ -254,18 +256,15 @@ public class BeaudamController {
 
 		}		
 		
-
 		String pageIndexList = util.pageIndexList(currentPage, totalPage, listUrl);
 
 		String detailUrl = cp + "/productDetail.action?pageNum="+pageNum;
 
 		if (!param.equals("")) {
 			detailUrl = detailUrl + "&" + param;
-		}			
+		}		
 		
-
-		request.setAttribute("sortList", sortList);
-		request.setAttribute("searchProductList", view);
+		request.setAttribute("searchProductList", sortList);
 		request.setAttribute("count", dataCount);
 		request.setAttribute("detailUrl", detailUrl);
 		request.setAttribute("pageIndexList", pageIndexList);
@@ -288,7 +287,7 @@ public class BeaudamController {
 		String pageNum = request.getParameter("pageNum");
 		String searchType = request.getParameter("searchType");
 		String searchValue = request.getParameter("searchValue");				
-			
+		String sort = request.getParameter("sort");
 		HashMap<String, Object> DataCountMap = new HashMap<String, Object>();
 		HashMap<String, Object> ProductDataMap = new HashMap<String, Object>();
 		
@@ -325,21 +324,19 @@ public class BeaudamController {
 		}
 
 		int start = (currentPage-1)*numPerPage+1;
-		int end = currentPage*numPerPage;	    
-
-
-		ProductDataMap.put("searchValue", searchValue);
-		ProductDataMap.put("searchType", searchType);		   
-		ProductDataMap.put("start", start);
-		ProductDataMap.put("end", end);
-
-
-		List<ProductView> searchProductList = viewService.getSearchProductDataList(ProductDataMap);
+		int end = currentPage*numPerPage;	   	
 		
-		ProductDataMap.clear();
-		ProductDataMap.put("searchValue", searchValue);
+		if(sort==null||sort.equals("")) {
+			sort = "desc";
+		}
+		
 		ProductDataMap.put("searchType", searchType);
-		List<ProductView> sortList = viewService.getSearchProductDataList(ProductDataMap);
+		ProductDataMap.put("searchValue", searchValue);	
+		ProductDataMap.put("start", start);
+		ProductDataMap.put("end", end);	
+		ProductDataMap.put("sort", sort);
+		
+		List<ProductView> sortList = viewService.getSearchProductDataList(ProductDataMap);	
 		
 		String param = "?";
 		String listUrl = cp+"/productList.action";
@@ -376,19 +373,16 @@ public class BeaudamController {
 
 		if (!param.equals("")) {
 			detailUrl = detailUrl + "&" + param;
-		}
+		}	
 		
-		
-		request.setAttribute("searchProductList", searchProductList);
+		request.setAttribute("searchProductList", sortList);
 		request.setAttribute("count", count);
 		request.setAttribute("detailUrl", detailUrl);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("searchType", searchType);
-		request.setAttribute("searchValue", searchValue);
-		request.setAttribute("sortList", sortList);
+		request.setAttribute("searchValue", searchValue);		
 
-		return new ModelAndView("beaudam/productList", "id", (String) session.getAttribute("id"));
-		
+		return new ModelAndView("beaudam/productList", "id", (String) session.getAttribute("id"));		
 		
 	}
 	

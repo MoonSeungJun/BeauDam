@@ -301,11 +301,23 @@
 		
 		<select id="getSearchProductDataList" resultType="com.view.view.ProductView" parameterType="map">
 			select *from (
-			select rownum rnum,data.*from (
-			select code, brand, product_Name,product_Price,type,category, thumb_Img from productView
-			where  product_Name like '%'||#{searchValue}||'%' and
-			       type like '%'||#{searchType}||'%'			       
-			order by code desc) data)
+				select rownum rnum,data.*from (
+					select code, brand, product_Name,product_Price,type,category, thumb_Img from productView
+					where  product_Name like '%'||#{searchValue}||'%' and
+			       	type like '%'||#{searchType}||'%'			       
+					order by 
+					<if test='sort.equals("desc")'>
+						product_Price desc
+					</if>
+					<if test='sort.equals("asc")'>
+						product_Price asc
+					</if>
+					<if test='sort.equals("product_Name")'>
+						product_Name asc
+					</if>				
+					)
+				data
+			)
 			<if test="start != null">
 			<![CDATA[
 	 			where rnum>=#{start} and rnum <=#{end} 

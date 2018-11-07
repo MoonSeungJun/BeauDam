@@ -56,108 +56,15 @@ session="true" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
 
-	function maxSorting() {
-		refreshList();
-		var lists = new Array();	
+	function sort(sort) {
 		
-		<c:forEach items="${sortList}" var="item">
-			lists.push({
-				'code':'${item.code}',
-				'price':'${item.product_Price}',
-				'brand':'${item.brand}',
-				'img':'${item.thumb_Img}',
-				'name':'${item.product_Name}'			
-			});				
-		</c:forEach>			
-		
-		lists.sort(function (a, b) { 
-			return Number(a.price) > Number(b.price) ? -1 : Number(a.price) < Number(b.price) ? 1 : 0;  
-		});
-		
-		viewList( lists );	
-		
+		var listUrl = "productList.action?"
+		var sort = sort;
+		var page = $('#pageNum').val()+"&";
+		submit(listUrl,page,sort);
 	}
 
-	function minSorting() {
-		refreshList();
-		var lists = new Array();	
-		
-		<c:forEach items="${sortList}" var="item">
-			lists.push({
-				'code':'${item.code}',
-				'price':'${item.product_Price}',
-				'brand':'${item.brand}',
-				'img':'${item.thumb_Img}',
-				'name':'${item.product_Name}'			
-			});	
-		</c:forEach>
-		
-		lists.sort(function (a, b) { 
-			return Number(a.price) < Number(b.price) ? -1 : Number(a.price) > Number(b.price) ? 1 : 0;  
-		});
-		viewList( lists );
-			
-	}
-	
-	function nameSorting() {
-		refreshList();
-		var lists = new Array();	
-		
-		<c:forEach items="${sortList}" var="item">
-			lists.push({
-				'code':'${item.code}',
-				'price':'${item.product_Price}',
-				'brand':'${item.brand}',
-				'img':'${item.thumb_Img}',
-				'name':'${item.product_Name}'			
-			});	
-			
-		</c:forEach>
-		
-		lists.sort( function(a, b) {
-			  var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-			  var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-			  if (nameA < nameB) {
-			    return -1;
-			  }
-			  if (nameA > nameB) {
-			    return 1;
-			  }
 
-			  // 이름이 같을 경우
-			  return 0;
-			});
-		viewList( lists );
-		
-	}
-	
-	function viewList( lists ) {
-		var data = "";
-		var brand = "";
-		var code = "";
-		var img = "";
-		var product_Name = "";
-		var product_Price = "";
-		
-		for(var i=0;i<lists.length;i++){
-			brand = lists[i].brand;
-			code = lists[i].code;
-			img = lists[i].img;
-			product_Name = lists[i].name;
-			product_Price = lists[i].price;
-			
-			
-			data += "<li><div class=\"listitem\" id=\""+brand+"\"style=\"display: block;\">"; 
-			data += "<a href=\"${detailUrl}&code="+code+"\"><img src=\"<%=cp %>/thumbImg/"+img+"\"></a>";
-			data += "<p style=\"color: gray;\">"+brand+"</p><p>"+product_Name+"</p>";		
-			data += "<p style=\"color: #ee782f; font-size: 20px; font-family: 'YiSunShinDotumM';\">"+product_Price+"원</p></div></li>"			
-		}
-		$("#listProduct").append(data);	
-	}
-	
-	function refreshList() {	
-		$('#listProduct').empty();		
-	}
 </script>
 
 
@@ -165,7 +72,6 @@ session="true" pageEncoding="UTF-8"%>
 function replaceAll(str, searchStr, replaceStr) {
     return str.split(searchStr).join(replaceStr);
 }
-
 
 window.onload = function() {
 	var brand = '${brand}';		
@@ -193,10 +99,20 @@ window.onload = function() {
 }
 	
 	
-	function submit(listUrl,page) {
+	function submit(listUrl,page,sort) {
 		
 		var pageNum = page;
 		var listUrl = listUrl;
+		var sort = sort;
+		var value = $('#value').val();
+		var type = $('#type').val();		
+		if(pageNum == '&'){
+			pageNum = '1';
+		}
+		
+		if(!sort){
+			sort = '';
+		}		
 		var brand = new Array();
 		var f= document.productListForm;	
 		$("input:checkbox[name=brand]:checked").each(function(){
@@ -204,7 +120,7 @@ window.onload = function() {
 			
 		});
 		
-		f.action= listUrl+"pageNum="+pageNum;	
+		f.action= listUrl+"pageNum="+pageNum+"&sort="+sort;	
 		f.submit();
 		
 		
@@ -336,9 +252,9 @@ window.onload = function() {
 	${searchType}에 총 <font style="color: #ff4d4d">${count }개</font>의 상품이 있습니다.
 	<div class="filter" style=" height: 50px; border-bottom: 3px solid #ddd; border-top: 3px solid #ddd; margin: 20px 0;">
 		<ul style="margin-left: 50px;">
-			<li><a href="javascript:void(0);" onclick="minSorting();">낮은 가격순</a></li>
-			<li><a href="javascript:void(0);" onclick="maxSorting();">높은 가격순</a></li>			
-			<li><a href="javascript:void(0);" onclick="nameSorting();" >이름순</a></li>
+			<li><a href="javascript:void(0);" onclick="sort('asc');">낮은 가격순</a></li>
+			<li><a href="javascript:void(0);" onclick="sort('desc');">높은 가격순</a></li>			
+			<li><a href="javascript:void(0);" onclick="sort('product_Name');" >이름순</a></li>
 		</ul>
 	</div>
 		<ul id="listProduct">
