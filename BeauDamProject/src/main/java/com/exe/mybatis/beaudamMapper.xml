@@ -74,7 +74,7 @@
 		
 		<!-- Review -->
 			<insert id="insertReview" parameterType="com.table.otherDTO.ReviewDTO">
-				insert into review (sale_code, score, review) values (#{sale_code}, #{score}, #{review})
+				insert into review (sale_Code, score, review) values (#{sale_Code}, #{score}, #{review})
 			</insert>
 			
 			
