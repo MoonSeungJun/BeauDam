@@ -12,48 +12,6 @@ session="true" pageEncoding="UTF-8"%>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/beaudam/list.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<style type="text/css">
-
-.page {
-	background-color: fuchsia; 
-	margin: 30px auto 0 auto; 
-	width: 960px;
-	text-align: center;
-}
-.page ol {
-	overflow: hidden;
-}
-.page li {
-	width: 34px;
-	height: 34px;
-	border: 1px solid gray;
-	float: left;
-}
-.pageing {
-	padding: 30px;
-	text-align: center;
-	margin-top: 30px;
-}
-.pageing ol {
-	overflow: hidden; 
-	display: inline-block; 
-	padding: 0;
-	margin: 0;
-	
-}
-.pageing li {
-	width: 34px;
-	height: 34px;
-	line-height: 34px;
-	float: left;
-	border: 1px solid #d7d5d5;
-}
-.pageing li:hover {
-       background-color: rgba( 237, 237, 237, 0.5 ); 
-}
-</style>
-
-
 <script type="text/javascript">
 
 	function maxSorting() {
