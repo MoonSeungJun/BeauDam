@@ -117,8 +117,18 @@ session="true" pageEncoding="UTF-8"%>
 			var f = document.reviewForm;
 			
 			f.score.value = 0;
+			
+			if($('#flag').val()==1){
+				
+				$('html, body').animate({
+					scrollTop: $('#aaa').offset().top
+					});
+				
+			}
 
 		});
+		
+
 
   			function amountminus() {
   				if($('#amount').val() == 0){
@@ -240,6 +250,8 @@ session="true" pageEncoding="UTF-8"%>
 			function sendReview(){
 				
 				var f = document.reviewForm;
+				
+				f.flag.value = 1;
 				
 				f.action = "<%=cp%>/review.action";
 				f.submit();				
@@ -366,10 +378,13 @@ session="true" pageEncoding="UTF-8"%>
 											<input type="text" name="searchValue" value="${searchValue }"/>
 											<input type="text" name="code" value="${dto.code }"/>
 			                				<input type="text" name="sale_Code" value="${saleCode }"/>
+			                				<input type="text" name="flag" id="flag"/>
 			                    			<textarea style="width: 100%;" name="review" placeholder="리뷰를 작성해 주세요! 사랑합니다 고객님♡ "></textarea>
 			                			</div>
 		                				<div class="modal-footer">
+				                    		<a href="#aaa">
 				                    		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="sendReview();" style="background-color: #f0ad4e; color: white; font-weight: bold; border: none;">등록하기</button>
+				                    		</a>
 				                    		<button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; ">취소하기</button>
 		                				</div>
 	                				</form>

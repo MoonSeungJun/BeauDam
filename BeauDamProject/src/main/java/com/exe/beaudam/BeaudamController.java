@@ -491,6 +491,7 @@ public class BeaudamController {
 		
 		int point = (int) ((int) detailData.getProduct_Price()*0.1);	
 		
+		request.setAttribute("flag", request.getParameter("flag"));
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("searchType", searchType);
 		request.setAttribute("searchValue", searchValue);
@@ -564,11 +565,11 @@ public class BeaudamController {
 		
 		if(searchType==null||searchType.equals("")) {
 			
-			return "redirect:/productDetail.action?pageNum=&"+pageNum+"&searchValue="+searchValue+"&code="+dto.getCode();
+			return "redirect:/productDetail.action?pageNum=&"+pageNum+"&searchValue="+searchValue+"&code="+dto.getCode()+"&flag=1";
 		
 		} else {
 			
-			return "redirect:/productDetail.action?+pageNum=&"+pageNum+"&searchType="+searchType+"&code="+dto.getCode();
+			return "redirect:/productDetail.action?+pageNum=&"+pageNum+"&searchType="+searchType+"&code="+dto.getCode()+"&flag=1";
 			
 		}
 		

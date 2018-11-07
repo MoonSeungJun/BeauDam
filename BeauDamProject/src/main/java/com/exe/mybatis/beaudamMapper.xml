@@ -438,9 +438,7 @@
 			where a.id = #{id} and a.code = b.code and a.basket_num = #{basket_Num}
 		</select>
 		
-		
-		
-		
+
 		<!-- Notification -->
 		
 		<select id="getNotificationMaxNum" resultType="int">
