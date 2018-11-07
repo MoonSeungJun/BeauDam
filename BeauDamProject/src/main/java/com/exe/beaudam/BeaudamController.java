@@ -397,23 +397,6 @@ public class BeaudamController {
 		String saleCode = "";
 		
 		ProductView detailData = productService.getOneProductData(req.getParameter("code"));
-		List<SaleView> saleData = saleService.getPersonalSaleData(id);
-		
-		
-		Iterator<SaleView> it = saleData.iterator();
-		
-		while(it.hasNext()) {
-			
-			SaleView sale = it.next();
-			
-			if(sale.getCode().equals(detailData.getCode())) {
-				
-				saleCode = sale.getSale_Code();
-				
-			}
-			
-		}
-
 		
 		int point = (int) ((int) detailData.getProduct_Price()*0.1);	
 		
@@ -421,9 +404,29 @@ public class BeaudamController {
 		req.setAttribute("saleCode", saleCode);
 		req.setAttribute("point", point);
 
-		// 상품상세 페이지 이동
-		return new ModelAndView("beaudam/productDetail", "id", id);
+		if(id!=null&&id.equals("")) {
+			
+			List<SaleView> saleData = saleService.getPersonalSaleData(id);
+			
+			
+			Iterator<SaleView> it = saleData.iterator();
+			
+			while(it.hasNext()) {
+				
+				SaleView sale = it.next();
+				
+				if(sale.getCode().equals(detailData.getCode())) {
+					
+					saleCode = sale.getSale_Code();
+					
+				}
+				
+			}
 
+		}
+		
+		return new ModelAndView("beaudam/productDetail", "id", id);
+		
 	}
 	
 	@RequestMapping(value = "/review.action", method = RequestMethod.POST)
