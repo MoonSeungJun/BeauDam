@@ -96,22 +96,76 @@ html {
 	            <div class="header_grid">
 	                <div class="header_event">
 	                    <p>GET IT!</p>
-	                    <ul>
-	                    	<li>
-		                    	<div>
-		                    		<ul>
-		                    			<li><img src="<%=cp%>/resources/image/beaudam/main/header_event_l.png" id="prev"></li>
-		                    		</ul>
-		                        </div>
-		                    </li>
-	                        <li>
+	                    <ul>	                    	
+		                    <li>
+		                    <div class="container" style="background-color: transparent;">
+
+									<div id="myCarousel" class="carousel slide"
+										data-ride="carousel" style="width: 25%; background-color: transparent;">
+										
+										<!-- Wrapper for slides -->
+										<div class="carousel-inner" style="background-color: white;">
+											<div class="item active " style="background-color: white;">
+												<ul>
+													<li><a href="<%=cp %>/productDetail.action?code=ae2001"><img class="list_logo" src="<%=cp%>/resources/image/beaudam/main/list_logo1.jpg"></a></li>
+		                       						<li>A'pieu<br/>미네랄 섀도우<br/>4,000원</li>
+		                       					</ul>
+											</div>
+
+											<div class="item" style="background-color: white;">
+												<ul>
+		                        					<li><a href="<%=cp %>/productDetail.action?code=al4002"><img class="list_logo" src="<%=cp%>/resources/image/beaudam/main/list_logo2.jpg"></a></li>
+		                       						<li>A'pieu<br/>컬러 립 스테인<br/>7,500원</li>
+		                        				</ul>
+											</div>
+
+											<div class="item" style="background-color: white;">
+												<ul>
+		                        					<li><a href="<%=cp %>/productDetail.action?code=fs2003"><img class="list_logo" src="<%=cp%>/resources/image/beaudam/main/list_logo3.jpg"></a></li>
+		                       						<li>THE FACE SHOP<br/>수분 쿠션 블러쉬<br/>12,000원</li>
+		                        				</ul>
+		                        			</div>
+										</div>
+
+										<!--  Left and right controls -->
+										<!-- <a class="left carousel-control" href="#myCarousel"
+											data-slide="prev" style="background-color: transparent;"> <span
+											class="glyphicon glyphicon-chevron-left" style="background-color: white;"></span> <span
+											class="sr-only" style="background-color: transparent;">Previous</span>
+										</a> <a class="right carousel-control" href="#myCarousel"
+											data-slide="next" style="background-color: transparent;"> <span
+											class="glyphicon glyphicon-chevron-right" style="background-color: white;"></span> <span
+											class="sr-only" style="background-color: transparent;">Next</span>
+										</a>   -->
+										
+										<!-- Controls -->
+										<!-- <a class="left carousel-control"
+											href="#carousel-example-generic" role="button"
+											data-slide="prev"> <span
+											class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+											<span class="sr-only">Previous</span>
+										</a> <a class="right carousel-control"
+											href="#carousel-example-generic" role="button"
+											data-slide="next"> <span
+											class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+											<span class="sr-only">Next</span>
+										</a> -->
+
+
+									</div>
+								</div>
+							</li>
+		                    
+		                    
+		                    
+	                        <%-- <li>
 	                        	<div id="slideshow">
 		                        	<ul>
 		                        		<li><img class="list_logo" src="<%=cp%>/resources/image/beaudam/main/list_logo1.jpg"></li>
 		                       			<li>A'pieu<br/>미네랄 섀도우<br/>4,000원</li>
 		                        	</ul>
 	                        	</div>
-	           				</li>
+	           				</li> --%>
 	           				<!-- 제이쿼리 수정 중 -->
 	           				<%-- <li>
 	                        	<div id="slideshow">
@@ -128,14 +182,7 @@ html {
 		                       			<li>THEFACESHOP<br/>수분 쿠션 스테인<br/>12,000원</li>
 		                        	</ul>
 	                        </div>
-	           				</li> --%>
-	                        <li>
-		                    	<div>
-		                    		<ul>
-		                    			<li><img src="<%=cp%>/resources/image/beaudam/main/header_event_r.png" id="next" ></li>
-		                    		</ul>
-		                        </div>
-		                    </li>
+	           				</li> --%>	                        
 	                    </ul>
 	                </div>
 	                <div class="header_logo">
