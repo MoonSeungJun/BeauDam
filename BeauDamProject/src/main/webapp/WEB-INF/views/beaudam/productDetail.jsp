@@ -7,36 +7,119 @@ session="true" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
     <head>
-    	<meta charset="utf-8">
-        <link rel="stylesheet" href="./resources/css/beaudam/productDetail.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="<%=cp %>/resources/js/jquery-1.11.3.min.js"></script>
-<style>
-.star-input>.input,
-.star-input>.input>label:hover,
-.star-input>.input>input:focus+label,
-.star-input>.input>input:checked+label{display: inline-block;vertical-align:middle;background:url('<%=cp%>/resources/image/beaudam/productDetail/grade_img.png')no-repeat;}
-.star-input{display:inline-block; white-space:nowrap;width:225px;height:40px;line-height:30px;}
-.star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
-.star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
-star-input>.input.focus{outline:1px dotted #ddd;}
-.star-input>.input>label{width:30px;height:0;padding:28px 0 0 0;overflow: hidden;float:left;cursor: pointer;position: absolute;top: 0;left: 0;}
-.star-input>.input>label:hover,
-.star-input>.input>input:focus+label,
-.star-input>.input>input:checked+label{background-size: 150px;background-position: 0 bottom;}
-.star-input>.input>label:hover~label{background-image: none;}
-.star-input>.input>label[for="p1"]{width:30px;z-index:5;}
-.star-input>.input>label[for="p2"]{width:60px;z-index:4;}
-.star-input>.input>label[for="p3"]{width:90px;z-index:3;}
-.star-input>.input>label[for="p4"]{width:120px;z-index:2;}
-.star-input>.input>label[for="p5"]{width:150px;z-index:1;}
-.star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
-</style>
-		<script type="text/javascript">
-  		
+   	<meta charset="utf-8">
+    <link rel="stylesheet" href="./resources/css/beaudam/productDetail.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="<%=cp %>/resources/js/jquery-1.11.3.min.js"></script>
+	<style>
+		.star-input>.input,
+		.star-input>.input>label:hover,
+		.star-input>.input>input:focus+label,
+		.star-input>.input>input:checked+label {
+			display: inline-block;
+			vertical-align: middle;
+			background:
+				url('<%=cp%>/resources/image/beaudam/productDetail/grade_img.png')
+				no-repeat;
+		}
+		
+		.star-input {
+			display: inline-block;
+			white-space: nowrap;
+			width: 225px;
+			height: 40px;
+			line-height: 30px;
+		}
+		
+		.star-input>.input {
+			display: inline-block;
+			width: 150px;
+			background-size: 150px;
+			height: 28px;
+			white-space: nowrap;
+			overflow: hidden;
+			position: relative;
+		}
+		
+		.star-input>.input>input {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			opacity: 0;
+		}
+		
+		star-input>.input.focus {
+			outline: 1px dotted #ddd;
+		}
+		
+		.star-input>.input>label {
+			width: 30px;
+			height: 0;
+			padding: 28px 0 0 0;
+			overflow: hidden;
+			float: left;
+			cursor: pointer;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		
+		.star-input>.input>label:hover, .star-input>.input>input:focus+label,
+			.star-input>.input>input:checked+label {
+			background-size: 150px;
+			background-position: 0 bottom;
+		}
+		
+		.star-input>.input>label:hover ~label{
+			background-image: none;
+		}
+		
+		.star-input>.input>label[for="p1"] {
+			width: 30px;
+			z-index: 5;
+		}
+		
+		.star-input>.input>label[for="p2"] {
+			width: 60px;
+			z-index: 4;
+		}
+		
+		.star-input>.input>label[for="p3"] {
+			width: 90px;
+			z-index: 3;
+		}
+		
+		.star-input>.input>label[for="p4"] {
+			width: 120px;
+			z-index: 2;
+		}
+		
+		.star-input>.input>label[for="p5"] {
+			width: 150px;
+			z-index: 1;
+		}
+		
+		.star-input>output {
+			display: inline-block;
+			width: 60px;
+			font-size: 18px;
+			text-align: right;
+			vertical-align: middle;
+		}
+	</style>
+	<script type="text/javascript">
+		
+		$(document).ready(function () {
+			
+			var f = document.reviewForm;
+			
+			f.score.value = 0;
+
+		});
+
   			function amountminus() {
   				if($('#amount').val() == 0){
   					alert("수량은 0개 이상이어야 합니다.");
@@ -136,6 +219,23 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 				
 			}
 			
+			function checkLogin(){
+				
+				alert("로그인을 한 경우에 리뷰작성이 가능합니다!");
+				
+				var popupX = (window.screen.width/2)-(815/2);
+				var popupY= (window.screen.height/2)-648;
+				
+				window.open("<%=cp%>/login.action?popup=1",
+						'로그인',
+						'width=815, height=648, toolbar=no, menubar=no, scrollbars=no, resizable=no, left='
+						+ popupX 
+						+ ', top=' + popupY 
+						+ ', screenX=' + popupX 
+						+ ', screenY= '+ popupY);
+				
+			}
+			
 
 			function sendReview(){
 				
@@ -153,8 +253,10 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 				f.score.value = $("input[type='radio'][name='star']:checked").val();
 				
 			}
+			
+			
   		
-  		</script>
+  	</script>
   		
     </head>
     <body>
@@ -214,17 +316,32 @@ star-input>.input.focus{outline:1px dotted #ddd;}
         <!-- 리뷰 댓글 -->
         <div class="review">
         	<div class="review_container">
-        		<div class="review_button" style="margin-top: 20px;">
+        		<div class="review_button" id="aaa" style="margin-top: 20px;">
 		        	<p>뷰담 고객 리뷰</p>
 		        	<div class="container">
-					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="border: none; float: right; background-color: #f0ad4e; width: 80px; padding: 5px; font-size: 13px; " >리뷰쓰기</button>
+		        	<c:if test="${empty id }">
+		        	    <button type="button" 
+			        		class="btn btn-info btn-lg" onclick="checkLogin();"
+			        		style="border: none; float: right; background-color: #f0ad4e; width: 80px; padding: 5px; font-size: 13px; " >
+			        		리뷰쓰기
+			        	</button>
+		        	</c:if>
+		        	<c:if test="${!empty id }">
+			        	<button type="button" 
+			        		class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" 
+			        		style="border: none; float: right; background-color: #f0ad4e; width: 80px; padding: 5px; font-size: 13px; " >
+			        		리뷰쓰기
+			        	</button>
+		        	</c:if>
+		  
+					
   						<!-- Modal -->
 	    				<div class="modal fade" id="myModal" role="dialog">
 	       					<div class="modal-dialog">
 	     					<!-- Modal content-->
 	            				<div class="modal-content" style="width: 500px;">
 	                				<div class="modal-header">
-				                    	<button type="button" class="close" data-dismiss="modal" onclick="checkLogin();">&times;</button>
+				                    	<button type="button" class="close" data-dismiss="modal">&times;</button>
 				                    	<span class="modal-title" style="font-weight: bold">리뷰쓰기</span>
 	                				</div>
 	                				<form name="reviewForm" method="post">
@@ -244,7 +361,10 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 											  	</span>
 											  	<input type="hidden" name="score"/>
 											</span>
-
+											<input type="text" name="pageNum" value="${pageNum }"/>
+											<input type="text" name="searchType" value="${searchType }"/>
+											<input type="text" name="searchValue" value="${searchValue }"/>
+											<input type="text" name="code" value="${dto.code }"/>
 			                				<input type="text" name="sale_Code" value="${saleCode }"/>
 			                    			<textarea style="width: 100%;" name="review" placeholder="리뷰를 작성해 주세요! 사랑합니다 고객님♡ "></textarea>
 			                			</div>
@@ -259,16 +379,34 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 					</div>
         		</div>
         		<ul>
-        			<c:forEach var="dto" items="${lists }">
+        			<c:forEach var="dto" items="${review }">
         			<li>
         				<div class="review_wrapper">
 	        				<div class="review_info">
-	        					<span>♥♥♥♥♡</span>
-	        					<span>kimhn93</span>
-	        					<span style="color: gray">2018.10.19</span>
+	        					<c:choose>
+	        						<c:when test="${dto.score==0 }">
+	        							<span>
+	        								<c:forEach var="i" begin="0" end="4">
+	        									<img src="<%=cp%>/resources/image/beaudam/productDetail/lineheart.png" width="10"/>
+	        								</c:forEach>
+	        							</span>
+	        						</c:when>       						
+	        						<c:otherwise>
+	        							<span>
+	        								<c:forEach var="j" begin="0" end="${dto.score -1 }">
+	        									<img src="<%=cp%>/resources/image/beaudam/productDetail/heart.png" width="10"/>
+	        								</c:forEach>
+	        								<c:forEach var="k" begin="1" end="${5 - dto.score }">
+	        									<img src="<%=cp%>/resources/image/beaudam/productDetail/lineheart.png" width="10"/>
+	        								</c:forEach>
+	        							</span>
+	        						</c:otherwise>
+	        					</c:choose>
+	        					<span>${dto.id }</span>
+	        					<span style="color: gray">${dto.created }</span>
 	        				</div>
 	        				<div class="review_data">
-	        					 뷰담 화이팅 
+	        					 ${dto.review }
 	        				</div>
         				</div>
         			</li>

@@ -107,8 +107,8 @@ public class OtherServiceImpl implements OtherService {
 	}
 
 	@Override
-	public List<ReviewDTO> getReviewData(String sale_Code) {
-		List<ReviewDTO> lists = dao.getReviewData(sale_Code);		
+	public List<ReviewDTO> getReviewData(String code) {
+		List<ReviewDTO> lists = dao.getReviewData(code);		
 		return lists;
 	}
 

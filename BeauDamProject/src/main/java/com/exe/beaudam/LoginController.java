@@ -64,97 +64,105 @@ import com.view.view.MemberView;
 @Controller("LoginController")
 public class LoginController {
 
-	
 	/* NaverLoginBO */
-	@Resource(name="naverLoginBO")
+	@Resource(name = "naverLoginBO")
 	private NaverLoginBO naverLoginBO;
-	
-	@Resource(name="memberService")
+
+	@Resource(name = "memberService")
 	private MemberServiceImpl memberService;
-	
-	@Resource(name="otherService")
+
+	@Resource(name = "otherService")
 	private OtherServiceImpl otherService;
-	
-	@Resource(name="viewService")
+
+	@Resource(name = "viewService")
 	private ViewServiceImpl viewService;
-	
-	
+
 	// ********************** Beaudam Page **********************
-	
+
 	@RequestMapping(value = "/login.action", method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request, HttpSession session) {
-		
+
 		/* 네아로 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
-        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-        
-        /* 생성한 인증 URL을 View로 전달 */
-        return new ModelAndView("beaudam/login", "url", naverAuthUrl);
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		request.setAttribute("popup", request.getParameter("popup"));
+		/* 생성한 인증 URL을 View로 전달 */
+		return new ModelAndView("beaudam/login", "url", naverAuthUrl);
 	}
-	
-	@RequestMapping(value="/login_ok.action", method = {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView login_ok(HttpServletRequest request, HttpSession session) {
-		
+
+	@RequestMapping(value = "/login_ok.action", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView login_ok(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws Exception {
+
 		// 로그인 정보 받아오기
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("password");
-		
+		String popup = request.getParameter("popup");
+
 		// 입력한 id 조회
-		
+
 		MemberView dto = viewService.getOneMemberData(id);
-		
-		
-		if(dto == null) {
-			
+
+		if (dto == null) {
+
 			String errormessage = "존재하지 않는 아이디입니다";
 
 			return new ModelAndView("beaudam/login", "message", errormessage);
-			
+
 		}
-		
+
 		int leave_ck = dto.getIsLeave();
-		
-		if(leave_ck ==1) {
+
+		if (leave_ck == 1) {
 			String errormessage2 = "탈퇴한 회원입니다.";
-			
+
 			return new ModelAndView("beaudam/login", "message", errormessage2);
 		}
-		
-		
+
 		String ck_pwd = dto.getPwd();
-		
-		if(pwd.equals(ck_pwd)) {
-			
+
+		if (pwd.equals(ck_pwd)) {
+
 			session.setAttribute("id", id);
 
-			return new ModelAndView("redirect:/main.action");
-			
-		}else {
-		
-			String errormessage = "잘못된 비밀번호입니다";
+			if (popup == "1" || popup.equals("1")) {
 
-			return new ModelAndView("beaudam/login", "message", errormessage);
-		
+				response.setContentType("text/html; charset=UTF-8");
+
+				PrintWriter out = response.getWriter();
+
+				out.println("<script type='text/javascript'>");
+				out.println("opener.parent.location.reload();");
+				out.println("window.close();");
+				out.println("</script>");
+				out.flush();
+
+			} else {
+
+				return new ModelAndView("redirect:/main.action");
+
+			}
 		}
-		
-		
-		
-		
-		
+
+		String errormessage = "잘못된 비밀번호입니다";
+
+		return new ModelAndView("beaudam/login", "message", errormessage);
+
 	}
-	
+
 	@RequestMapping(value = "/callback.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
+	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session)
+			throws IOException, ParseException {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
-		
+
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
-		
+
 		JSONParser parser = new JSONParser();
-		
+
 		JSONObject obj1 = (JSONObject) parser.parse(apiResult);
-			
-		JSONObject obj2 =  (JSONObject) obj1.get("response");
-		
+
+		JSONObject obj2 = (JSONObject) obj1.get("response");
+
 		String id = (String) obj2.get("id");
 		String nickname = (String) obj2.get("nickname");
 		String gender = (String) obj2.get("gender");
@@ -164,54 +172,53 @@ public class LoginController {
 
 		session.setAttribute("id", id);
 		session.setAttribute("nickname", nickname);
-		
+
 		return new ModelAndView("redirect:/main.action");
 	}
-	
-	@RequestMapping(value="/searchIdPwd.action", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/searchIdPwd.action", method = RequestMethod.GET)
 	public ModelAndView searchIdPwd() {
-		
+
 		return new ModelAndView("beaudam/searchIdPwd");
-		
+
 	}
-	
-	@RequestMapping(value="/searchId.action", method = {RequestMethod.GET ,RequestMethod.POST})
+
+	@RequestMapping(value = "/searchId.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchId(HttpServletRequest request) {
-		
+
 		HashMap<String, Object> nameBirth = new HashMap<String, Object>();
-		
+
 		nameBirth.put("name", request.getParameter("name"));
 		nameBirth.put("birth", request.getParameter("birth"));
 
 		String resultId = viewService.getSearchId(nameBirth);
-		
-		return new ModelAndView("beaudam/searchId","resultId",resultId);
-		
+
+		return new ModelAndView("beaudam/searchId", "resultId", resultId);
+
 	}
-	
-	@RequestMapping(value="/searchPwd.action", method = {RequestMethod.GET ,RequestMethod.POST})
+
+	@RequestMapping(value = "/searchPwd.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchPwd(HttpServletRequest request) {
-		
+
 		HashMap<String, Object> nameEmail = new HashMap<String, Object>();
-		
+
 		nameEmail.put("id", request.getParameter("searchId"));
 		nameEmail.put("name", request.getParameter("name"));
 		nameEmail.put("email", request.getParameter("email"));
-		
-		String resultPwd = viewService.getSearchPwd(nameEmail);		
-		
-		return new ModelAndView("beaudam/searchPwd","resultPwd",resultPwd);
-		
-	}	
-	
+
+		String resultPwd = viewService.getSearchPwd(nameEmail);
+
+		return new ModelAndView("beaudam/searchPwd", "resultPwd", resultPwd);
+
+	}
+
 	@RequestMapping(value = "/logout.action", method = RequestMethod.GET)
-	public void logout(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		response.setContentType("text/html; charset=UTF-8");
-		
+
 		PrintWriter out = response.getWriter();
-		
+
 		out.println("<script type='text/javascript'>");
 		out.println("var result=confirm('로그아웃하시겠습니까?');");
 		out.println("if(result==true){");
@@ -223,16 +230,15 @@ public class LoginController {
 		out.flush();
 
 	}
-	
-	@RequestMapping(value="/logout_ok.action", method = RequestMethod.GET)
-	public ModelAndView logout_ok(HttpServletRequest request,
-			HttpSession session) {
-		
+
+	@RequestMapping(value = "/logout_ok.action", method = RequestMethod.GET)
+	public ModelAndView logout_ok(HttpServletRequest request, HttpSession session) {
+
 		session.removeAttribute("id");
 		return new ModelAndView("redirect:/main.action");
-		
+
 	}
-	
+
 	@RequestMapping(value = "/newTerm.action", method = RequestMethod.GET)
 	public ModelAndView newTerm() {
 
@@ -241,100 +247,94 @@ public class LoginController {
 
 	}
 
-	
-	@RequestMapping(value = "/newUser.action", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/newUser.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView newUser(HttpServletRequest request) {
-		
+
 		String newId = request.getParameter("newId");
 
 		// 회원가입 페이지 이동
-		return new ModelAndView("beaudam/newUser","newId",newId);
+		return new ModelAndView("beaudam/newUser", "newId", newId);
 
 	}
 
-	
-	@RequestMapping(value="/checkId.action", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/checkId.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView checkId(HttpServletRequest request) {
-		
+
 		String flag = "false";
-		
+
 		String ck_id = request.getParameter("ck_id");
-		
+
 		MemberView dto = viewService.getOneMemberData(ck_id);
-		
-		if(dto!=null) 
+
+		if (dto != null)
 			flag = "true";
-		
+
 		request.setAttribute("ck_id", ck_id);
 		request.setAttribute("flag", flag);
-		
+
 		return new ModelAndView("beaudam/checkId");
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/newUser_ok.action", method = RequestMethod.POST)
-	public ModelAndView newUser_ok(HttpServletRequest request,
-			MemberDTO mDto, 
-			Member_InfoDTO mIdto, 
-			Member_GradeDTO mGdto, 
-			CouponDTO cDto) throws Exception {
-		
-		//member - member_Info - member_grade - coupon
-		
+	public ModelAndView newUser_ok(HttpServletRequest request, MemberDTO mDto, Member_InfoDTO mIdto,
+			Member_GradeDTO mGdto, CouponDTO cDto) throws Exception {
+
+		// member - member_Info - member_grade - coupon
+
 		mDto.setNickname(request.getParameter("nickName"));
-		
+
 		memberService.insertMember(mDto);
-		
+
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
-		
+
 		String birth = year + "-" + month + "-" + day;
-		
+
 		mIdto.setBirth(birth);
-		
+
 		String hp1 = request.getParameter("hp1");
 		String hp2 = request.getParameter("hp2");
 		String hp3 = request.getParameter("hp3");
-		
+
 		String cellphone = hp1 + "-" + hp2 + "-" + hp3;
-		
+
 		mIdto.setCellphone(cellphone);
-		
+
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
-		
+
 		String email = email1 + "@" + email2;
-		
+
 		mIdto.setEmail(email);
-		
+
 		cDto.setCoupon("20%");
-		
+
 		String phone1 = request.getParameter("phone1");
-		
-		if(!phone1.equals("0")) {
+
+		if (!phone1.equals("0")) {
 
 			String phone2 = request.getParameter("phone2");
 			String phone3 = request.getParameter("phone3");
-			
+
 			String tel = phone1 + "-" + phone2 + "-" + phone3;
-		
+
 			mIdto.setTel(tel);
-			
+
 			memberService.insertMemberInfo(mIdto);
-			
-		}else {
+
+		} else {
 
 			memberService.insertMemberInfoEX(mIdto);
-			
+
 		}
 
 		memberService.insertMemberGrade(mGdto);
 		otherService.insertCoupon(cDto);
-		
+
 		return new ModelAndView("redirect:/login.action");
-		
+
 	}
 
 }

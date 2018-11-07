@@ -1,7 +1,5 @@
 package com.exe.beaudam;
 
-
-
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -23,6 +21,7 @@ import com.table.otherDTO.BasketDTO;
 import com.table.otherDTO.CouponDTO;
 import com.table.otherDTO.ReviewDTO;
 import com.view.view.*;
+
 
 /*
  *  1. method mapping을 다 기본적으로 get, post 모두 설정해뒀음
@@ -394,23 +393,32 @@ public class BeaudamController {
 	
 
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView productDetail(HttpSession session, HttpServletRequest req) {
+	public ModelAndView productDetail(HttpSession session, HttpServletRequest request) {
 		
 		String id = (String)session.getAttribute("id");
+		String code = request.getParameter("code");
 		String saleCode = "";
+		String pageNum = request.getParameter("pageNum");
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		System.out.println("pageNum=" + pageNum);
+		System.out.println("searchType=" + searchType);
 		
-		ProductView detailData = productService.getOneProductData(req.getParameter("code"));
+		ProductView detailData = productService.getOneProductData(code);
+		List<ReviewDTO> reviewData = otherService.getReviewData(code);
 		
 		int point = (int) ((int) detailData.getProduct_Price()*0.1);	
 		
-		req.setAttribute("dto", detailData);
-		req.setAttribute("saleCode", saleCode);
-		req.setAttribute("point", point);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("searchValue", searchValue);
+		request.setAttribute("dto", detailData);
+		request.setAttribute("review", reviewData);
+		request.setAttribute("point", point);
 
-		if(id!=null&&id.equals("")) {
+		if(id!=null&&!id.equals("")) {
 			
 			List<SaleView> saleData = saleService.getPersonalSaleData(id);
-			
 			
 			Iterator<SaleView> it = saleData.iterator();
 			
@@ -418,7 +426,7 @@ public class BeaudamController {
 				
 				SaleView sale = it.next();
 				
-				if(sale.getCode().equals(detailData.getCode())) {
+				if(sale.getCode()==detailData.getCode()||sale.getCode().equals(detailData.getCode())) {
 					
 					saleCode = sale.getSale_Code();
 					
@@ -428,19 +436,59 @@ public class BeaudamController {
 
 		}
 		
+		request.setAttribute("saleCode", saleCode);
+		
 		return new ModelAndView("beaudam/productDetail", "id", id);
 		
 	}
 	
 	@RequestMapping(value = "/review.action", method = RequestMethod.POST)
-	public ModelAndView review(HttpServletRequest request,
-			ReviewDTO dto) {
+	public String review(HttpSession session,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			ReviewDTO dto) throws Exception {
+		
+		String pageNum = request.getParameter("pageNum");
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		
+		dto.setId((String)session.getAttribute("id"));
+		dto.setCode(request.getParameter("code"));
+		String saleCode = request.getParameter("sale_Code");
+		String url = "";
 
-		dto.setSaleCode(request.getParameter("sale_Code"));
 		
-		otherService.insertReview(dto);		
+		if(saleCode==null||saleCode.equals("")) {
+			
+			if(searchType==null||searchType.equals("")) {
+				
+				url = "productDetail.action?pageNum="+pageNum+"&searchValue="+searchValue+"&code="+dto.getCode();
+				
+			} else {
+				
+				url = "productDetail.action?pageNum="+pageNum+"&searchType="+searchType+"&code="+dto.getCode();
+			}
+			
+			request.setAttribute("url", url);
+			return "beaudam/alert";
+			
+		} else {
+			
+			dto.setSaleCode(saleCode);
+			
+			otherService.insertReview(dto);
+
+		}
 		
-		return new ModelAndView("beaudam/main");
+		if(searchType==null||searchType.equals("")) {
+			
+			return "redirect:/productDetail.action?pageNum=&"+pageNum+"&searchValue="+searchValue+"&code="+dto.getCode();
+		
+		} else {
+			
+			return "redirect:/productDetail.action?+pageNum=&"+pageNum+"&searchType="+searchType+"&code="+dto.getCode();
+			
+		}
 		
 	}
 	

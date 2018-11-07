@@ -74,7 +74,7 @@
 		
 		<!-- Review -->
 			<insert id="insertReview" parameterType="com.table.otherDTO.ReviewDTO">
-				insert into review (sale_Code, score, review) values (#{sale_Code}, #{score}, #{review})
+				insert into review (id, code, sale_Code, score, review) values (#{id}, #{code}, #{sale_Code}, #{score}, #{review})
 			</insert>
 			
 			
@@ -232,7 +232,7 @@
 		
 		<!-- Notification -->
 		<delete id="deleteNotification" parameterType="int">
-			delete notification where num = #{num}			
+			delete notification where num = #{num}		
 		</delete>
 	
 		<!-- Member -->
@@ -495,8 +495,8 @@
 		
 		<!-- Review -->
 		<select id="getReviewData" parameterType="String" resultType="com.table.otherDTO.ReviewDTO">
-			select sale_Code,score,review,created from review
-			where sale_Code = #{sale_Code}
+			select id,code,sale_Code,score,review,created from review
+			where code = #{code}
 		</select>
 		
 		<!-- Sale -->

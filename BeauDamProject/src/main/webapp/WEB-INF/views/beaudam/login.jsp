@@ -104,7 +104,7 @@ a:hover{
 			return;			
 		}
 		
-		f.action = "<%=cp%>/login_ok.action";
+		f.action = "<%=cp%>/login_ok.action?popup=" + ${popup };
 		f.submit();
 		
 	}
