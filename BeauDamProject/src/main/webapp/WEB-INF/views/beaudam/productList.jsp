@@ -58,7 +58,9 @@ session="true" pageEncoding="UTF-8"%>
 
 	function sort(sort) {
 		
-		var listUrl = "productList.action?"
+// 		var listUrl = "productList.action?";
+		var listUrl = window.location.pathname+"?";
+		alert(listUrl);
 		var sort = sort;
 		var page = $('#pageNum').val()+"&";
 		submit(listUrl,page,sort);
@@ -119,8 +121,18 @@ window.onload = function() {
 			brand.push($(this).val());
 			
 		});
+		alert(type + value);
 		
-		f.action= listUrl+"pageNum="+pageNum+"&sort="+sort;	
+		if(type != ""){			
+			f.action= listUrl+"pageNum="+pageNum+"&sort="+sort+"&searchType="+type;						
+		}
+		
+		if(value != ""){			
+			f.action= listUrl+"pageNum="+pageNum+"&sort="+sort+"&searchValue="+value;				
+		}		
+		
+		
+		
 		f.submit();
 		
 		

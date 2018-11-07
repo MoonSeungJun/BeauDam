@@ -192,8 +192,8 @@ public class BeaudamController {
 				
 		
 		String[] brands = request.getParameterValues("brand");
-		String value = request.getParameter("value");
-		String type = request.getParameter("type");
+		String value = request.getParameter("searchValue");
+		String type = request.getParameter("searchType");
 		String pageNum = request.getParameter("pageNum");
 		String sort = request.getParameter("sort");
 		String cp = request.getContextPath();
