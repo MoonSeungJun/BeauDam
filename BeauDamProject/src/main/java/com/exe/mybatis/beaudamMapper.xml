@@ -348,11 +348,7 @@
 			where  product_Name like '%'||#{searchValue}||'%' and
 			       type like '%'||#{searchType}||'%'			       
 			        <if test="list != null">
-<<<<<<< HEAD
 			       	and brand in
-=======
-			       and brand in
->>>>>>> 김해나브랜치
 			       		<foreach item="list" index="index" collection="list" open="(" close=")" separator=",">
 			      			#{list}
 			      	 	</foreach>	
@@ -363,10 +359,6 @@
 			]]>	
 			
 		</select>
-<<<<<<< HEAD
-=======
-		
->>>>>>> 김해나브랜치
 		<select id="getSearchDataCount" resultType="int" parameterType="Map">
 			select nvl(count(*),0) from productView 
 			where  product_Name like '%'||#{searchValue}||'%' and
