@@ -30,8 +30,8 @@
 			<p class="itemTitle">사용한 제품 알아보기!</p>
 			<div class="videoItem">
 				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Primer&code=is7002"><img alt="" src="<%=cp%>/resources/image/beaudam/look/look11.png"></a>
-				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Shadow&code=ie2002"><img alt="" src="<%=cp%>/resources/image/beaudam/look/look12.png"></a>
-				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Stick&code=il3003"> <img alt="" src="<%=cp%>/resources/image/beaudam/look/look13.png"></a>
+				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Stick&code=il3003"><img alt="" src="<%=cp%>/resources/image/beaudam/look/look12.png"></a>
+				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Shadow&code=ie2002"> <img alt="" src="<%=cp%>/resources/image/beaudam/look/look13.png"></a>
 			</div>
 		</div>
 	</div>

@@ -67,6 +67,11 @@ body {
 
 .button a:hover {
 	text-decoration: none;
+	color: #ee782f;
+}
+
+.button a:active {
+	color: #ee782f;
 }
 
 

@@ -434,8 +434,8 @@
 			</td>
 		</tr>
 	</table>
-	<div class="button">
-		<a href="<%=cp%>/myBasket.action">뒤로가기</a>
+	<div class="button" style="margin: 0 auto; width: 100px; margin-top: 30px; background-color: #ddd; padding: 10px; text-align: center; ">
+		<a href="<%=cp%>/myBasket.action" style="color: #ee782f; font-family: 'YiSunShinDotumM';">뒤로가기</a>
 	</div>		
 	</form>
 

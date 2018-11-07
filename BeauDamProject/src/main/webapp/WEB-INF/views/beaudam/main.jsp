@@ -94,85 +94,8 @@ $(document).ready(function() {
 </head>
 <body>
 	<jsp:include page="mainTop.jsp"/>
-        <!-- 슬라이드 이미지 -->
-        <div class="container" style="width: 100%">  
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img src="<%=cp%>/resources/image/beaudam/main/content_main01.jpg" alt="" style="width:100%;">
-                </div>
-
-                <div class="item">
-                    <img src="<%=cp%>/resources/image/beaudam/main/content_main05.png"  alt="" style="width:100%;">
-                </div>
-
-                <div class="item">
-                    <img src="<%=cp%>/resources/image/beaudam/main/content_main03.jpg" alt="" style="width:100%;">
-                </div>
-            </div>
-
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background-color: white; opacity: 0;">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next" style="background-color: white; opacity: 0;">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            </div>
-        </div>
-        <!-- 슬라이드 이미지 끝 -->
-        
-
-        <!-- 베스트 상품 -->
-        <div class="best_wrapper rolling_wrapper">
-        <h3>BEST ITEM</h3>
-        	<div class="rolling_panel" style="width: 100%;">
-				<ul class="rolling_panel" style="width: 1400px;">
-				<c:forEach var="dto" items="${productList }">					
-					<li style="width: 280px;"><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}" ></a>
-						<div style="width: 270px;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>
-					</li>
-				</c:forEach>
-				</ul>
-			</div>
-        </div>
-        <!-- 베스트 상품 끝 -->
-        
-        <!-- 이미지 레이아웃  -->
-        <div class="content_layout">
-            <div class="content_box">
-                <div class="content_grid row">
-                    <div class="content_left col-sm-6">
-                        <div class="layout_img">
-                            <img src="<%=cp%>/resources/image/beaudam/main/content_layout06.jpg">
-                        </div>
-                     	<div class="layout_img">
-                            <img src="<%=cp%>/resources/image/beaudam/main/content_layout03.jpg">
-                     	</div>
-                    </div>
-                    <div class="content_right col-sm-6">
-                       <div class="layout_img">
-                            <img src="<%=cp%>/resources/image/beaudam/main/content_layout01.jpg">
-                       	</div>
-                        <div class="layout_img">
-                            <img src="<%=cp%>/resources/image/beaudam/main/content_layout07.jpg">
-                        </div>
-                    </div>
-                </div>           
-            </div>
-        </div>
-        <!-- 이미지 레이아웃 끝 -->
-        
-         <!-- 브랜드 소개 -->
+	
+	 <!-- 브랜드 소개 -->
         <div class="brandwrapper" style="padding: 30px;">
         	<h2 style="padding: 30px 30px 10px 30px; text-align: center; font-family: 'YiSunShinDotumM'; ">
         		브랜드 모아, 모아! 잘나가는건 <span style="font-family: 'designhouseOTFLight00'; font-size: 35px;">뷰담</span>에 다있다!
@@ -196,6 +119,83 @@ $(document).ready(function() {
         		</div>
         	</div>
         </div>
+
+	    <!-- 슬라이드 이미지 -->
+        <div class="container" style="width: 100%">  
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="<%=cp%>/resources/image/beaudam/main/content_main011.jpg" alt="" style="width:100%;">
+                </div>
+
+                <div class="item">
+                    <img src="<%=cp%>/resources/image/beaudam/main/content_main021.jpg"  alt="" style="width:100%;">
+                </div>
+
+                <div class="item">
+                    <img src="<%=cp%>/resources/image/beaudam/main/content_main031.jpg" alt="" style="width:100%;">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background-color: white; opacity: 0;">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next" style="background-color: white; opacity: 0;">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+            </div>
+        </div>
+        <!-- 슬라이드 이미지 끝 -->
+
+        <!-- 베스트 상품 -->
+        <div class="best_wrapper rolling_wrapper">
+        <h3>BEST ITEM</h3>
+        	<div class="rolling_panel" style="width: 100%;">
+				<ul class="rolling_panel" style="width: 1400px;">
+				<c:forEach var="dto" items="${productList }">					
+					<li style="width: 280px;"><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}" ></a>
+						<div style="width: 270px;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>
+					</li>
+				</c:forEach>
+				</ul>
+			</div>
+        </div>
+        <!-- 베스트 상품 끝 -->
+        
+        <!-- 이미지 레이아웃  -->
+        <div class="content_layout">
+            <div class="content_box">
+                <div class="content_grid row">
+                    <div class="content_left col-sm-6">
+                        <div class="layout_img">
+                            <img src="<%=cp%>/resources/image/beaudam/main/content_layout06.jpg" >
+                        </div>
+                     	<div class="layout_img">
+                            <a href="./look.action"><img src="<%=cp%>/resources/image/beaudam/main/content_layout031.jpg"></a>
+                     	</div>
+                    </div>
+                    <div class="content_right col-sm-6">
+                       <div class="layout_img">
+                            <a href="./event2.action"><img src="<%=cp%>/resources/image/beaudam/main/content_layout01.jpg"></a>
+                       	</div>	
+                        <div class="layout_img">
+                            <img src="<%=cp%>/resources/image/beaudam/main/content_layout07.jpg">
+                        </div>
+                    </div>
+                </div>           
+            </div>
+        </div>
+        <!-- 이미지 레이아웃 끝 -->
         
         <!-- new item -->
         <div class="new_item" id="newItem">
@@ -216,7 +216,6 @@ $(document).ready(function() {
                 </c:if>
             </div>
         </div>
-        
         <jsp:include page="./mainBottom.jsp"/>
     </body>
 </html>

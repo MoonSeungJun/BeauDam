@@ -270,10 +270,10 @@ html {
 	        </div>
 	    </div> 
 	        <a href="./bestItem.action">BEST ITEM</a>
-	        <a href="#newItem">NEW ITEM</a>
-	        <a href="./event.action">EVENT</a>
+	        <a href="./main.action #newItem">NEW ITEM</a>
 	        <a href="./look.action">LOOKS</a>
 	        <a href="./pick.action">뷰담 PICK'S</a>
+	        <a href="./event.action">EVENT</a>
 	    </div>
 	    </div>
 	   

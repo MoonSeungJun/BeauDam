@@ -102,6 +102,7 @@
 .product .rankName {
 	font-family: 'YiSunShinDotumM';
 	font-size: 23px;
+	height: 64px;
 }
 
 .product .price {

@@ -24,15 +24,40 @@
 	font-style: normal; 
 }
 
-.title {
-	font-family: 'designhouseOTFLight00';
-	text-align: center;
-	font-weight: normal;
-	width: 1200px;
-    margin: 50px auto 0 auto;
-    letter-spacing: 0.1em;
+.wrapper {
+	height: 300px;
 }
 
-.title h2 {
+.wrapper h2 {
 	font-size: 40px;
+	text-align: center;
+	line-height: 300px;
+	font-family: 'designhouseOTFLight00';
 }
+
+video {
+	width: 500px;
+	margin: 30px auto;
+}
+
+.video {
+	float: left;
+	text-align: center; 
+	margin: 50px 30px;
+	height: 500px;
+}
+
+.video_cotent a {
+	text-decoration: none;
+	color: black;
+	font-size: 18px;
+	background-color: #ddd;
+	padding: 5px;
+}
+
+.video_cotent a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+
