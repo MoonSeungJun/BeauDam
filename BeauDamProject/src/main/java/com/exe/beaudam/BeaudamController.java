@@ -8,6 +8,7 @@ import java.util.*;
 import javax.annotation.Resource;
 import javax.servlet.http.*;
 
+import org.apache.commons.logging.impl.SLF4JLocationAwareLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -318,22 +319,81 @@ public class BeaudamController {
 	}
 	
 	@RequestMapping(value = "/bestItem.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView bestItem(HttpSession session,HttpServletRequest request)throws Exception {
+	public ModelAndView brandBestItem(HttpSession session,HttpServletRequest request)throws Exception {
 		
 		String ap = "Ap";
 		String etude = "Etu";
 		String innis= "Innis";
 		String nature = "Nature";
 		String face = "Face";
+		String cp = request.getContextPath();
 		
+		List<SaleView> apList = viewService.getBrandBestItems(ap); //코드
+		Iterator<SaleView> itApList = apList.iterator();
+		List<ProductView> apProductList = new ArrayList<ProductView>();
 		
-//		List<SaleView> apList = viewService.get
+		while(itApList.hasNext()) {
+			SaleView saleVO = itApList.next();
+			ProductView productVO = productService.getOneProductData(saleVO.getCode());	
+			productVO.setThumb_Img("thumbImg\\"+productVO.getThumb_Img());
+			apProductList.add(productVO);		
+			
+		}		
 		
+		List<SaleView> etuList = viewService.getBrandBestItems(etude);
+		Iterator<SaleView> itEtuList = etuList.iterator();
+		List<ProductView> etuProductList = new ArrayList<ProductView>();
 		
+		while(itEtuList.hasNext()) {
+			SaleView saleVO = itEtuList.next();			
+			ProductView productVO = productService.getOneProductData(saleVO.getCode());						
+			productVO.setThumb_Img("thumbImg\\"+productVO.getThumb_Img());
+			etuProductList.add(productVO);
+		}	
 		
+		List<SaleView> innisList = viewService.getBrandBestItems(innis);
+		Iterator<SaleView> itInnisList = innisList.iterator();
+		List<ProductView> innisProductList = new ArrayList<ProductView>();
 		
+		while(itInnisList.hasNext()) {
+			SaleView saleVO = itInnisList.next();
+			ProductView productVO = productService.getOneProductData(saleVO.getCode());
+			productVO.setThumb_Img("thumbImg\\"+productVO.getThumb_Img());
+			innisProductList.add(productVO);		
+			
+		}	
 		
+		List<SaleView> natuList = viewService.getBrandBestItems(nature);
+		Iterator<SaleView> itNatureList = natuList.iterator();
+		List<ProductView> natureProductList = new ArrayList<ProductView>();
 		
+		while(itNatureList.hasNext()) {
+			SaleView saleVO = itNatureList.next();
+			ProductView productVO = productService.getOneProductData(saleVO.getCode());
+			productVO.setThumb_Img("thumbImg\\"+productVO.getThumb_Img());
+			natureProductList.add(productVO);		
+			
+		}	
+		
+		List<SaleView> faceList = viewService.getBrandBestItems(face);
+		Iterator<SaleView> itFaceList = faceList.iterator();
+		List<ProductView> faceProductList = new ArrayList<ProductView>();
+	
+		while(itFaceList.hasNext()) {
+			SaleView saleVO = itFaceList.next();
+			ProductView productVO = productService.getOneProductData(saleVO.getCode());	
+			productVO.setThumb_Img("thumbImg\\"+productVO.getThumb_Img());
+			faceProductList.add(productVO);	
+		}	
+		
+		String detailUrl = cp+"/productDetail.action";
+		
+		request.setAttribute("apList", apProductList);
+		request.setAttribute("etuList", etuProductList);
+		request.setAttribute("innisList", innisProductList);
+		request.setAttribute("natuList", natureProductList);
+		request.setAttribute("faceList", faceProductList);
+		request.setAttribute("detailUrl", detailUrl);
 		
 		
 		return new ModelAndView("beaudam/bestItem","id",(String) session.getAttribute("id"));
@@ -357,12 +417,12 @@ public class BeaudamController {
 
 	}
 	
-	@RequestMapping(value = "/bestItem.action", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/bestItem.action", method = RequestMethod.GET)
 	public String bestItem(HttpSession session) {
 
 		// 세일 페이지 이동
 		return "beaudam/bestItem";
-	}
+	}*/
 
 	@RequestMapping(value = "/event.action", method = RequestMethod.GET)
 	public ModelAndView event(HttpSession session) {
@@ -531,18 +591,6 @@ public class BeaudamController {
 		return "redirect:/main.action";
 	}
 	
-	
-	/*static class ComparePriceAsc implements Comparator<ProductView>{
-		오름차순
-		@Override
-		public int compare(ProductView o1, ProductView o2) {
-			// TODO Auto-generated method stub
-			
-			return o1.getProduct_Price().compareTo(o2.getProduct_Price());
-		}
-		
-	}
-	*/
 	
 	
 }

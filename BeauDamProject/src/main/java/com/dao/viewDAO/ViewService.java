@@ -21,7 +21,11 @@ public interface ViewService {
 	List<ProductView> getSearchProductDataList(HashMap<String, Object> searchValuePack);
 	int getSearchDataCount(HashMap<String, Object> searchCountPack);
 	ProductView getProductDataRowNum(int selectRowNum);
-	public int getBrandSearchProductDataCount(HashMap<String, Object> searchPack);
-	public List<ProductView> getBrandSearchProductData(HashMap<String, Object> searchPack);
-	SaleView	getBrandBestItems(String brand);
+	int getBrandSearchProductDataCount(HashMap<String, Object> searchPack);
+	List<ProductView> getBrandSearchProductData(HashMap<String, Object> searchPack);
+	List<SaleView> getBrandBestItems(String brand);
+	int getPersonalSaleDataCount(String id);
+	int getWeeklyPersonalSaleDataCount(String id);
+	int getMonthlyPersonalSaleDataCount(HashMap<String, Object> monthlySalePack);
+	int getInputDatePersonalSaleDataCount(HashMap<String, Object> inputSalePack);
 }

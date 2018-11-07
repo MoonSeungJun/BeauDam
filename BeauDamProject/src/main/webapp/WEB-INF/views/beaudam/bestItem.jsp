@@ -23,30 +23,20 @@
 			<p><img alt="" src="<%=cp%>/resources/image/beaudam/main/etude.jpg"></p>
 		</div>
 		<div style="overflow: hidden;">
+			<c:forEach var="dto" items="${etuList }" varStatus="st">
 			<div class="product">
-				<p class="rank">BEST 1</p>
+				<p class="rank">BEST ${st.count}</p>
 				<div>
-					<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg"></a>
-					<p class="rankBand">ETUDE HOUSE</p>
-					<p class="rankName">제품명 제품명</p>
-					<p class="price">100,000원</p>
+					<a href="${detailUrl }?code=${dto.code}">
+					<img alt="" src="<%=cp %>/${dto.thumb_Img}">
+					</a>
+					<p class="rankBand">${dto.brand }</p>
+					<p class="rankName">${dto.product_Name }</p>
+					<p class="price">${dto.product_Price }</p>
 				</div>
 			</div>
-			<div class="product">
-				<p class="rank">BEST 2</p>
-				<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg"></a>
-				<p class="rankBand">ETUDE HOUSE</p>
-				<p class="rankName">제품명 제품명</p>
-				<p class="price">100,000원</p>
+			</c:forEach>
 			</div>
-			<div class="product">
-				<p class="rank">BEST 3</p>
-				<a href=""><img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg"></a>
-				<p class="rankBand">ETUDE HOUSE</p>
-				<p class="rankName">제품명 제품명</p>
-				<p class="price">100,000원</p>
-			</div>
-		</div>
 	</div>
 	<hr>
 	<!-- 여기까지 반복 -->
@@ -59,30 +49,20 @@
 			<p><img alt="" src="<%=cp%>/resources/image/beaudam/main/apieu2.jpg"></p>
 		</div>
 		<div style="overflow: hidden;">
+			<c:forEach var="dto" items="${apList }" varStatus="st">
 			<div class="product">
-				<p class="rank">BEST 1</p>
+				<p class="rank">BEST ${st.count}</p>
 				<div>
-					<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-					<p class="rankBand">ETUDE HOUSE</p>
-					<p class="rankName">제품명 제품명</p>
-					<p class="price">100,000원</p>
+					<a href="${detailUrl }?code=${dto.code}">
+					<img alt="" src="<%=cp %>/${dto.thumb_Img}">
+					</a>
+					<p class="rankBand">${dto.brand }</p>
+					<p class="rankName">${dto.product_Name }</p>
+					<p class="price">${dto.product_Price }</p>
 				</div>
 			</div>
-			<div class="product">
-				<p class="rank">BEST 2</p>
-				<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-				<p class="rankBand">ETUDE HOUSE</p>
-				<p class="rankName">제품명 제품명</p>
-				<p class="price">100,000원</p>
+			</c:forEach>
 			</div>
-			<div class="product">
-				<p class="rank">BEST 3</p>
-				<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-				<p class="rankBand">ETUDE HOUSE</p>
-				<p class="rankName">제품명 제품명</p>
-				<p class="price">100,000원</p>
-			</div>
-		</div>
 	</div>
 	<hr>
 	<div class="best">
@@ -90,29 +70,19 @@
 			<p><img alt="" src="<%=cp%>/resources/image/beaudam/main/face2.jpg"></p>
 		</div>
 		<div style="overflow: hidden;">
+			<c:forEach var="dto" items="${faceList }" varStatus="st">
 			<div class="product">
-				<p class="rank">BEST 1</p>
+				<p class="rank">BEST ${st.count}</p>
 				<div>
-					<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-					<p class="rankBand">ETUDE HOUSE</p>
-					<p class="rankName">제품명 제품명</p>
-					<p class="price">100,000원</p>
+					<a href="${detailUrl }?code=${dto.code}">
+					<img alt="" src="<%=cp %>/${dto.thumb_Img}">
+					</a>
+					<p class="rankBand">${dto.brand }</p>
+					<p class="rankName">${dto.product_Name }</p>
+					<p class="price">${dto.product_Price }</p>
 				</div>
 			</div>
-			<div class="product">
-				<p class="rank">BEST 2</p>
-				<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-				<p class="rankBand">ETUDE HOUSE</p>
-				<p class="rankName">제품명 제품명</p>
-				<p class="price">100,000원</p>
-			</div>
-			<div class="product">
-				<p class="rank">BEST 3</p>
-				<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-				<p class="rankBand">ETUDE HOUSE</p>
-				<p class="rankName">제품명 제품명</p>
-				<p class="price">100,000원</p>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 	<hr>
@@ -121,29 +91,19 @@
 			<p><img alt="" src="<%=cp%>/resources/image/beaudam/main/innisfree2.jpg"></p>
 		</div>
 		<div style="overflow: hidden;">
+			<c:forEach var="dto" items="${innisList }" varStatus="st">
 			<div class="product">
-				<p class="rank">BEST 1</p>
+				<p class="rank">BEST ${st.count}</p>
 				<div>
-					<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-					<p class="rankBand">ETUDE HOUSE</p>
-					<p class="rankName">제품명 제품명</p>
-					<p class="price">100,000원</p>
+					<a href="${detailUrl }?code=${dto.code}">
+					<img alt="" src="<%=cp %>/${dto.thumb_Img}">
+					</a>
+					<p class="rankBand">${dto.brand }</p>
+					<p class="rankName">${dto.product_Name }</p>
+					<p class="price">${dto.product_Price }</p>
 				</div>
 			</div>
-			<div class="product">
-				<p class="rank">BEST 2</p>
-				<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-				<p class="rankBand">ETUDE HOUSE</p>
-				<p class="rankName">제품명 제품명</p>
-				<p class="price">100,000원</p>
-			</div>
-			<div class="product">
-				<p class="rank">BEST 3</p>
-				<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-				<p class="rankBand">ETUDE HOUSE</p>
-				<p class="rankName">제품명 제품명</p>
-				<p class="price">100,000원</p>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 	<hr>
@@ -152,29 +112,19 @@
 			<p><img alt="" src="<%=cp%>/resources/image/beaudam/main/nature.gif"></p>
 		</div>
 		<div style="overflow: hidden;">
+			<c:forEach var="dto" items="${natuList }" varStatus="st">
 			<div class="product">
-				<p class="rank">BEST 1</p>
+				<p class="rank">BEST ${st.count}</p>
 				<div>
-					<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-					<p class="rankBand">ETUDE HOUSE</p>
-					<p class="rankName">제품명 제품명</p>
-					<p class="price">100,000원</p>
+					<a href="${detailUrl }?code=${dto.code}">
+					<img alt="" src="<%=cp %>/${dto.thumb_Img}">
+					</a>
+					<p class="rankBand">${dto.brand }</p>
+					<p class="rankName">${dto.product_Name }</p>
+					<p class="price">${dto.product_Price }</p>
 				</div>
 			</div>
-			<div class="product">
-				<p class="rank">BEST 2</p>
-				<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-				<p class="rankBand">ETUDE HOUSE</p>
-				<p class="rankName">제품명 제품명</p>
-				<p class="price">100,000원</p>
-			</div>
-			<div class="product">
-				<p class="rank">BEST 3</p>
-				<img alt="" src="<%=cp%>/resources/image/beaudam/main/sample5.jpg">
-				<p class="rankBand">ETUDE HOUSE</p>
-				<p class="rankName">제품명 제품명</p>
-				<p class="price">100,000원</p>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 	<hr>

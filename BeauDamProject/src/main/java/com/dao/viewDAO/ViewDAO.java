@@ -130,11 +130,31 @@ public class ViewDAO {
 		
 		return getBrandSearchProductData;
 	}
-	public SaleView	getBrandBestItems(String brand) {
-		SaleView getBrandBestItems = sessionTemplate.selectOne("beaudam.getBrandBestItems",brand);
+	
+	public List<SaleView> getBrandBestItems(String brand) {
+		List<SaleView> getBrandBestItems = sessionTemplate.selectList("beaudam.getBrandBestItems",brand);
 		return getBrandBestItems;
 	}
 	
+	public int getPersonalSaleDataCount(String id) {
+		int result = sessionTemplate.selectOne("beaudam.getPersonalSaleDataCount",id);
+		
+		return result;
+	}
 	
+	public int getWeeklyPersonalSaleDataCount(String id) {
+		int result = sessionTemplate.selectOne("beaudam.getWeeklyPersonalSaleDataCount",id);
+		return result;
+	}
+	
+	public int getMonthlyPersonalSaleDataCount(HashMap<String, Object> monthlySalePack) {
+		int result = sessionTemplate.selectOne("beaudam.getMonthlyPersonalSaleDataCount",monthlySalePack);
+		return result;
+	}
+	
+	public int getInputDatePersonalSaleDataCount(HashMap<String, Object> inputSalePack) {
+		int result = sessionTemplate.selectOne("beaudam.getInputDatePersonalSaleDataCount",inputSalePack);
+		return result;
+	}
 	
 }

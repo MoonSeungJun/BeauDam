@@ -122,10 +122,34 @@ public class ViewServiceImpl implements ViewService {
 	}
 
 	@Override
-	public SaleView getBrandBestItems(String brand) {
-		SaleView getBrandBestItem = dao.getBrandBestItems(brand);
-		
-		return getBrandBestItem;
+	public List<SaleView> getBrandBestItems(String brand) {
+		List<SaleView> lists = dao.getBrandBestItems(brand);
+		return lists;
 	}
+
+	@Override
+	public int getPersonalSaleDataCount(String id) {
+		int result = dao.getPersonalSaleDataCount(id);
+		return result;
+	}
+
+	@Override
+	public int getWeeklyPersonalSaleDataCount(String id) {
+		int result = dao.getWeeklyPersonalSaleDataCount(id);
+		return result;
+	}
+
+	@Override
+	public int getMonthlyPersonalSaleDataCount(HashMap<String, Object> monthlySalePack) {
+		int result = dao.getMonthlyPersonalSaleDataCount(monthlySalePack);
+		return result;
+	}
+
+	@Override
+	public int getInputDatePersonalSaleDataCount(HashMap<String, Object> inputSalePack) {
+		int result = dao.getInputDatePersonalSaleDataCount(inputSalePack);
+		return result;
+	}
+
 	
 }

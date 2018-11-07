@@ -213,9 +213,9 @@
 									<td style="width: 300px;">
 										(${dto.pay_Status }) ${dto.saleDate } | ${dto.sale_Code }<br/>(${dto.color_Code }) ${dto.product_Name }
 									</td>
-									<td>16,000 원 (${dto.qty }개)</td>
-									<td class="bbb">1,600</td>
-									<td>14,400 원</td>
+									<td>${dto.product_Price } (${dto.qty }개)</td>
+									<td class="bbb">${(dto.product_Price*dto.qty)*0.1 }</td>
+									<td>${dto.product_Price*dto.qty }</td>
 									<td>${dto.delivery_Status }</td>
 								</tr>
 								</c:forEach>
@@ -231,6 +231,18 @@
 									<td>14,400 원</td>
 									<td>배송 중</td>
 								</tr> -->
+								<tr align="center">
+									<c:if test="${empty pageIndexList }">
+										<td align="center" colspan="6">
+											구매내역이 없습니다.
+										</td>
+									</c:if>
+									<c:if test="${!empty pageIndexList }">
+										<td align="center" colspan="6">
+											${pageIndexList }
+										</td>
+									</c:if>
+								</tr>
 							</table>
 						</div>
 					</div>

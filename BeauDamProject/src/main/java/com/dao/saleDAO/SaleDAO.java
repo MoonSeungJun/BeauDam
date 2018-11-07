@@ -28,6 +28,10 @@ public class SaleDAO {
 		List<SaleView> view = sessionTemplate.selectList("beaudam.getPersonalSaleData", id);
 		return view;
 	}
+	public List<SaleView> getPersonalAllSaleData(HashMap<String, Object> searchSalePack) {
+		List<SaleView> view = sessionTemplate.selectList("beaudam.getPersonalAllSaleData", searchSalePack);
+		return view;
+	}
 	
 	
 	
@@ -94,8 +98,8 @@ public class SaleDAO {
 		return lists;
 	}
 	
-	public List<SaleView> getWeekPersonalSaleData(String id){
-		List<SaleView> view = sessionTemplate.selectList("beaudam.getWeekPersonalSaleData", id);
+	public List<SaleView> getWeekPersonalSaleData(HashMap<String, Object> weekRange){
+		List<SaleView> view = sessionTemplate.selectList("beaudam.getWeekPersonalSaleData", weekRange);
 		return view;	
 	}
 	
@@ -108,6 +112,6 @@ public class SaleDAO {
 		List<SaleView> view = sessionTemplate.selectList("beaudam.getInputDatePersonalSaleData", inputDateRange);
 		return view;	
 	}
-
+	
 	
 }

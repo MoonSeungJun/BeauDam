@@ -107,7 +107,10 @@
 				
 		<select id="getBrandBestItems" resultType="com.view.view.SaleView" parameterType="String">
 		<![CDATA[
-			select * from ( select rownum rnum, data.* from (select code, sum(qty) qty from saleview where brand like '%'||#{brand}||'%' group by code order by qty desc) data) where rnum <=3;
+		select * from ( select rownum rnum, data.* from (select code, sum(qty) qty from saleview 
+					where brand like '%'||#{brand}||'%'
+					group by code order by qty desc) data) where rnum <=3
+
 		]]>
 		</select>
 		
@@ -486,36 +489,119 @@
 			select max(to_number(sale_code)) from saleview
 		</select>
 		
+		
 		<select id="getPersonalSaleData" parameterType="String" resultType="com.view.view.SaleView">
-			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
+		select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
 			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saleDate from saleView where id = #{id}
+			order by saleDate desc
 		</select>
 		
-		<select id="getWeekPersonalSaleData" parameterType="String" resultType="com.view.view.SaleView">
+		
+		<select id="getPersonalAllSaleData" parameterType="map" resultType="com.view.view.SaleView">
+			select *from (
+			select rownum rnum,data.*from (
+			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
+			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saleDate from saleView 
+			where id = #{id}
+			order by saleDate desc) data)
+			<![CDATA[
+			where rnum>=#{start} and rnum <=#{end}
+			]]>	
+		</select>		
+		
+		<!-- <select id="getWeekPersonalSaleData" parameterType="String" resultType="com.view.view.SaleView">
 			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
 			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saleDate from saleView 
 			where id = #{id} and
 				  to_char(saledate, 'yyyy-mm-dd hh24:mi:ss') between to_char(sysdate-7,'yyyy-mm-dd')||' 00:00:00' and to_char(sysdate,'yyyy-mm-dd')||' 23:59:59'
-		</select>
+				  order by saleDate desc	
+		</select> -->
 		
-		<select id="getMonthPersonalSaleData" parameterType="map" resultType="com.view.view.SaleView">
+		
+		<select id="getWeekPersonalSaleData" parameterType="map" resultType="com.view.view.SaleView">
+			select *from (
+			select rownum rnum,data.*from (
 			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
 			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saleDate from saleView 
 			where id = #{id} and
-			      to_char(saledate, 'yyyy-mm-dd hh24:mi:ss') between to_char(add_months(sysdate,#{monthValue}),'yyyy-mm-dd')||' 00:00:00' and to_char(sysDate,'yyyy-mm-dd')||' 23:59:59'
-			
+				  to_char(saledate, 'yyyy-mm-dd hh24:mi:ss') between to_char(sysdate-7,'yyyy-mm-dd')||' 00:00:00' and to_char(sysdate,'yyyy-mm-dd')||' 23:59:59'
+				  order by saleDate desc) data)
+				  <![CDATA[
+				  where rnum>=#{start} and rnum <=#{end}
+				  ]]>	
 		</select>
+				  
+	
 		
-		<select id="getInputDatePersonalSaleData" parameterType="map" resultType="com.view.view.SaleView">
+		
+		
+		<!-- <select id="getMonthPersonalSaleData" parameterType="map" resultType="com.view.view.SaleView">
+			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
+			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saleDate from saleView 
+			where id = #{id} and
+			      to_char(saledate, 'yyyy-mm-dd hh24:mi:ss') 
+			      between to_char(add_months(sysdate,#{monthValue}),'yyyy-mm-dd')||' 00:00:00' and to_char(sysDate,'yyyy-mm-dd')||' 23:59:59'
+				  order by saleDate desc
+		</select> -->
+		<select id="getMonthPersonalSaleData" parameterType="map" resultType="com.view.view.SaleView">
+			select *from (
+			select rownum rnum,data.*from (
+			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
+			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saleDate from saleView 
+			where id = #{id} and
+			      to_char(saledate, 'yyyy-mm-dd hh24:mi:ss') 
+			      between to_char(add_months(sysdate,#{monthValue}),'yyyy-mm-dd')||' 00:00:00' and to_char(sysDate,'yyyy-mm-dd')||' 23:59:59'
+				  order by saleDate desc) data)
+				  <![CDATA[
+				  where rnum>=#{start} and rnum <=#{end}
+				  ]]>
+		</select>
+		<!-- <select id="getInputDatePersonalSaleData" parameterType="map" resultType="com.view.view.SaleView">
 			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
 			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saleDate from saleView 
 			where id = #{id} and
 				 to_char(saledate, 'yyyy-mm-dd hh24:mi:ss') between #{startDate}||' 00:00:00' and #{endDate}||' 23:59:59'
+				 order by saleDate desc
+		</select> -->
+		<select id="getInputDatePersonalSaleData" parameterType="map" resultType="com.view.view.SaleView">
+			select *from (
+			select rownum rnum,data.*from (
+			select sale_Code,id,name,cellPhone,tel,code,brand,product_Name,color_Code,use_Coupon,payment_Method,addr,message,pay_Status,delivery_Status,
+			product_Price,qty,use_Point,total_Price,to_char(saledate, 'yyyy-mm-dd') saleDate from saleView 
+			where id = #{id} and
+			to_char(saledate, 'yyyy-mm-dd hh24:mi:ss') between #{startDate}||' 00:00:00' and #{endDate}||' 23:59:59'
+				 order by saleDate desc) data)
+				 <![CDATA[
+				  where rnum>=#{start} and rnum <=#{end}
+				  ]]>
+			
 		</select>
 		
 		
 		
+		<!-- 세일데이터 카운트(페이징처리시) -->
+		<select id="getPersonalSaleDataCount" parameterType="String" resultType="int">
+			select nvl(count(*),0) from saleView 
+			where id = #{id}
+		</select>
 		
+		<select id="getWeeklyPersonalSaleDataCount" parameterType="String" resultType="int">
+			select nvl(count(*),0) from saleView 
+			where id = #{id} and
+				  to_char(saledate, 'yyyy-mm-dd hh24:mi:ss') between to_char(sysdate-7,'yyyy-mm-dd')||' 00:00:00' and to_char(sysdate,'yyyy-mm-dd')||' 23:59:59'
+		</select>
+		
+		<select id="getMonthlyPersonalSaleDataCount" parameterType="map" resultType="int">
+			select nvl(count(*),0) from saleView
+			where id = #{id} and
+			      to_char(saledate, 'yyyy-mm-dd hh24:mi:ss') between to_char(add_months(sysdate,#{monthValue}),'yyyy-mm-dd')||' 00:00:00' and to_char(sysDate,'yyyy-mm-dd')||' 23:59:59'
+		</select>
+		
+		<select id="getInputDatePersonalSaleDataCount" parameterType="map" resultType="int">
+			select nvl(count(*),0) from saleView
+			where id = #{id} and
+				 to_char(saledate, 'yyyy-mm-dd hh24:mi:ss') between #{startDate}||' 00:00:00' and #{endDate}||' 23:59:59'
+	    </select>
 		
 		
 		

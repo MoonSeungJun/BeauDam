@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +20,7 @@ import com.dao.saleDAO.*;
 import com.view.view.*;
 
 import com.dao.viewDAO.ViewServiceImpl;
+import com.exe.util.MyUtil;
 import com.table.memberDTO.MemberDTO;
 import com.table.memberDTO.Member_InfoDTO;
 import com.table.otherDTO.*;
@@ -82,6 +85,8 @@ public class MyPageController {
 	@Resource(name="otherService")
 	private OtherServiceImpl otherService;
 	
+	@Autowired
+	MyUtil myUtil;
 	
 	// ********************** My Page **********************
 
@@ -326,7 +331,10 @@ public class MyPageController {
 		String startDate = req.getParameter("startDate");
 		String endDate = req.getParameter("endDate");
 		List<SaleView> sLists = new ArrayList<SaleView>();
-				
+		String pageNum = req.getParameter("pageNum");		
+		String cp = req.getContextPath();
+		int numPerPage = 5;
+		
 		MemberView dto = memberService.getOneMemberData(id);		
 		req.setAttribute("dto", dto);
 		
@@ -366,18 +374,53 @@ public class MyPageController {
 		req.setAttribute("deliReady", deliReady);
 		req.setAttribute("deliIng", deliIng);
 		req.setAttribute("deliCompl", deliCompl);
-			
-		/*if(wterm.equals("")||wterm==null) {
-			if(mterm.equals("")||mterm==null) {
-			sLists = saleService.getPersonalSaleData(id);
-			}
-		}*/
+					
 		
+		
+		
+		String listUrl = cp+"/myOrder.action";
+		String pageIndexList ="";
 		if(wterm==null&&mterm==null&&startDate==null) {
 			System.out.println("!@$@!$@!@!$@!@!널값일때$@!$!@$!@$@!@!@!$@!$@!$");
 			
 			req.setAttribute("alldate", "all");
-			sLists = saleService.getPersonalSaleData(id);
+					
+			int dataCount = viewService.getPersonalSaleDataCount(id);
+			
+			System.out.println("★");
+			System.out.println("count"+dataCount);
+			System.out.println("★");
+			
+			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+			
+			
+			int currentPage = 1;
+			
+			if(pageNum != null) {
+				currentPage = Integer.parseInt(pageNum);
+			}
+			/*if(pageNum == null) {
+				pageNum="1";
+			}*/
+			
+			if(currentPage>totalPage) {
+				currentPage=totalPage;
+			}
+			
+			int start = (currentPage-1)*numPerPage+1;
+			int end = currentPage*numPerPage;	
+			
+			HashMap<String, Object> searchSalePack = new HashMap<String, Object>();
+			
+			searchSalePack.put("id", id);
+			searchSalePack.put("start", start);
+			searchSalePack.put("end", end);
+			
+						
+			sLists=saleService.getPersonalAllSaleData(searchSalePack);
+			
+			
+			pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 			
 		}
 		
@@ -387,8 +430,39 @@ public class MyPageController {
 			System.out.println("!@$@!$@!@!$@!@!일주일$@!$!@$!@$@!@!@!$@!$@!$");
 
 			req.setAttribute("weekSearch", wterm);
+						
+			int dataCount = viewService.getWeeklyPersonalSaleDataCount(id);
 			
-			sLists = saleService.getWeekPersonalSaleData(id);
+			System.out.println("★");
+			System.out.println("count"+dataCount);
+			System.out.println("★");
+			
+			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+			int currentPage=1;
+			
+			if(pageNum != null)
+				currentPage = Integer.parseInt(pageNum);
+
+			if(currentPage > totalPage) {
+				currentPage = totalPage;
+			}
+
+			int start = (currentPage-1)*numPerPage+1;
+			int end = currentPage*numPerPage;	
+			
+			HashMap<String, Object>weekRange = new HashMap<String, Object>();
+			
+			weekRange.put("id", id);
+			weekRange.put("start", start);
+			weekRange.put("end", end);			
+			
+			String params = "?weekTerm="+wterm;
+			if(params!=null) {
+				listUrl = listUrl+params;
+				}
+			
+			sLists = saleService.getWeekPersonalSaleData(weekRange);
+			pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		}
 		
 		//1,3,6개월 단위가 검색 값일때
@@ -411,13 +485,41 @@ public class MyPageController {
 				monthValue ="-6";
 			}
 		
+		HashMap<String, Object> monthlySalePack = new HashMap<String, Object>();
+			monthlySalePack.put("id", id);
+			monthlySalePack.put("monthValue", monthValue);
+			
+		
+		req.setAttribute("monthSearch", mterm);
+		
+		int dataCount = viewService.getMonthlyPersonalSaleDataCount(monthlySalePack);
+		
+		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+		int currentPage=1;
+		
+		if(pageNum != null)
+			currentPage = Integer.parseInt(pageNum);
+
+		if(currentPage > totalPage) {
+			currentPage = totalPage;
+		}
+
+		int start = (currentPage-1)*numPerPage+1;
+		int end = currentPage*numPerPage;
+		
 		HashMap<String, Object> monthRange = new HashMap<String, Object>();
 		
 		monthRange.put("id", id);
-		monthRange.put("monthValue", monthValue);		
+		monthRange.put("monthValue", monthValue);
+		monthRange.put("start",start);
+		monthRange.put("end", end);		
 		
-		req.setAttribute("monthSearch", mterm);
+		String params = "?monthTerm="+mterm;
+		listUrl=listUrl+params;		
+		
 		sLists = saleService.getMonthPersonalSaleData(monthRange);
+		pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);	
+		
 		
 		}
 		
@@ -427,27 +529,58 @@ public class MyPageController {
 			
 			System.out.println("!@$@!$@!@!$@!@!인풋데이터$@!$!@$!@$@!@!@!$@!$@!$");
 			
-		HashMap<String, Object> inputDateRange = new HashMap<String, Object>();
-		
-		inputDateRange.put("id", id);
-		inputDateRange.put("startDate", startDate);
-		inputDateRange.put("endDate", endDate);
-		
-		System.out.println("^^^^^^^^^^^^^^^^^^");
-		System.out.println(startDate+22);
-		System.out.println("^^^^^^^^^^^^^^^^^^");
-		
-		
+			HashMap<String, Object> inputSalePack = new HashMap<String, Object>();
+			
+			inputSalePack.put("id", id);
+			inputSalePack.put("startDate", startDate);
+			inputSalePack.put("endDate",endDate);
+			
+			
+			int dataCount = viewService.getInputDatePersonalSaleDataCount(inputSalePack);
+			
+			
+			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+			int currentPage=1;
+			
+			if(pageNum != null)
+				currentPage = Integer.parseInt(pageNum);
+
+			if(currentPage > totalPage) {
+				currentPage = totalPage;
+			}
+
+			int start = (currentPage-1)*numPerPage+1;
+			int end = currentPage*numPerPage;
+			
+			HashMap<String, Object>	 inputDateRange = new HashMap<String, Object>();
+			
+			
+			inputDateRange.put("id", id);
+			inputDateRange.put("startDate", startDate);
+			inputDateRange.put("endDate", endDate);
+			inputDateRange.put("start", start);
+			inputDateRange.put("end", end);
+						
+			String params = "?startDate="+startDate+"&endDate="+endDate;
+			listUrl=listUrl+params;
+			
+			sLists = saleService.getInputDatePersonalSaleData(inputDateRange);
+			
+			pageIndexList= myUtil.pageIndexList(currentPage, totalPage, listUrl);	
+			
+			
+			
 			req.setAttribute("startd", startDate);
 			req.setAttribute("endd", endDate);
-			sLists =saleService.getInputDatePersonalSaleData(inputDateRange);
-		
+			
 		}
+		
+		
+		req.setAttribute("pageIndexList", pageIndexList);
+				
 		
 				
 		// 주문정보 (마이페이지) 페이지 이동
-		
-		
 		return new ModelAndView("myPage/myOrder","sLists",sLists) ;
 	}
 	

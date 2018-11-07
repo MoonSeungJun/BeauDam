@@ -21,6 +21,11 @@ public class SaleServiceImpl implements SaleService {
 		List<SaleView> view = dao.getPersonalSaleData(id);
 		return view;
 	}
+	@Override
+	public List<SaleView> getPersonalAllSaleData(HashMap<String, Object> searchSalePack) {
+		List<SaleView> view = dao.getPersonalAllSaleData(searchSalePack);
+		return view;
+	}
 	
 	@Override
 	public String getMaxSaleCode() {
@@ -96,8 +101,8 @@ public class SaleServiceImpl implements SaleService {
 	}
 
 	@Override
-	public List<SaleView> getWeekPersonalSaleData(String id) {
-		List<SaleView> view = dao.getWeekPersonalSaleData(id);
+	public List<SaleView> getWeekPersonalSaleData(HashMap<String, Object> weekRange) {
+		List<SaleView> view = dao.getWeekPersonalSaleData(weekRange);
 		return view;
 	}
 
