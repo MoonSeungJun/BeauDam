@@ -94,7 +94,35 @@ $(document).ready(function() {
 </head>
 <body>
 	<jsp:include page="mainTop.jsp"/>
-        <!-- 슬라이드 이미지 -->
+	
+	 <!-- 브랜드 소개 -->
+        <div class="brandwrapper" style="padding: 30px;">
+        	<h2 style="padding: 30px 30px 10px 30px; text-align: center; font-family: 'YiSunShinDotumM'; ">
+        		브랜드 모아, 모아! 잘나가는건 <span style="font-family: 'designhouseOTFLight00'; font-size: 35px;">뷰담</span>에 다있다!
+        	</h2>
+        	<h3 style="text-align: center; font-family: 'YiSunShinDotumM'; color: gray;">뷰담에서 더 쉽고 빠르게 쇼핑하자</h3>
+        	<div class="brand_grid" style="overflow: hidden; margin: 20px auto;">
+        		<div class="brandimg">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/apieu2.jpg">
+        		</div>
+        		<div class="brandimg">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/etude.jpg">
+        		</div>
+        		<div class="brandimg">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/face2.jpg">
+        		</div>
+        		<div class="brandimg">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/innisfree2.jpg">
+        		</div>
+        		<div class="brandimg">
+        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/nature.gif">
+        		</div>
+        	</div>
+        </div>
+	
+	
+	
+	       <!-- 슬라이드 이미지 -->
         <div class="container" style="width: 100%">  
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -130,6 +158,9 @@ $(document).ready(function() {
             </div>
         </div>
         <!-- 슬라이드 이미지 끝 -->
+	
+	
+ 
         
 
         <!-- 베스트 상품 -->
@@ -172,30 +203,7 @@ $(document).ready(function() {
         </div>
         <!-- 이미지 레이아웃 끝 -->
         
-         <!-- 브랜드 소개 -->
-        <div class="brandwrapper" style="padding: 30px;">
-        	<h2 style="padding: 30px 30px 10px 30px; text-align: center; font-family: 'YiSunShinDotumM'; ">
-        		브랜드 모아, 모아! 잘나가는건 <span style="font-family: 'designhouseOTFLight00'; font-size: 35px;">뷰담</span>에 다있다!
-        	</h2>
-        	<h3 style="text-align: center; font-family: 'YiSunShinDotumM'; color: gray;">뷰담에서 더 쉽고 빠르게 쇼핑하자</h3>
-        	<div class="brand_grid" style="overflow: hidden; margin: 20px auto;">
-        		<div class="brandimg">
-        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/apieu2.jpg">
-        		</div>
-        		<div class="brandimg">
-        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/etude.jpg">
-        		</div>
-        		<div class="brandimg">
-        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/face2.jpg">
-        		</div>
-        		<div class="brandimg">
-        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/innisfree2.jpg">
-        		</div>
-        		<div class="brandimg">
-        			<img alt="" src="<%=cp%>/resources/image/beaudam/main/nature.gif">
-        		</div>
-        	</div>
-        </div>
+        
         
         <!-- new item -->
         <div class="new_item" id="newItem">
