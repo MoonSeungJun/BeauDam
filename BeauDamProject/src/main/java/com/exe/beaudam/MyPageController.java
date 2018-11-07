@@ -313,8 +313,12 @@ public class MyPageController {
 	// msj
 	@RequestMapping(value = "/myOrder.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView myOrder(HttpSession session) {
-		
 		String id = (String)session.getAttribute("id");
+		if(id==null||id.equals("")) {
+			return new ModelAndView("redirect:/main.action");
+		}
+		
+		
 		
 		List<SaleView> sLists = saleService.getPersonalSaleData(id);
 
