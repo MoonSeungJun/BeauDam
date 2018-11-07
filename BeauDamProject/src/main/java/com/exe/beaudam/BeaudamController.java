@@ -21,6 +21,7 @@ import com.dao.viewDAO.ViewService;
 import com.exe.util.*;
 import com.table.otherDTO.BasketDTO;
 import com.table.otherDTO.CouponDTO;
+import com.table.otherDTO.ReviewDTO;
 import com.view.view.*;
 
 /*
@@ -386,16 +387,49 @@ public class BeaudamController {
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView productDetail(HttpSession session, HttpServletRequest req) {
 		
+		String id = (String)session.getAttribute("id");
+		String saleCode = "";
+		
 		ProductView detailData = productService.getOneProductData(req.getParameter("code"));
+		List<SaleView> saleData = saleService.getPersonalSaleData(id);
+		
+		
+		Iterator<SaleView> it = saleData.iterator();
+		
+		while(it.hasNext()) {
+			
+			SaleView sale = it.next();
+			
+			if(sale.getCode().equals(detailData.getCode())) {
+				
+				saleCode = sale.getSale_Code();
+				
+			}
+			
+		}
+
 		
 		int point = (int) ((int) detailData.getProduct_Price()*0.1);	
 		
 		req.setAttribute("dto", detailData);
+		req.setAttribute("saleCode", saleCode);
 		req.setAttribute("point", point);
 
 		// 상품상세 페이지 이동
-		return new ModelAndView("beaudam/productDetail", "id", (String) session.getAttribute("id"));
+		return new ModelAndView("beaudam/productDetail", "id", id);
 
+	}
+	
+	@RequestMapping(value = "/review.action", method = RequestMethod.POST)
+	public ModelAndView review(HttpServletRequest request,
+			ReviewDTO dto) {
+
+		dto.setSaleCode(request.getParameter("sale_Code"));
+		
+		otherService.insertReview(dto);		
+		
+		return new ModelAndView("beaudam/main");
+		
 	}
 	
 	@RequestMapping(value = "/bestItem.action", method = RequestMethod.GET)
