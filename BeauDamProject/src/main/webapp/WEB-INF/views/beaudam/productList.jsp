@@ -61,7 +61,7 @@ session="true" pageEncoding="UTF-8"%>
 		
 // 		var listUrl = "productList.action?";
 		var listUrl = window.location.pathname+"?";
-		alert(listUrl);
+// 		alert(listUrl);
 		var sort = sort;
 		var page = $('#pageNum').val()+"&";
 		submit(listUrl,page,sort);
@@ -122,7 +122,7 @@ window.onload = function() {
 			brand.push($(this).val());
 			
 		});
-		alert(type + value);
+// 		alert(type + value);
 		
 		if(type != ""){			
 			f.action= listUrl+"pageNum="+pageNum+"&sort="+sort+"&searchType="+type;						

@@ -205,14 +205,13 @@ public class BeaudamController {
 		if(value == null || value.equals("")) {
 			value = " ";
 		}else if(type == null || type.equals("")) {
-			type = " ";
+			type = "";
 		}		
 		
-		for(String str : brands) {			
-			list.add(str);			
-			System.out.println();
-			System.out.println(str);
-			System.out.println();
+		for(String str : brands) {
+			
+			list.add(str);	
+			
 		}		
 		
 		map.put("list", list);
@@ -233,7 +232,7 @@ public class BeaudamController {
 		}
 
 		int start = (currentPage-1)*numPerPage+1;
-		int end = currentPage*numPerPage;				
+		int end = currentPage*numPerPage;	
 		
 		if(sort==null||sort.equals("")) {
 			sort = "desc";
@@ -315,7 +314,7 @@ public class BeaudamController {
 		DataCountMap.put("searchType", searchType);
 		DataCountMap.put("searchValue", searchValue);					
 
-		int count = viewService.getSearchDataCount(DataCountMap);	
+		int count = viewService.getSearchDataCount(DataCountMap);
 		
 		int numPerPage = 12;
 		int totalPage = myUtil.getPageCount(numPerPage, count);
