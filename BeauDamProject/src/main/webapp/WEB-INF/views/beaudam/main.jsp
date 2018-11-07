@@ -119,10 +119,8 @@ $(document).ready(function() {
         		</div>
         	</div>
         </div>
-	
-	
-	
-	       <!-- 슬라이드 이미지 -->
+
+	    <!-- 슬라이드 이미지 -->
         <div class="container" style="width: 100%">  
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -134,15 +132,15 @@ $(document).ready(function() {
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="<%=cp%>/resources/image/beaudam/main/content_main01.jpg" alt="" style="width:100%;">
+                    <img src="<%=cp%>/resources/image/beaudam/main/content_main011.jpg" alt="" style="width:100%;">
                 </div>
 
                 <div class="item">
-                    <img src="<%=cp%>/resources/image/beaudam/main/content_main05.png"  alt="" style="width:100%;">
+                    <img src="<%=cp%>/resources/image/beaudam/main/content_main021.jpg"  alt="" style="width:100%;">
                 </div>
 
                 <div class="item">
-                    <img src="<%=cp%>/resources/image/beaudam/main/content_main03.jpg" alt="" style="width:100%;">
+                    <img src="<%=cp%>/resources/image/beaudam/main/content_main031.jpg" alt="" style="width:100%;">
                 </div>
             </div>
 
@@ -158,10 +156,6 @@ $(document).ready(function() {
             </div>
         </div>
         <!-- 슬라이드 이미지 끝 -->
-	
-	
- 
-        
 
         <!-- 베스트 상품 -->
         <div class="best_wrapper rolling_wrapper">
@@ -184,16 +178,16 @@ $(document).ready(function() {
                 <div class="content_grid row">
                     <div class="content_left col-sm-6">
                         <div class="layout_img">
-                            <img src="<%=cp%>/resources/image/beaudam/main/content_layout06.jpg">
+                            <img src="<%=cp%>/resources/image/beaudam/main/content_layout06.jpg" >
                         </div>
                      	<div class="layout_img">
-                            <img src="<%=cp%>/resources/image/beaudam/main/content_layout03.jpg">
+                            <a href="./look.action"><img src="<%=cp%>/resources/image/beaudam/main/content_layout031.jpg"></a>
                      	</div>
                     </div>
                     <div class="content_right col-sm-6">
                        <div class="layout_img">
-                            <img src="<%=cp%>/resources/image/beaudam/main/content_layout01.jpg">
-                       	</div>
+                            <a href="./event2.action"><img src="<%=cp%>/resources/image/beaudam/main/content_layout01.jpg"></a>
+                       	</div>	
                         <div class="layout_img">
                             <img src="<%=cp%>/resources/image/beaudam/main/content_layout07.jpg">
                         </div>
@@ -202,8 +196,6 @@ $(document).ready(function() {
             </div>
         </div>
         <!-- 이미지 레이아웃 끝 -->
-        
-        
         
         <!-- new item -->
         <div class="new_item" id="newItem">
@@ -224,7 +216,6 @@ $(document).ready(function() {
                 </c:if>
             </div>
         </div>
-        
         <jsp:include page="./mainBottom.jsp"/>
     </body>
 </html>
