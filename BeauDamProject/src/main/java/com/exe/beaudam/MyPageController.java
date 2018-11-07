@@ -422,8 +422,7 @@ public class MyPageController {
 			
 						
 			sLists=saleService.getPersonalAllSaleData(searchSalePack);
-			
-			
+						
 			pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 			
 		}
