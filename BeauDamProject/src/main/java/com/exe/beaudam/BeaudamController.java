@@ -208,6 +208,9 @@ public class BeaudamController {
 		
 		for(String str : brands) {			
 			list.add(str);			
+			System.out.println();
+			System.out.println(str);
+			System.out.println();
 		}		
 		
 		map.put("list", list);
