@@ -264,18 +264,22 @@ session="true" pageEncoding="UTF-8"%>
 			
 			function deleteReview(num){
 				
-			    $.ajax({
-			        url: "deleteReview.action",
-			        type:"post", 
-			        data: {
-			        	"num": num
-			        	},
-				    dataType: "text",
-				    complete: function() {
-				    	alert("해당 리뷰가 삭제되었습니다!");
-  						window.location.reload();
-					}
-			    })
+				if(confirm("리뷰를 삭제하시겠습니까?")){
+				
+				    $.ajax({
+				        url: "deleteReview.action",
+				        type:"post", 
+				        data: {
+				        	"num": num
+				        	},
+					    dataType: "text",
+					    complete: function() {
+					    	alert("해당 리뷰가 삭제되었습니다!");
+					    	window.location.reload();
+						}
+				    })
+			    
+				}
 			}
 			
 			
