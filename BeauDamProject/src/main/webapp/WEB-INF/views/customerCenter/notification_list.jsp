@@ -25,16 +25,10 @@
 	//1:1문의연결팝업
     function popupOpen(){
 
-	var popUrl = "inquire.action";	//팝업창에 출력될 페이지 URL
-
-<<<<<<< HEAD
-
-	var popOption = "width=600, height=490, resizable=no, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
-
-=======
-	var popOption = "width=600, height=490, resizable=yes, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
+		var popUrl = "inquire.action";	//팝업창에 출력될 페이지 URL
 	
->>>>>>> 김해나브랜치
+		var popOption = "width=600, height=490, resizable=no, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
+	
 		window.open(popUrl,"",popOption);
 
 	}
