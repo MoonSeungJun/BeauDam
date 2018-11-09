@@ -262,23 +262,19 @@ session="true" pageEncoding="UTF-8"%>
 				
 			}
 			
-			function deleteReview(){
-				
-				var f = document.reviewForm;
+			function deleteReview(num){
 				
 			    $.ajax({
-			        url: "<%=cp%>/deleteReview.action",
+			        url: "deleteReview.action",
 			        type:"post", 
 			        data: {
-			        	"num": $("#reviewno").val()
+			        	"num": num
 			        	},
-			        success: function(result){
-			            if (result=="OK") {
-			                alert("댓글삭제완료");
-			            } else{
-			                alert("댓글삭제실패");
-			            }
-			        }
+				    dataType: "text",
+				    complete: function() {
+				    	alert("해당 리뷰가 삭제되었습니다!");
+  						window.location.reload();
+					}
 			    })
 			}
 			
@@ -432,14 +428,14 @@ session="true" pageEncoding="UTF-8"%>
 	        							</span>
 	        						</c:otherwise>
 	        					</c:choose>
-	        					<span id="reviewno">${dto.id }</span>
+	        					<span>${dto.id }</span>
 	        					<span style="color: gray">${dto.created }</span>
 	        				</div>
 	        				<div class="review_data">
 	        					 ${dto.review }
 	        			
 	        					<c:if test="${id eq dto.id }">
-	        						<button type="button" onclick="deleteReview();" style="float: right;">x</button>
+	        						<button type="button" onclick="deleteReview(${dto.num});" style="float: right;">x</button>
 	        					</c:if>
 	        				
 	        				</div>

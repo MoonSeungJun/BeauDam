@@ -620,44 +620,11 @@ public class BeaudamController {
 	}
 	
 	@RequestMapping(value = "/deleteReview.action", method = RequestMethod.POST)
-	public String deleteReview(HttpServletRequest request,
+	public void deleteReview(HttpServletRequest request,
 			HttpServletResponse response) {
-		
-		ObjectMapper mapper = new ObjectMapper();
-        response.setContentType("application/json;charset=UTF-8");
         
-        try {
-        	
         	otherService.deleteReview(Integer.parseInt(request.getParameter("num")));
-        	response.getWriter().print(mapper.writeValueAsString("OK"));
-        	
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-			
-		}
-		
-		String pageNum = request.getParameter("pageNum");
-		String reviewPage = request.getParameter("reviewPage");
-		String code = request.getParameter("code");
-		String searchType = request.getParameter("searchType");
-		String searchValue = request.getParameter("searchValue");
-		String url = "redirect:/productDetail.action?pageNum=" + pageNum;
-		
-		if(searchType==null||searchType.equals("")) {
-			
-			url += "&searchValue=" + searchValue;
-		
-		} else {
-			
-			url += "&searchType=" + searchType;
-			
-		}
-		
-		url += "&code=" + code + "&reviewPage=" + reviewPage + "&flag=1";
-		
-		return url;
-		
+
 	}
 	
 	/*@RequestMapping(value = "/bestItem.action", method = RequestMethod.GET)
