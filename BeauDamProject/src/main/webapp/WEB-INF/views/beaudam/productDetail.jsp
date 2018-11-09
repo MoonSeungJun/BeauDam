@@ -270,12 +270,7 @@ session="true" pageEncoding="UTF-8"%>
 			        url: "<%=cp%>/deleteReview.action",
 			        type:"post", 
 			        data: {
-			        	"num": $("#reviewno").val(),
-			        	"searchType" : f.searchType.val(),
-			        	"searchValue" : f.searchValue.val(),
-			        	"reviewPageNum" : "",
-			        	"pageNum" : f.pageNum.val(),
-			        	"code" : f.code.val()
+			        	"num": $("#reviewno").val()
 			        	},
 			        success: function(result){
 			            if (result=="OK") {
@@ -442,11 +437,11 @@ session="true" pageEncoding="UTF-8"%>
 	        				</div>
 	        				<div class="review_data">
 	        					 ${dto.review }
-	        					 <div>
+	        			
 	        					<c:if test="${id eq dto.id }">
-	        						<button type="button" onclick="deleteReview();">x</button>
+	        						<button type="button" onclick="deleteReview();" style="float: right;">x</button>
 	        					</c:if>
-	        					 </div>
+	        				
 	        				</div>
 
         				</div>

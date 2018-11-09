@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.*;
 
 import org.apache.commons.logging.impl.SLF4JLocationAwareLog;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -619,24 +620,43 @@ public class BeaudamController {
 	}
 	
 	@RequestMapping(value = "/deleteReview.action", method = RequestMethod.POST)
-	public String deleteReview(HttpServletRequest request) {
+	public String deleteReview(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		ObjectMapper mapper = new ObjectMapper();
+        response.setContentType("application/json;charset=UTF-8");
+        
+        try {
+        	
+        	otherService.deleteReview(Integer.parseInt(request.getParameter("num")));
+        	response.getWriter().print(mapper.writeValueAsString("OK"));
+        	
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		}
 		
 		String pageNum = request.getParameter("pageNum");
+		String reviewPage = request.getParameter("reviewPage");
 		String code = request.getParameter("code");
 		String searchType = request.getParameter("searchType");
 		String searchValue = request.getParameter("searchValue");
-		
-		otherService.deleteReview(Integer.parseInt(request.getParameter("num")));
+		String url = "redirect:/productDetail.action?pageNum=" + pageNum;
 		
 		if(searchType==null||searchType.equals("")) {
 			
-			return "redirect:/productDetail.action?pageNum=&"+pageNum+"&searchValue="+searchValue+"&code="+code+"&flag=1";
+			url += "&searchValue=" + searchValue;
 		
 		} else {
 			
-			return "redirect:/productDetail.action?pageNum=&"+pageNum+"&searchType="+searchType+"&code="+code+"&flag=1";
+			url += "&searchType=" + searchType;
 			
 		}
+		
+		url += "&code=" + code + "&reviewPage=" + reviewPage + "&flag=1";
+		
+		return url;
 		
 	}
 	
