@@ -85,6 +85,14 @@ a:hover{
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 
+	function enterkey() {
+	    if (window.event.keyCode == 13) {
+	
+	         f_login();
+	    }
+	}
+
+
 	function f_login(){
 		
 		var f = document.loginForm;
@@ -145,7 +153,7 @@ a:hover{
 								<h4>비밀번호</h4>
 							</td>
 							<td style="padding-right: 40px">
-								<input type="password" name="password" style="width: 200ox; height: 28px"/>
+								<input type="password" name="password" style="width: 200ox; height: 28px" onkeyup="enterkey();"/>
 							</td>
 						</tr>				
 					</table>
