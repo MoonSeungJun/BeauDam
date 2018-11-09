@@ -63,6 +63,8 @@ import com.view.view.MemberView;
 
 @Controller("LoginController")
 public class LoginController {
+	
+	HashMap<String, Object> info = new HashMap<String, Object>();
 
 	/* NaverLoginBO */
 	@Resource(name = "naverLoginBO")
@@ -150,7 +152,10 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/callback.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session)
+	public ModelAndView callback(@RequestParam String code,
+			@RequestParam String state,
+			HttpSession session,
+			HttpServletRequest request)
 			throws IOException, ParseException {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
 
@@ -169,11 +174,26 @@ public class LoginController {
 		String email = (String) obj2.get("email");
 		String name = (String) obj2.get("name");
 		String birth = (String) obj2.get("birthday");
+			
+		info.put("id", id);
+		info.put("nickname", nickname);
+		info.put("gender", gender);
+		info.put("email", email);
+		info.put("name", name);
+		info.put("birth", birth);
+		
+		MemberView dto = viewService.getOneMemberData(id);
+		
+		if (dto == null) {
+			
+			return new ModelAndView("redirect:/newUserNaver.action");
+			
+		}
 
 		session.setAttribute("id", id);
-		session.setAttribute("nickname", nickname);
 
 		return new ModelAndView("redirect:/main.action");
+		
 	}
 
 	@RequestMapping(value = "/searchIdPwd.action", method = RequestMethod.GET)
@@ -255,6 +275,22 @@ public class LoginController {
 		// 회원가입 페이지 이동
 		return new ModelAndView("beaudam/newUser", "newId", newId);
 
+	}
+	
+	@RequestMapping(value = "/newUserNaver.action", method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView newUserNaver(HttpServletRequest request) {
+		
+		System.out.println("info.get" + info.get("id"));
+		
+		request.setAttribute("id", info.get("id"));
+		request.setAttribute("nickName", info.get("nickname"));
+		request.setAttribute("gender", info.get("gender"));
+		request.setAttribute("email", info.get("email"));
+		request.setAttribute("name", info.get("name"));
+		request.setAttribute("birth", info.get("birth"));
+		
+		return new ModelAndView("beaudam/newUserNaver");
+		
 	}
 
 	@RequestMapping(value = "/checkId.action", method = { RequestMethod.GET, RequestMethod.POST })
