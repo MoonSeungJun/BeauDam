@@ -89,7 +89,7 @@ a:hover{
 		
 		var f = document.loginForm;
 		var str = f.id.value;
-		
+
 		if(!str){
 			alert("\n아이디를 입력하세요!");
 			str.focus();
@@ -104,7 +104,9 @@ a:hover{
 			return;			
 		}
 		
-		f.action = "<%=cp%>/login_ok.action?popup=" + ${popup };
+		
+		f.action = "<%=cp%>/login_ok.action";
+			
 		f.submit();
 		
 	}
@@ -159,6 +161,8 @@ a:hover{
 							<img src="<%=cp %>/resources/image/beaudam/login/naver_login.PNG" height=40px;/>
 						</a>
 					</div>
+					
+					<input type="hidden" name="popup" id="popup" value="${popup }"/>
 				
 				</form>
 				

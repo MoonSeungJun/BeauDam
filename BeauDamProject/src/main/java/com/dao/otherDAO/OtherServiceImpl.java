@@ -107,8 +107,8 @@ public class OtherServiceImpl implements OtherService {
 	}
 
 	@Override
-	public List<ReviewDTO> getReviewData(String code) {
-		List<ReviewDTO> lists = dao.getReviewData(code);		
+	public List<ReviewDTO> getReviewData(HashMap<String, Object> hMap) {
+		List<ReviewDTO> lists = dao.getReviewData(hMap);		
 		return lists;
 	}
 
@@ -167,6 +167,12 @@ public class OtherServiceImpl implements OtherService {
 	public int getNotificationRowNum() {
 		int num = dao.getNotificationRowNum();
 		return num;
+	}
+
+	@Override
+	public int getReviewCount(String code) {
+		int count = dao.getReviewCount(code);
+		return count;
 	}
 	
 	

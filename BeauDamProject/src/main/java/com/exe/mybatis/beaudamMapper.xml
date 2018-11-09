@@ -502,9 +502,20 @@
 		</select>
 		
 		<!-- Review -->
-		<select id="getReviewData" parameterType="String" resultType="com.table.otherDTO.ReviewDTO">
-			select id,code,sale_Code,score,review,created from review
+		<select id="getReviewCount" parameterType="String" resultType="Integer">
+			select nvl(count(*),0) from review
+			where code = #{code}			
+		</select>
+		
+		<select id="getReviewData" parameterType="map" resultType="com.table.otherDTO.ReviewDTO">
+			select * from (
+			select rownum rnum, data.* from (
+			select num,id,code,sale_Code,score,review,created from review
 			where code = #{code}
+			order by num desc) data)
+		<![CDATA[
+			where rnum>=#{reviewStart} and rnum <=#{reviewEnd}
+		]]>
 		</select>
 		
 		<!-- Sale -->

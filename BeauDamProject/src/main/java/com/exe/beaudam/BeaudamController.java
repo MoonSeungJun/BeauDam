@@ -477,26 +477,68 @@ public class BeaudamController {
 	@RequestMapping(value = "/productDetail.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView productDetail(HttpSession session, HttpServletRequest request) {
 		
+		MyUtil3 myUtil3 = new MyUtil3();
+		
+		String cp = request.getContextPath();
+		
 		String id = (String)session.getAttribute("id");
 		String code = request.getParameter("code");
 		String saleCode = "";
+		String reviewPage = request.getParameter("reviewPage");
 		String pageNum = request.getParameter("pageNum");
 		String searchType = request.getParameter("searchType");
 		String searchValue = request.getParameter("searchValue");
-		System.out.println("pageNum=" + pageNum);
-		System.out.println("searchType=" + searchType);
+		
+		HashMap<String, Object> hMap = new HashMap<String, Object>();
 		
 		ProductView detailData = productService.getOneProductData(code);
-		List<ReviewDTO> reviewData = otherService.getReviewData(code);
+		
+		int reviewCount = otherService.getReviewCount(code);
+		int numPerPage = 5;
+		int totalReviewPage = myUtil3.getPageCount(numPerPage, reviewCount);
+		int currentReviewPage = 1;
+		
+		if(reviewPage != null)
+			currentReviewPage = Integer.parseInt(reviewPage);
+
+		if(currentReviewPage > totalReviewPage) {
+			currentReviewPage = totalReviewPage;
+		}
+
+		int start = (currentReviewPage-1) * numPerPage + 1;
+		int end = currentReviewPage * numPerPage;
+		
+		hMap.put("reviewStart", start);
+		hMap.put("reviewEnd", end);
+		hMap.put("code", code);
+		
+		List<ReviewDTO> reviewData = otherService.getReviewData(hMap);
+		
+		String reviewUrl = cp + "/productDetail.action?pageNum=" + pageNum;
+		
+		if(searchType==null||searchType.equals("")) {
+			
+			reviewUrl += "&searchValue=" + searchValue;
+			
+		} else {
+			
+			reviewUrl += "&searchType=" + searchType;
+		}
+		
+		reviewUrl += "&code=" + code;
+		
+		String reviewIndexList = myUtil3.pageIndexList(currentReviewPage, totalReviewPage, reviewUrl);
 		
 		int point = (int) ((int) detailData.getProduct_Price()*0.1);	
 		
+		request.setAttribute("id", id);
 		request.setAttribute("flag", request.getParameter("flag"));
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("searchType", searchType);
 		request.setAttribute("searchValue", searchValue);
 		request.setAttribute("dto", detailData);
 		request.setAttribute("review", reviewData);
+		request.setAttribute("reviewIndexList", reviewIndexList);
 		request.setAttribute("point", point);
 
 		if(id!=null&&!id.equals("")) {
@@ -520,6 +562,7 @@ public class BeaudamController {
 		}
 		
 		request.setAttribute("saleCode", saleCode);
+		request.setAttribute("dto", detailData);
 		
 		return new ModelAndView("beaudam/productDetail", "id", id);
 		
@@ -569,7 +612,29 @@ public class BeaudamController {
 		
 		} else {
 			
-			return "redirect:/productDetail.action?+pageNum=&"+pageNum+"&searchType="+searchType+"&code="+dto.getCode()+"&flag=1";
+			return "redirect:/productDetail.action?pageNum=&"+pageNum+"&searchType="+searchType+"&code="+dto.getCode()+"&flag=1";
+			
+		}
+		
+	}
+	
+	@RequestMapping(value = "/deleteReview.action", method = RequestMethod.POST)
+	public String deleteReview(HttpServletRequest request) {
+		
+		String pageNum = request.getParameter("pageNum");
+		String code = request.getParameter("code");
+		String searchType = request.getParameter("searchType");
+		String searchValue = request.getParameter("searchValue");
+		
+		otherService.deleteReview(Integer.parseInt(request.getParameter("num")));
+		
+		if(searchType==null||searchType.equals("")) {
+			
+			return "redirect:/productDetail.action?pageNum=&"+pageNum+"&searchValue="+searchValue+"&code="+code+"&flag=1";
+		
+		} else {
+			
+			return "redirect:/productDetail.action?pageNum=&"+pageNum+"&searchType="+searchType+"&code="+code+"&flag=1";
 			
 		}
 		

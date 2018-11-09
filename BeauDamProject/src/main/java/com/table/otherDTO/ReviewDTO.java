@@ -2,6 +2,8 @@ package com.table.otherDTO;
 
 public class ReviewDTO {
 	
+	private int num;
+	
 	private String id;
 	
 	private String code;
@@ -60,6 +62,14 @@ public class ReviewDTO {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 }

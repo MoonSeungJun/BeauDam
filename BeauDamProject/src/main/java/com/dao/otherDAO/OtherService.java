@@ -30,7 +30,8 @@ public interface OtherService {
 	List<CouponDTO> getCouponData(String id);
 	int getWeekCouponCount(String id);
 	List<CouponDTO> getWeekCouponData(String id);
-	List<ReviewDTO> getReviewData (String code);
+	List<ReviewDTO> getReviewData (HashMap<String, Object> hMap);
+	int getReviewCount (String code);
 
 	int getNotificationMaxNum();
 	List<NotificationDTO> getNotificationAllData(int start,int end,String searchKey,String searchValue);

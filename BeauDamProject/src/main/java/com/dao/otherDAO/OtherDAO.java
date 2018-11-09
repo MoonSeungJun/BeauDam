@@ -107,10 +107,17 @@ public class OtherDAO {
 		List<CouponDTO> lists = sessionTemplate.selectList("beaudam.getWeekCouponData", id);
 		return lists;
 	}
+	
+	public int getReviewCount(String code) {
+		
+		int count = sessionTemplate.selectOne("beaudam.getReviewCount", code);
+		return count;		
+		
+	}
 
-	public List<ReviewDTO> getReviewData(String code) {
+	public List<ReviewDTO> getReviewData(HashMap<String, Object> hMap) {
 
-		List<ReviewDTO> lists = sessionTemplate.selectList("beaudam.getReviewData", code);
+		List<ReviewDTO> lists = sessionTemplate.selectList("beaudam.getReviewData", hMap);
 
 		return lists;
 	}

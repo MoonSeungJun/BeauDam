@@ -121,14 +121,12 @@ session="true" pageEncoding="UTF-8"%>
 			if($('#flag').val()==1){
 				
 				$('html, body').animate({
-					scrollTop: $('#aaa').offset().top
+					scrollTop: $('#scroll').offset().top
 					});
 				
 			}
 
 		});
-		
-
 
   			function amountminus() {
   				if($('#amount').val() == 0){
@@ -251,8 +249,6 @@ session="true" pageEncoding="UTF-8"%>
 				
 				var f = document.reviewForm;
 				
-				f.flag.value = 1;
-				
 				f.action = "<%=cp%>/review.action";
 				f.submit();				
 				
@@ -264,6 +260,31 @@ session="true" pageEncoding="UTF-8"%>
 				
 				f.score.value = $("input[type='radio'][name='star']:checked").val();
 				
+			}
+			
+			function deleteReview(){
+				
+				var f = document.reviewForm;
+				
+			    $.ajax({
+			        url: "<%=cp%>/deleteReview.action",
+			        type:"post", 
+			        data: {
+			        	"num": $("#reviewno").val(),
+			        	"searchType" : f.searchType.val(),
+			        	"searchValue" : f.searchValue.val(),
+			        	"reviewPageNum" : "",
+			        	"pageNum" : f.pageNum.val(),
+			        	"code" : f.code.val()
+			        	},
+			        success: function(result){
+			            if (result=="OK") {
+			                alert("댓글삭제완료");
+			            } else{
+			                alert("댓글삭제실패");
+			            }
+			        }
+			    })
 			}
 			
 			
@@ -326,9 +347,10 @@ session="true" pageEncoding="UTF-8"%>
 
         </div>
         <!-- 리뷰 댓글 -->
+        <div style="height: 10px" id="scroll"></div>
         <div class="review">
         	<div class="review_container">
-        		<div class="review_button" id="aaa" style="margin-top: 20px;">
+        		<div class="review_button"style="margin-top: 20px;">
 		        	<p>뷰담 고객 리뷰</p>
 		        	<div class="container">
 		        	<c:if test="${empty id }">
@@ -378,13 +400,11 @@ session="true" pageEncoding="UTF-8"%>
 											<input type="text" name="searchValue" value="${searchValue }"/>
 											<input type="text" name="code" value="${dto.code }"/>
 			                				<input type="text" name="sale_Code" value="${saleCode }"/>
-			                				<input type="text" name="flag" id="flag"/>
+			                				<input type="text" name="flag" id="flag" value="${flag }"/>
 			                    			<textarea style="width: 100%;" name="review" placeholder="리뷰를 작성해 주세요! 사랑합니다 고객님♡ "></textarea>
 			                			</div>
 		                				<div class="modal-footer">
-				                    		<a href="#aaa">
 				                    		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="sendReview();" style="background-color: #f0ad4e; color: white; font-weight: bold; border: none;">등록하기</button>
-				                    		</a>
 				                    		<button type="button" class="btn btn-default" data-dismiss="modal" style="font-weight: bold; ">취소하기</button>
 		                				</div>
 	                				</form>
@@ -417,17 +437,26 @@ session="true" pageEncoding="UTF-8"%>
 	        							</span>
 	        						</c:otherwise>
 	        					</c:choose>
-	        					<span>${dto.id }</span>
+	        					<span id="reviewno">${dto.id }</span>
 	        					<span style="color: gray">${dto.created }</span>
 	        				</div>
 	        				<div class="review_data">
 	        					 ${dto.review }
+	        					 <div>
+	        					<c:if test="${id eq dto.id }">
+	        						<button type="button" onclick="deleteReview();">x</button>
+	        					</c:if>
+	        					 </div>
 	        				</div>
+
         				</div>
         			</li>
         			<hr>
         			</c:forEach>
         		</ul>
+        	</div>
+        	<div style="text-align: center">
+        		${reviewIndexList }
         	</div>
         </div>
         <jsp:include page="./mainBottom.jsp" />
