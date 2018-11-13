@@ -16,7 +16,7 @@
 <jsp:include page="mainTop.jsp"/>
 <div>
 	<div class="video" style="background-color: #c9765a; " id="autoumn">
-	<div class="menu">
+		<div class="menu" style="background-color: #c9765a">
 			<p>내게 맞는 MAKEUP LOOK을 찾아봐!💕</p>
 			<a href="#daily"><span>#데일리 메이크업</span></a>
 			<a href="#date"><span>#데이트 메이크업</span></a>
