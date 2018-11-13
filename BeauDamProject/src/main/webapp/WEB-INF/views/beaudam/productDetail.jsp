@@ -184,7 +184,7 @@ session="true" pageEncoding="UTF-8"%>
   					async:false,
   					dataType: "text",
   					complete: function() {
-						if(confirm('장바구니에 추가되었습니다. 장바구니로 이동 할까요?')==true){
+						if(confirm('장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?')==true){
 							window.location.href = "/beaudam/myBasket.action";
 						}else{
 							return;
@@ -335,15 +335,15 @@ session="true" pageEncoding="UTF-8"%>
                 </div>  
             </div>
         </div>
-        <div class="detail">
+        <div class="detail" id="detail">
         	<hr>
-        	<h4 style="font-weight: bold; margin-bottom: 20px;">상세정보</h4>
-        	<img class="detailimg" src="<%=cp %>/detailImg/${dto.detail_Img}">
-
+        	<a href="#detail">상품정보</a>
+        	<a href="#review">상품후기</a>
+        	<img class="detailimg" src="<%=cp %>/detailImg/${dto.detail_Img}" style="display: block; margin: 30px auto;">
         </div>
         <!-- 리뷰 댓글 -->
         <div style="height: 10px" id="scroll"></div>
-        <div class="review">
+        <div class="review" id="review">
         	<div class="review_container">
         		<div class="review_button"style="margin-top: 20px;">
 		        	<p>뷰담 고객 리뷰</p>
