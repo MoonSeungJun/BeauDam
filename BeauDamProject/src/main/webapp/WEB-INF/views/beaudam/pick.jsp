@@ -62,17 +62,6 @@
 		</div>
 	</div>
 	
-	
-	<%-- 
-	<div>
-		<video src="<%=cp%>/resources/video/pick/innis.mp4" controls="controls"></video>
-		<a href="is6001"></a>
-	</div>
-	
-	<div>
-		<video src="<%=cp%>/resources/video/pick/the.mp4" controls="controls"></video>
-		<a href="fe2002"></a>
-	</div>	 --%>
 <jsp:include page="mainBottom.jsp"/>
 </body>
 </html>

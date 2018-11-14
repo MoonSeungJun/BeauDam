@@ -241,6 +241,7 @@ window.onload = function() {
 			</c:forEach>
 		</ul>
 	</div>
+	
 	<div class="pageing" style="text-align: center;">
 		<ol>
 			<c:if test="${!empty pageIndexList }">
@@ -251,6 +252,7 @@ window.onload = function() {
 			</c:if>
 		</ol>
 	</div>
+	
 	<jsp:include page="./mainBottom.jsp" />
 	</body>
 </html>

@@ -20,12 +20,58 @@
 			$( '.basket_order' ).fadeOut();
 		}
 	} );
+	
 	$( document ).ready( function() {
 	  $( '.goTop' ).click( function() {
-	    $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+	    $( 'html, body' ).animate( { scrollTop : 0 }, 200 );
 	    return false;
 	  } );
 	} );
+	
+	$( document ).ready( function() {
+		  $( '.goBottom' ).click( function() {
+		    $( 'html, body' ).animate( { scrollTop : $(document).height() }, 200 );
+		    return false;
+		  } );
+		} );
+	
+	function goBasket() {
+					
+		f = document.bottom;
+		var id = '${id}';
+		
+		if(id == ''){
+			var result = confirm("로그인이 필요합니다. 로그인 하시겠습니까?");
+			if(result==true){
+				f.action = "<%=cp%>/login.action";
+			} else {
+				return;
+			} 
+		} else {
+			f.action = "<%=cp%>/myBasket.action";
+		}
+		f.submit();
+	}
+		
+	function goOrder() {
+		
+		f = document.bottom;
+		var id = '${id}';
+		
+		if(id == ''){
+			var result = confirm("로그인이 필요합니다. 로그인 하시겠습니까?");
+			if(result==true){
+				f.action = "<%=cp%>/login.action";
+			} else {
+				return;
+			} 
+		} else {
+			f.action = "<%=cp%>/myOrder.action";
+		}
+		f.submit();
+	}
+	
+			
 </script>
 </head>
 <body>
@@ -50,15 +96,21 @@
      <div class="side">
          <a href="./event1.action"><img src="<%=cp%>/resources/image/beaudam/main/side.png"></a> 
      </div>
-     <div class="basket_order">
-         <img class="goTop"  src="<%=cp%>/resources/image/beaudam/main/goTop.png" style="width: 34px;">
-         <p class="goTop">TOP</p>
-         <a href="<%=cp%>/myBasket.action" style="text-decoration: none;">
-     		<img src="<%=cp%>/resources/image/beaudam/main/basket.png" style="width: 34px;">
-     	 </a><br><br>
-     	 <a href="<%=cp%>/myOrder.action">
-     		<img src="<%=cp%>/resources/image/beaudam/main/order.png" style="width: 34px;">
-     	 </a>
-     </div>
+     <form action="" name="bottom">
+	     <div class="basket_order">
+	         <img class="goTop"  src="<%=cp%>/resources/image/beaudam/main/goTop.png" style="width: 34px;">
+	         <br>
+	         <span onclick="goBasket();" style="text-decoration: none;">
+	     		<img src="<%=cp%>/resources/image/beaudam/main/basket.png" style="width: 34px;">
+	     	 </span>
+	     	 <br><br>
+	     	 <span onclick="goOrder();">
+	     		<img src="<%=cp%>/resources/image/beaudam/main/order.png" style="width: 34px;">
+	     	 </span>
+	     	 <br>
+	     	 <img class="goBottom"  src="<%=cp%>/resources/image/beaudam/main/goBottom.png" style="width: 34px;">
+	         
+	     </div>
+     </form>
 </body>
 </html>
