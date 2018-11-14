@@ -71,7 +71,7 @@
     
     function register(){
     	
-    	var f = document.registerForm;
+    	var f = document.naverRegisterForm;
     	
     	if(!f.zip.value){
     		
@@ -117,7 +117,7 @@
     		}    		
     	}
     	
-    	f.action = 'newUserNaver_ok.action';
+    	f.action = 'newUser_ok.action';
     	f.submit();
     	
     }
@@ -204,7 +204,7 @@ button:hover {
 				</div>
 			</div>
 			
-			<form name="registerForm" method="post">
+			<form name="naverRegisterForm" method="post">
 				<div style="width: 800px; margin: 0 auto">				
 					<h3 style="float: left">추가가입정보</h3>
 					<p style="color: red; float: right;"> * 필수입력사항 (전화번호 제외)</p>
@@ -239,18 +239,9 @@ button:hover {
 						</tr>
 						<tr>
 							<td style="padding-left: 20px"><b>생년월일</b></td>
-							<td>
-							<select name="year">
-								<option value="${y }">${y }</option>
-							</select>
-							<select name="month">
-								<option value="${m }">${m }</option>
-							</select>
-							<select name="day">
-								<option value="${d }">${d }</option>
-							</select>
-							</td>
+							<td><input type="text" name="birth" value="${birth }"  readonly="readonly" style="background: #BDBDBD;"/></td>
 						</tr>
+						<tr>
 							<td rowspan="2" style="padding-left: 20px"><b>주소</b></td>
 							<td>
 								<input type="text" readonly="readonly" id="postcode" name="zip" placeholder="우편번호">
@@ -311,9 +302,7 @@ button:hover {
 						<tr>
 							<td style="padding-left: 20px"><b>이메일주소</b></td>
 							<td>
-								<input type="text" name="email1" readonly="readonly" style="background: #BDBDBD;"/>
-								@
-								<input type="text" name="email2" value="naver.com"  readonly="readonly" style="background: #BDBDBD;"/>
+								<input type="text" name="email" value="${email }" readonly="readonly" style="background: #BDBDBD;"/>
 							</td>
 						</tr>
 					</table>

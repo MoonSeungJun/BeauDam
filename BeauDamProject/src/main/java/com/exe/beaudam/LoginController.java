@@ -318,6 +318,8 @@ public class LoginController {
 
 		// member - member_Info - member_grade - coupon
 
+		String birth;
+		
 		mDto.setNickname(request.getParameter("nickName"));
 
 		memberService.insertMember(mDto);
@@ -326,8 +328,12 @@ public class LoginController {
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
 
-		String birth = year + "-" + month + "-" + day;
-
+		if(year!=null) {
+			birth = year + "-" + month + "-" + day;
+		} else {
+			birth = request.getParameter("birth");
+		}
+		
 		mIdto.setBirth(birth);
 
 		String hp1 = request.getParameter("hp1");
@@ -338,11 +344,14 @@ public class LoginController {
 
 		mIdto.setCellphone(cellphone);
 
+		String email;
 		String email1 = request.getParameter("email1");
-		String email2 = request.getParameter("email2");
-
-		String email = email1 + "@" + email2;
-
+		if(email1!=null) {
+			String email2 = request.getParameter("email2");
+			email = email1 + "@" + email2;
+		} else {
+			email = request.getParameter("email");
+		}
 		mIdto.setEmail(email);
 
 		cDto.setCoupon("20%");
