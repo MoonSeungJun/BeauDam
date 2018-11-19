@@ -1,7 +1,8 @@
 package com.exe.beaudam;
 
 import java.io.*;
-
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.annotation.*;
@@ -331,9 +332,20 @@ public class LoginController {
 		memberService.insertMember(mDto);
 
 		String year = request.getParameter("year");
+		int intYear = Integer.parseInt(year);
 		String month = request.getParameter("month");
+		int intMonth = Integer.parseInt(month)-1;
 		String day = request.getParameter("day");
-
+		int intDay = Integer.parseInt(day);
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(intYear, intMonth, 1);
+		
+		int endDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		
+		if(intDay>endDay) {
+			day = String.valueOf(endDay);
+		}
 
 		if(year!=null) {
 			birth = year + "-" + month + "-" + day;
