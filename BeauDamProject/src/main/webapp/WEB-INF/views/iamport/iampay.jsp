@@ -27,8 +27,8 @@
 			pay_method : '${payType}', // 'card':신용카드, 'trans':실시간계좌이체, 'vbank':가상계좌, 'phone':휴대폰소액결제
 			merchant_uid : 'merchant_' + new Date().getTime(),
 			name : '${pName}',
-// 			amount : '100',
-			amount : '${payResult}',
+			amount : '100',
+// 			amount : '${payResult}',
 			buyer_email : '${member.email }',
 			buyer_name : '${member.name }',
 			buyer_tel : '${member.cellphone }',
