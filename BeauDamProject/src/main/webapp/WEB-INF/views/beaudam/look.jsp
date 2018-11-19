@@ -22,7 +22,7 @@
 			<a href="#date"><span>#데이트 메이크업</span></a>
 			<a href="#autoumn"><span>#가을 메이크업</span></a>
 		</div>
-		<video src="<%=cp%>/resources/video/look/LOOK_1.mp4" controls="controls" style="display: block; margin: 100px auto 30px auto;" autoplay="autoplay" ></video>
+		<video src="<%=cp%>/resources/video/look/LOOK_1.mp4" controls="controls" style="display: block; margin: 100px auto 30px auto;" autoplay="autoplay"  "></video>
 		<p class="videoName">AUTOUMN CHILLI MOOD MAKEUP</p>
 		<p class="videoComment">올 가을 은은한 붉은빛으로 물들여보자!<Br>
 		#이니스프리 #가을메이크업 #칠리무드 #뷰담 </p>
