@@ -69,6 +69,14 @@
         }).open();
     }
     
+    function initialize(){
+    	
+    	var f = document.naverRegisterForm;
+    	
+    	f.phone1.value = "0";
+    	
+    }
+    
     function register(){
     	
     	var f = document.naverRegisterForm;
@@ -193,7 +201,7 @@ button:hover {
 
 </style>
 </head>
-<body style="font-family: SeoulHangangM">
+<body style="font-family: SeoulHangangM" onload="initialize();">
 
 	<div id="container">
 			<div class="title_style">

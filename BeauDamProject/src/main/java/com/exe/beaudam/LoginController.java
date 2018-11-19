@@ -321,12 +321,19 @@ public class LoginController {
 		String birth;
 		
 		mDto.setNickname(request.getParameter("nickName"));
+		
+		String pwd = request.getParameter("pwd");
+		
+		if(pwd==null||pwd.equals("")) {
+			mDto.setPwd("1111");
+		}
 
 		memberService.insertMember(mDto);
 
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
+
 
 		if(year!=null) {
 			birth = year + "-" + month + "-" + day;
