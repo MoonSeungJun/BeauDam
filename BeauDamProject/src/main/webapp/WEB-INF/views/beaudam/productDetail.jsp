@@ -390,12 +390,12 @@ session="true" pageEncoding="UTF-8"%>
 											  	</span>
 											  	<input type="hidden" name="score"/>
 											</span>
-											<input type="text" name="pageNum" value="${pageNum }"/>
-											<input type="text" name="searchType" value="${searchType }"/>
-											<input type="text" name="searchValue" value="${searchValue }"/>
-											<input type="text" name="code" value="${dto.code }"/>
-			                				<input type="text" name="sale_Code" value="${saleCode }"/>
-			                				<input type="text" name="flag" id="flag" value="${flag }"/>
+											<input type="hidden" name="pageNum" value="${pageNum }"/>
+											<input type="hidden" name="searchType" value="${searchType }"/>
+											<input type="hidden" name="searchValue" value="${searchValue }"/>
+											<input type="hidden" name="code" value="${dto.code }"/>
+			                				<input type="hidden" name="sale_Code" value="${saleCode }"/>
+			                				<input type="hidden" name="flag" id="flag" value="${flag }"/>
 			                    			<textarea style="width: 100%;" name="review" placeholder="리뷰를 작성해 주세요! 사랑합니다 고객님♡ "></textarea>
 			                			</div>
 		                				<div class="modal-footer">
