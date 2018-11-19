@@ -163,8 +163,14 @@ $(document).ready(function() {
         	<div class="rolling_panel" style="width: 100%;">
 				<ul class="rolling_panel" style="width: 1400px;">
 				<c:forEach var="dto" items="${productList }">					
-					<li style="width: 280px;"><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}" ></a>
-						<div style="width: 270px;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>
+					<li style="width: 280px;">
+						<a href="productDetail.action?code=${dto.code }">
+							<img src="<%=cp %>/${dto.thumb_Img}" >
+						</a>
+						<div style="width: 270px;">
+							<p style="color: gray;">${dto.brand }</p>
+							<p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p>
+						</div>
 					</li>
 				</c:forEach>
 				</ul>
