@@ -161,8 +161,9 @@ $(document).ready(function() {
         <div class="best_wrapper rolling_wrapper">
         <h3>BEST ITEM</h3>
         	<div class="rolling_panel" style="width: 100%;">
-				<ul class="rolling_panel" style="width: 1400px;">
+				<ul class="rolling_panel" style="width: 1000px;">
 				<c:forEach var="dto" items="${productList }">					
+<<<<<<< HEAD
 					<li style="width: 280px;">
 						<a href="productDetail.action?code=${dto.code }">
 							<img src="<%=cp %>/${dto.thumb_Img}" >
@@ -171,6 +172,10 @@ $(document).ready(function() {
 							<p style="color: gray;">${dto.brand }</p>
 							<p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p>
 						</div>
+=======
+					<li style="width: 200px;"><a href="productDetail.action?code=${dto.code }"><img src="<%=cp %>/${dto.thumb_Img}" ></a>
+						<div style="width: 200px;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>
+>>>>>>> 김해나브랜치
 					</li>
 				</c:forEach>
 				</ul>
