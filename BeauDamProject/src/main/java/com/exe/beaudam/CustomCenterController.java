@@ -76,8 +76,12 @@ public class CustomCenterController {
 	}
 
 	@RequestMapping(value = "/inquire.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String inquire() {
+	public String inquire(HttpServletRequest request) {
 
+		HttpSession session= request.getSession();
+
+		request.setAttribute("id",session.getAttribute("id"));
+		
 		// 1:1문의 페이지 이동
 		return "customerCenter/mailForm";
 	}

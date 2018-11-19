@@ -71,7 +71,7 @@ text-align: center;
 					</tr>
 					<tr>
 						<td>아이디</td>
-						<td><input type="text" name="id"/></td>
+						<td><input type="text" name="id" value="${id }"/></td>
 					</tr>
 					<tr>
 						<td>이메일</td>
