@@ -208,13 +208,16 @@ $(document).ready(function() {
             <div class="new_item" style="margin: 50px auto;">
             	<c:if test="${!empty newItemList }">
                 <h3>NEW ITEM </h3>
-                <ul class="new_item" style="width: 1266px;">
+                <ul class="new_item" style="width: 1080px;">
                 	<c:forEach var="dto" items="${newItemList }">
                     <li>
-                    	<div style="width: 420px;">
+                    	<div style="width: 360px;">
 	                  		<a href="${detailUrl }?code=${dto.code}">
 	                  		<img src="<%=cp %>/thumbImg/${dto.thumb_Img}"></a>
-					    	<div style="width: 400px; height: 86px; margin: 0 auto;"><p style="color: gray;">${dto.brand }</p><p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p></div>   
+					    	<div style="width: 360px; height: 86px; margin: 0 auto;">
+					    		<p style="color: gray;">${dto.brand }</p>
+					    		<p style="font-family: 'YiSunShinDotumM'; font-size: 20px;">${dto.product_Name }</p>
+					    	</div>   
                     	</div >
                     </li>
                     </c:forEach>

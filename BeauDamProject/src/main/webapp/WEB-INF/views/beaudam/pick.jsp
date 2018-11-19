@@ -39,23 +39,23 @@
 	<hr>
 	
 	<div style="overflow: hidden; width: 1700px; margin: 0 auto; ">
-		<div class="video" style="height: 600px;">
+		<div class="video" >
 			<p style="font-family: 'YiSunShinDotumM'; color: #e45151; font-size: 23px;">[네이처리퍼블릭] 프로 터치 블러셔 팔레트</p>
-			<video src="<%=cp%>/resources/video/pick/nature.mp4" controls="controls"></video>
+			<video src="<%=cp%>/resources/video/pick/nature.mp4" controls="controls" style="width: 350px;"></video>
 			<p class="video_cotent">
 				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Shadow&code=ns2003	">지금 사러 가자 ♡ 8색조 블러셔 팔레트</a>
 			</p>
 		</div>
-		<div class="video" style="height: 600px;">
+		<div class="video" >
 			<p style="font-family: 'YiSunShinDotumM'; color: #e45151; font-size: 23px;">[더페이스샵] 모노큐브 아이섀도우</p>
-			<video src="<%=cp%>/resources/video/pick/the.mp4" controls="controls"></video>
+			<video src="<%=cp%>/resources/video/pick/the.mp4" controls="controls" style="width: 350px;"></video>
 			<p class="video_cotent">
 				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Shadow&code=fe2002	">지금 사러 가자! ♡ 영롱한 모노큐브 !</a>
 			</p>
 		</div>
-		<div class="video" style="height: 600px; ">
+		<div class="video">
 			<p style="font-family: 'YiSunShinDotumM'; color: #e45151; font-size: 23px;">[이니스프리] 노세범 미네랄 팩트</p>
-			<video src="<%=cp%>/resources/video/pick/innis.mp4" controls="controls" style="height: 500px;"></video>
+			<video src="<%=cp%>/resources/video/pick/innis.mp4" controls="controls" style="width: 350px; height: 410px;"></video>
 			<p class="video_cotent">
 				<a href="<%=cp %>/productDetail.action?pageNum=1&searchType=Powder&code=is6001	">지금 사러 가자! ♡ 행운이 담긴 노세범 팩트</a>
 			</p>
