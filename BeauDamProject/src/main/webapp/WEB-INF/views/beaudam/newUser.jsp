@@ -258,6 +258,32 @@
 		}
 
 	}
+	
+	function chkPwd(){
+
+
+		 //HTML의 form name="boardWriteForm"
+		 //유효성체크하고 싶은 값의 id, name="content_pwd", maxlength="16"
+		 
+		  var UserPassword = document.registerForm.pwd;
+		 
+		  if(UserPassword.value.length<8) {
+		    alert("비밀번호는 8~16자를 입력해주세요.");
+		    UserPassword.value="";
+		    UserPassword.focus();
+		    return false;
+		  }
+		  
+		  if(!UserPassword.value.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,-])|([!,@,#,$,%,^,&,*,?,_,~,-].*[a-zA-Z0-9])/)) {
+		      alert("비밀번호는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 입력해주세요.");
+		      UserPassword.value="";
+		      UserPassword.focus();
+			return false;
+		  }
+		 
+		  return true;
+		}
+
 </script>
 
 <style type="text/css">
@@ -346,7 +372,7 @@ button:hover {
 					<h3 style="float: left">가입정보</h3>
 					<p style="color: red; float: right;"> * 필수입력사항 (전화번호 제외)</p>
 					<hr style="width: 800px">
-					<table style="width: 650px">
+					<table style="width: 100%">
 						<tr>
 							<td width="150px" style="padding-left: 20px"><b>아이디</b></td>
 							<td width="600px">
@@ -397,11 +423,13 @@ button:hover {
 						<tr>
 							<td style="padding-left: 20px"><b>비밀번호</b></td>
 							<td>
-								<input class="js-mytooltip-pw form-control" id="ch_new_pw" type="password" name="pwd"
+								<input class="js-mytooltip-pw form-control" id="mpassword" type="password" name="pwd"
+								onchange="chkPwd();"
 								tabindex="3" data-mytooltip-direction="right" 
 								data-mytooltip-dinamic-content="true" 
 								data-mytooltip-action="focus" 
 								data-mytooltip-animate-duration="0"/>
+								<span>영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_?)혼용 8~16자</span>
 							</td>
 						</tr>
 						<tr>
